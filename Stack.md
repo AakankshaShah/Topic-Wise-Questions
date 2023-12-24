@@ -23,6 +23,42 @@ https://www.youtube.com/playlist?list=PL_z_8CaSLPWdeOezg68SKkeLN4-T_jNHd
 12. Polish Notation https://leetcode.com/problems/evaluate-reverse-polish-notation
 13. Basic Calculator** https://leetcode.com/problems/basic-calculator
 14. Basic Calculator II https://leetcode.com/problems/basic-calculator-ii/
+15. Longest Absolute File path https://leetcode.com/problems/longest-absolute-file-path/
+
+``` 
+public int lengthLongestPath(String input) {
+        if (input == null || input.length() == 0) {
+            return 0;
+        }
+        String[] tokens = input.split("\n");
+        int[] dirs = new int[tokens.length];
+        int max = 0;
+        int curr;
+        for (int i = 0; i < tokens.length; i ++) {
+            String s = tokens[i];
+            int count = s.lastIndexOf("\t") + 1;
+            s = s.substring(count);
+            if (s.indexOf(".") != -1) {
+                //file
+                int cand = s.length();
+                if (count != 0) {
+                    cand = dirs[count - 1] + s.length();
+                }
+                max = Math.max(max, cand);
+            }
+            else {
+                //folder
+                dirs[count] = s.length() + 1;
+                if (count != 0) {
+                    dirs[count] += dirs[count - 1];
+                }
+            }
+        }
+        return max;
+        
+    }
+} 
+```
 
 
 
