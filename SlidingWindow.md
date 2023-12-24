@@ -130,3 +130,20 @@ cout<<"start"<<s1<<"\n";
 
 10. Longest repeating character replacement https://leetcode.com/problems/longest-repeating-character-replacement/
 11. Max consecutive ones https://leetcode.com/problems/max-consecutive-ones-iii/
+```
+
+        while(right < n) {
+            if(nums[right]==0) {
+                count++;
+            }
+            
+            while(count > k) {
+                if(nums[left]==0) {
+                    count--;
+                }
+                left++;
+            }
+            ans = max(ans, right-left+1);
+            right++;
+        }
+```
