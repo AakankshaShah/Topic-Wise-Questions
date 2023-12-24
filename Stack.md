@@ -148,7 +148,7 @@ int curr=dis[i][1];
         return size;
 
 ```
-
+21. Implement k stacks single array https://www.geeksforgeeks.org/efficiently-implement-k-stacks-single-array/
 
 ## Extras 
 
