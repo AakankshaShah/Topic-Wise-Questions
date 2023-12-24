@@ -37,3 +37,4 @@ return -1;
 return ans;
 ```
 
+2. First non repeating char in a stream 
