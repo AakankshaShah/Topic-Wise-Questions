@@ -115,6 +115,39 @@ public int lengthLongestPath(String input) {
         return true;  
 ```
 
+20 . Finding the Number of Visible Mountains https://leetcode.com/problems/finding-the-number-of-visible-mountains/
+
+```
+vector<vector<int>> dis;
+
+        for(int i =0;i<peaks.size();i++)
+        {
+            dis.push_back({peaks[i][0]-peaks[i][1],peaks[i][0]+peaks[i][1]});
+        }
+
+        sort(dis.begin(),dis.end());
+        int i=0;
+        int size=0;
+
+        while(i<dis.size())
+        {
+            size++;
+
+            if(i==dis.size()-1)
+            return size;
+
+            if(dis[i][0]==dis[i+1][0])
+            size--;
+int curr=dis[i][1];
+            while(i+1<dis.size()&&curr>=dis[i+1][1])
+            {
+                i++;
+            }
+            i++;
+        }
+        return size;
+
+```
 
 
 ## Extras 
