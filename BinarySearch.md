@@ -34,3 +34,4 @@ int left = 0;
         return -1; // Target not found
 ```
 2. Find First and Last Position of Element in Sorted Array
+3. Search Insert Position
