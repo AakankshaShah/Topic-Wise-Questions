@@ -149,6 +149,7 @@ int curr=dis[i][1];
 
 ```
 21. Implement k stacks single array https://www.geeksforgeeks.org/efficiently-implement-k-stacks-single-array/
+22. Redundant braces https://www.geeksforgeeks.org/expression-contains-redundant-bracket-not/
 
 ## Extras 
 
