@@ -127,3 +127,5 @@ cout<<"start"<<s1<<"\n";
         else
         return s.substr(s1,ans);
 ```
+
+10. Longest repeating character replacement https://leetcode.com/problems/longest-repeating-character-replacement/
