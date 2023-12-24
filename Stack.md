@@ -150,6 +150,75 @@ int curr=dis[i][1];
 ```
 21. Implement k stacks single array https://www.geeksforgeeks.org/efficiently-implement-k-stacks-single-array/
 22. Redundant braces https://www.geeksforgeeks.org/expression-contains-redundant-bracket-not/
+23. LRU Cache
+
+  ``` LRUCache(int cap)
+    {
+       capa=cap;
+       head->next=tail;
+       tail->prev=head;
+    }
+    
+    void addN(node* newnode)
+    {
+        node* temp=head->next;
+        newnode->next=temp;
+        newnode->prev=head;
+        head->next=newnode;
+        temp->prev=newnode;
+    }
+    
+    void deleteN(node* delnode )
+    {
+        node* tem=delnode->next;
+        node *temp=delnode->prev;
+        temp->next=tem;
+        tem->prev=temp;
+    }
+    
+    //Function to return value corresponding to the key.
+    int get(int key)
+    {
+        
+        if(m.find(key)!=m.end())
+        {
+            node* res=m[key];
+            int result=res->val;
+            m.erase(key);
+             deleteN(res);
+             addN(res);
+             m[key]=head->next;
+            return result;
+           
+        }
+       else
+       return -1;
+       
+       
+       
+       
+    }
+    
+    //Function for storing key-value pair.
+    void set(int key, int value)
+    {
+        // your code here 
+        if(m.find(key)!=m.end())
+        {
+            node* resn=m[key];
+            m.erase(key);
+            deleteN(resn);
+        }
+        if(m.size()==capa)
+        {
+            m.erase(tail->prev->key);
+            deleteN(tail->prev);
+        }
+        addN(new node(key,value));
+        m[key]=head->next;
+    }
+
+```
 
 ## Extras 
 
