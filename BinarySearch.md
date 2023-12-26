@@ -1,6 +1,7 @@
 # Binary Search
 
 ## Theory
+https://www.youtube.com/watch?v=j7NodO9HIbk&list=PL_z_8CaSLPWeYfhtuKHj-9MpYb6XQJ_f2
 
 ## Questions
 
