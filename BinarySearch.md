@@ -105,3 +105,21 @@ return 0;
 ```
 
 6. Longest Increasing subsequence*** https://www.youtube.com/watch?v=on2hvxBXJH4
+ ```
+ vector<int>v;
+
+        v.push_back(nums[0]);
+
+
+        for(int i=0;i<nums.size();i++)
+        {
+            if(nums[i]>v.back())
+             v.push_back(nums[i]);
+             else
+             {
+                 int ind=lower_bound(v.begin(),v.end(),nums[i])-v.begin();
+                 v[ind]=nums[i];
+             }
+        }
+        return v.size();
+```
