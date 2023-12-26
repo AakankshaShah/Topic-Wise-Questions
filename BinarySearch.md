@@ -103,3 +103,5 @@ return 0;
     }
 };
 ```
+
+6. Longest Increasing subsequence
