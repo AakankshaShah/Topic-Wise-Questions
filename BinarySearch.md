@@ -36,3 +36,4 @@ int left = 0;
 2. Find First and Last Position of Element in Sorted Array
 3. Search Insert Position
 4. Search a 2d matrix
+5. Medain of 2 sorted arrays** https://leetcode.com/problems/median-of-two-sorted-arrays/
