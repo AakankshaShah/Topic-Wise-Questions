@@ -287,4 +287,7 @@ long long l=0,r=1e6,n=nums.size(),ans;
     }
 ```
 
+12. Partition Array Into Two Arrays to Minimize Sum Difference - Meet in middle technique Doubt
+
+
 
