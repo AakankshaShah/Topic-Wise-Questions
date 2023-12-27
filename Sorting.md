@@ -8,7 +8,7 @@
 1. Count inversions** https://www.youtube.com/watch?v=AseUmwVNaoY
 
 ```
-nt merge(vector<int> &arr, int low, int mid, int high) {
+int merge(vector<int> &arr, int low, int mid, int high) {
     vector<int> temp; // temporary array
     int left = low;      // starting index of left half of arr
     int right = mid + 1;   // starting index of right half of arr
