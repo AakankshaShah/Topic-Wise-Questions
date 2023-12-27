@@ -249,3 +249,41 @@ bool search(int len, string S) {
     }
 ```
 
+
+11. Minimum Cost to Make Array Equal
+
+```
+long long find_cost(int ele,vector<int>& nums, vector<int>& cost)
+    {
+        long long ans = 0;
+        for(int i = 0; i < nums.size(); i++)
+        {
+            long long a = abs(nums[i] - ele);
+            ans = ans + (a * cost[i]);
+        }
+            
+        return ans;
+    }
+    
+    long long minCost(vector<int>& nums, vector<int>& cost) 
+    {
+
+
+long long l=0,r=1e6,n=nums.size(),ans;
+        while(l<=r) {
+            int m=(l+r)/2;
+            long long a1=find_cost(m,nums,cost), a2=find_cost(m+1,nums,cost);
+            if(a1<=a2) {
+                r=m-1;
+            }
+            else {
+                l=m+1;
+            }
+        }
+        long long a1=find_cost(l,nums,cost), a2=find_cost(l-1,nums,cost);
+        return min(a1,a2);
+        
+    }
+```
+
+
