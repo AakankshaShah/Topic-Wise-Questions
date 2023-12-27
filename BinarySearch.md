@@ -216,4 +216,36 @@ vector<vector<int>> charIndexes(26);
         return count;
 ```
 9. Koko eating bananas https://leetcode.com/problems/koko-eating-bananas/description/
+10. Longest repeating substring ***
+
+```
+bool search(int len, string S) {
+        unordered_set<string> seen;
+        for (int i = 0; i + len <= S.length(); i++) {
+            string curr = S.substr(i, len);
+            if (seen.find(curr) != seen.end()) {
+                return true;
+            }
+            seen.insert(curr);
+        }
+        return false;
+    }
+    int longestRepeatingSubstring(string s) {
+         int n = s.length();
+        int start = 0;
+        int end = n - 1;
+        int maxLen = 0;
+        while (start <= end) {
+            int mid = start + (end - start) / 2;
+            if (search(mid, s)) {
+                maxLen = mid;
+                start = mid + 1;
+            } else {
+                end = mid - 1;
+            }
+        }
+        return maxLen;
+        
+    }
+```
 
