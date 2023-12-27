@@ -215,3 +215,5 @@ vector<vector<int>> charIndexes(26);
         
         return count;
 ```
+9. Koko eating bananas https://leetcode.com/problems/koko-eating-bananas/description/
+
