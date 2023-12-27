@@ -195,3 +195,61 @@ public:
     }
 };
 ```
+
+
+8. ***Split Array largest sum / Aggressive Cow / Minimum number of pages https://leetcode.com/problems/split-array-largest-sum/submissions/ 
+
+```
+int isValid(vector<int>& nums,int n, int k, int mid)
+{
+    int s=0;
+    int c=1;
+
+    for(int i=0;i<n;i++)
+    {
+        if(s+nums[i]<=mid)
+        s+=nums[i];
+        else
+        {
+            c++;
+            s=nums[i];
+
+        }
+
+    
+    }
+
+return c;
+
+}
+    int splitArray(vector<int>& nums, int k) 
+    {
+        int n=nums.size();
+        int l=0;
+        int h=0;
+        int res=-1;
+
+        for(int i=0;i<n;i++)
+        {
+          l=max(l,nums[i]);
+            h+=nums[i];
+        }
+while(l<=h)
+{
+    int mid=(l+h)/2;
+
+    if(isValid(nums,n,k,mid)<=k)
+    {
+        res=mid;
+        h=mid-1;
+    }
+
+    else
+    l=mid+1;
+
+}
+
+return res;
+        
+    }
+```
