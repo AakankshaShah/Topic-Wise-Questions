@@ -251,6 +251,7 @@ bool search(int len, string S) {
 
 
 11. Minimum Cost to Make Array Equal
+https://leetcode.com/problems/minimum-cost-to-make-array-equal/description/
 
 ```
 long long find_cost(int ele,vector<int>& nums, vector<int>& cost)
