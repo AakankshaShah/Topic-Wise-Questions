@@ -15,7 +15,7 @@ https://www.youtube.com/watch?v=nqowUJzG-iM&list=PL_z_8CaSLPWekqhdCPmFohncHwz8TY
    
 
 ```
-// 0 1 Knapsack
+# 0 1 Knapsack
 int dp[n+1][w+1];
 
 
@@ -40,7 +40,7 @@ int dp[n+1][w+1];
 ```
 
 ```
-\\Target sum
+# Target sum
  int sum =0;
     int n=nums.size();
    
