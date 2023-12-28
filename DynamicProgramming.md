@@ -6,11 +6,11 @@ https://www.youtube.com/watch?v=nqowUJzG-iM&list=PL_z_8CaSLPWekqhdCPmFohncHwz8TY
 ## Questions
 
 1. 0/1 Knapsack 
-   Subset Sum
-   Equal Sum Parition
-   Count of Subset Sum
-   Minimum Subset Sum Diff
-   Target Sum
-   No of subset with given difference 
+   * Subset Sum
+   * Equal Sum Parition
+   * Count of Subset Sum
+   * Minimum Subset Sum Diff
+   * Target Sum
+   * No of subset with given difference 
 2. Unbounded Knapsack
 
