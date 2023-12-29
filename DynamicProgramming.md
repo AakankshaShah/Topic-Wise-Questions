@@ -30,7 +30,7 @@ int dp[n+1][w+1];
                 dp[i][j]=1;
 
                 else if(wt[i-1]<=j)
-                dp[i][j]=max(dp[i-1][j],dp[i-1][j-wt[i-1]]);
+                dp[i][j]=max(dp[i-1][j],wt[i-1]+dp[i-1][j-wt[i-1]]);
 
                 else
                 dp[i][j]=dp[i-1][j];
@@ -97,7 +97,7 @@ int dp[n+1][w+1];
                 dp[i][j]=1;
 
                 else if(wt[i-1]<=j)
-                dp[i][j]=max(dp[i-1][j],dp[i][j-wt[i-1]]);
+                dp[i][j]=max(dp[i-1][j],wt[i-1d]+p[i][j-wt[i-1]]);
 
                 else
                 dp[i][j]=dp[i-1][j];
