@@ -360,7 +360,7 @@ int dp[n+1][w+1];
 
 9. Egg dropping 
 
-10. Scrambled strings
+ 10. Scrambled strings
 
 
 
