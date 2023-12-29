@@ -355,6 +355,9 @@ int dp[n+1][w+1];
 6. Palindromic Parition
 
 7. https://leetcode.com/problems/minimum-score-triangulation-of-polygon/description/
+8. Evaluate expression to true boolean paratheses
+9.Egg dropping 
+10.Scrambled strings
 
 
 
