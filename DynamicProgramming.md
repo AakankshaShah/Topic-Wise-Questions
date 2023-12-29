@@ -326,6 +326,34 @@ int dp[n+1][w+1];
    
 
 4. Matrix chain multiplication
+    ```
+     int solve(vector<int>& nums, int i, int j) {
+        if (i > j)
+            return 0;
+
+        if (dp[i][j] != -1)
+            return dp[i][j];
+
+        int ans ;
+        for (int k = i; k <= j; k++) {
+
+            int tans = solve(nums, i, k ) + solve(nums, k + 1, j) +
+                       calculations;
+            ans = max(ans, tans);
+        }
+        return dp[i][j] = ans;
+    }
+
+    ```
+
+
+5. Burst Ballons ** https://www.youtube.com/watch?v=Yz4LlDSlkns
+
+     int tans = solve(nums, i, k - 1) + solve(nums, k + 1, j) +
+                       nums[i - 1] * nums[k] * nums[j + 1];
+
+6. Palindromic Parition
+
 
 
  
