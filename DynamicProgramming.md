@@ -261,7 +261,66 @@ int dp[n+1][w+1];
 
    * Minimum no of deletion in a string to make it palindrome
 
-        String length - longest palindromic subsequence 
+        String length - longest palindromic subsequence
+   
+   * Print shortest common supersequence 
+     
+    ```
+    int n = str1.length();
+        int m = str2.length();
+        int dp[n + 1][m + 1];
+
+        for (int i = 0; i <= n; i++) {
+            for (int j = 0; j <= m; j++) {
+                if (i == 0 || j == 0)
+                    dp[i][j] = 0;
+
+                else if (str1[i - 1] == str2[j - 1])
+                    dp[i][j] = dp[i - 1][j - 1] + 1;
+
+                else
+                    dp[i][j] = max(dp[i - 1][j], dp[i][j - 1]);
+            }
+        }
+
+        string ans = "";
+
+        int i = n;
+        int j = m;
+
+        while (i > 0 && j > 0) {
+            if (str1[i - 1] == str2[j - 1]) {
+                ans.push_back(str1[i - 1]);
+                i--;
+                j--;
+            }
+
+            else if (dp[i - 1][j] > dp[i][j - 1]) {
+                ans.push_back(str1[i - 1]);
+                i--;
+
+            }
+
+            else {
+                ans.push_back(str2[j - 1]);
+                j--;
+            }
+        }
+
+        while (i > 0) {
+            ans.push_back(str1[i - 1]);
+            i--;
+        }
+
+        while (j > 0) {
+            ans.push_back(str2[j - 1]);
+            j--;
+        }
+        reverse(ans.begin(), ans.end());
+        return ans;
+
+     ```
+
 
  
 
