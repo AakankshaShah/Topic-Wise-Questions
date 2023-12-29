@@ -213,6 +213,9 @@ int dp[n+1][w+1];
     cout<<ans;
 
    ```
+* Shortest Common Supersequence 
+
+X's length + Y's length - LCS
 
 
 
