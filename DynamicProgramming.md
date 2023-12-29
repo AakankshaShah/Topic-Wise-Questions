@@ -321,6 +321,7 @@ int dp[n+1][w+1];
 
      ```
     * Longest repeating subsequence 
+       LCS with same string with this condition  if (i != j && s1[i - 1] == s2[j - 1])
 
 
  
