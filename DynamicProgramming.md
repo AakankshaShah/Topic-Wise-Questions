@@ -320,6 +320,7 @@ int dp[n+1][w+1];
         return ans;
 
      ```
+    * Longest repeating subsequence 
 
 
  
