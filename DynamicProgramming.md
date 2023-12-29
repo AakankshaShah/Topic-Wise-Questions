@@ -107,7 +107,8 @@ int dp[n+1][w+1];
 ```
 
 3. String DP 
-   * Longest Common Subsequence
+    * Longest Common Subsequence
+
      ```
         int n=text1.length();
         int m=text2.length();
