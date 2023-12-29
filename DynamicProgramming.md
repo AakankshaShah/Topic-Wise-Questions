@@ -328,7 +328,7 @@ int dp[n+1][w+1];
 4. Matrix chain multiplication
     ```
      int solve(vector<int>& nums, int i, int j) {
-        if (i > j)
+        if (i >=j)
             return 0;
 
         if (dp[i][j] != -1)
@@ -338,8 +338,8 @@ int dp[n+1][w+1];
         for (int k = i; k <= j; k++) {
 
             int tans = solve(nums, i, k ) + solve(nums, k + 1, j) +
-                       calculations;
-            ans = max(ans, tans);
+                       arr[i-1]*arr[k]*arr[j];
+            ans = min(ans, tans);
         }
         return dp[i][j] = ans;
     }
