@@ -354,6 +354,8 @@ int dp[n+1][w+1];
 
 6. Palindromic Parition
 
+7. https://leetcode.com/problems/minimum-score-triangulation-of-polygon/description/
+
 
 
  
