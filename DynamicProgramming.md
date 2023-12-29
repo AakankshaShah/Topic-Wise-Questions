@@ -166,10 +166,11 @@ int dp[n+1][w+1];
         return ans;
 
      ```
-  * Print longest common subsequence 
+    * Print longest common subsequence 
    
-  ```
-  string str1 = "havoc";
+       
+    ``` 
+    string str1 = "havoc";
     string str2 = "bhvct";
     int m = str1.size();
     int n = str2.size();
@@ -212,15 +213,19 @@ int dp[n+1][w+1];
     reverse(ans.begin(), ans.end());
     cout<<ans;
 
-   ```
-  * Shortest Common Supersequence 
+    ```
+          
+  
+
+      
+    * Shortest Common Supersequence 
 
     X's length + Y's length - LCS
 
-  * Min number of insertion/deletions to make strings equal 
+    * Min number of insertion/deletions to make strings equal 
 
-    ```
-    int n=word1.length();
+        ```
+          int n=word1.length();
         int m=word2.length();
 
         int dp[n+1][m+1];
@@ -246,16 +251,17 @@ int dp[n+1][w+1];
         int b=m-dp[n][m];
 
         return (a+b);
+    
 
-       ```
+        ```
 
-     * Longest palindromic subsequence 
+       * Longest palindromic subsequence 
         
-       Reverse given string and LCS
+        Reverse given string and LCS
 
-    * Minimum no of deletion in a string to make it palindrome
+      * Minimum no of deletion in a string to make it palindrome
 
-       String length - longest palindromic subsequence 
+        String length - longest palindromic subsequence 
 
  
 
