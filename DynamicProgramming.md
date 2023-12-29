@@ -215,7 +215,7 @@ int dp[n+1][w+1];
    ```
 * Shortest Common Supersequence 
 
-X's length + Y's length - LCS
+    X's length + Y's length - LCS
 
 
 
