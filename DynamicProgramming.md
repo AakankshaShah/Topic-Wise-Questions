@@ -255,11 +255,11 @@ int dp[n+1][w+1];
 
         ```
 
-       * Longest palindromic subsequence 
+   * Longest palindromic subsequence 
         
         Reverse given string and LCS
 
-      * Minimum no of deletion in a string to make it palindrome
+  * Minimum no of deletion in a string to make it palindrome
 
         String length - longest palindromic subsequence 
 
