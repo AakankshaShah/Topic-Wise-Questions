@@ -412,7 +412,44 @@ int dp[n+1][w+1];
         }
         return result;
     }
+
+     ```
+
+12.  Wildcard matching***  https://www.youtube.com/watch?v=ZmlQ3vgAOMo
+
+     
 ```
+ int n = s.length(), m = p.length();
+        bool v[n + 1][m + 1];
+
+        memset(v, false, sizeof(v));
+
+        for (int i = 0; i <= n; i++) {
+            v[i][0] = false;
+        }
+        v[0][0] = true;
+
+        int st = 0;
+        while (st < m && p[st] == '*') {
+            v[0][++st] = true;
+        }
+        for (int i = 1; i <= n; i++) {
+            for (int j = 1; j <= m; j++) {
+                if (s[i - 1] == p[j - 1] || p[j - 1] == '?') {
+                    v[i][j] = v[i - 1][j - 1];
+                } else if (p[j - 1] == '*') {
+                    v[i][j] = v[i - 1][j] || v[i][j - 1];
+                } else {
+                    v[i][j] = false;
+                }
+            }
+        }
+        return v[n][m];
+```
+
+
+
+
 
 
 
