@@ -360,7 +360,59 @@ int dp[n+1][w+1];
 
 9. Egg dropping 
 
- 10. Scrambled strings
+10. Scrambled strings
+
+11.  Print longest palindromic substring 
+     
+     ```
+       int n = s.length();
+        string s1 = s;
+        string s2=s;
+        reverse(s.begin(), s.end());
+
+        int dp[n + 1][n + 1];
+        int ans = 0;
+        int pi = 0;
+        int pj = 0;
+
+        for (int i = 0; i <= n; i++) {
+            for (int j = 0; j <= n; j++) {
+                if (i == 0 || j == 0)
+                    dp[i][j] = 0;
+
+                else if (s1[i - 1] == s[j - 1])
+                    dp[i][j] = dp[i - 1][j - 1] + 1;
+
+                else
+                    dp[i][j] = 0;
+
+                if (dp[i][j] > ans) {
+                    //Check again if palindrome or not 
+                    string temp = s2.substr(i - dp[i][j], dp[i][j]);
+                    string temp2 = temp;
+                    reverse(temp2.begin(), temp2.end());
+                    if (temp == temp2)
+                    {    ans = dp[i][j];
+                    pi = i;
+                    pj = j;
+                    }
+                }
+            }
+        }
+        string result = "";
+
+        for (int i = pi, j = pj; i > 0 && j > 0;) {
+            if (dp[i][j] > 0) {
+                result.push_back(s1[i - 1]);
+                i--;
+                j--;
+            } else {
+                break;
+            }
+        }
+        return result;
+    }
+```
 
 
 
