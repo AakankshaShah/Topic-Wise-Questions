@@ -449,6 +449,7 @@ int dp[n+1][w+1];
 
 
 13. Unique paths
+14. Decode paths
 
 
 
