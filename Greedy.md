@@ -3,10 +3,26 @@
 ## Questions
 
 1. Fractional knapsack
-2. Minimum no of jumps || Jump Game 2 || Jump Game
+2. Minimum no of jumps || Jump Game 2 || Jump Game https://www.youtube.com/watch?v=Yan0cv2cLy8
 
     ```
-       int n = arr.size();
+      //If possible or not 
+        
+         int goal=n-1;
+
+
+        for(int i=n-1;i>=0;i--)
+        {
+            if(i+arr[i]>=goal)
+            goal=i;
+        }
+
+
+        return goal==0;
+
+
+
+    int n = arr.size();
         if (n <= 1)
             return 0;
 
