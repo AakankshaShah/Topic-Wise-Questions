@@ -3,7 +3,7 @@
 ## Questions
 
 1. Fractional knapsack
-2. Minimum no of jumps || Jump Game 2 
+2. Minimum no of jumps || Jump Game 2 || Jump Game
 
     ```
        int n = arr.size();
