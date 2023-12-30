@@ -490,7 +490,25 @@ int dp[n+1][w+1];
     }
  ```
 
-16. 
+16. House robbery 
+     ```
+        int t[nums.size()+1];
+
+        t[0]=0;
+        t[1]=nums[0];
+
+        for(int i=2;i<=nums.size();i++)
+        {
+            int steal=nums[i-1]+t[i-2];
+            int skip=t[i-1];
+
+            t[i]=max(steal,skip);
+        }
+
+      return t[nums.size()];
+
+     ```
+17. 
 
 
 
