@@ -224,5 +224,51 @@ long long mergeSort(vector<int> &arr, long long low, long long high) {
     }
 ```
 
+
+4. Non overlapping interval https://www.youtube.com/watch?v=0TYKyTwGOAs
+
+    1. Sort start time 
+    2. Sort end time
+     ```
+      sort(begin(intervals), end(intervals));
+        int n = intervals.size(); 
+        
+        int count = 0;
+        vector<int>L=intervals[0];
+        int i=1;
+        
+        
+        while(i < n) {
+            int laste=L[1];
+            int curr_s=intervals[i][0];
+            int curr_e=intervals[i][1];
+
+
+            if(curr_s>=laste)
+            {
+                L=intervals[i];
+                i++;
+
+            }
+            else if(curr_e>=laste)
+            {
+                count++;
+                i++;
+                
+            }
+            else if(curr_e<laste)
+            {
+                L=intervals[i];
+                i++;
+                count++;
+                
+            }
+
+          
+        }
+
+        return count;
+     ```
+
    
 
