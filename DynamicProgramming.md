@@ -508,7 +508,39 @@ int dp[n+1][w+1];
       return t[nums.size()];
 
      ```
-17. 
+17. Ugly Numbers 2
+    
+     ```
+       int arr[n + 1];
+
+        arr[1] = 1;
+        int i2 = 1;
+        int i3 = 1;
+        int i5 = 1;
+        int vi2, vi3, vi5;
+
+        for (int i = 2; i <= n; i++) {
+            vi2 = arr[i2] * 2;
+            vi3 = arr[i3] * 3;
+            vi5 = arr[i5] * 5;
+            arr[i] = std::min({vi2, vi3, vi5});
+
+            if (vi2 == arr[i]) {
+
+                i2++;
+            }
+            if (vi3 == arr[i]) {
+                arr[i] = vi3;
+                i3++;
+            }
+            if (vi5 == arr[i]) {
+                arr[i] = vi5;
+                i5++;
+            }
+        }
+
+        return arr[n];
+     ```
 
 
 
