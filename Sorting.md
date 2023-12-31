@@ -271,6 +271,38 @@ long long mergeSort(vector<int> &arr, long long low, long long high) {
      ```
 Leetcode - 252 : 
 Leetcode - 253 : 
+```
+int n = intervals.size();
+        if (n <= 1)
+            return n;
+
+        vector<int> startTime(n);
+        vector<int> endTime(n);
+
+        int i = 0;
+        for (int i0; i < n; i++) {
+            startTime[i] = intervals[i][0];
+            endTime[i] = intervals[i][1];
+            i++;
+        }
+
+        sort(begin(startTime), end(startTime));
+        sort(begin(endTime), end(endTime));
+
+        i = 0;
+        int j = 0;
+        int count = 0;
+
+        while (i < n) {
+            if (startTime[i] < endTime[j]) {
+                count++; // we need one more room
+            } else {
+                j++; // previous room can be used which is over
+            }
+            i++;
+        }
+
+```
 Leetcode - 452 : 
 Leetcode - 2446 :  
    
