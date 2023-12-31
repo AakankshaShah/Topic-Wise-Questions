@@ -490,7 +490,7 @@ int dp[n+1][w+1];
     }
  ```
 
-16. House robbery 
+16. House robbery 1 & 2
      ```
         int t[nums.size()+1];
 
