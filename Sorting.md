@@ -307,41 +307,27 @@ int n = intervals.size();
 
 ```
 //Heap
-int n = intervals.size();
-        if(n <= 1)
-            return n;
-        //why sorting ?
-        /*
-            We want to handle meetings based on their starting time.
-            It ensures that comparison done in priority_queue
-            will be definitely correct.
-            We won't have to worry about the starting time of
-            meetings already running (i.e. meetings that are in priority_queue)
-        */
-        sort(begin(intervals), end(intervals), sortComp);
-
-        priority_queue<Interval, vector<Interval>, Compare> pq;
-        pq.push(intervals[0]); //minimum one room required
-
-        for(int i = 1; i<n; i++) {
-            /*if I have to organise a meeting, 
-              I will look for the one which ends first
-              So that if there is no clash, same room can be occupied
-            */
-
-            Interval top = pq.top();
-            Interval curr = intervals[i];
-
-            //clash
-            if(top.end > curr.start) {
-                pq.push(curr);
-            } else {
-                pq.pop(); //That meeting ends
-                pq.push(curr); //I will use same room
+ // min heap to store end-times
+        std::priority_queue<int, vector<int>, greater<int>> pq;
+       
+        sort(intervals.begin(), intervals.end());
+       
+        pq.push(intervals[0][1]);
+        
+        for (int i=1; i<intervals.size(); ++i)
+        {
+            // if next interval starts after min-end time
+            if (intervals[i][0] >= pq.top())
+            {
+                // room can be reused
+                // pop that end-time and add new end-time
+                pq.pop();
             }
+            
+            pq.push(intervals[i][1]);
         }
-
-        return (int) pq.size();
+        // size of priority queue is the min number of meeting rooms required
+        return pq.size();
 ```
 Leetcode - 452 : 
 Leetcode - 2446 :  
