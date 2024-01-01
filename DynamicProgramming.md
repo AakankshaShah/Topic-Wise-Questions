@@ -599,6 +599,28 @@ int dp[n+1][w+1];
 
 20. Longest Arithmetic subsequence with given difference https://www.youtube.com/watch?v=OHxwaAbO1A8
 
+     ```
+       int longestSubsequence(vector<int>& arr, int difference) 
+    {
+        int n=arr.size();
+        int res=0;
+        unordered_map<int,int>mp;
+
+        for(int i=0;i<n;i++)
+        {
+            //res=max(res,1+solve(arr,difference,i));
+            int curr=arr[i];
+            int prev=curr-difference;
+
+            int curr_length=mp[prev]+1;
+            mp[curr]=mp[prev]+1;
+            res=max(res,mp[curr]);
+        }
+        return res;
+    }
+
+     ```
+
 
 
 
