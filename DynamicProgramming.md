@@ -543,6 +543,11 @@ int dp[n+1][w+1];
      ```
 
 
+     18. Palindromic substrings
+
+
+
+
 
 
 
