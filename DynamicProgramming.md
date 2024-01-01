@@ -543,7 +543,7 @@ int dp[n+1][w+1];
      ```
 
 
-     18. Palindromic substrings
+     18. Count Palindromic substrings https://www.youtube.com/watch?v=XmSOWnL6T_I
 
 
 
