@@ -597,7 +597,7 @@ int dp[n+1][w+1];
       ```
 
 
-20. 
+20. Longest Arithmetic subsequence with given difference https://www.youtube.com/watch?v=OHxwaAbO1A8
 
 
 
