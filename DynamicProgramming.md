@@ -568,7 +568,7 @@ int dp[n+1][w+1];
 
 19. Distinct palindromic substring 
 
-         ```
+     ```
         int n = s.size();
         bool dp[n][n];
         int cnt = 0;
@@ -593,7 +593,11 @@ int dp[n+1][w+1];
             }
         }
         return a.size();
-   ```
+
+      ```
+
+
+20. 
 
 
 
