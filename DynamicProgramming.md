@@ -542,8 +542,7 @@ int dp[n+1][w+1];
         return arr[n];
      ```
 
-
-     18. Count Palindromic substrings https://www.youtube.com/watch?v=XmSOWnL6T_I
+18. Count Palindromic substrings https://www.youtube.com/watch?v=XmSOWnL6T_I
 
           ```
             int n = s.size();
@@ -567,7 +566,7 @@ int dp[n+1][w+1];
           ```
 
 
-    19. Distinct palindromic substring 
+19. Distinct palindromic substring 
 
          ```
         int n = s.size();
