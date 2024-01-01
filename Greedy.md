@@ -3,6 +3,14 @@
 ## Questions
 
 1. Fractional knapsack
+    ```
+        Calculate the ratio (profit/weight) for each item.
+        Sort all the items in decreasing order of the ratio.
+        Initialize res = 0, curr_cap = given_cap.
+        Do the following for every item i in the sorted order:
+        If the weight of the current item is less than or equal to the remaining capacity then add the value of that item into the result
+       Else add the current item as much as we can and break out of the loop.
+    ```
 2. Minimum no of jumps || Jump Game 2 || Jump Game https://www.youtube.com/watch?v=Yan0cv2cLy8
 
     ```
