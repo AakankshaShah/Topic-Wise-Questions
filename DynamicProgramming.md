@@ -413,7 +413,7 @@ int dp[n+1][w+1];
         return result;
     }
 
-   ```
+    ```
 
 12.  Wildcard matching***  https://www.youtube.com/watch?v=ZmlQ3vgAOMo
 
@@ -620,6 +620,10 @@ int dp[n+1][w+1];
     }
 
      ```
+
+
+
+21. Arithmetic slices
 
 
 
