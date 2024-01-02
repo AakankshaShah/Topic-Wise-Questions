@@ -413,13 +413,13 @@ int dp[n+1][w+1];
         return result;
     }
 
-     ```
+   ```
 
 12.  Wildcard matching***  https://www.youtube.com/watch?v=ZmlQ3vgAOMo
 
      
 ```
- int n = s.length(), m = p.length();
+        int n = s.length(), m = p.length();
         bool v[n + 1][m + 1];
 
         memset(v, false, sizeof(v));
