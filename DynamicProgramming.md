@@ -623,7 +623,7 @@ int dp[n+1][w+1];
 
 
 
-21. Arithmetic slices
+21. Arithmetic slices https://www.youtube.com/watch?v=D7PZZtvHnGo
 
 
 
