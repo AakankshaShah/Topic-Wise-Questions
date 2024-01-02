@@ -624,6 +624,22 @@ int dp[n+1][w+1];
 
 
 21. Arithmetic slices https://www.youtube.com/watch?v=D7PZZtvHnGo
+     ```
+      int n = nums.size();
+        int curr = 0;
+        int total = 0;
+        for (int i = 2; i < n; i++) {
+            if (nums[i - 1] - nums[i] == nums[i - 2] - nums[i - 1]) {
+                curr++;
+                total += curr;
+            } else
+                curr = 0;
+        }
+
+        return total;
+    ```
+
+22.
 
 
 
