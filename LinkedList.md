@@ -87,4 +87,65 @@
 
         return head;
      ```
-7. 
+7. Reverse in k groups 
+    ```
+    ListNode* reverseList(ListNode* head, int k) {
+        ListNode* prev = NULL;
+        ListNode* cur = head;
+        ListNode* next;
+        int count=0;
+        while (current != NULL && count < k) {
+            next = cur->next;
+            cur->next = prev;
+            prev = cur;
+            cur = next;
+            count++;
+    
+        }
+        if(next!=null)
+         head->next = reverse(next, k); 
+        
+        return prev;
+    }
+
+     ```
+8. Reverse in k groups only 
+    ```
+     ListNode* reverseList(ListNode* head, int k) {
+        ListNode* prev = NULL;
+        ListNode* cur = head;
+        ListNode* next;
+        while (k--) {
+            next = cur->next;
+            cur->next = prev;
+            prev = cur;
+            cur = next;
+        }
+        head->next = cur;
+        return prev;
+    }
+
+   public:
+    ListNode* reverseKGroup(ListNode* head, int k) {
+        int len = 0;
+        ListNode* length = head;
+        while (length != NULL) {
+            len++;
+            length = length->next;
+        }
+        ListNode* NewList = new ListNode();
+        ListNode* temp = NewList;
+        ListNode* cur = head;
+        while (cur != NULL) {
+            if (len >= k) {
+                temp->next = reverseList(cur, k);
+                len -= k;
+                temp = cur;
+                cur = cur->next;
+            } else {
+                break;
+            }
+        }
+        return NewList->next;
+    }
+    ```
