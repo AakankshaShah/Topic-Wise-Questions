@@ -149,3 +149,4 @@
         return NewList->next;
     }
     ```
+9. Partition list
