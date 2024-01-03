@@ -172,3 +172,4 @@
 		// if traversal reaches to NULL this means no cycle.
         return false;
     ```
+11. Reorder list
