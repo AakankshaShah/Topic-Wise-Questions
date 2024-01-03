@@ -60,4 +60,5 @@
         return partitionAndMerge(0, n - 1, lists);
     }
  
-```
+   ```
+6. 
