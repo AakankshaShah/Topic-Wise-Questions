@@ -17,3 +17,6 @@
 14. String Manipulation
 15. Greedy Algorithm
 16. Two Pointer
+17. Heap / Priority queue
+18. Hashing
+19. Intervals
