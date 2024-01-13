@@ -10,31 +10,35 @@ https://www.youtube.com/watch?v=s7zE4Nmc2Fg&list=PL5DyztRVgtRVLwNWS7Rpp4qzVVHJal
 1. https://www.interviewbit.com/problems/path-with-good-nodes/
 
    ```
-     int recurse(int node,int target,vector<int>arr[], vector<int>&vis, vector<int>&A)
-   {
-    target=target-A[node-1];
-    if(arr[node].size()==1)
-    {
-        if(target>=0)
-        return 1;
-        else 
-        return 0;
-    }
-    
+     void dfs(int node,vector<int>adj[],int c,int C,vector<int>&good,vector<int>&vis){
+
     vis[node]=1;
-    int count=0;
-    
-    for(int child : arr[node])
-    {
-        if(vis[child]==0)
-        {
-            count += recurse(child, target, arr, vis, A);
-        }
+
+    if(good[node]==1){
+
+        c++;
+
     }
-    
-    
-    return count;
+
+    if(adj[node].size()==1){
+
+        
+
+        if(c<=C)ans++;
+
+        return;
+
+    }  
+
+    for(auto it:adj[node]){
+
+        if(!vis[it])
+
+        dfs(it,adj,c,C,good,vis);
+
     }
+
+   }
 
    
    ```
