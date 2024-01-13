@@ -42,7 +42,7 @@ https://www.youtube.com/watch?v=s7zE4Nmc2Fg&list=PL5DyztRVgtRVLwNWS7Rpp4qzVVHJal
 
    
    ```
-   2. https://leetcode.com/problems/pacific-atlantic-water-flow/description/
+2. https://leetcode.com/problems/pacific-atlantic-water-flow/description/
 
        ```
            class Solution {
