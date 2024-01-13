@@ -101,3 +101,38 @@ https://www.youtube.com/watch?v=s7zE4Nmc2Fg&list=PL5DyztRVgtRVLwNWS7Rpp4qzVVHJal
        }
       };
        ```
+
+
+ 3. Stepping Num
+     ```
+       void dfs (int n, int A, int B, vector<int> &ans) {
+    if (n > B)
+        return;
+    
+    if (n >= A && n <= B)
+        ans.push_back(n);
+    
+    int lastDigit = n % 10;
+    
+    if (lastDigit != 0) 
+        dfs(n*10 + lastDigit-1, A, B, ans);
+    
+    if (lastDigit != 9)
+        dfs(n*10 + lastDigit+1, A, B, ans);
+    }
+
+    vector<int> Solution::stepnum(int A, int B) {
+    vector<int> ans;
+    
+    for (int i=1; i <= 9; i++) {
+        dfs(i, A, B, ans);
+    }
+    
+    if (A == 0) // in the question A >= 1, but in one test-case A is 0
+        ans.push_back(0);
+    
+    sort(ans.begin(), ans.end());
+    
+    return ans;
+    }
+    ```
