@@ -243,9 +243,9 @@ bool DFS(vector<string> &A, int i, int j, string B, int idx , vector<vector<bool
 4. https://www.interviewbit.com/problems/valid-path/
     ```
      int dx[8] = {1, 1, 1, 0, 0, -1, -1, -1};
-int dy[8] = {0, 1, -1, 1, -1, 0, 1, -1};
+     int dy[8] = {0, 1, -1, 1, -1, 0, 1, -1};
 
-string bfs(vector<vector<bool>>& mat, int x, int y, int i, int j) {
+    string bfs(vector<vector<bool>>& mat, int x, int y, int i, int j) {
     mat[i][j] = true;
     queue<pair<int, int>> q;
     q.push({i, j});
