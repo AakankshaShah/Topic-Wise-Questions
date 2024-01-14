@@ -73,4 +73,37 @@
   
      ```
 
-    3.
+    3. Sum of fibonacci numbers 
+
+       ```
+           int Solution::fibsum(int n) {
+   
+         vector<int>fb;
+        fb.push_back(1);
+       fb.push_back(1);
+   
+        while(fb.back()<n)
+        {
+        fb.push_back(fb.back()+fb[fb.size()-2]);
+       }
+   
+       set<int>s;
+   
+       for(auto &x:fb)
+        {
+        s.insert(x);
+        }
+   
+        int cnt=0;
+   
+        while(n!=0)
+        {
+        auto it = s.upper_bound(n);
+        it--;
+        cnt++;
+        n=n-(*it);
+        }
+       return cnt;
+   
+       }
+       ```
