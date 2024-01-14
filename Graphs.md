@@ -79,7 +79,7 @@ https://www.youtube.com/watch?v=s7zE4Nmc2Fg&list=PL5DyztRVgtRVLwNWS7Rpp4qzVVHJal
         }
 
         return result;
-      }
+       }
 
         private:
         void dfs(vector<vector<int>>& heights, int r, int c, int& m, int& n,
@@ -99,7 +99,7 @@ https://www.youtube.com/watch?v=s7zE4Nmc2Fg&list=PL5DyztRVgtRVLwNWS7Rpp4qzVVHJal
             }
         }
        }
-      };
+       };
        ```
 
 
@@ -178,7 +178,9 @@ https://www.youtube.com/watch?v=s7zE4Nmc2Fg&list=PL5DyztRVgtRVLwNWS7Rpp4qzVVHJal
     return ;
     }
    ```
+
 5. Word search board 
+
 ```
     bool safe(int i, int j, int n, int m){
    
@@ -238,9 +240,9 @@ bool DFS(vector<string> &A, int i, int j, string B, int idx , vector<vector<bool
    
     return 0;
   }
-```
+ ```
 
-4. https://www.interviewbit.com/problems/valid-path/
+6. https://www.interviewbit.com/problems/valid-path/
     ```
      int dx[8] = {1, 1, 1, 0, 0, -1, -1, -1};
      int dy[8] = {0, 1, -1, 1, -1, 0, 1, -1};
