@@ -240,3 +240,60 @@ bool DFS(vector<string> &A, int i, int j, string B, int idx , vector<vector<bool
   }
 ```
 
+4. https://www.interviewbit.com/problems/valid-path/
+    ```
+     int dx[8] = {1, 1, 1, 0, 0, -1, -1, -1};
+int dy[8] = {0, 1, -1, 1, -1, 0, 1, -1};
+
+string bfs(vector<vector<bool>>& mat, int x, int y, int i, int j) {
+    mat[i][j] = true;
+    queue<pair<int, int>> q;
+    q.push({i, j});
+
+    while (!q.empty()) {
+        pair<int, int> top = q.front();
+        q.pop();
+        int i = top.first;
+        int j = top.second;
+        if (i == x && j == y)
+            return "YES";
+
+        for (int k = 0; k < 8; k++) {
+            int ny = j + dy[k];
+            int nx = i + dx[k];
+
+            if (nx >= 0 && nx <= x && ny >= 0 && ny <= y && mat[nx][ny] == false) {
+                mat[nx][ny] = true;
+                q.push({nx, ny});
+            }
+        }
+    }
+    return "NO";
+     }
+
+    string Solution::solve(int A, int B, int C, int D, vector<int>& E, vector<int>& F) {
+    vector<vector<bool>> mat(A + 1, vector<bool>(B + 1));
+
+    for (int i = 0; i <= A; i++) {
+        for (int j = 0; j <= B; j++) {
+            bool flag = false;
+            for (int k = 0; k < C; k++) {
+                int x = (E[k] - i) * (E[k] - i);
+                int y = (F[k] - j) * (F[k] - j);
+                if (x + y <= D * D) {
+                    flag = true;
+                    break;
+                }
+            }
+            mat[i][j] = flag;
+        }
+    }
+
+    if (mat[0][0] == true)
+        return "NO";
+
+    return bfs(mat, A, B, 0, 0);
+    }
+
+    ```
+
