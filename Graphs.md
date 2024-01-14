@@ -299,3 +299,7 @@ bool DFS(vector<string> &A, int i, int j, string B, int idx , vector<vector<bool
 
     ```
 
+7.Delete edge *** Doubt
+
+    
+
