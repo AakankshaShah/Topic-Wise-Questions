@@ -400,6 +400,7 @@ bool DFS(vector<string> &A, int i, int j, string B, int idx , vector<vector<bool
     ```
 
 12.  Word ladder 1 
+
      ```
        queue<pair<string,int>>q;
     q.push({A,1});
@@ -429,11 +430,13 @@ bool DFS(vector<string> &A, int i, int j, string B, int idx , vector<vector<bool
                     }
             }    
                 word[i] = org;
+          }
+        
+        
         }
-        
-        
-     }
-     return 0;
-     ```
+        return 0;
+
+    ```
+13.  Word ladder 2 https://www.youtube.com/watch?v=DREutrv2XD0 ***
 
     
