@@ -1,4 +1,4 @@
-# Grredy Alogorithm 
+# Greedy Alogorithm 
 
 ## Questions
 
