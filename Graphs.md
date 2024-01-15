@@ -379,3 +379,4 @@ bool DFS(vector<string> &A, int i, int j, string B, int idx , vector<vector<bool
     return ans;
    }
    ```
+10. Smallest multiple with 0 & 1 https://www.youtube.com/watch?v=Om47LiGTy8o
