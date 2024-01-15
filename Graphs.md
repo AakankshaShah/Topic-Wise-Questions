@@ -380,3 +380,20 @@ bool DFS(vector<string> &A, int i, int j, string B, int idx , vector<vector<bool
    }
    ```
 10. Smallest multiple with 0 & 1 https://www.youtube.com/watch?v=Om47LiGTy8o
+11. Mother vertex 
+    ```
+       int Solution::motherVertex(int A, vector<vector<int> > &B) {
+    vector<int> indeg (A+1, 0);
+    for (auto i : B) {
+        if (i[0] != i[1]) indeg[i[1]]++;
+    }
+    
+    int count = 0;
+    for (int i : indeg) {
+        if (i == 0) count++;
+    }
+    
+    // accounting for the 0 at indeg[0] (unaccessed)
+    return (count<=2);
+    }
+    ```
