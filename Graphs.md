@@ -5,7 +5,7 @@ https://www.youtube.com/watch?v=s7zE4Nmc2Fg&list=PL5DyztRVgtRVLwNWS7Rpp4qzVVHJal
 
 ## Questions
 
-### DFS
+
 
 1. https://www.interviewbit.com/problems/path-with-good-nodes/
 
@@ -349,4 +349,33 @@ bool DFS(vector<string> &A, int i, int j, string B, int idx , vector<vector<bool
     ```
 
     
+9. Level Order Traversal 
 
+   ```
+    vector<vector<int>> Solution::levelOrder(TreeNode* A) {
+    vector<vector<int>> ans;
+    if (A == NULL)
+        return ans;
+
+    // we will do BFS
+    queue<TreeNode*> q;  // Change the queue declaration to hold pointers
+    q.push(A);
+    vector<int> curr;
+
+    while (!q.empty()) {
+        int sz = q.size();
+        while (sz--) {
+            TreeNode* current = q.front();
+            q.pop();
+            curr.push_back(current->val);
+            if (current->left != NULL)
+                q.push(current->left);
+            if (current->right != NULL)
+                q.push(current->right);
+        }
+        ans.push_back(curr);
+        curr.clear();
+    }
+    return ans;
+   }
+   ```
