@@ -440,5 +440,39 @@ bool DFS(vector<string> &A, int i, int j, string B, int idx , vector<vector<bool
 13.  Word ladder 2 https://www.youtube.com/watch?v=DREutrv2XD0 ***
 
 14.  Clone Graph https://www.youtube.com/watch?v=z7mPg_xT5xk
+      ```
+         class Solution {
+      public:
+      unordered_map<Node*, Node*> mp;
+
+    void dfs(Node* node, Node* clone) {
+        for (Node* n : node->neighbors) {
+            if (mp.find(n) == mp.end()) {
+                Node* clone1 = new Node(n->val);
+                mp[n] = clone1;
+                clone->neighbors.push_back(clone1);
+                dfs(n, clone1);
+
+            }
+
+            else {
+                clone->neighbors.push_back(mp[n]);
+            }
+        }
+    }
+
+    Node* cloneGraph(Node* node) {
+        if (node == NULL)
+            return NULL;
+
+        Node* clone = new Node(node->val);
+        mp[node] = clone;
+
+        dfs(node, clone);
+
+        return clone;
+    }
+    };
+      ```
 
     
