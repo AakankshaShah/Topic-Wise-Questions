@@ -396,6 +396,44 @@ bool DFS(vector<string> &A, int i, int j, string B, int idx , vector<vector<bool
     // accounting for the 0 at indeg[0] (unaccessed)
     return (count<=2);
     }
+    
     ```
+
+12.  Word ladder 1 
+     ```
+       queue<pair<string,int>>q;
+    q.push({A,1});
+    unordered_set<string> st(C.begin(), C.end());
+    st.erase(A);
+    while(!q.empty())
+    {
+        string word=q.front().first;
+        int step=q.front().second;
+        q.pop();
+        if(word==B)
+        return step;
+        
+        for(int i=0;i<word.size();i++)
+        {
+            char org=word[i];
+            
+            
+            for(char k='a';k<='z';k++)
+            {
+                word[i]=k;
+                
+                if (st.find(word) != st.end())
+                    {
+                        st.erase(word);
+                        q.push({word, step + 1});
+                    }
+            }    
+                word[i] = org;
+        }
+        
+        
+     }
+     return 0;
+     ```
 
     
