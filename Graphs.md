@@ -476,4 +476,7 @@ bool DFS(vector<string> &A, int i, int j, string B, int idx , vector<vector<bool
     };
  ```
 
+15. Alien dictionary Topological sort
+16. Sum of all distances in a tree
+
     
