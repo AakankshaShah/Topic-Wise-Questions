@@ -609,3 +609,43 @@ bool DFS(vector<string> &A, int i, int j, string B, int idx , vector<vector<bool
         }
         return result;
        ```
+
+20. Count unreachable pairs 
+
+     ```
+       int dfs(vector<vector<int>>& adj, vector<bool>& visited, int currNode) {
+        visited[currNode] = true;
+        int nodeCount = 1;
+        for (int adjNode : adj[currNode]) {
+            if (visited[adjNode])
+                continue;
+            nodeCount += dfs(adj, visited, adjNode);
+        }
+        return nodeCount;
+    }
+    long long countPairs(int n, vector<vector<int>>& edges) {
+        vector<vector<int>> adj(n);
+        for (vector<int> edge : edges) {
+            adj[edge[0]].push_back(edge[1]);
+            adj[edge[1]].push_back(edge[0]);
+        }
+        //=======================================================================
+        vector<bool> visited(n, false);
+        vector<int> components;
+        for (int node = 0; node < n; node++) {
+            if (visited[node])
+                continue;
+            int componentSize = dfs(adj, visited, node);
+            components.push_back(componentSize);
+        }
+        //=======================================================================
+        long long postSum = components[components.size() - 1];
+        long long ans = 0;
+        for (int i = components.size() - 2; i >= 0; i--) {
+            ans += (components[i] * postSum);
+            postSum += components[i];
+        }
+        //=============================================================================
+        return ans;
+        }
+     ```
