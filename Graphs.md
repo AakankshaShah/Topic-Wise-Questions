@@ -576,5 +576,36 @@ bool DFS(vector<string> &A, int i, int j, string B, int idx , vector<vector<bool
         return ans;  
        
        ```
-
-    
+ 19. Possible recipes
+       ```
+          vector<string> findAllRecipes(vector<string>& recipes, vector<vector<string>>& ingredients, vector<string>& supplies) {
+        int numberOfRecipes = recipes.size();
+        vector<string> result;
+        unordered_map<string,vector<string>> adj;
+        for(int i=0;i<ingredients.size();i++){
+            for(int j=0;j<ingredients[i].size();j++){
+                adj[ingredients[i][j]].push_back(recipes[i]);
+            }
+        }
+        unordered_map<string,int> inDegree;
+        for(int i=0;i<recipes.size();i++){
+            inDegree[recipes[i]] = ingredients[i].size();
+        }
+        queue<string>q;
+        for(int i=0;i<supplies.size();i++){
+            q.push(supplies[i]);
+        }
+        while(!q.empty()){
+            string currentSupply = q.front();
+            q.pop();
+            vector<string> recipesThatCanBeMade = adj[currentSupply];
+            for(int i=0;i<recipesThatCanBeMade.size();i++){
+                inDegree[recipesThatCanBeMade[i]]--;
+                if(inDegree[recipesThatCanBeMade[i]]==0){
+                    q.push(recipesThatCanBeMade[i]);
+                    result.push_back(recipesThatCanBeMade[i]);
+                }
+            }
+        }
+        return result;
+       ```
