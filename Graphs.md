@@ -536,7 +536,7 @@ bool DFS(vector<string> &A, int i, int j, string B, int idx , vector<vector<bool
  18. Detonate the maximum bombs
 
        ```
-          void dfs(vector<int>& vis, vector<vector<int>>& temp, int& t, int& i) {
+        void dfs(vector<int>& vis, vector<vector<int>>& temp, int& t, int& i) {
         vis[i] = 1;
         t++;
         for (int j = 0; j < temp[i].size(); j++) {
@@ -573,7 +573,8 @@ bool DFS(vector<string> &A, int i, int j, string B, int idx , vector<vector<bool
             dfs(vis, temp, t, i);
             ans = max(ans, t);
         }
-        return ans;
-   ```
+        return ans;  
+       
+       ```
 
     
