@@ -396,3 +396,26 @@
     }
      ```
 
+
+     ```
+     //Make use of BST 
+     int dfs(TreeNode* root,int low,int high)
+    {
+        if(root== NULL)
+            return 0;
+        int ans = 0;
+        if(root->val >=low && root->val <=high)
+            ans =  root->val;
+        
+        int left = 0,right = 0;
+        if(low<=root->val)
+            left = dfs(root->left,low,high);
+        if(high>=root->val)
+            right = dfs(root->right,low,high);
+        return ans +left+right;
+    }
+    int rangeSumBST(TreeNode* root, int low, int high) {
+        return dfs(root,low,high);
+    }
+     ```
+
