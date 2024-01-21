@@ -85,5 +85,25 @@
         return 1 + min(left, right);
 
     ```
-         
+3. Populating next right pointer in each node
+     
+   ```
+     if(root==NULL){
+            return NULL;
+        }
+        Node* current=root;
+        while(current->left!=NULL){
+            
+            Node* temp=current;
+            while(current!=NULL){
+                
+                current->left->next=current->right;
+                current->right->next=current->next==NULL?NULL: current->next->left;
+                current=current->next;
+                
+            }
+            current=temp->left;
+        }
+        return root;
+   ```
 
