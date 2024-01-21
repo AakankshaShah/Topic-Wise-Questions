@@ -157,3 +157,25 @@
         return root;
    ```
 
+
+   7. House robber 3 https://www.youtube.com/watch?v=FYho45iq68Y
+      ```
+        unordered_map<TreeNode*, int> map;
+
+        int rob(TreeNode* root) {
+        // Uncomment the following lines if you want to use the recursive approach
+        // pair<int, int> ans = solve(root);
+        // return max(ans.first, ans.second);
+
+        if (root == nullptr) return 0;
+        if (map.find(root) != map.end()) return map[root];
+
+        int val = 0;
+        if (root->left != nullptr) val += rob(root->left->left) + rob(root->left->right);
+        if (root->right != nullptr) val += rob(root->right->left) + rob(root->right->right);
+
+        map[root] = max(root->val + val, rob(root->left) + rob(root->right));
+        return map[root];
+       }
+      ```
+
