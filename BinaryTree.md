@@ -156,9 +156,7 @@
 
         return root;
    ```
-
-
-   7. House robber 3 https://www.youtube.com/watch?v=FYho45iq68Y
+7. House robber 3 https://www.youtube.com/watch?v=FYho45iq68Y
       ```
         unordered_map<TreeNode*, int> map;
 
@@ -178,4 +176,32 @@
         return map[root];
        }
       ```
+8. Find leaves of a binary tree
+   ```
+    map<int, vector<int>> m;
+
+    int findHeight(TreeNode* node) {
+        if (node == NULL)
+            return 0;
+
+        int lh = findHeight(node->left);
+        int rh = findHeight(node->right);
+
+        int h = 1 + max(lh, rh);
+        m[h].push_back(node->val);
+        return h;
+    }
+
+    vector<vector<int>> findLeaves(TreeNode* root) {
+
+        findHeight(root);
+
+        vector<vector<int>> res;
+        for (auto it = m.begin(); it != m.end(); it++) {
+            res.push_back(it->second);
+        }
+
+        return res;
+    }
+   ```
 
