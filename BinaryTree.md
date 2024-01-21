@@ -375,3 +375,24 @@
     }
      
      ```
+13. Range sum BT
+     ```
+      void traverse(TreeNode* node, int low, int high)
+     {
+    if(node->val >=low && node->val <= high)
+        res+=node->val;
+
+    if(node->left != NULL)
+        traverse(node->left, low, high);
+
+    if(node->right != NULL)
+        traverse(node->right, low, high);
+    }
+
+    int rangeSumBST(TreeNode* root, int low, int high) {
+        res = 0;
+        traverse(root, low, high);
+        return res;
+    }
+     ```
+
