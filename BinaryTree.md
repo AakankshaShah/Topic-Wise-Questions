@@ -459,4 +459,33 @@
         return answer;
     }
     ```
+15. Avg substree 
+
+    ```
+     int countNodes(TreeNode* root) {
+        if (!root)
+            return 0;
+        return 1 + countNodes(root->left) + countNodes(root->right);
+    }
+
+    int totalSum(TreeNode* root) {
+        if (!root)
+            return 0;
+        return root->val + totalSum(root->left) + totalSum(root->right);
+    }
+    int averageOfSubtree(TreeNode* root) {
+        if (!root)
+            return 0;
+        int sum = root->val + totalSum(root->left) + totalSum(root->right);
+        int totalNodes = 1 + countNodes(root->left) + countNodes(root->right);
+
+        int avg = floor(sum / totalNodes);
+        if (avg == root->val) {
+            return 1 + averageOfSubtree(root->left) +
+                   averageOfSubtree(root->right);
+        }
+        return averageOfSubtree(root->left) + averageOfSubtree(root->right);
+    }
+
+    ```
 
