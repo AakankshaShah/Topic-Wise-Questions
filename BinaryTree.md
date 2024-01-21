@@ -125,4 +125,21 @@
         return root;
     }
     ```
+5. LCA  of Binary Tree
+   ```
+      if (root == NULL || p == root || q == root)
+            return root;
+
+        TreeNode* lh = lowestCommonAncestor(root->left, p, q);
+        TreeNode* rh = lowestCommonAncestor(root->right, p, q);
+
+        if (lh == NULL)
+            return rh;
+
+        else if (rh == NULL)
+            return lh;
+
+        else
+            return root;
+   ```
 
