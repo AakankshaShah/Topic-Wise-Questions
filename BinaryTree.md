@@ -142,4 +142,18 @@
         else
             return root;
    ```
+6. LCA of Binary Search Tree
+
+   ```
+     if (root == NULL)
+            return NULL;
+
+        if (root->val < p->val && root->val < q->val)
+            return lowestCommonAncestor(root->right, p, q);
+
+        else if (root->val > p->val && root->val > q->val)
+            return lowestCommonAncestor(root->left, p, q);
+
+        return root;
+   ```
 
