@@ -488,4 +488,47 @@
     }
 
     ```
+16. Distance between two nodes
+    ```
+     TreeNode* LCA(TreeNode* root, int n1, int n2) {
+        // Your code here
+        if (root == NULL)
+            return root;
+        if (root->val == n1 || root->val == n2)
+            return root;
+
+        TreeNode* left = LCA(root->left, n1, n2);
+        TreeNode* right = LCA(root->right, n1, n2);
+
+        if (left != NULL && right != NULL)
+            return root;
+        if (left == NULL && right == NULL)
+            return NULL;
+        if (left != NULL)
+            return LCA(root->left, n1, n2);
+
+        return LCA(root->right, n1, n2);
+    }
+
+    int findLevel(TreeNode* root, int k, int level) {
+        if (root == NULL)
+            return -1;
+        if (root->val == k)
+            return level;
+
+        int left = findLevel(root->left, k, level + 1);
+        if (left == -1)
+            return findLevel(root->right, k, level + 1);
+        return left;
+    }
+    int findDistance(TreeNode* root, int a, int b) {
+
+        TreeNode* lca = LCA(root, a, b);
+
+        int d1 = findLevel(lca, a, 0);
+        int d2 = findLevel(lca, b, 0);
+
+        return d1 + d2;
+    }
+    ```
 
