@@ -204,4 +204,38 @@
         return res;
     }
    ```
+9.Find duplicate subtree
+   ```
+   ```
+
+10. Sum of left leaves
+
+    ```
+     bool isLeaf(TreeNode* node) {
+        if (node == NULL)
+            return false;
+        if (node->left == NULL && node->right == NULL)
+            return true;
+        return false;
+    }
+
+    int leftLeavesSum(TreeNode* root) {
+
+        int res = 0;
+
+        if (root != NULL) {
+
+            if (isLeaf(root->left))
+                res += root->left->val;
+            else
+                res += leftLeavesSum(root->left);
+
+            res += leftLeavesSum(root->right);
+        }
+
+        // return result
+        return res;
+    }
+
+    ```
 
