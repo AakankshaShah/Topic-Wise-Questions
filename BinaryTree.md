@@ -205,7 +205,32 @@
     }
    ```
 9.Find duplicate subtree
-   ```
+
+   ``` 
+    string DFS(TreeNode* root, unordered_map<string, int>& mp,
+               vector<TreeNode*>& res) {
+        if (root == NULL)
+            return "NULL";
+
+        string s = to_string(root->val) + "," + DFS(root->left, mp, res) + "," +
+                   DFS(root->right, mp, res);
+
+        if (mp[s] == 1)
+            res.push_back(root);
+
+        mp[s]++;
+
+        return s;
+    }
+    vector<TreeNode*> findDuplicateSubtrees(TreeNode* root) {
+        unordered_map<string, int> mp;
+
+        vector<TreeNode*> res;
+
+        DFS(root, mp, res);
+
+        return res;
+    }
    ```
 
 10. Sum of left leaves
@@ -237,5 +262,20 @@
         return res;
     }
 
+    ```
+11. Symmetric tree
+     
+    ```
+      bool check(TreeNode* l, TreeNode* r) {
+        if(l == NULL && r == NULL)
+            return true;
+        if(l == NULL || r == NULL)
+            return false;
+        
+        if(l->val == r->val && check(l->left, r->right) && check(l->right, r->left))
+            return true;
+        
+        return false;
+    }
     ```
 
