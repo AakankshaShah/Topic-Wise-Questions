@@ -106,4 +106,23 @@
         }
         return root;
    ```
+4. Invert Binary tree
+    ```
+      void swap(TreeNode* curr) {
+        if (!curr)
+            return;
+        // Swap the child pointers
+        TreeNode* temp;
+        temp = curr->left;
+        curr->left = curr->right;
+        curr->right = temp;
+
+        swap(curr->left);
+        swap(curr->right);
+    }
+    TreeNode* invertTree(TreeNode* root) {
+        swap(root);
+        return root;
+    }
+    ```
 
