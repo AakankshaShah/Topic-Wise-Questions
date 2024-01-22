@@ -107,3 +107,28 @@
    
        }
        ```
+   4. Minimum additions to make valid string 
+
+       ```
+        int addMinimum(string s) {
+        int n = s.size();
+        int cnt = 0;
+
+        for (int i = 0; i < n; i++) {
+            if (i + 2 < n && s.substr(i, 3) == "abc")
+                i += 2;
+
+            else if (i + 1 < n &&
+                     (s.substr(i, 2) == "ab" || s.substr(i, 2) == "bc" ||
+                      s.substr(i, 2) == "ac")) {
+                cnt++;
+                i++;
+            }
+
+            else {
+                cnt += 2;
+            }
+        }
+        return cnt;
+        }
+       ```
