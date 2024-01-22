@@ -17,6 +17,33 @@ https://www.youtube.com/playlist?list=PL_z_8CaSLPWdeOezg68SKkeLN4-T_jNHd
 6. Rainwater trapping
 7. Min Stack
 8. Celebrity Problem
+   ```
+    int celebrity(int M[N][N], int n)
+    {
+    
+ 
+    int i = 0, j = n - 1;
+    while (i < j) {
+        if (M[j][i] == 1) // j knows i
+            j--;
+        else 
+            i++;
+    }
+    
+    int candidate = i;
+ 
+    
+    for (i = 0; i < n; i++) {
+        if (i != candidate) {
+            if (M[i][candidate] == 0
+                || M[candidate][i] == 1)
+                return -1;
+        }
+    }
+    
+    return candidate;
+   }
+   ```
 9. Valid Parentheses https://leetcode.com/problems/valid-parentheses
 10. Longest Valid Paratheses* https://leetcode.com/problems/longest-valid-parentheses
 11. Simplify Path* https://leetcode.com/problems/simplify-path/
