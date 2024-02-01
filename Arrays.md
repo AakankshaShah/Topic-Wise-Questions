@@ -102,14 +102,18 @@
         for(int i=top;i<=bottom;i++)
         arr.push_back(A[i][right]);
         right--;
-        
+        if(top<=bottom)
+        {
         for(int i=right;i>=left;i--)
         arr.push_back(A[bottom][i]);
         bottom--;
-        
+        }
+        if(left<=right)
+       {
         for(int i=bottom;i>=top;i--)
         arr.push_back(A[i][left]);
         left++;
+       } 
         
         
     }
