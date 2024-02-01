@@ -43,7 +43,7 @@
    3. Factorial of a large number https://www.youtube.com/watch?v=O3fwYjcMV_M
 
       ```
-           int multiplier( vector<int> &arr, int &size,int fact)
+     void multiplier( vector<int> &arr, int &size,int fact)
      { void carry=0;
     for (int i=0;i<size;i++)
     {
@@ -83,4 +83,36 @@
         
       }
       ```
+4. Spiral order matrix traversal 
+    ```
+       int n=A.size();
+    int m=A[0].size();
+    int left=0;
+    int right=m-1;
+    int top=0;
+    int bottom=n-1;
+    vector<int>arr;
+    
+    while(left<=right&&top<=bottom)
+    {
+        for(int i=left;i<=right;i++)
+        arr.push_back(A[top][i]);
+        top++;
+        
+        for(int i=top;i<=bottom;i++)
+        arr.push_back(A[i][right]);
+        right--;
+        
+        for(int i=right;i>=left;i--)
+        arr.push_back(A[bottom][i]);
+        bottom--;
+        
+        for(int i=bottom;i>=top;i--)
+        arr.push_back(A[i][left]);
+        left++;
+        
+        
+    }
+    return arr;
+    ```
 
