@@ -156,7 +156,7 @@
        
 6. Min steps in infinite grid 
 
-   ```
+     ```
       int dist= 0;
     for(int i = 0; i<A.size()-1; i++){
         int a = abs(A[i+1] - A[i]);
@@ -165,7 +165,29 @@
         else dist+= b;
     }
     return dist;
-  ```
+
+   ```
+7. Min lights to activate 
+    ```
+      int ans = 0;
+    int n = A.size();
+    for(int i=0;i<A.size();){
+        int r = min(i+B-1, n-1), l = max(i-B+1, 0);
+        bool canLight = false;
+        while(r >= l){
+            if(A[r] == 1){
+                canLight = true;
+                break;
+            }
+            r--;
+        }
+        if(canLight == false)
+            return -1;
+        ans++;
+        i = r+B;// r is last position so for r+1 farthest is i+B-1 = r+1+B-1 hence r+B
+    }
+    return ans;
+    ```
    
 
         
