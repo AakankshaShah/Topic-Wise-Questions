@@ -147,3 +147,27 @@ cout<<"start"<<s1<<"\n";
             right++;
         }
 ```
+
+12. Pick from any side 
+     ```
+      int sum = 0;
+        int maxi = 0;
+
+        for (int i = 0; i < B; i++)
+            sum += A[i];
+
+        int r = A.size() - 1;
+        maxi = sum;
+
+        for (int i = B - 1; i >= 0; i--) {
+            sum -= A[i];
+
+            sum += A[r];
+
+            maxi = max(maxi, sum);
+
+            r--;
+        }
+
+        return maxi;
+     ```
