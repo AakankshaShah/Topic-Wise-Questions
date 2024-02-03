@@ -119,5 +119,36 @@
     }
     return arr;
     ```
-   5. Pick from both sides! https://www.youtube.com/watch?v=XJZczN4wts0
+   5. Pick from both sides! https://www.youtube.com/watch?v=XJZczN4wts0 Another approach 
+       ```
+         int left_sum[B + 1], right_sum[B + 1], max, i;
+        int n = A.size();
+
+        left_sum[0] = right_sum[0] = 0;
+
+        for (i = 1; i < B + 1; ++i)
+
+        {
+
+            left_sum[i] = left_sum[i - 1] + A[i - 1];
+
+            right_sum[i] = right_sum[i - 1] + A[n - i];
+        }
+
+        max = left_sum[0] + right_sum[B];
+
+        for (i = 0; i < B + 1; ++i)
+
+        {
+
+            if (left_sum[i] + right_sum[B - i] > max)
+
+            {
+
+                max = left_sum[i] + right_sum[B - i];
+            }
+        }
+
+        return max;
+       ```
 
