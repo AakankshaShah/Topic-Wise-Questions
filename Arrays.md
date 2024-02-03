@@ -119,4 +119,5 @@
     }
     return arr;
     ```
+   5. Pick from both sides! https://www.youtube.com/watch?v=XJZczN4wts0
 
