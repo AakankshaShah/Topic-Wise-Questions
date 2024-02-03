@@ -42,25 +42,25 @@
      ```
    3. Factorial of a large number https://www.youtube.com/watch?v=O3fwYjcMV_M
 
-      ```
-     void multiplier( vector<int> &arr, int &size,int fact)
-     { void carry=0;
-    for (int i=0;i<size;i++)
-    {
+     ```
+        void multiplier( vector<int> &arr, int &size,int fact)
+         { void carry=0;
+         for (int i=0;i<size;i++)
+         {
         int res=arr[i]*fact;
         res=res+carry;
         arr[i]=res%10;
         carry=res/10;
-    }
+         }
     
-    while(carry>0)
-    {
-        arr[size++]=carry%10;
-        carry=carry/10;
-    }
+          while(carry>0)
+         {
+           arr[size++]=carry%10;
+          carry=carry/10;
+         }
     
-     }
-    vector<int> factorial(int N){
+        }
+       vector<int> factorial(int N){
     
         vector<int> arr(10000,0);
         vector<int> res;
@@ -82,7 +82,7 @@
 
         
       }
-      ```
+    ```
 4. Spiral order matrix traversal 
     ```
        int n=A.size();
