@@ -42,7 +42,7 @@
      ```
    3. Factorial of a large number https://www.youtube.com/watch?v=O3fwYjcMV_M
 
-     ```
+   ```
         void multiplier( vector<int> &arr, int &size,int fact)
          { void carry=0;
          for (int i=0;i<size;i++)
@@ -82,8 +82,9 @@
 
         
       }
-    ```
-4. Spiral order matrix traversal 
+   ```
+  4. Spiral order matrix traversal 
+
     ```
        int n=A.size();
     int m=A[0].size();
@@ -119,7 +120,8 @@
     }
     return arr;
     ```
-   5. Pick from both sides! https://www.youtube.com/watch?v=XJZczN4wts0 Another approach 
+    
+ 5. Pick from both sides! https://www.youtube.com/watch?v=XJZczN4wts0 Another approach 
        ```
          int left_sum[B + 1], right_sum[B + 1], max, i;
         int n = A.size();
@@ -148,7 +150,23 @@
                 max = left_sum[i] + right_sum[B - i];
             }
         }
+       return max;
 
-        return max;
        ```
+       
+6. Min steps in infinite grid 
+
+   ```
+      int dist= 0;
+    for(int i = 0; i<A.size()-1; i++){
+        int a = abs(A[i+1] - A[i]);
+        int b = abs(B[i+1] - B[i]);
+        if(a>=b) dist += a;
+        else dist+= b;
+    }
+    return dist;
+  ```
+   
+
+        
 
