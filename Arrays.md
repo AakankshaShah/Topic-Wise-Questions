@@ -189,6 +189,41 @@
     return ans;
     ```
 8. Maximum sum triplet
+
+    ```
+     vector<int> suffix(A.size());
+        int n = A.size();
+
+        suffix[n - 1] = A[n - 1];
+
+        for (int i = A.size() - 2; i >= 0; i--) {
+
+            suffix[i] = max(suffix[i + 1], A[i]);
+        }
+
+        set<int> left;
+
+        int maxSum = 0, sum;
+
+        left.insert(A[0]);
+
+        for (int i = 1; i < A.size(); i++) {
+
+            left.insert(A[i]);
+
+            auto it = left.find(A[i]);
+
+            if (it != left.begin() && suffix[i] != A[i])
+
+                sum = (*--it) + A[i] + suffix[i];
+
+            maxSum = max(sum, maxSum);
+        }
+
+        return maxSum;
+    
+
+    ```
    
 
         
