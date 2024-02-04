@@ -250,6 +250,12 @@
     reverse(ans.begin(),ans.end());
     return ans;
    ```
+
+10. Max absolute difference 
+
+    ```
+      
+    ```
    
 
         
