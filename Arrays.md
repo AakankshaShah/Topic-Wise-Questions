@@ -224,6 +224,32 @@
     
 
     ```
+9. Add 1 to number 
+
+   ```
+     int carry =1;
+    vector<int>ans;
+    
+    for(int i=A.size()-1;i>=0;i--)
+    {
+        int res=A[i]+carry;
+        ans.push_back(res%10);
+        carry=res/10;
+    }
+    while(carry>0)
+    {
+        ans.push_back(carry%10);
+        carry=carry/10;
+    }
+    int i=ans.size()-1;
+    while(ans[i]==0) {
+        ans.pop_back();
+        i--;
+    }
+    
+    reverse(ans.begin(),ans.end());
+    return ans;
+   ```
    
 
         
