@@ -251,9 +251,27 @@
     return ans;
    ```
 
-10. Max absolute difference 
+10. Max absolute difference https://www.youtube.com/watch?v=KqDIeQ9S5Vc
 
     ```
+      int val1=INT_MAX;
+    int val2=INT_MAX;
+    int val3=INT_MIN;
+    int val4=INT_MIN;
+    int ans=0;
+    
+    
+    for(int i=0;i<A.size();i++)
+    {
+        val1=min(val1,A[i]-i);
+        val2=min(val2,A[i]+i);
+        val3=max(val3,A[i]-i);
+        val4=max(val4,A[i]+i);
+        
+        ans=max(val4-val2,val3-val1);
+    }
+    
+    return ans;
       
     ```
    
