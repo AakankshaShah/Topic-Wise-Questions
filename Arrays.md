@@ -296,6 +296,8 @@
         return slow;
     ```
 
+12. Partitions
+
    
 
         
