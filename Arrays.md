@@ -297,6 +297,37 @@
     ```
 
 12. Partitions
+     ```
+       if (A < 3)
+            return 0;
+
+        int totalSum = 0, sum = 0, ans = 0;
+
+        for (int num : B)
+            totalSum += num;
+
+        if (totalSum % 3 != 0)
+            return 0;
+
+        int x = totalSum / 3;
+
+        int twiceX = x * 2;
+
+        int xCount = 0;
+
+        for (int idx = 0; idx < A - 1; idx++) {
+
+            sum += B[idx];
+
+            if (sum == twiceX)
+                ans += xCount;
+
+            if (sum == x)
+                xCount++;
+        }
+
+        return ans;
+     ```
 
    
 
