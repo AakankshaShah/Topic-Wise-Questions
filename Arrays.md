@@ -437,6 +437,66 @@
 
 
     ```
+
+15. Max area of triangle 
+     ```
+       int Solution::solve(vector<string>& A) {
+    int rows = A.size(), cols = A[0].size();
+    map<char, int> maxRow[cols], minRow[cols], maxCol, minCol;
+
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            maxRow[j][A[i][j]] = max(maxRow[j][A[i][j]], i);
+            if (minRow[j].count(A[i][j])) {
+                minRow[j][A[i][j]] = min(minRow[j][A[i][j]], i);
+            } else {
+                minRow[j][A[i][j]] = i;
+            }
+            maxCol[A[i][j]] = max(maxCol[A[i][j]], j);
+            if (minCol.count(A[i][j])) {
+                minCol[A[i][j]] = min(minCol[A[i][j]], j);
+            } else {
+                minCol[A[i][j]] = j;
+            }
+        }
+    }
+    int ans = 0;
+    for (int col = 0; col < cols;
+         col++) // let's check that in which column, the base of triangle can
+                // lie so as to maximise the area
+    {
+        int maxBase, maxHeight;
+
+        if (maxRow[col].count('r') and maxRow[col].count('g') and
+            maxCol.count('b')) {
+            maxBase = max(abs(maxRow[col]['r'] - minRow[col]['g']),
+                          abs(minRow[col]['r'] - maxRow[col]['g'])) +
+                      1;
+            maxHeight = max(abs(col - maxCol['b']), abs(col - minCol['b'])) + 1;
+            ans = max(ans, maxBase * maxHeight);
+        }
+
+        if (maxRow[col].count('g') and maxRow[col].count('b') and
+            maxCol.count('r')) {
+            maxBase = max(abs(maxRow[col]['g'] - minRow[col]['b']),
+                          abs(minRow[col]['g'] - maxRow[col]['b'])) +
+                      1;
+            maxHeight = max(abs(col - maxCol['r']), abs(col - minCol['r'])) + 1;
+            ans = max(ans, maxBase * maxHeight);
+        }
+
+        if (maxRow[col].count('b') and maxRow[col].count('r') and
+            maxCol.count('g')) {
+            maxBase = max(abs(maxRow[col]['b'] - minRow[col]['r']),
+                          abs(minRow[col]['b'] - maxRow[col]['r'])) +
+                      1;
+            maxHeight = max(abs(col - maxCol['g']), abs(col - minCol['g'])) + 1;
+            ans = max(ans, maxBase * maxHeight);
+        }
+    }
+    return ceil(ans / 2.0);
+    }
+     ```
    
 
         
