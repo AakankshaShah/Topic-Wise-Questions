@@ -328,7 +328,28 @@
 
         return ans;
      ```
+13. First missing positive number
+     ```
+      int n = A.size();
 
+        for (int i = 0; i < n; i++) {
+            int a = A[i];
+
+            if (a >= 1 && a <= n) {
+                int pos = a - 1;
+                if (A[pos] != A[i]) {
+                    swap(A[pos], A[i]);
+                    i--;
+                }
+            }
+        }
+        for (int i = 0; i < n; i++) {
+            if (i + 1 != A[i])
+                return i + 1;
+        }
+
+        return n + 1;
+     ```
    
 
         
