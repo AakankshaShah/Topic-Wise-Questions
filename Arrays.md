@@ -497,7 +497,8 @@
     return ceil(ans / 2.0);
     }
      ```
-    16. Set intersecrtion
+16. Set intersecrtion
+
         ```
            static bool cmp(vector<int>& a, vector<int>& b) {
         if (a[1] != b[1]) {
