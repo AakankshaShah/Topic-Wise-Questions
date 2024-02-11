@@ -44,7 +44,7 @@
 
    3. Factorial of a large number https://www.youtube.com/watch?v=O3fwYjcMV_M
 
-    ```
+       ```
         void multiplier( vector<int> &arr, int &size,int fact)
          { void carry=0;
          for (int i=0;i<size;i++)
@@ -84,11 +84,11 @@
 
         
       }
-    ```
+      ```
   4. Spiral order matrix traversal 
 
-    ```
-       int n=A.size();
+   ```
+    int n=A.size();
     int m=A[0].size();
     int left=0;
     int right=m-1;
@@ -121,7 +121,7 @@
         
     }
     return arr;
-    ```
+   ```
     
  5. Pick from both sides! https://www.youtube.com/watch?v=XJZczN4wts0 Another approach 
        ```
@@ -509,7 +509,7 @@
 
 16. Set intersecrtion
 
-        ```
+     ```
            static bool cmp(vector<int>& a, vector<int>& b) {
         if (a[1] != b[1]) {
             // Sort by endpoint in ascending order
@@ -554,7 +554,7 @@
         }
 
         return res;
-    ```
+      ```
 
 17. 
    
