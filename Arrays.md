@@ -4,6 +4,7 @@
 
 1. Circular tour
 2.  Maximum non negative subarray sum
+
      ```
      vector<int> result;
     long long sum = 0;
@@ -40,9 +41,10 @@
      }
 
      ```
+
    3. Factorial of a large number https://www.youtube.com/watch?v=O3fwYjcMV_M
 
-   ```
+    ```
         void multiplier( vector<int> &arr, int &size,int fact)
          { void carry=0;
          for (int i=0;i<size;i++)
@@ -82,7 +84,7 @@
 
         
       }
-   ```
+    ```
   4. Spiral order matrix traversal 
 
     ```
@@ -166,8 +168,10 @@
     }
     return dist;
 
-   ```
+    ```
+
 7. Min lights to activate 
+
     ```
       int ans = 0;
     int n = A.size();
@@ -188,6 +192,7 @@
     }
     return ans;
     ```
+
 8. Maximum sum triplet
 
     ```
@@ -224,6 +229,7 @@
     
 
     ```
+
 9. Add 1 to number 
 
    ```
@@ -250,6 +256,7 @@
     reverse(ans.begin(),ans.end());
     return ans;
    ```
+
 
 10. Max absolute difference https://www.youtube.com/watch?v=KqDIeQ9S5Vc
 
@@ -328,6 +335,7 @@
 
         return ans;
      ```
+
 13. First missing positive number
      ```
       int n = A.size();
@@ -350,6 +358,7 @@
 
         return n + 1;
      ```
+
 14. Missing & repeat number
     ```
       long long n = a.size(); // size of the array
@@ -497,6 +506,7 @@
     return ceil(ans / 2.0);
     }
      ```
+
 16. Set intersecrtion
 
         ```
@@ -545,6 +555,7 @@
 
         return res;
     ```
+
 17. 
    
 
