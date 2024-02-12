@@ -269,10 +269,10 @@ long long mergeSort(vector<int> &arr, long long low, long long high) {
 
         return count;
      ```
-Leetcode - 252 : 
-Leetcode - 253 : 
-```
-int n = intervals.size();
+     Leetcode - 252 : 
+     Leetcode - 253 : 
+      ```
+      int n = intervals.size();
         if (n <= 1)
             return n;
 
@@ -302,12 +302,12 @@ int n = intervals.size();
             i++;
         }
 
-```
+      ```
 
 
-```
-//Heap
- // min heap to store end-times
+      ```
+        //Heap
+        // min heap to store end-times
         std::priority_queue<int, vector<int>, greater<int>> pq;
        
         sort(intervals.begin(), intervals.end());
@@ -328,9 +328,9 @@ int n = intervals.size();
         }
         // size of priority queue is the min number of meeting rooms required
         return pq.size();
-```
-Leetcode - 452 : 
-Leetcode - 2446 :  
+    ```
+    Leetcode - 452 : 
+    Leetcode - 2446 :  
 
 5. Wave array 
 
