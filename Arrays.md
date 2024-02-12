@@ -556,7 +556,48 @@
         return res;
       ```
 
-17. 
+17. Max unsorted array 
+
+     ```
+       int n = arr.size();
+    int l = -1, r = -1;
+    for (int i = 0; i < n - 1; i++) {
+        if (arr[i] > arr[i + 1]) {
+            l = i;
+            break;
+        }
+    }
+    if (l == -1) {
+        return {-1};
+    }
+    for (int i = n - 1; i > 0; i--) {
+        if (arr[i] < arr[i - 1]) {
+            r = i;
+            break;
+        }
+    }
+    int mini = 1e9;
+    int maxi = -1e9;
+    for (int i = l; i <= r; i++) {
+        mini = min(arr[i], mini);
+        maxi = max(maxi, arr[i]);
+    }
+    for (int i = 0; i < l; i++) {
+        if (arr[i] > mini) {
+            l = i;
+            break;
+        }
+    }
+
+    for (int i = n - 1; i > r; i--) {
+        if (arr[i] < maxi) {
+            r = i;
+            break;
+        }
+    }
+    return {l, r};
+
+     ```
    
 
         
