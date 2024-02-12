@@ -331,5 +331,18 @@ int n = intervals.size();
 ```
 Leetcode - 452 : 
 Leetcode - 2446 :  
+
+5. Wave array 
+
+    ```
+     std::sort(A.begin(),A.end());
+    int i = 1;
+    while(i < A.size())
+    {
+        if(i%2 == 1) std::swap(A.at(i-1),A.at(i));
+        i += 2;
+    }
+    return A;
+   ```
    
 
