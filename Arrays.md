@@ -680,7 +680,37 @@ if (y == 1) {
     }
 }
 ```
-20.
+20. Make array elements equal 
+    
+```
+   // Method 1
+sort(begin(A), end(A));
+int n = A.size();
+
+for (int i = 1; i < n; i++) {
+    if ((A[i] - A[i - 1]) % B != 0)
+        return 0;
+}
+if ((A[n - 1] - A[0]) > 2 * B)
+    return 0;
+
+return 1;
+
+// Method 2
+
+int max = A[0];
+int min = A[0];
+for (int i = 0; i < A.length; i++) {
+    if (A[i] > max)
+        max = A[i];
+    if (A[i] < min)
+        min = A[i];
+}
+return max - min == B * 2 ? 1 : 0;
+
+ ```
+21. 
+      
    
 
         
