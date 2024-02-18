@@ -850,6 +850,21 @@ return max - min == B * 2 ? 1 : 0;
     }
     return A;
     ```
+
+24. Kth row of pascal 
+
+     ```
+       vector<int>ans;
+    int prev = 1;
+     ans.push_back(prev);
+ 
+    for (int i = 1; i <= N; i++) {
+        int curr = (prev * (N - i + 1)) / i;
+        ans.push_back(curr);
+        prev = curr;
+    }
+    return ans;
+     ```
       
    
 
