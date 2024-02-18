@@ -886,6 +886,22 @@ return max - min == B * 2 ? 1 : 0;
     return ans;
 
     ```
+    ```
+       vector<vector<int>> vect;
+        vect.push_back({1});        // The first row content 
+
+        for (int i = 1; i < n; i++){
+            // Temproary vector to fetch i-th row contents
+            vector<int> a;
+            a.push_back(1);         // The first value of the row 
+            for(int j = 1; j <= i-1; j++){
+                a.push_back(vect[i-1][j-1]+vect[i-1][j]);
+            }
+            a.push_back(1);         // The last value of the row
+            vect.push_back(a);      // Updation in main vector
+        }
+     return vect;   
+    ```
       
    
 
