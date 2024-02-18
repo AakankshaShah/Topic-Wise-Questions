@@ -990,6 +990,23 @@ return max - min == B * 2 ? 1 : 0;
     reverse(A.begin() + ind + 1, A.end());
     return A;
     ```
+29. Next permutation
+     ```
+      vector<int> res;
+    int start = 1;
+    int end = B;
+
+    for (int i = 0.i < A.size(); i++) {
+        if (A[i] == 'I') {
+            res.push_back(start);
+            start++;
+        } else {
+            res.push_back(end);
+            end--;
+        }
+    }
+    return res;
+     ```
 
         
 
