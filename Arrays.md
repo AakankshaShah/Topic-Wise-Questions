@@ -709,9 +709,10 @@ for (int i = 0; i < A.length; i++) {
 return max - min == B * 2 ? 1 : 0;
 
  ```
-21. Max sum square submatrix
+21. Max sum square submatrix https://www.youtube.com/watch?v=WxjYE4_agbo
 
-    ```
+    ``` 
+    //Brute Method
       int row = A.size();
      int col = A[0].size();
      int max_sum = INT_MIN;
@@ -735,6 +736,28 @@ return max - min == B * 2 ? 1 : 0;
 
     
     ```
+   ```
+    int dp[row + 1][col + 1];
+
+    for (int i = 1; i <= row; i++) {
+        for (int j = 1; j <= col; j++) {
+            dp[i][j] = dp[i - 1][j] + dp[i][j - 1] - dp[i - 1][j - 1] +
+                       A[i - 1][j - 1];
+        }
+    }
+
+    for (int i = 1; i <= row; i++) {
+        int sum = 0;
+        for (int j = 1; j <= col; j++) {
+            if (i - B >= 0 && j - B >= 0) {
+                sum = dp[i][j] - dp[i - B][j] - dp[i][j - B] + dp[i - B][j - B];
+                max_sum = max(max_sum, sum);
+            }
+        }
+    }
+    return max_sum;
+
+   ```
       
    
 
