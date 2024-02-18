@@ -812,7 +812,18 @@ return max - min == B * 2 ? 1 : 0;
         return 0;
     }
     ```
-23. 
+23. Move zeroes to end
+    ```
+      int i=0;
+    int n=A.size();
+    for(int j=0;j<n;j++){
+        if(A[j]!=0){
+            swap(A[j],A[i]);
+            i++;
+        }
+    }
+    return A;
+    ```
       
    
 
