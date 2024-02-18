@@ -780,6 +780,39 @@ return max - min == B * 2 ? 1 : 0;
 
     return 0;
     ```
+
+    ```
+     //One pass
+       int n = A.size();
+    int maxi = A[0];
+    int mini = A[2];
+    int j = 1;
+    for(int i = 1; i<n-1; i++){
+        if(A[i] > maxi){
+            maxi = A[i];
+            mini = A[i+1];
+            j = i+1;
+            while(j<n){
+                if(A[i]<mini){
+                    mini = min(A[j+1], mini);
+                    maxi = max(maxi, A[j]);
+                    j++;
+                }
+                else{
+                    break;
+                }
+            }
+            i = j;
+        }
+    }
+    if(j == n){
+        return 1;
+    }
+    else{
+        return 0;
+    }
+    ```
+23. 
       
    
 
