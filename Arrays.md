@@ -758,6 +758,7 @@ return max - min == B * 2 ? 1 : 0;
     return max_sum;
 
     ```
+22. Peak element
       
    
 
