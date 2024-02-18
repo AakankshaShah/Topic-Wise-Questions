@@ -709,7 +709,32 @@ for (int i = 0; i < A.length; i++) {
 return max - min == B * 2 ? 1 : 0;
 
  ```
-21. 
+21. Max sum square submatrix
+
+    ```
+      int row = A.size();
+     int col = A[0].size();
+     int max_sum = INT_MIN;
+
+    for (int i = 0; i < row; i++) {
+    for (int j = 0; j < col; j++) {
+        if (i + B <= row && j + B <= col) {
+            int sum = 0;
+            for (int k = i; k < i + B; k++)
+
+            {
+                for (int l = j; l < j + B; l++) {
+                    sum += A[k][l];
+                }
+            }
+            max_sum = max(max_sum, sum);
+        }
+    }
+    }
+    return max_sum;
+
+    
+    ```
       
    
 
