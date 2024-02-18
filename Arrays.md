@@ -736,7 +736,7 @@ return max - min == B * 2 ? 1 : 0;
 
     
     ```
-   ```
+    ```
     int dp[row + 1][col + 1];
 
     for (int i = 1; i <= row; i++) {
@@ -757,7 +757,7 @@ return max - min == B * 2 ? 1 : 0;
     }
     return max_sum;
 
-   ```
+    ```
       
    
 
