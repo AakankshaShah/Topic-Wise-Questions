@@ -903,7 +903,68 @@ return max - min == B * 2 ? 1 : 0;
      return vect;   
     ```
       
-   
+26. Largest number
+    
+    ```
+      static bool cmp(int& a, int& b)
+
+    {
+
+        string x = to_string(a) + to_string(b);
+
+        string y = to_string(b) + to_string(a);
+
+        return x > y;
+    }
+
+    string Solution::largestNumber(const vector<int>& A) {
+        vector<int> ans;
+
+        int cnt = 0;
+
+        for (int i = 0; i < A.size(); i++)
+
+        {
+
+            if (A[i] == 0)
+
+                cnt++;
+        }
+
+        if (cnt == A.size())
+
+            return "0";
+
+        for (int i = 0; i < A.size(); i++)
+
+        {
+
+            ans.push_back(A[i]);
+        }
+
+        sort(ans.begin(), ans.end(), cmp);
+
+        string res;
+
+        for (auto i : ans) {
+
+            res += to_string(i);
+        }
+
+        return res;
+    }
+    ```
+27. Rotate array 
+
+     ```
+       void Solution::rotate(vector<vector<int>> & matrix) {
+        reverse(matrix.begin(), matrix.end());
+        for (int i = 0; i < matrix.size(); i++) {
+            for (int j = i + 1; j < matrix[i].size(); j++)
+                swap(matrix[i][j], matrix[j][i]);
+        }
+    }
+     ```
 
         
 
