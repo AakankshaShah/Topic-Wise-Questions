@@ -1043,7 +1043,83 @@ return max - min == B * 2 ? 1 : 0;
         
     }
     return ans;
+    ```
+31. Triplets with sum in range
+     
      ```
+       int i=0;
+    int j=A.size()-1;
+    
+    sort(A.begin(),A.end());
+    
+    while(j-i>=2)
+    {
+        int m=(j+i)/2;
+        double s=stof(A[i])+stof(A[j])+stof(A[m]);
+        if(s>2)
+        j--;
+        else if(s<1)
+        i++;
+        else
+        return 1;
+        
+    }
+    return 0;
+     ```
+32. Balanced arrays https://www.youtube.com/watch?v=jcAsP5z41EM 
+    
+     ```
+      int n=A.size();
+    vector<int> v(n, 0);
+    
+    for(int i=n-1;i>=0;i--)
+    {
+        v[i]=A[i];
+        if(i+2<n)
+        v[i]+=v[i+2];
+    }
+    int ans=0;
+    int odc=0;
+    int evc=0;
+  
+    for(int i=0;i<n;i++)
+    {
+        int odd=0;
+        int even=0;
+        if(i%2==0)
+        {
+            if(i+1<n)
+            odd+=v[i+1];
+            if(i+2<n)
+            even+=v[i+2];
+        }
+        else
+        {
+             if(i+1<n)
+            even+=v[i+1];
+            if(i+2<n)
+            odd+=v[i+2];
+            
+        }
+        
+        
+        
+        if(odd+odc==even+evc)
+        {ans++;
+        }
+        
+        if(i%2)
+        evc+=A[i];
+        else
+        odc+=A[i];
+    }
+    //cout<<ans;
+    return ans;
+
+     ```
+33.
+
+     
 
         
 
