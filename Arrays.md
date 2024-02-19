@@ -1007,6 +1007,43 @@ return max - min == B * 2 ? 1 : 0;
     }
     return res;
      ```
+ 30. Anti diagonal traversal of array
+     
+     ```
+       int n=A.size();
+    int row;
+    int col;
+      vector<vector<int> > ans;
+    
+    for(int i=0;i<n;i++)
+    {
+        row=0;
+        col=i;
+        vector<int> result;
+        while(row<n&&col>=0)
+        {
+            result.push_back(A[row][col]);
+            row++;
+            col--;
+        }
+        ans.push_back(result);
+    }
+    for(int i=1;i<n;i++)
+    {
+        col=n-1;
+        row=i;
+        vector<int> result;
+        while(row<n&&col>=0)
+        {
+            result.push_back(A[row][col]);
+            row++;
+            col--;
+        }
+        ans.push_back(result);
+        
+    }
+    return ans;
+     ```
 
         
 
