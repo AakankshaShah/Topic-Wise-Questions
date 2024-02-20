@@ -1192,7 +1192,41 @@ return max - min == B * 2 ? 1 : 0;
     ```
 
 
-35. 
+35. Max gap
+    
+   ```
+    int mina = nums[0], maxa = nums[0], n = nums.size();
+
+        for (int x : nums) {
+            mina = min(mina, x);
+            maxa = max(maxa, x);
+        }
+
+        if (mina == maxa)
+            return 0;
+
+        int bucketSize = ceil(static_cast<double>(maxa - mina) / (n - 1));
+        vector<int> minBucket(n, INT_MAX);
+        vector<int> maxBucket(n, INT_MIN);
+
+        for (int x : nums) {
+            int idx = (x - mina) / bucketSize;
+            minBucket[idx] = min(x, minBucket[idx]);
+            maxBucket[idx] = max(x, maxBucket[idx]);
+        }
+
+        int maxGap = bucketSize;
+        int previous = maxBucket[0];
+
+        for (int i = 1; i < n; i++) {
+            if (minBucket[i] == INT_MAX)
+                continue;
+            maxGap = max(maxGap, minBucket[i] - previous);
+            previous = maxBucket[i];
+        }
+
+        return maxGap;
+   ```
 
 
      
