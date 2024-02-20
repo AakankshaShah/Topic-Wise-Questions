@@ -1117,7 +1117,83 @@ return max - min == B * 2 ? 1 : 0;
     return ans;
 
      ```
-33.
+33. N/3 repeat number
+    
+    ```
+       int cnt1=0;
+    int ele1;
+    int cnt2=0;
+    int ele2;
+    
+    for(int i=0;i<A.size();i++)
+    {
+        if(cnt1==0&&A[i]!=ele2)
+        {
+            cnt1++;
+            ele1=A[i];
+            
+        }
+        else if(cnt2==0&&A[i]!=ele1)
+        {
+            cnt2++;
+            ele2=A[i];
+            
+        }
+        else if(ele1==A[i])
+        cnt1++;
+        else if(ele2==A[i])
+        cnt2++;
+        else
+        {
+            cnt1--;
+            cnt2--;
+        }
+        
+        
+    }
+    int n=A.size();
+    int count1=0,count2=0;
+    for(int i=0;i<A.size();i++){
+        if(A[i]==ele1){
+            count1++;
+        }
+        if(A[i]==ele2){
+            count2++;
+        }
+    }
+    if(count1>(n/3)){
+        return ele1;
+    }
+    if(count2>(n/3)){
+        return ele2;
+    
+    }
+    return -1;  
+    ```
+34. Majority element N/ 2 (If more than n/2 then only one element)
+    
+    ```
+    int cnt=0;
+
+    for(int i=0;i<n;i++)
+    {
+     if(cnt==0)
+      {cnt=1;
+       ele=A[i];
+      }
+    else if( ele==A[i])
+    cnt++;
+    else
+    cnt--;
+    
+
+    }
+    
+    ```
+
+
+35. 
+
 
      
 
