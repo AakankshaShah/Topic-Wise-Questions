@@ -806,6 +806,17 @@ return max - min == B * 2 ? 1 : 0;
 
     return 0;
     ```
+    ```
+      vector<int> greater(n,arr[n-1]);
+    for(int i=n-2; i>=0; i--)
+        greater[i] = min(greater[i+1], arr[i]);
+    for(int i=1; i<n-1; i++) {
+        if(arr[i] >= arr[i-1] && arr[i] <= greater[i+1])
+            return arr[i];
+        arr[i] = max(arr[i-1], arr[i]);
+    }
+    return -1;
+    ```
 
     ```
      //One pass
