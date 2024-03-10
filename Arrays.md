@@ -1393,6 +1393,21 @@ return max - min == B * 2 ? 1 : 0;
         
         ans.push_back(v);
     ```
+    42. chocolate distribution problem 
+
+        ```
+          long long ans=INT_MAX;
+        if(n<m)
+        return -1;
+        sort(a.begin(),a.end());
+        
+        for(int i=0;i+m-1<n;i++)
+        {
+            ans=min(ans,a[i+m-1]-a[i]);
+        }
+        return ans;
+
+        ```
      
 
         
