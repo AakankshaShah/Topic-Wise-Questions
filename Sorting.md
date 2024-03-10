@@ -378,5 +378,24 @@ long long mergeSort(vector<int> &arr, long long low, long long high) {
 
     return maxDist;
    ```
+7. Sort array of 0s,1s,2s
+   ```
+     int l = 0, mid = 0, high = n - 1;
+while (mid <= high) {
+    switch (a[mid]) {
+    case 0:
+        swap(a[l++], a[mid++]);
+        break;
+
+    case 1:
+        mid++;
+        break;
+
+    case 2:
+        swap(a[mid], a[high--]);
+        break;
+    }
+    }
+   ```
    
 
