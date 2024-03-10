@@ -15,6 +15,30 @@ https://www.youtube.com/playlist?list=PL_z_8CaSLPWdeOezg68SKkeLN4-T_jNHd
 4. Max area under histogram
 5. Max area of rectangle in a binary matrix
 6. Rainwater trapping
+    ```
+      int i=0;
+       int j=n-1;
+       int l_max=0;
+       int r_max=0;
+       int ans=0;
+       
+       while(i<=j)
+       {
+           if(r_max<l_max)
+           {
+               ans+=max(0,r_max-arr[j]);
+               r_max=max(r_max,arr[j]);
+               j--;
+           }
+           else
+           {
+                ans+=max(0,l_max-arr[i]);
+               l_max=max(l_max,arr[i]);
+               i++;
+           }
+       }
+       return ans;
+    ```
 7. Min Stack
 8. Celebrity Problem
    ```
