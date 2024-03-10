@@ -1325,7 +1325,24 @@ return max - min == B * 2 ? 1 : 0;
         sort(arr2,arr2+m);// code here 
     ```
 
-
+40. Zig zag fashion
+    ```
+       void zigZag(int arr[], int n) {
+        for(int i=0;i<n;i++)
+        {
+            if(i%2==1)
+            {
+                if(arr[i]<arr[i-1])
+                swap(arr[i],arr[i-1]);
+                
+                if(arr[i]<arr[i+1])
+                swap(arr[i],arr[i+1]);
+                
+            }
+        }
+        // code here
+    }
+    ```
      
 
         
