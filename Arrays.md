@@ -1228,6 +1228,37 @@ return max - min == B * 2 ? 1 : 0;
         return maxGap;
    ```
 
+36. Subarray with given sum 
+    ```
+     int i=0,j=0;
+        int sum=0;
+        vector<int>ans;
+        
+        while(j<n)
+        {
+            sum+=arr[j];
+            
+            while(i<j&&sum>s)
+            {
+                sum-=arr[i];
+                i++;
+            }
+            
+            if(sum==s)
+            {
+                ans.push_back(i+1);
+                ans.push_back(j+1);
+                return ans;
+                
+            }
+            j++;
+            
+            
+        }
+        ans.push_back(-1);
+        return ans;
+    ```
+
 
      
 
