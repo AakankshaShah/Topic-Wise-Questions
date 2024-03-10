@@ -1435,6 +1435,9 @@ return max - min == B * 2 ? 1 : 0;
     	 }
     	 return res;
         ```
+    44. Number of pairs 
+        ```
+        ```
      
 
         
