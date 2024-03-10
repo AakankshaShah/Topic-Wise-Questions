@@ -1283,7 +1283,27 @@ return max - min == B * 2 ? 1 : 0;
 	    return c;
       ```
 
-38.
+38. Rearange array alternatively 
+    ```
+      	int min_ind=0;
+    	int i=0;
+    	int max_ind=n-1;
+    	int z=arr[n-1]+1;
+    	for(i=0;i<n;i++)
+    	{if(i%2==0)
+    	   { arr[i]=arr[i]+(arr[max_ind]%z)*z;
+    	    max_ind--;
+    	    }
+    	else
+    	{arr[i]=arr[i]+(arr[min_ind]%z)*z;
+    	    min_ind++;
+    	    
+    	}
+    	}
+    	for(i=0;i<n;i++)
+    	arr[i]=arr[i]/z;
+    	 
+    ```
 
 
      
