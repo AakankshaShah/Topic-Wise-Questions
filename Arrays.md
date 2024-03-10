@@ -1408,6 +1408,33 @@ return max - min == B * 2 ? 1 : 0;
         return ans;
 
         ```
+    43. Minimum platforms https://www.youtube.com/watch?v=dxVcMDI7vyI
+
+        ```
+          sort(arr,arr+n);
+    	sort(dep,dep+n);
+    	int i=1,j=0;
+    	int res=0;
+    	int plat=1;
+    	 while(i<n&&j<n)
+    	 {if(arr[i]<=dep[j])
+    	 {
+    	     i++;
+    	     plat++;
+    	 }
+    	 
+    	 else if(arr[i]>dep[j])
+    	 {
+    	     plat--;
+    	     j++;
+    	 }
+    	    res=max(res,plat); 
+    	     
+    	     
+    	     
+    	 }
+    	 return res;
+        ```
      
 
         
