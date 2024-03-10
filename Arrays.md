@@ -1355,7 +1355,7 @@ return max - min == B * 2 ? 1 : 0;
     }
     ```
 
-41. Stock sell & buy
+41. Stock sell & buy Local mnima & local maxima
     ```
       vector<vector<int>>ans;
         if (n == 1)
