@@ -1436,8 +1436,36 @@ return max - min == B * 2 ? 1 : 0;
     	 return res;
         ```
 44. Number of pairs 
-        ```
-        ```
+       
+``` 
+long long int N_Y[1005];
+memset(N_Y, 0, sizeof(N_Y));
+
+sort(Y, Y + N);
+for (long long int i = 0; i < N; i++) {
+    N_Y[Y[i]]++;
+}
+long long int c = 0;
+for (int i = 0; i < M; i++) {
+    if (X[i] == 0)
+        continue;
+
+    else if (X[i] == 1)
+        c += N_Y[0];
+    else {
+        int* idx = upper_bound(Y, Y + N, X[i]);
+        c += N_Y[0] + N_Y[1];
+        c = c + ((Y + N) - idx);
+        if (X[i] == 2)
+            c = c - (N_Y[3] + N_Y[4]);
+        if (X[i] == 3)
+            c += N_Y[2];
+    }
+    // cout<<c<<"\n";
+}
+return c;
+```
+45. 
      
 
         
