@@ -1393,7 +1393,7 @@ return max - min == B * 2 ? 1 : 0;
         
         ans.push_back(v);
     ```
-    42. chocolate distribution problem 
+42. chocolate distribution problem 
 
         ```
           long long ans=INT_MAX;
@@ -1408,7 +1408,7 @@ return max - min == B * 2 ? 1 : 0;
         return ans;
 
         ```
-    43. Minimum platforms https://www.youtube.com/watch?v=dxVcMDI7vyI
+43. Minimum platforms https://www.youtube.com/watch?v=dxVcMDI7vyI
 
         ```
           sort(arr,arr+n);
@@ -1435,7 +1435,7 @@ return max - min == B * 2 ? 1 : 0;
     	 }
     	 return res;
         ```
-    44. Number of pairs 
+44. Number of pairs 
         ```
         ```
      
