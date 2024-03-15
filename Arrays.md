@@ -1465,7 +1465,61 @@ for (int i = 0; i < M; i++) {
 }
 return c;
 ```
-45. 
+45. Count inversions
+
+    ```
+      void merge(long long arr[],long long  low,long long  mid, long long high)
+    {
+        long long left=low;
+        long long right=mid+1;
+        vector<long long>temp;
+        
+        while(left<=mid&&right<=high)
+        {
+            if(arr[left]<=arr[right])
+            {temp.push_back(arr[left]);
+            left++;
+            }
+            else
+            {
+               count+=(mid-left+1);
+                temp.push_back(arr[right]);
+                right++;
+                
+            }
+            
+        }
+        while(left<=mid)
+        temp.push_back(arr[left++]);
+        while(right<=high)
+        temp.push_back(arr[right++]);
+        
+        for(long long i=low;i<=high;i++)
+        {
+            arr[i]=temp[i-low];
+        }
+        
+    }
+    
+    void mergesort(long long arr[],long long low,long long high)
+    {
+        if(low>=high)
+        return;
+        long long mid=(low+high)/2;
+        mergesort(arr,low,mid);
+        mergesort(arr,mid+1,high);
+        merge(arr,low,mid,high);
+    }
+    
+    long long int inversionCount(long long arr[], long long N)
+    {
+        count=0;
+        mergesort(arr,0,N-1);
+        return count;
+    }```
+
+46.
+
      
 
         
