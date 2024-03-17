@@ -1579,6 +1579,38 @@ return c;
 	    return sum;
 	}
     ```
+49. Closet sum to zero 
+    ```
+      sort(arr, arr + n);
+    int low = 0;
+    int high = n - 1;
+    int ans = INT_MAX;
+    while (low < high) {
+        int sum = arr[low] + arr[high];
+        if (sum == 0)
+            return 0;
+        if ((abs(sum) <= abs(ans))) {
+            if (abs(sum) == abs(ans)) {
+                ans = max(ans, sum);
+            } else {
+                ans = sum;
+            }
+
+            if (sum < 0) {
+                low++;
+            } else {
+                high--;
+            }
+        } else {
+            if (sum < 0) {
+                low++;
+            } else {
+                high--;
+            }
+        }
+    }
+    return ans;
+    ```
 
      
 
