@@ -1745,7 +1745,29 @@ return c;
         return ans;
     }
     ```
-55. 
+55. Next permutation
+
+     ```
+      int ind = -1;
+        for (int i = nums.size() - 1; i > 0; i--) {
+            if (nums[i] > nums[i - 1]) {
+                ind = i - 1;
+                break;
+            }
+        }
+
+        if (ind != -1) {
+            int swap_index = ind;
+            for (int j = nums.size() - 1; j > ind; j--) {
+                if (nums[j] > nums[ind]) {
+                    swap_index = j;
+                    break;
+                }
+            }
+            swap(nums[swap_index], nums[ind]);
+        }
+        reverse(nums.begin() + ind + 1, nums.end());
+     ```
 
      
 
