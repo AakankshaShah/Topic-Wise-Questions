@@ -1635,7 +1635,117 @@ return c;
         
       }
     ```
-51. 
+51. 3 sum
+    ```
+      sort(nums.begin(), nums.end());
+        vector<vector<int>> ans;
+
+        int n = nums.size();
+
+        for (int i = 0; i < n - 2; ++i) {
+            // Skip duplicate values for i
+            if (i > 0 && nums[i] == nums[i - 1])
+                continue;
+
+            int j = i + 1;
+            int k = n - 1;
+
+            while (j < k) {
+                int sum = nums[i] + nums[j] + nums[k];
+                if (sum == 0) {
+                    ans.push_back({nums[i], nums[j], nums[k]});
+                    // Skip duplicate values for j
+                    while (j < k && nums[j] == nums[j + 1])
+                        ++j;
+                    // Skip duplicate values for k
+                    while (j < k && nums[k] == nums[k - 1])
+                        --k;
+                    ++j;
+                    --k;
+                } else if (sum > 0) {
+                    --k;
+                } else {
+                    ++j;
+                }
+            }
+        }
+
+        return ans;
+    ```
+52. Closet 3 sum
+    ```
+      sort(nums.begin(), nums.end());
+        
+        
+        int closetSum=100000;
+
+        int n = nums.size();
+
+        for (int i = 0; i < n - 2; ++i) {
+            
+
+            int j = i + 1;
+            int k = n - 1;
+
+            while (j < k) {
+                int sum = nums[i] + nums[j] + nums[k];
+
+               if(abs(target-sum)<abs(target-closetSum))
+               closetSum=sum;
+
+               if(sum<target)
+               j++;
+               else
+               k--;
+                
+            }
+        }
+
+        return closetSum;
+    ```
+53. 4 sum 
+
+     ```
+       sort(nums.begin(), nums.end());
+        vector<vector<int>> ans;
+        int n = nums.size();
+        for (int i = 0; i < n - 3; i++) {
+            if (i > 0 && nums[i] == nums[i - 1]) {
+                continue;
+            }
+            for (int j = i + 1; j < n - 2; j++) {
+                if (j > i + 1 && nums[j] == nums[j - 1]) {
+                    continue;
+                }
+
+                long long  tSum = (long long)target - (nums[i] + nums[j]);
+                int l = j + 1, h = n - 1;
+                while (l < h) {
+                    if (nums[l] + nums[h] == tSum) {
+                        vector<int> oneAns = {nums[i], nums[j], nums[l],
+                                              nums[h]};
+                        ans.push_back(oneAns);
+                        while (l < h && nums[l] == nums[l + 1]) {
+                            l++;
+                        }
+                        while (l < h && nums[h] == nums[h - 1]) {
+                            h--;
+                        }
+                        l++;
+                        h--;
+                    } else if (nums[l] + nums[h] < tSum) {
+                        l++;
+                    } else {
+                        h--;
+                    }
+                }
+            }
+        }
+
+        return ans;
+    }
+    ```
+55. 
 
      
 
