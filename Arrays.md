@@ -1768,6 +1768,8 @@ return c;
         }
         reverse(nums.begin() + ind + 1, nums.end());
      ```
+56. Valid Soduko 
+
 
      
 
