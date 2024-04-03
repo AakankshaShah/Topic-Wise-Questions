@@ -42,6 +42,265 @@
         return ans;
     }
    ```
+2. Container with  most water
+
+    ```
+      int maxArea(vector<int>& height) {
+        int i=0;
+        int j=height.size()-1;
+        int ans=0;
+
+        while(i<j)
+        {
+            
+            int w=j-i;
+            int h=min(height[i],height[j]);
+            ans=max(ans,w*h);
+            if(height[j]>height[i])
+            i++;
+            else
+            j--;
+        }
+        return ans;
+        
+      }
+    ```
+3. 3sum
+    ```
+      sort(nums.begin(), nums.end());
+        vector<vector<int>> ans;
+
+        int n = nums.size();
+
+        for (int i = 0; i < n - 2; ++i) {
+            // Skip duplicate values for i
+            if (i > 0 && nums[i] == nums[i - 1])
+                continue;
+
+            int j = i + 1;
+            int k = n - 1;
+
+            while (j < k) {
+                int sum = nums[i] + nums[j] + nums[k];
+                if (sum == 0) {
+                    ans.push_back({nums[i], nums[j], nums[k]});
+                    // Skip duplicate values for j
+                    while (j < k && nums[j] == nums[j + 1])
+                        ++j;
+                    // Skip duplicate values for k
+                    while (j < k && nums[k] == nums[k - 1])
+                        --k;
+                    ++j;
+                    --k;
+                } else if (sum > 0) {
+                    --k;
+                } else {
+                    ++j;
+                }
+            }
+        }
+
+        return ans;
+    ```
+4. Closet 3 sum
+    ```
+      sort(nums.begin(), nums.end());
+        
+        
+        int closetSum=100000;
+
+        int n = nums.size();
+
+        for (int i = 0; i < n - 2; ++i) {
+            
+
+            int j = i + 1;
+            int k = n - 1;
+
+            while (j < k) {
+                int sum = nums[i] + nums[j] + nums[k];
+
+               if(abs(target-sum)<abs(target-closetSum))
+               closetSum=sum;
+
+               if(sum<target)
+               j++;
+               else
+               k--;
+                
+            }
+        }
+
+        return closetSum;
+    ```
+5. 4 sum 
+
+     ```
+       sort(nums.begin(), nums.end());
+        vector<vector<int>> ans;
+        int n = nums.size();
+        for (int i = 0; i < n - 3; i++) {
+            if (i > 0 && nums[i] == nums[i - 1]) {
+                continue;
+            }
+            for (int j = i + 1; j < n - 2; j++) {
+                if (j > i + 1 && nums[j] == nums[j - 1]) {
+                    continue;
+                }
+
+                long long  tSum = (long long)target - (nums[i] + nums[j]);
+                int l = j + 1, h = n - 1;
+                while (l < h) {
+                    if (nums[l] + nums[h] == tSum) {
+                        vector<int> oneAns = {nums[i], nums[j], nums[l],
+                                              nums[h]};
+                        ans.push_back(oneAns);
+                        while (l < h && nums[l] == nums[l + 1]) {
+                            l++;
+                        }
+                        while (l < h && nums[h] == nums[h - 1]) {
+                            h--;
+                        }
+                        l++;
+                        h--;
+                    } else if (nums[l] + nums[h] < tSum) {
+                        l++;
+                    } else {
+                        h--;
+                    }
+                }
+            }
+        }
+
+        return ans;
+    }
+    ```
+6. Next permutation
+
+     ```
+      int ind = -1;
+        for (int i = nums.size() - 1; i > 0; i--) {
+            if (nums[i] > nums[i - 1]) {
+                ind = i - 1;
+                break;
+            }
+        }
+
+        if (ind != -1) {
+            int swap_index = ind;
+            for (int j = nums.size() - 1; j > ind; j--) {
+                if (nums[j] > nums[ind]) {
+                    swap_index = j;
+                    break;
+                }
+            }
+            swap(nums[swap_index], nums[ind]);
+        }
+        reverse(nums.begin() + ind + 1, nums.end());
+     ```
+7. Search in rotated sorted array 
+
+    ```
+     int search(vector<int>& nums, int target) {
+        int l = 0;
+        int h = nums.size() - 1;
+        int ans = -1;
+
+        while (l <= h) {
+            int mid = (l + h) / 2;
+            if (nums[mid] == target) {
+                ans = mid;
+                return ans;
+            } else if (nums[l] <= nums[mid]) {
+                if (nums[l] <= target && target <= nums[mid]) {
+                    h = mid - 1;
+                } else {
+                    l = mid + 1;
+                }
+            } else {
+                if (nums[mid] <= target && target <= nums[h]) {
+                    l = mid + 1;
+                } else {
+                    h = mid - 1;
+                }
+            }
+        }
+        return -1;
+    }
+    ```
+8.Valid Sudoku
+
+     //Approach 1
+       bool isvalidBox(vector<vector<char>>& board, int sr, int er, int sc, int ec) {
+        unordered_set<char> s;
+        for (int i = sr; i < er; i++) {
+            for (int j = sc; j < ec; j++) {
+                if (board[i][j] != '.' && s.find(board[i][j]) != s.end())
+                    return false;
+                s.insert(board[i][j]);
+            }
+        }
+        return true;
+    }
+    
+    bool isValidSudoku(vector<vector<char>>& board) {
+        // Row validate
+        for (int i = 0; i < 9; i++) {
+            unordered_set<char> s;
+            for (int j = 0; j < 9; j++) {
+                if (board[i][j] != '.' && s.find(board[i][j]) != s.end())
+                    return false;
+                s.insert(board[i][j]);
+            }
+        }
+        
+        // Column validate
+        for (int i = 0; i < 9; i++) {
+            unordered_set<char> s;
+            for (int j = 0; j < 9; j++) {
+                if (board[j][i] != '.' && s.find(board[j][i]) != s.end())
+                    return false;
+                s.insert(board[j][i]);
+            }
+        }
+        
+        // Sub square validate
+        for (int sr = 0; sr < 9; sr += 3) {
+            for (int sc = 0; sc < 9; sc += 3) {
+                if (!isvalidBox(board, sr, sr + 3, sc, sc + 3))
+                    return false;
+            }
+        }
+        
+        return true;
+    }
+    
+    
+    // Approach 2
+      bool isValidSudoku(vector<vector<char>>& board) {
+        unordered_set<string> st;
+        
+        for(int i = 0; i<9; i++) {
+            for(int j = 0; j<9; j++) {
+                if(board[i][j] == '.') continue;
+                
+                string row = string(1, board[i][j]) + "_row_" + to_string(i);
+                string col = string(1, board[i][j]) + "_col_" + to_string(j);
+                string box = string(1, board[i][j]) + "_box_" + to_string(i/3) + "_" + to_string(j/3);
+                if(st.count(row) || st.count(col) || st.count(box)) return false;
+                st.insert(row);
+                st.insert(col);
+                st.insert(box);
+            }
+        }
+        
+        return true;
+    }
+    
+
+
+
+
 
 
 1. Circular tour
@@ -1654,163 +1913,6 @@ return c;
     return ans;
     ```
 
-50. Container with  most water
-
-    ```
-      int maxArea(vector<int>& height) {
-        int i=0;
-        int j=height.size()-1;
-        int ans=0;
-
-        while(i<j)
-        {
-            
-            int w=j-i;
-            int h=min(height[i],height[j]);
-            ans=max(ans,w*h);
-            if(height[j]>height[i])
-            i++;
-            else
-            j--;
-        }
-        return ans;
-        
-      }
-    ```
-51. 3 sum
-    ```
-      sort(nums.begin(), nums.end());
-        vector<vector<int>> ans;
-
-        int n = nums.size();
-
-        for (int i = 0; i < n - 2; ++i) {
-            // Skip duplicate values for i
-            if (i > 0 && nums[i] == nums[i - 1])
-                continue;
-
-            int j = i + 1;
-            int k = n - 1;
-
-            while (j < k) {
-                int sum = nums[i] + nums[j] + nums[k];
-                if (sum == 0) {
-                    ans.push_back({nums[i], nums[j], nums[k]});
-                    // Skip duplicate values for j
-                    while (j < k && nums[j] == nums[j + 1])
-                        ++j;
-                    // Skip duplicate values for k
-                    while (j < k && nums[k] == nums[k - 1])
-                        --k;
-                    ++j;
-                    --k;
-                } else if (sum > 0) {
-                    --k;
-                } else {
-                    ++j;
-                }
-            }
-        }
-
-        return ans;
-    ```
-52. Closet 3 sum
-    ```
-      sort(nums.begin(), nums.end());
-        
-        
-        int closetSum=100000;
-
-        int n = nums.size();
-
-        for (int i = 0; i < n - 2; ++i) {
-            
-
-            int j = i + 1;
-            int k = n - 1;
-
-            while (j < k) {
-                int sum = nums[i] + nums[j] + nums[k];
-
-               if(abs(target-sum)<abs(target-closetSum))
-               closetSum=sum;
-
-               if(sum<target)
-               j++;
-               else
-               k--;
-                
-            }
-        }
-
-        return closetSum;
-    ```
-53. 4 sum 
-
-     ```
-       sort(nums.begin(), nums.end());
-        vector<vector<int>> ans;
-        int n = nums.size();
-        for (int i = 0; i < n - 3; i++) {
-            if (i > 0 && nums[i] == nums[i - 1]) {
-                continue;
-            }
-            for (int j = i + 1; j < n - 2; j++) {
-                if (j > i + 1 && nums[j] == nums[j - 1]) {
-                    continue;
-                }
-
-                long long  tSum = (long long)target - (nums[i] + nums[j]);
-                int l = j + 1, h = n - 1;
-                while (l < h) {
-                    if (nums[l] + nums[h] == tSum) {
-                        vector<int> oneAns = {nums[i], nums[j], nums[l],
-                                              nums[h]};
-                        ans.push_back(oneAns);
-                        while (l < h && nums[l] == nums[l + 1]) {
-                            l++;
-                        }
-                        while (l < h && nums[h] == nums[h - 1]) {
-                            h--;
-                        }
-                        l++;
-                        h--;
-                    } else if (nums[l] + nums[h] < tSum) {
-                        l++;
-                    } else {
-                        h--;
-                    }
-                }
-            }
-        }
-
-        return ans;
-    }
-    ```
-55. Next permutation
-
-     ```
-      int ind = -1;
-        for (int i = nums.size() - 1; i > 0; i--) {
-            if (nums[i] > nums[i - 1]) {
-                ind = i - 1;
-                break;
-            }
-        }
-
-        if (ind != -1) {
-            int swap_index = ind;
-            for (int j = nums.size() - 1; j > ind; j--) {
-                if (nums[j] > nums[ind]) {
-                    swap_index = j;
-                    break;
-                }
-            }
-            swap(nums[swap_index], nums[ind]);
-        }
-        reverse(nums.begin() + ind + 1, nums.end());
-     ```
-56. Valid Soduko 
 
 
      
