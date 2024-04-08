@@ -297,7 +297,53 @@
         return true;
     }
     
+9. Sudoko solver [Backtracking]
+    ```
+      bool isSafe(int i, int j, char val, vector<vector<char>>& board) {
+        for (int k = 0; k < 9; k++) {
+            if (board[i][k] == val)
+                return false;
+            if (board[k][j] == val)
+                return false;
+        }
+        int r = i - i % 3;
+        int c = j - j % 3;
 
+        for (int m = r; m < r + 3; m++) {
+            for (int n = c; n < c + 3; n++) {
+                if (board[m][n] == val)
+                    return false;
+            }
+        }
+        return true;
+    }
+
+    bool solve(vector<vector<char>>& board) {
+        int n = board.size();
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                if (board[i][j] == '.') {
+                    // insert
+                    for (char value = '1'; value <= '9'; value++) {
+                        // checking for safety of row,col and 3*3 box
+                        if (isSafe(i, j, value, board)) {
+                            board[i][j] = value;
+                            // baaki recursion sambhaal leha
+                            bool aageKaSolution = solve(board);
+                            if (aageKaSolution == true)
+                                return true;
+                            // else backtracking
+                            board[i][j] = '.';
+                        }
+                    }
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+    void solveSudoku(vector<vector<char>>& board) { solve(board); }
+    ```
 
 
 
