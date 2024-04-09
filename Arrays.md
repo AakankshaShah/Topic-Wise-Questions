@@ -228,9 +228,10 @@
         return -1;
     }
     ```
-8.Valid Sudoku
+8. Valid Sudoku
 
-     //Approach 1
+     ``` 
+       //Approach 1
        bool isvalidBox(vector<vector<char>>& board, int sr, int er, int sc, int ec) {
         unordered_set<char> s;
         for (int i = sr; i < er; i++) {
@@ -371,6 +372,48 @@
         return ans;
     }
     ```
+11. Combination Sum 2 
+     ```
+     void findCombination(int index, int target, vector<int>& ds,
+                         vector<vector<int>>& ans, vector<int> arr, int n) {
+
+        if (target == 0) {
+
+            ans.push_back(ds);
+            return;
+        }
+
+        for (int i = index; i < n; i++) {
+
+            if ((i > index) and (arr[i] == arr[i - 1])) {
+                continue;
+            }
+
+            if (arr[i] > target) {
+                break;
+            }
+            ds.push_back(arr[i]);
+
+            findCombination(i + 1, target - arr[i], ds, ans, arr, n);
+
+            ds.pop_back();
+        }
+    }
+
+    vector<vector<int>> combinationSum2(vector<int>& candidates, int target) {
+
+        int n = candidates.size();
+        vector<vector<int>> ans;
+
+        vector<int> ds;
+
+        sort(candidates.begin(), candidates.end());
+
+        findCombination(0, target, ds, ans, candidates, n);
+
+        return ans;
+    }
+     ```
 
 
 
