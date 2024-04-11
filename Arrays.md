@@ -555,6 +555,94 @@
         }
     }
      ```
+   18. Group Anagrams 
+       ```
+          string generate(string& s) {
+        vector<int> count(26, 0);
+        for (char c : s) {
+            count[c - 'a']++;
+        }
+
+        string ss;
+        for (int i = 0; i < 26; i++) {
+            if (count[i] != 0) {
+                ss += string(count[i], 'a' + i);
+            }
+        }
+        return ss;
+    }
+    vector<vector<string>> groupAnagrams(vector<string>& strs) {
+        unordered_map<string, vector<string>> mp;
+        vector<vector<string>> ans;
+
+        for (int i = 0; i < strs.size(); i++) {
+            string temp = strs[i];
+            string new_word = generate(temp);
+            mp[new_word].push_back(temp);
+        }
+        for (auto it : mp) {
+            ans.push_back(it.second);
+        }
+        return ans;
+    }
+       ```
+19. N - Queens O(n!)
+    ```
+      bool isSafe(vector<string>& board, int row, int col, int n) {
+        int i = row;
+        int j = col;
+
+        while (row >= 0 && col >= 0) {
+            if (board[row][col] == 'Q')
+                return false;
+            row--;
+            col--;
+        }
+        col = j;
+        row = i;
+
+        while (col >= 0) {
+            if (board[row][col] == 'Q')
+                return false;
+            col--;
+        }
+        col = j;
+        while (col >= 0 && row < n) {
+            if (board[row][col] == 'Q')
+                return false;
+            col--;
+            row++;
+        }
+
+        return true;
+    }
+
+    void solve(vector<string>& board, int col, int n,
+               vector<vector<string>>& ans) {
+        if (col == n) {
+            ans.push_back(board);
+            return;
+        }
+        for (int row = 0; row < n; row++) {
+            if (isSafe(board, row, col, n)) {
+                board[row][col] = 'Q';
+                solve(board, col + 1, n, ans); // Corrected the recursive call
+                board[row][col] = '.';
+            }
+        }
+    }
+
+    vector<vector<string>> solveNQueens(int n) {
+        vector<vector<string>> ans;
+        vector<string> board(n);
+        string s(n, '.');
+        for (int i = 0; i < n; i++)
+            board[i] = s;
+
+        solve(board, 0, n, ans);
+        return ans;
+    }
+    ```
 
 
 
