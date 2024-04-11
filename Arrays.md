@@ -438,6 +438,32 @@
         return n + 1;
    
      ```
+   13. Trapping Rain water
+       
+       ```
+         int i=0;
+        int j=height.size()-1;
+
+        int maxL=0;
+        int maxR=0;
+        int res=0;
+        while(i<=j)
+        {
+            if(maxR<=maxL)
+            {
+                res+=max(0,maxR-height[j]);
+                maxR=max(maxR,height[j]);
+                j--;
+            }
+            else
+            {
+                res+=max(0,maxL-height[i]);
+                maxL=max(maxL,height[i]);
+                i++; 
+            }
+        }
+       return res; 
+       ```
 
 
 
