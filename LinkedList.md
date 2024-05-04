@@ -21,6 +21,26 @@
         return dummy->next;
    ```
 2. Remove nth node from end (K-N+1) two pointer approach
+   ```
+     ListNode* fast = head;
+        ListNode* slow = head;
+
+        for (int i = 0; i < n; i++) {
+            fast = fast->next;
+        }
+
+        if (fast == NULL) {
+            head = head->next;
+            return head;
+        }
+
+        while (fast->next != NULL) {
+            fast = fast->next;
+            slow = slow->next;
+        }
+        slow->next = slow->next->next;
+        return head;
+   ```
 3.  Reverse linked list 
      ```
       Node* current = head;
