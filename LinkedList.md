@@ -59,6 +59,34 @@
 
       ```
 4. Merge two sorted linked list
+   ```
+    ListNode* dummy = new ListNode();
+        ListNode* temp = dummy;
+
+        while (list1 != NULL && list2 != NULL) {
+            if (list1->val <= list2->val) {
+                dummy->next = list1;
+
+                list1 = list1->next;
+
+            } else {
+                dummy->next = list2;
+
+                list2 = list2->next;
+            }
+            dummy = dummy->next;
+        }
+
+        if (list1 != NULL) {
+            dummy->next = list1;
+        }
+
+        if (list2 != NULL) {
+            dummy->next = list2;
+        }
+
+        return temp->next;
+   ```
 5. Merge k sorted linked lists
     ```
     ListNode* mergeTwoSortedLists(ListNode* l1, ListNode* l2) {
