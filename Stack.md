@@ -68,8 +68,57 @@ https://www.youtube.com/playlist?list=PL_z_8CaSLPWdeOezg68SKkeLN4-T_jNHd
     return candidate;
    }
    ```
-9. Valid Parentheses https://leetcode.com/problems/valid-parentheses
-10. Longest Valid Paratheses* https://leetcode.com/problems/longest-valid-parentheses
+9. Valid Parentheses 
+
+    ```
+      bool isValid(string s) {
+        stack<char> st;
+
+        for (int i = 0; i < s.length(); i++) {
+            if (s[i] == '(' || s[i] == '{' || s[i] == '[')
+                st.push(s[i]);
+
+            else if (s[i] == ')') {
+                if (!(st.size() > 0 && st.top() == '('))
+                    return false;
+                st.pop();
+            } else if (s[i] == '}') {
+                if (!(st.size() > 0 && st.top() == '{'))
+                    return false;
+                st.pop();
+            } else if (s[i] == ']') {
+                if (!(st.size() > 0 && st.top() == '['))
+                    return false;
+                st.pop();
+            }
+        }
+
+        return st.size() == 0;
+    }
+    ```
+10. Longest Valid Paratheses* 
+    ```
+       int longestValidParentheses(string s) {
+        stack<int> st;
+        st.push(-1);
+        int res = 0;
+        for (int i = 0; i < s.length(); i++) {
+            if (s[i] == '(')
+                st.push(i);
+            else {
+                if (!st.empty())
+                    st.pop();
+
+                if (!st.empty())//Stores the last invalid index
+                    res = max(res, i - st.top());
+
+                else
+                    st.push(i);
+            }
+        }
+        return res;
+    }
+    ```
 11. Simplify Path* https://leetcode.com/problems/simplify-path/
 12. Polish Notation https://leetcode.com/problems/evaluate-reverse-polish-notation
 13. Basic Calculator** https://leetcode.com/problems/basic-calculator
