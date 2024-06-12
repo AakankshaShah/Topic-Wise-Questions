@@ -39,6 +39,24 @@ https://www.youtube.com/playlist?list=PL_z_8CaSLPWdeOezg68SKkeLN4-T_jNHd
        }
        return ans;
     ```
+    ```
+     int n = height.size() - 1;
+        int maxL[n+1];
+        int maxR[n+1];
+        maxL[0] = height[0];
+        maxR[n] = height[n];
+        int res=0;
+        for (int i = 1; i < height.size(); i++) {
+            maxL[i] = max(maxL[i - 1], height[i]);
+        }
+        for (int i = n-1; i >= 0; i--) {
+            maxR[i] = max(maxR[i + 1], height[i]);
+        }
+        for (int i = 1; i < height.size(); i++) {
+            res+=max(0,min(maxL[i],maxR[i])-height[i]);
+        }
+        return res;
+    ```
 7. Min Stack
 8. Celebrity Problem
    ```
