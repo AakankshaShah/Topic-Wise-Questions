@@ -137,7 +137,41 @@ https://www.youtube.com/playlist?list=PL_z_8CaSLPWdeOezg68SKkeLN4-T_jNHd
         return res;
     }
     ```
-11. Simplify Path* https://leetcode.com/problems/simplify-path/
+11. Simplify Path* 
+
+    ```
+     stack<string> s;
+        int len = path.length() - 1;
+        int n = len;
+        int i=0;
+
+        while (i <= len) {
+            if (path[i] == '/')
+                i++;
+            else {
+                string w = "";
+                while (path[i] != '/' && i <= len) {
+                    w += path[i++];
+                }
+                if (w == "..") {
+                    if (!s.empty())
+                        s.pop();
+                } else if (w == ".")
+                    continue;
+
+                else
+                    s.push(w);
+            }
+        }
+        string ans = "";
+        if (s.empty())
+            return "/";
+        while (!s.empty()) {
+            ans = +"/" + s.top() + ans;
+            s.pop();
+        }
+        return ans;
+    ```
 12. Polish Notation https://leetcode.com/problems/evaluate-reverse-polish-notation
 13. Basic Calculator** https://leetcode.com/problems/basic-calculator
 14. Basic Calculator II https://leetcode.com/problems/basic-calculator-ii/
