@@ -13,6 +13,42 @@ https://www.youtube.com/playlist?list=PL_z_8CaSLPWdeOezg68SKkeLN4-T_jNHd
 2. Nearest Smallest  Element towards left/right
 3. Stock span
 4. Max area under histogram
+   ```
+    stack<int> s;
+        stack<int> s1;
+        int len = height.size();
+        vector<int> l(len);
+        vector<int> r(len);
+
+        for (int i = 0; i < len; i++) {
+            while (s.size() > 0 && height[s.top()] >= height[i])
+                s.pop();
+            if (s.empty())
+                l[i] = -1;
+            else
+                l[i] = s.top();
+            s.push(i);
+        }
+
+        for (int i = len - 1; i >= 0; i--) {
+
+            while (s1.size() > 0 && height[s1.top()] >= height[i])
+                s1.pop();
+            if (s1.empty())
+                r[i] = len;
+            else
+                r[i] = s1.top();
+            s1.push(i);
+        }
+        int ans = 0;
+        for (int i = 0; i < len; i++) {
+            int width = r[i] - l[i] - 1;
+            int area = height[i] * width;
+            ans = max(ans, area);
+        }
+        return ans;
+    }
+   ```
 5. Max area of rectangle in a binary matrix
 6. Rainwater trapping
     ```
