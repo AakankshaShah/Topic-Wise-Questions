@@ -49,6 +49,33 @@ https://www.youtube.com/playlist?list=PL_z_8CaSLPWdeOezg68SKkeLN4-T_jNHd
         return ans;
     }
    ```
+   ```
+     stack<int> s;
+        int max_area = 0;
+        int tp;
+        int n = heights.size();
+        int i = 0;
+        while (i < n) {
+            if (s.empty() || heights[s.top()] <= heights[i])
+                s.push(i++);
+
+            else {
+                tp = s.top();
+                s.pop();
+                max_area = max(max_area,
+                               heights[tp] * (s.empty() ? i : i - s.top() - 1));
+            }
+        }
+        while (s.empty() == false) {
+            tp = s.top();
+            s.pop();
+            max_area =
+                max(max_area, heights[tp] * (s.empty() ? i : i - s.top() - 1));
+        }
+
+        return max_area;
+    }
+   ```
 5. Max area of rectangle in a binary matrix
 6. Rainwater trapping
     ```
