@@ -589,6 +589,25 @@ int curr=dis[i][1];
 
         return fans;
      ```
+27. Maximum ramp width
+    ```
+       int n = A.size();
+        vector<int> rMax(n);
+        rMax[n - 1] = A[n - 1];
+        for (int i = n - 2; i >= 0; i--) {
+            rMax[i] = max(rMax[i + 1], A[i]);
+        }
+        int left = 0, right = 0;
+        int ans = 0;
+        while (right < n) {
+            while (left < right && A[left] > rMax[right]) {
+                left++;
+            }
+            ans = max(ans, right - left);
+            right++;
+        }
+        return ans;
+    ```
 
 ## Extras 
 
