@@ -487,6 +487,21 @@ int curr=dis[i][1];
 ```
 
 24. Remove duplicate letter https://leetcode.com/problems/remove-duplicate-letters/
+25. Palindrome linked list 
+    ```
+       stack<int> s;
+        ListNode* curr = head;
+        while (curr != NULL) {
+            s.push(curr->val);
+            curr = curr->next;
+        }
+        curr = head;
+        while (curr != NULL && curr->val == s.top()) {
+            curr = curr->next;
+            s.pop();
+        }
+        return curr == NULL;
+    ```
 
 ## Extras 
 
