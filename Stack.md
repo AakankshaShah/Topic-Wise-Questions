@@ -286,6 +286,7 @@ https://www.youtube.com/playlist?list=PL_z_8CaSLPWdeOezg68SKkeLN4-T_jNHd
         return ans;
     ```
 12. Polish Notation https://leetcode.com/problems/evaluate-reverse-polish-notation
+   Make use of stoi to convert string to int 
 13. Basic Calculator** https://leetcode.com/problems/basic-calculator
 14. Basic Calculator II https://leetcode.com/problems/basic-calculator-ii/
 15. Longest Absolute File path https://leetcode.com/problems/longest-absolute-file-path/
