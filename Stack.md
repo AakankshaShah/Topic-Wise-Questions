@@ -76,7 +76,57 @@ https://www.youtube.com/playlist?list=PL_z_8CaSLPWdeOezg68SKkeLN4-T_jNHd
         return max_area;
     }
    ```
-5. Max area of rectangle in a binary matrix
+5. Max area of the rectangle in a binary matrix
+    ```
+      int MAH(int arr[], int n) {
+        if (n == 1)
+            return arr[0];
+
+        stack<int> s;
+        int i = 0;
+        int res = 0;
+        while (i < n) {
+            if (s.empty() || arr[s.top()] <= arr[i])
+                s.push(i++);
+
+            else {
+
+                int val = s.top();
+                s.pop();
+
+                res = max(res, arr[val] * (s.empty() ? i : i - s.top() - 1));
+            }
+        }
+        while (s.size() > 0) {
+            int val = s.top();
+            s.pop();
+            res = max(res, arr[val] * (s.empty() ? i : i - s.top() - 1));
+        }
+        return res;
+    }
+
+    int maximalRectangle(vector<vector<char>>& matrix) {
+        int n = matrix.size();
+        int m = matrix[0].size();
+        int arr[m];
+        for (int j = 0; j < m; j++) {
+            arr[j] = 0;
+        }
+        int ans = 0;
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                if (matrix[i][j] == '0')
+                    arr[j] = 0;
+                else
+                    arr[j] = arr[j] + 1;
+            }
+
+            ans = max(ans, MAH(arr, m));
+        }
+        return ans;
+    }
+    ```
 6. Rainwater trapping
     ```
       int i=0;
