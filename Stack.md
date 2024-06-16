@@ -535,6 +535,60 @@ int curr=dis[i][1];
         }
         return curr == NULL;
     ```
+26. Decode string 
+     ```
+        stack<int> st1;
+        stack<char> st2;
+
+        string fans = "";
+        int n = s.length();
+
+        for (int i = 0; i < n; i++) {
+
+            if (s[i] >= '0' && s[i] <= '9') {
+                int num = 0;
+                while (i < n && s[i] >= '0' && s[i] <= '9') {
+                    num = num * 10 + (s[i] - '0');
+                    i++;
+                }
+
+                st1.push(num);
+                i--;
+            }
+
+            else if (s[i] == ']') {
+                string var = "";
+                string ans = "";
+                while (st2.size() > 0 && st2.top() != '[') {
+                    var = st2.top() + var;
+                    st2.pop();
+                }
+                st2.pop();
+
+                for (int j = 1; j <= st1.top(); j++) {
+                    ans += var;
+                }
+
+                for (int it = 0; it < ans.size(); it++) {
+                    st2.push(ans[it]);
+                }
+                st1.pop();
+            } else {
+                st2.push(s[i]);
+            }
+        }
+        string rest;
+        while (!st2.empty()) {
+            char c = st2.top();
+            rest.push_back(c);
+            st2.pop();
+        }
+        reverse(rest.begin(), rest.end());
+
+        fans = fans + rest;
+
+        return fans;
+     ```
 
 ## Extras 
 
