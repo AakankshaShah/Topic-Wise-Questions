@@ -325,6 +325,27 @@ public int lengthLongestPath(String input) {
     }
 } 
 ```
+```
+ string[] tokens = input.split("\n");
+
+     for (int i = 0; i < tokens.length; i ++) 
+     {
+         int level=tokens[i].lastIndexof("\t")+1;
+         int len=tokens[i].length()-level;
+
+         while(s.size()>level+1)
+         s.pop();
+
+         if(tokens[i].Indexof(".")!=-1)
+         {
+             maxL=max(maxL,s.top()+len)
+
+         }
+         else
+         s.push(s.top()+len);
+     }
+     return maxL;
+```
 
 16. Remove K digits to get max https://leetcode.com/problems/remove-k-digits/
 17. Parsing a boolean expression https://leetcode.com/problems/parsing-a-boolean-expression/
