@@ -6,7 +6,7 @@
         }
         return pq.top();
 
-    2. Car fleet https://www.youtube.com/watch?v=P99yS9jLr6o
+ 2. Car fleet https://www.youtube.com/watch?v=P99yS9jLr6o
 
         ```
           priority_queue<vector<double>> pq;
