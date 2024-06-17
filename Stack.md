@@ -591,6 +591,7 @@ int curr=dis[i][1];
      ```
 27. Maximum ramp width
     ```
+    //Method 1
        int n = A.size();
         vector<int> rMax(n);
         rMax[n - 1] = A[n - 1];
@@ -605,6 +606,25 @@ int curr=dis[i][1];
             }
             ans = max(ans, right - left);
             right++;
+        }
+        return ans;
+    ```
+    ```
+    //Method 2
+      int n = A.size();
+        vector<int> b(n);
+        for (int i = 0; i < n; i++) {
+            b[i] = i;
+        }
+        sort(b.begin(), b.end(), [&A](int i, int j) {
+            return A[i] < A[j];
+        });
+
+        int mn = n;
+        int ans = 0;
+        for (int i = 0; i < n; i++) {
+            ans = max(ans, b[i] - mn);
+            mn = min(mn, b[i]);
         }
         return ans;
     ```
