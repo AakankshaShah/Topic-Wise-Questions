@@ -348,6 +348,46 @@ public int lengthLongestPath(String input) {
 ```
 
 16. Remove K digits to get max https://leetcode.com/problems/remove-k-digits/
+    ```
+      int n = num.length();
+        if (k >= n)
+            return "0";
+
+        stack<char> s;
+
+        for (int i = 0; i < n; i++) {
+            if (s.empty())
+                s.push(num[i]);
+
+            else {
+                while (!s.empty() && k > 0 && s.top() > num[i]) {
+                    s.pop();
+                    k--;
+                }
+                s.push(num[i]);
+            }
+        }
+
+        while (k > 0 && s.size() > 0) {
+            s.pop();
+            k--;
+        }
+
+        if (s.size() == 0)
+            return "0";
+
+        string ans = "";
+        while (!s.empty()) {
+            ans += s.top();
+            s.pop();
+        }
+        reverse(ans.begin(), ans.end());
+        int i = 0;
+        while (ans[i] == '0')
+            i++;
+
+        return ans.substr(i).length() > 0 ? ans.substr(i) : "0";
+    ```
 17. Parsing a boolean expression https://leetcode.com/problems/parsing-a-boolean-expression/
 18. Minimum remove to make valid parantheses https://leetcode.com/problems/minimum-remove-to-make-valid-parentheses/
 19. Check if Parathesis string can be made valid or not** https://leetcode.com/problems/check-if-a-parentheses-string-can-be-valid/
