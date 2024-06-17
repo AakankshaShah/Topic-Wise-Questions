@@ -353,7 +353,7 @@ public int lengthLongestPath(String input) {
         if (k >= n)
             return "0";
 
-        stack<char> s;
+        stack<char> s; // Can use string also instead of stack
 
         for (int i = 0; i < n; i++) {
             if (s.empty())
