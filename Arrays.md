@@ -2236,7 +2236,39 @@ return c;
     return ans;
     ```
 
+50. Odd even jump 
 
+    ```
+      int n = arr.size();
+
+        vector<bool> oddJumpPossibleFrom(n, false);
+        vector<bool> evenJumpPossibleFrom(n, false);
+        oddJumpPossibleFrom[n - 1] = true;
+        evenJumpPossibleFrom[n - 1] = true;
+        int totalGoodStartingPoints = 1;
+        map<int, int> elementToIdxMap;
+        // sorted on basis of value
+        elementToIdxMap[arr[n - 1]] = n - 1;
+        for (int i = n - 2; i >= 0; i--) {
+            auto greaterElementForOddJump = elementToIdxMap.lower_bound(arr[i]);
+            auto smallerElementForEvenJump =
+                elementToIdxMap.upper_bound(arr[i]);
+            if (greaterElementForOddJump != elementToIdxMap.end()) {
+                oddJumpPossibleFrom[i] =
+                    evenJumpPossibleFrom[greaterElementForOddJump->second];
+            }
+            if (smallerElementForEvenJump != elementToIdxMap.begin()) {
+                smallerElementForEvenJump--;
+                evenJumpPossibleFrom[i] =
+                    oddJumpPossibleFrom[smallerElementForEvenJump->second];
+            }
+            if (oddJumpPossibleFrom[i]) {
+                totalGoodStartingPoints++;
+            }
+            elementToIdxMap[arr[i]] = i;
+        }
+        return totalGoodStartingPoints;
+    ```
 
      
 
