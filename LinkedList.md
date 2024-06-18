@@ -282,3 +282,26 @@
             second = temp2;
         }
      ```
+12. Double a number shows as linked list
+     ```
+        istNode* prev=NULL;
+        if(head->val>=5)
+        head= new ListNode(0,head);
+        prev=head;
+        ListNode* curr=head;
+        while(curr!=NULL)
+        {
+            if(curr->val>=5)
+            {
+                prev->val++;
+                curr->val=curr->val*2-10;
+            }
+            else
+            {
+                curr->val=curr->val*2;
+            }
+            prev=curr;
+            curr=curr->next;
+        }
+        return head;
+     ```
