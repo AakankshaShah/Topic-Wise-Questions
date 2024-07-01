@@ -361,13 +361,22 @@
 
         ListNode* curr = prev->next;
         ListNode* next = curr->next;
-        for (int i = 0; i < right - left; i++) {
-            curr->next = next->next;
-            next->next = prev->next;
-            prev->next = next;
-            next = curr->next;
+        // for (int i = 0; i < right - left; i++) {
+        //     curr->next = next->next;
+        //     next->next = prev->next;
+        //     prev->next = next;
+        //     next = curr->next;
+        // }
+        for(int i = 1; i<=right-left; i++) {
+            
+            ListNode* temp = prev->next; //0
+            prev->next = curr->next; //1
+            curr->next = curr->next->next; //2
+            prev->next->next = temp; //3
+            
         }
-
+    
         return dummy->next;
+    }
     }
      ```
