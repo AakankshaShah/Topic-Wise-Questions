@@ -63,6 +63,42 @@ j++;
 5. Largest subarray of sum k - Variation If contains negative numbers
 6. Largest substring with k unique characters
 7. Longest substring with no repitions*
+    ```
+      int lengthOfLongestSubstring(string s) {
+
+        int i = 0;
+        int j = 0;
+        unordered_map<char, int> m;
+        int ans = 0;
+        int n = s.length();
+
+        while (j < n) {
+
+            m[s[j]]++;
+
+            if (m.size() == j - i + 1) {
+                ans = max(ans, j - i + 1);
+            }
+
+            else if (m.size() < j - i + 1) {
+                while (m.size() <
+                       j - i +
+                           1) // so till the duplicates are removed completely
+                {
+                    m[s[i]]--;        // remove the duplicates
+                    if (m[s[i]] == 0) // if the frequency becomes zero
+                    {
+                        m.erase(s[i]); // delete it completely
+                    }
+                    i++; // go for next element
+                }
+            }
+            j++;
+        }
+
+        return ans;
+    }
+    ```
 8. Pick toys*
 9. Minimum Window Substring***
 
