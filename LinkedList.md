@@ -628,3 +628,72 @@
         return ptr->next;
     }
     ```
+21. LRU Cache
+
+     ```
+       class node {
+    public:
+        int key;
+        int val;
+        node* next;
+        node* prev;
+        node(int _key, int _val) {
+            key = _key;
+            val = _val;
+        }
+    };
+    unordered_map<int, node*> m;
+    int capa;
+    node* head = new node(-1, -1);
+    node* tail = new node(-1, -1);
+    LRUCache(int capacity) {
+        capa = capacity;
+        head->next = tail;
+        tail->prev = head;
+    }
+    void addNode(node* newnode) { // Add after -1;
+        // Add in start
+        node* temp = head->next;
+        newnode->next = temp;
+        newnode->prev = head;
+        head->next = newnode;
+        temp->prev = newnode;
+    }
+
+    void deleteNode(node* delnode) { // Delete from end
+        node* tem = delnode->next;
+        node* temp = delnode->prev;
+        temp->next = tem;
+        tem->prev = temp;
+    }
+
+    int get(int key) {
+
+        if (m.find(key) != m.end()) {
+            node* res = m[key];
+            int result = res->val;
+            m.erase(key);
+            deleteNode(res);
+            addNode(res);
+            m[key] = head->next;
+            return result;
+
+        } else
+            return -1;
+    }
+
+    void put(int key, int value) {
+        if (m.find(key) != m.end()) {
+            node* resn = m[key];
+            m.erase(key);
+            deleteNode(resn);
+        }
+        if (m.size() == capa) {
+            m.erase(tail->prev->key);
+            deleteNode(tail->prev);
+        }
+        addNode(new node(key, value));
+        m[key] = head->next;
+    }
+    };
+     ```
