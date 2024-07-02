@@ -493,3 +493,21 @@
         return newHead;
     }
     ```
+17. Middle of list 
+
+    ```
+      ListNode* middleNode(ListNode* head) {
+        ListNode* fast=head;
+        ListNode* slow=head;
+
+        while(fast&&fast->next)
+        {
+            fast=fast->next->next;
+            slow=slow->next;
+        }
+
+        return slow;
+
+        
+    }
+    ```
