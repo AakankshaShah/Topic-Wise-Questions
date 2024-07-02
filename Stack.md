@@ -734,6 +734,7 @@ int curr=dis[i][1];
         int ans = 0;
 
         // Best answer would be smaller than current value and farther away
+        //6,0,8,2,1,5 For any element that 8 will be part of left 0 will be better answer that's why
         for (int i = n - 1; i >= 0; i--) {
             while (!st.empty() && A[i] >= A[st.top()]) {
                 ans = max(i - st.top(), ans);
