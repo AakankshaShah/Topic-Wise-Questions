@@ -283,7 +283,9 @@ cout<<"start"<<s1<<"\n";
     }
      ```
 16. Sliding window maximum
-     ```
+17. Longest substring with at least char repeating k times
+    ```
+        ```
         int longestSubstring(string s, int k) {
         int j = 0;
         unordered_map<char, int> mp;
@@ -329,4 +331,5 @@ cout<<"start"<<s1<<"\n";
         return ans;
     }
      ```
+    ```
   
