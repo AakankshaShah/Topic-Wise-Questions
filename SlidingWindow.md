@@ -165,6 +165,31 @@ cout<<"start"<<s1<<"\n";
 ```
 
 10. Longest repeating character replacement https://leetcode.com/problems/longest-repeating-character-replacement/
+     ```
+       int characterReplacement(string s, int k) {
+
+        int i = 0, j = 0;
+
+        int n = s.length();
+        int ans = 0;
+        int maxf = 0;
+
+        unordered_map<char, int> m;
+
+        for (int j = 0; j < n; j++) {
+            m[s[j]]++;
+            maxf = max(maxf, m[s[j]]);
+
+            if (j - i + 1 - maxf > k) {
+                m[s[i]]--;
+                i++;
+            } else {
+                ans = max(ans, j - i + 1);
+            }
+        }
+        return ans;
+    }
+     ```
 11. Max consecutive ones https://leetcode.com/problems/max-consecutive-ones-iii/
 ```
 
