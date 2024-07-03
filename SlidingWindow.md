@@ -282,4 +282,51 @@ cout<<"start"<<s1<<"\n";
         return ans;
     }
      ```
+16. Sliding window maximum
+     ```
+        int longestSubstring(string s, int k) {
+        int j = 0;
+        unordered_map<char, int> mp;
+        int freq[26] = {0};
+        int n = s.length();
+        int ans = 0;
+
+        while (j < s.length()) {
+            mp[s[j]]++;
+            j++;
+        }
+        int unique = mp.size();
+
+        for (int i = 1; i <= unique; i++) {
+            memset(freq, 0, sizeof(freq));
+            int st = 0, e = 0;
+            int c = 0, ck = 0;
+
+            while (e < n) {
+                if (c <= i) {
+                    int ind = s[e] - 'a';
+                    if (freq[ind] == 0)
+                        c++;
+                    freq[ind]++;
+                    if (freq[ind] == k)
+                        ck++;
+                    e++;
+
+                } else {
+                    int ind = s[st] - 'a';
+                    if (freq[ind] == k)
+                        ck--;
+                    freq[ind]--;
+                    if (freq[ind] == 0)
+                        c--;
+                    st++;
+                }
+                if (c == i && ck == i) {
+                    ans = max(ans, e - st);
+                }
+            }
+        }
+        return ans;
+    }
+     ```
   
