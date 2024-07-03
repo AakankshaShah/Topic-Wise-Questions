@@ -261,3 +261,25 @@ cout<<"start"<<s1<<"\n";
         return ans;
     }
     ```
+15. Minimize size  subarray sum
+     ```
+         int minSubArrayLen(int target, vector<int>& nums) {
+        int ans = INT_MAX;
+        int s = 0;
+        int i = 0, j = 0;
+        while (j < nums.size()) {
+            s += nums[j];
+            while (s >= target) {
+                ans = min(ans, j - i + 1);
+                s -= nums[i];
+                i++;
+            }
+            j++;
+        }
+        if (ans == INT_MAX)
+            return 0;
+
+        return ans;
+    }
+     ```
+  
