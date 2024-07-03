@@ -417,5 +417,28 @@ cout<<"start"<<s1<<"\n";
         return ans;
     }
      ```
+18. Max avg subarray I
+    ```
+        double findMaxAverage(vector<int>& nums, int k) {
+        int i = 0;
+        int j = 0;
+        double s = 0.0;
+        double ans = INT_MIN;
+
+        while (j < nums.size()) {
+            s += nums[j];
+            if(j-i+1<k)
+            j++;
+            else if (j - i + 1 == k) {
+                ans = max(ans, (double)s / k);
+                s -= nums[i];
+                i++;
+                j++;
+            }
+       
+        }
+            return ans;
+        }
+     ```
 
   
