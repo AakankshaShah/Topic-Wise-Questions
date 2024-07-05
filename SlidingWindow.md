@@ -487,5 +487,27 @@ cout<<"start"<<s1<<"\n";
         return ans;
     }
        ``` 
+21. Max points from cards 
+    ```
+       nt maxScore(vector<int>& cardPoints, int k) {
+        int ans = 0;
+        int s = 0;
+        int n = cardPoints.size();
 
+        for (int i = 0; i < k; i++) {
+            s += cardPoints[i];
+        }
+
+        int j = n - 1;
+        int ls = s;
+        int rs = 0;
+        for (int i = k - 1; i >= 0; i--) {
+            ls -= cardPoints[i];
+            rs += cardPoints[j];
+            j--;
+            s = max(s, ls + rs);
+        }
+        return s;
+    }
+    ```
   
