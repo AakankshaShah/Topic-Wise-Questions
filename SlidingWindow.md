@@ -440,5 +440,27 @@ cout<<"start"<<s1<<"\n";
             return ans;
         }
      ```
+19. Length of longest subarray with atmost k freq 
+     ```
+         int maxSubarrayLength(vector<int>& nums, int k) {
+        int ans = 0;
+        unordered_map<int, int> mp;
+        int i = 0, j = 0;
+
+        while (j < nums.size()) {
+            mp[nums[j]]++;
+            if (mp[nums[j]] <= k) {
+                ans = max(ans, j - i + 1);
+            } else {
+                while (mp[nums[j]] > k) {
+                    mp[nums[i]]--;
+                    i++;
+                }
+            }
+            j++;
+        }
+        return ans;
+    }
+     ```
 
   
