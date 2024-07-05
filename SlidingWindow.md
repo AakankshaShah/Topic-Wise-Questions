@@ -510,4 +510,40 @@ cout<<"start"<<s1<<"\n";
         return s;
     }
     ```
+22. Frequency of most frequent element 
+      ```
+          int bsearch(vector<int>& nums, int target, int k, vector<long long>& prefix) {
+        long long t = nums[target];
+        long long l = 0;
+        long r = target;
+        long long best = target;
+        while (l <= r) {
+            int mid = l + (r - l) / 2;
+            int op = t * (target - mid + 1) -
+                     (prefix[target] - (mid > 0 ? prefix[mid - 1] : 0));
+
+            if (op > k)
+                l = mid + 1;
+            else {
+                best = mid;
+                r = mid - 1;
+            }
+        }
+        return target - best + 1;
+    }
+    int maxFrequency(vector<int>& nums, int k) {
+        sort(nums.begin(), nums.end());
+        int n = nums.size();
+        vector<long long> prefix(n, 0);
+        prefix[0] = nums[0];
+        for (int i = 1; i < n; i++) {
+            prefix[i] = prefix[i - 1] + nums[i];
+        }
+        int ans = 0;
+        for (int target = 0; target < n; target++) {
+            ans = max(ans, bsearch(nums, target, k, prefix));
+        }
+        return ans;
+    }
+       ```
   
