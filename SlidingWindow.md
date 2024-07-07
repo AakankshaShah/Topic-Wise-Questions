@@ -547,6 +547,29 @@ return sans;
         return ans;
     }
        ```
+       ```
+        //Sliding Window
+         long long total = 0;
+    int maxFrequency(vector<int>& nums, int k) {
+        sort(nums.begin(), nums.end());
+        int n = nums.size();
+        int l = 0;
+        int r = 0;
+        int ans = 0;
+        while (r < n) {
+            int t = nums[r];
+            total += nums[r];
+            while ((long long)t * (r - l + 1) - total > k) {
+                total -= nums[l];
+                l++;
+            }
+
+            ans = max(ans, r - l + 1);
+            r++;
+        }
+        return ans;
+    }
+       ```
 22. Contains duplicates II
      ```
        bool containsNearbyDuplicate(vector<int>& nums, int k) {
