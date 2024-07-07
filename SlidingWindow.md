@@ -633,7 +633,7 @@ cout<<"start"<<s1<<"\n";
         return ans;
     }
       ```
-26. Minimum number of k bit flips 
+26. Minimum number of k bit flips || Minimum Operations to Make Binary Array Elements Equal to One I
      ```
        //Approach 1
        int minKBitFlips(vector<int>& nums, int k) {
