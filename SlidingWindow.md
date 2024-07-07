@@ -571,7 +571,7 @@ cout<<"start"<<s1<<"\n";
         return false;
     }
       ```
-    24. Find all anagrams in a string 
+24. Find all anagrams in a string 
 
          ```
            bool is_check(vector<int>& mp1, vector<int>& mp2) {
@@ -741,5 +741,37 @@ cout<<"start"<<s1<<"\n";
         }
         return ans;
         
+    }
+     ```
+29. Grumpy Bookstore owner
+     ```
+         int maxSatisfied(vector<int>& customers, vector<int>& grumpy, int minutes) {
+        int n = customers.size();
+        int unsat = 0;
+        for (int i = 0; i < minutes; i++) {
+            unsat += customers[i] * grumpy[i];
+        }
+
+        int maxUnsat = unsat;
+         int i = 0;
+        int j = minutes;
+
+        while(j < n) {
+            unsat += customers[j] * grumpy[j];            
+            unsat -= customers[i] * grumpy[i];           
+            
+            maxUnsat = max(maxUnsat, unsat);       
+            i++;
+            j++;
+        }
+
+        int totalCustomers = maxUnsat;
+
+        // Calculate total satisfied customers
+        for (int i = 0; i < n; i++) {
+            totalCustomers += customers[i] * (1 - grumpy[i]);
+        }
+
+        return totalCustomers;
     }
      ```
