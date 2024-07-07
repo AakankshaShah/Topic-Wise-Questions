@@ -749,10 +749,10 @@ return sans;
         return totalCustomers;
     }
      ```
-28.Count number of nice subarrays**
+28. Count number of nice subarrays**
 
     ```
-      int numberOfSubarrays(vector<int>& nums, int k) {
+    int numberOfSubarrays(vector<int>& nums, int k) {
 
         int ansCnt = 0;
         int cnt = 0;
@@ -778,5 +778,32 @@ return sans;
 
         return ansCnt;
     }
+     ```
+29. Longest Continuous Subarray With Absolute Diff Less Than or Equal to Limit
+     ```
+        int longestSubarray(vector<int>& nums, int limit) {
 
-    ```
+        int l = 0;
+        int r = 0;
+
+        multiset<int, greater<int>> ms;
+        int longest = 0;
+
+        while (r < nums.size()) {
+            ms.insert(nums[r]);
+            int largest = *ms.begin();
+            int smallest = *ms.rbegin();
+            while (abs(largest - smallest) > limit) {
+                ms.erase(ms.find(nums[l]));
+
+                l++;
+                largest = *ms.begin();
+                smallest = *ms.rbegin();
+            }
+            longest = max(longest, r - l + 1);
+            r++;
+        }
+        return longest;
+    }
+     ```
+
