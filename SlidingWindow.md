@@ -191,7 +191,7 @@ return sans;
             j++;
     
         }
-cout<<"start"<<s1<<"\n";
+
         if(ans==s.length()+1)
         return sans;
         else
@@ -243,7 +243,30 @@ cout<<"start"<<s1<<"\n";
         }
 ```
 
-12. Pick from any side 
+12. Pick from any side  ||Max points from cards 
+
+    ```
+       nt maxScore(vector<int>& cardPoints, int k) {
+        int ans = 0;
+        int s = 0;
+        int n = cardPoints.size();
+
+        for (int i = 0; i < k; i++) {
+            s += cardPoints[i];
+        }
+
+        int j = n - 1;
+        int ls = s;
+        int rs = 0;
+        for (int i = k - 1; i >= 0; i--) {
+            ls -= cardPoints[i];
+            rs += cardPoints[j];
+            j--;
+            s = max(s, ls + rs);
+        }
+        return s;
+    }
+     ```
      ```
       int sum = 0;
         int maxi = 0;
@@ -487,30 +510,8 @@ cout<<"start"<<s1<<"\n";
         return ans;
     }
        ``` 
-21. Max points from cards 
-    ```
-       nt maxScore(vector<int>& cardPoints, int k) {
-        int ans = 0;
-        int s = 0;
-        int n = cardPoints.size();
 
-        for (int i = 0; i < k; i++) {
-            s += cardPoints[i];
-        }
-
-        int j = n - 1;
-        int ls = s;
-        int rs = 0;
-        for (int i = k - 1; i >= 0; i--) {
-            ls -= cardPoints[i];
-            rs += cardPoints[j];
-            j--;
-            s = max(s, ls + rs);
-        }
-        return s;
-    }
-    ```
-22. Frequency of most frequent element **
+21. Frequency of most frequent element **
       ```
           int bsearch(vector<int>& nums, int target, int k, vector<long long>& prefix) {
         long long t = nums[target];
@@ -546,7 +547,7 @@ cout<<"start"<<s1<<"\n";
         return ans;
     }
        ```
-23. Contains duplicates II
+22. Contains duplicates II
      ```
        bool containsNearbyDuplicate(vector<int>& nums, int k) {
         bool ans;
@@ -571,7 +572,7 @@ cout<<"start"<<s1<<"\n";
         return false;
     }
       ```
-24. Find all anagrams in a string 
+23. Find all anagrams in a string 
 
          ```
            bool is_check(vector<int>& mp1, vector<int>& mp2) {
@@ -608,7 +609,7 @@ cout<<"start"<<s1<<"\n";
         }
         ```
 
-25. Binary subarray with sum 
+24. Binary subarray with sum 
       ```
          int numSubarraysWithSum(vector<int>& nums, int goal) {
         unordered_map<int, int> m;
@@ -633,7 +634,7 @@ cout<<"start"<<s1<<"\n";
         return ans;
     }
       ```
-26. Minimum number of k bit flips || Minimum Operations to Make Binary Array Elements Equal to One I
+25. Minimum number of k bit flips || Minimum Operations to Make Binary Array Elements Equal to One I
      ```
        //Approach 1
        int minKBitFlips(vector<int>& nums, int k) {
@@ -714,36 +715,9 @@ cout<<"start"<<s1<<"\n";
 
         return flips;
      ```
-27. Bulb Switcher - No. of perfect square 
-28. Max consecutive ones 
-     ```
-       {
+26. Bulb Switcher - No. of perfect square 
 
-        int count = 0;
-        int n = nums.size();
-        int right=0;
-        int left = 0;
-        int ans = 0;
-
-        while(right < n) {
-            if(nums[right]==0) {
-                count++;
-            }
-            
-            while(count > k) {
-                if(nums[left]==0) {
-                    count--;
-                }
-                left++;
-            }
-            ans = max(ans, right-left+1);
-            right++;
-        }
-        return ans;
-        
-    }
-     ```
-29. Grumpy Bookstore owner**
+27. Grumpy Bookstore owner**
      ```
          int maxSatisfied(vector<int>& customers, vector<int>& grumpy, int minutes) {
         int n = customers.size();
@@ -775,9 +749,10 @@ cout<<"start"<<s1<<"\n";
         return totalCustomers;
     }
      ```
-30.Count number of nice subarrays**
+28.Count number of nice subarrays**
+
     ```
-       int numberOfSubarrays(vector<int>& nums, int k) {
+      int numberOfSubarrays(vector<int>& nums, int k) {
 
         int ansCnt = 0;
         int cnt = 0;
@@ -803,4 +778,5 @@ cout<<"start"<<s1<<"\n";
 
         return ansCnt;
     }
+
     ```
