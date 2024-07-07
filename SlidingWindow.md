@@ -369,7 +369,7 @@ cout<<"start"<<s1<<"\n";
         return ans;
     }
      ```
-17. Longest substring with at least char repeating k times
+17. Longest substring with at least char repeating k times **
     ```
 
         int longestSubstring(string s, int k) {
@@ -440,7 +440,7 @@ cout<<"start"<<s1<<"\n";
             return ans;
         }
      ```
-19. Length of longest subarray with atmost k freq 
+19. Length of longest subarray with atmost k freq  
      ```
          int maxSubarrayLength(vector<int>& nums, int k) {
         int ans = 0;
@@ -510,7 +510,7 @@ cout<<"start"<<s1<<"\n";
         return s;
     }
     ```
-22. Frequency of most frequent element 
+22. Frequency of most frequent element **
       ```
           int bsearch(vector<int>& nums, int target, int k, vector<long long>& prefix) {
         long long t = nums[target];
