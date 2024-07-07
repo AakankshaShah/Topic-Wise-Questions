@@ -63,4 +63,25 @@
         
         return fleets;
         ```
-       
+ 4. kth closest elements
+     ```
+       vector<int> findClosestElements(vector<int>& arr, int k, int x) {
+        vector<int> ans(k);
+        priority_queue<pair<int, int>> pq;
+
+        for (int i = 0; i < arr.size(); i++) {
+            int a = abs(arr[i] - x);
+            pq.push({a, arr[i]});
+        }
+
+        while (pq.size() != k)
+            pq.pop();
+        int i = k - 1;
+        while (!pq.empty()) {
+            ans[i--] = pq.top().second;
+            pq.pop();
+        }
+        sort(ans.begin(), ans.end());
+        return ans;
+    }
+     ```      
