@@ -606,5 +606,30 @@ cout<<"start"<<s1<<"\n";
         }
         return ans;
         }
-```
+    ```
+25. Binary subarray with sum 
+      ```
+         int numSubarraysWithSum(vector<int>& nums, int goal) {
+        unordered_map<int, int> m;
+        int ans = 0;
+        int curr = 0;
+
+        for (int i = 0; i < nums.size(); i++) {
+            curr += nums[i];
+
+            if (curr == goal)
+                ans++;
+
+            if (m.find(curr - goal) != m.end()) {
+                ans += m[curr - goal];
+            }
+
+            if (m.find(curr) != m.end())
+                m[curr]++;
+            else
+                m[curr] = 1;
+        }
+        return ans;
+    }
+      ```
   
