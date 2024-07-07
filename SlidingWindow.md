@@ -606,7 +606,8 @@ cout<<"start"<<s1<<"\n";
         }
         return ans;
         }
-    ```
+        ```
+
 25. Binary subarray with sum 
       ```
          int numSubarraysWithSum(vector<int>& nums, int goal) {
