@@ -743,7 +743,7 @@ cout<<"start"<<s1<<"\n";
         
     }
      ```
-29. Grumpy Bookstore owner
+29. Grumpy Bookstore owner**
      ```
          int maxSatisfied(vector<int>& customers, vector<int>& grumpy, int minutes) {
         int n = customers.size();
@@ -775,3 +775,32 @@ cout<<"start"<<s1<<"\n";
         return totalCustomers;
     }
      ```
+30.Count number of nice subarrays**
+    ```
+       int numberOfSubarrays(vector<int>& nums, int k) {
+
+        int ansCnt = 0;
+        int cnt = 0;
+        int i = 0, j = 0;
+
+        while (j < nums.size()) {
+            if (nums[j] % 2 != 0) {
+                k--;
+                cnt = 0;
+            }
+
+            while (k == 0) {
+                if (nums[i] % 2 != 0) {
+                    k++;
+                }
+                cnt++;
+                i++;
+            }
+
+            ansCnt += cnt;
+            j++;
+        }
+
+        return ansCnt;
+    }
+    ```
