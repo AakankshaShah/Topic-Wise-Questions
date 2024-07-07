@@ -546,4 +546,29 @@ cout<<"start"<<s1<<"\n";
         return ans;
     }
        ```
+23. Contains duplicates II
+     ```
+       bool containsNearbyDuplicate(vector<int>& nums, int k) {
+        bool ans;
+        unordered_map<int, int> m;
+        int j = 0;
+        int i = 0;
+
+        while (j < nums.size()) {
+            m[nums[j]]++;
+            if (m[nums[j]] > 1) {
+                return true;
+            }
+            if (j - i == k) {
+                m[nums[i]]--;
+                if (m[nums[i] == 0])
+                    m.erase(nums[i]);
+                i++;
+            }
+
+            j++;
+        }
+        return false;
+    }
+      ```
   
