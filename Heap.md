@@ -84,4 +84,25 @@
         sort(ans.begin(), ans.end());
         return ans;
     }
-     ```      
+     ```     
+   ```
+     vector<int> ans(k);
+        priority_queue<pair<int, int>> pq;
+
+        for (int i = 0; i < arr.size(); i++) {
+            int diff = abs(arr[i] - x);
+            pq.push({diff, arr[i]});
+            if (pq.size() > k) {
+                pq.pop();
+            }
+        }
+
+        while (!pq.empty()) {
+            ans[--k] = pq.top().second;
+            pq.pop();
+        }
+
+        sort(ans.begin(), ans.end());
+        return ans;
+    }
+``` 
