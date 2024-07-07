@@ -660,3 +660,30 @@ cout<<"start"<<s1<<"\n";
         return flips;
     }
      ```
+     ```
+       //Approach 2 Remove extra space
+          int n = nums.size();
+        int flips = 0;
+        int flipCountforIfromPast = 0;
+       // vector<bool> isFlipped(n, false);
+
+        for (int i = 0; i < n; i++) {
+            if (i >= k && nums[i-k]==5) {
+                flipCountforIfromPast--;
+            }
+            if (flipCountforIfromPast % 2 == nums[i]) {
+                // flip at index i
+
+                if (i + k > n)
+                    return -1;
+                flipCountforIfromPast++;
+                flips++;
+                nums[i]=5;
+               // isFlipped[i] = true;
+            }
+        }
+
+        return flips;
+    }
+      
+     ```
