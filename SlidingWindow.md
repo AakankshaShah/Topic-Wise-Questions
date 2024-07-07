@@ -571,4 +571,40 @@ cout<<"start"<<s1<<"\n";
         return false;
     }
       ```
+    24. Find all anagrams in a string 
+
+         ```
+           bool is_check(vector<int>& mp1, vector<int>& mp2) {
+        for (int i = 0; i < 26; i++) {
+            if (mp1[i] != mp2[i])
+                return false;
+        }
+
+        return true;
+        }
+        vector<int> findAnagrams(string s, string p) {
+        vector<int> ans;
+        int i = 0;
+        int j = 0;
+        vector<int> mp(26, 0);
+
+        vector<int> mp1(26, 0);
+        for (int i = 0; i < p.length(); i++)
+            mp[p[i] - 'a']++;
+        i = 0;
+
+        while (j < s.length()) {
+            mp1[s[j] - 'a']++;
+
+            if (j - i + 1 == p.length()) {
+                if (is_check(mp, mp1))
+                    ans.push_back(i);
+                mp1[s[i] - 'a']--;
+                i++;
+            }
+            j++;
+        }
+        return ans;
+        }
+```
   
