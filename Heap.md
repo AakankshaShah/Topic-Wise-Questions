@@ -153,4 +153,30 @@
         return ans;
     }
     ```
-7. 
+7. Sort characters by frequency 
+    ```
+       string frequencySort(string s) {
+
+        priority_queue<pair<int, char>> pq;
+        string ans;
+        int n = s.size();
+        unordered_map<char, int> mpp;
+
+        for (int i = 0; i < n; i++) {
+            mpp[s[i]]++;
+        }
+
+        for (auto it : mpp) {
+            pq.push({it.second, it.first});
+        }
+
+        while (!pq.empty()) {
+            char t = pq.top().second;
+            for (int i = 0; i < pq.top().first; i++)
+                ans += t;
+            pq.pop();
+        }
+
+        return ans;
+    }
+    ```
