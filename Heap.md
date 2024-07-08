@@ -180,3 +180,30 @@
         return ans;
     }
     ```
+8. Relative Ranks
+    ```
+      vector<string> findRelativeRanks(vector<int>& score) {
+         priority_queue<tuple<int, int>> pq; 
+         vector<string> answer(score.size(), "");
+          for (int idx = 0; idx < score.size(); idx++) {
+            pq.push(make_tuple(score[idx], idx));
+        }
+        int place = 1;
+        while (pq.size()) {
+            tuple<int, int> athelete = pq.top();
+            pq.pop();
+            if (place == 1)
+                answer[get<1>(athelete)] = "Gold Medal";
+            else if (place == 2)
+                answer[get<1>(athelete)] = "Silver Medal";
+            else if (place == 3)
+                answer[get<1>(athelete)] = "Bronze Medal";
+            else {
+                answer[get<1>(athelete)] = to_string(place);
+            }
+               place++;
+        }
+        return answer;
+        
+    }
+    ```
