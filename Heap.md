@@ -8,7 +8,7 @@
 
  2. Car fleet https://www.youtube.com/watch?v=P99yS9jLr6o
 
-        ```
+     ```
           priority_queue<vector<double>> pq;
 
         for (int i = 0; i < position.size(); i++) {
@@ -36,8 +36,8 @@
             }
         }
         return fleet;
-        ```
-        ```
+     ```
+     ```
         //Chatgpt solution
          vector<pair<int, double>> cars;
         
@@ -62,7 +62,7 @@
         }
         
         return fleets;
-        ```
+     ```
  4. kth closest elements
      ```
        vector<int> findClosestElements(vector<int>& arr, int k, int x) {
@@ -207,3 +207,99 @@
         
     }
     ```
+7. Task Scheduler
+   ```
+      int leastInterval(vector<char>& tasks, int n) {
+        vector<int> mp(26, 0);
+        for (auto& ch : tasks) {
+            mp[ch - 'A']++;
+        }
+
+        priority_queue<int> pq;
+        for (int i = 0; i < 26; i++) {
+            if (mp[i] > 0) {
+                pq.push(mp[i]);
+            }
+        }
+
+        int time = 0;
+        while (!pq.empty()) {
+            vector<int> temp;
+
+            for (int i = 1; i <= n + 1; i++) {
+                if (!pq.empty()) {
+                    int freq = pq.top();
+                    pq.pop();
+                    freq--;
+                    temp.push_back(freq);
+                }
+            }
+            for (auto& f : temp) {
+                if (f > 0) {
+                    pq.push(f);
+                }
+            }
+
+            if (pq.empty()) {
+                time += temp.size();
+            } else {
+                time += n + 1;
+            }
+        }
+        return time;
+    }
+   ```
+  ```
+    //Greedy
+      vector<int>mp(26,0);
+        for(int i=0;i<tasks.size();i++)
+        mp[tasks[i]-'A']++;
+
+       sort(begin(mp),end(mp));
+
+        int maxfreq=mp[25];
+        int gs=maxfreq-1;
+        int idealSpots=gs*n;
+
+        for(int i=24;i>=0;i--)
+        {
+            idealSpots-=min(mp[i],gs);
+        }
+
+        if(idealSpots>0)
+        {
+            return tasks.size()+idealSpots;
+        }
+        else
+        return tasks.size();
+
+  ```
+8. K frequent elements 
+   ```
+       static bool cmp(pair<int, string> i, pair<int, string> j) {
+        if (i.first != j.first)
+            return i.first > j.first;
+        else {
+            return i.second < j.second;
+        }
+    }
+    vector<string> topKFrequent(vector<string>& words, int k) {
+        vector<string> ans;
+        unordered_map<string, int> m;
+        deque<pair<int, string>> dq;
+
+        for (int i = 0; i < words.size(); i++) {
+            m[words[i]]++;
+        }
+        for (auto it : m)
+            dq.push_back({it.second, it.first});
+
+        sort(dq.begin(), dq.end(), cmp);
+        while (k--) {
+            string s = dq.front().second;
+            dq.pop_front();
+            ans.push_back(s);
+        }
+        return ans;
+    }
+   ```
