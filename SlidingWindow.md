@@ -829,4 +829,47 @@ return sans;
         return longest;
     }
      ```
+30. Permutation in a string 
+     ```
+       bool checkInclusion(string s1, string s2) {
 
+        int n1 = s1.length();
+        int n2 = s2.length();
+
+        unordered_map<char, int> m;
+        for (int i = 0; i < n1; i++) {
+            m[s1[i]]++;
+        }
+
+        int count = m.size();
+
+        int i = 0;
+        int j = 0;
+        while (j < n2)
+
+        {
+            if (m.find(s2[j]) != m.end()) {
+                m[s2[j]]--;
+                if (m[s2[j]] == 0)
+                    count--;
+            }
+
+            if (j - i + 1 == n1) {
+                if (count == 0)
+                    return true;
+
+                if (m.find(s2[i]) != m.end()) {
+                    m[s2[i]]++;
+
+                    if (m[s2[i]] == 1)
+                        count++;
+                }
+                i++;
+            }
+
+            j++;
+        }
+        return false;
+    }
+     ```
+   
