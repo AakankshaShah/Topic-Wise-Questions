@@ -897,4 +897,40 @@ return sans;
         return ans;
     }
     ```
+32. Find median in a data stream 
+    ```
+      class MedianFinder {
+    public:
+    priority_queue<int> leftHeap;
+    priority_queue<int, vector<int>, greater<int>> rightHeap;
+
+    MedianFinder() {}
+
+    void addNum(int num) {
+        if (leftHeap.size() == 0 || num < leftHeap.top()) {
+            leftHeap.push(num);
+
+        } else {
+            rightHeap.push(num);
+        }
+        if (leftHeap.size() > rightHeap.size() + 1) {
+            rightHeap.push(leftHeap.top());
+            leftHeap.pop();
+        } else if (rightHeap.size() > leftHeap.size()) {
+            leftHeap.push(rightHeap.top());
+            rightHeap.pop();
+        }
+    }
+
+    double findMedian() {
+        if (rightHeap.size() < leftHeap.size()) {
+            return (double)leftHeap.top();
+        } else {
+            return ((double)(leftHeap.top() + rightHeap.top())) / 2;
+        }
+    }
+    };
+
+```
+
    
