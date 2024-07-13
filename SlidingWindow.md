@@ -872,4 +872,29 @@ return sans;
         return false;
     }
      ```
+31. Longest Nice Subarray
+    ```
+      int longestNiceSubarray(vector<int>& nums) {
+        long long num = 0;
+        int i = 0;
+        int j = 0;
+        int ans = INT_MIN;
+        while (j < nums.size()) {
+            if ((num & nums[j]) == 0) {
+                num |= nums[j];
+                ans = max(j - i + 1, ans);
+                j++;
+
+            }
+
+            else {
+                while ((num & nums[j]) != 0) {
+                    num ^= nums[i];
+                    i++;
+                }
+            }
+        }
+        return ans;
+    }
+    ```
    
