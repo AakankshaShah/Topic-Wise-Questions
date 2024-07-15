@@ -537,4 +537,62 @@
         }
 
         return result;
+
+   ```
+13. Maximum subsequence score
+    ```
+     //DP
+     long long solve(vector<int>& nums1, vector<int>& nums2, int sum, int minE,
+                    int count, int k, int i, int n) {
+        if (count == k)
+            return sum * minE;
+        if (i >= n)
+            return 0;
+        int take_i = solve(nums1, nums2, sum + nums1[i], min(minE, nums2[i]),
+                           count + 1, k, i + 1, n);
+    int not_take=solve(nums1,nums2,sum,minE,count,k,i+1,n);
+    return max(take_i, not_take);
+    }
+    long long maxScore(vector<int>& nums1, vector<int>& nums2, int k) {
+        int sum = 0;
+        int minE = INT_MAX;
+        int count = 0;
+        int i = 0;
+        int n = nums1.size();
+        return solve(nums1, nums2, sum, minE, count, k, i, n);
+    }
+    ```
+   ```
+   \\Optimal 
+     static bool cmp(pair<int,int> p,pair<int,int>q)
+    {
+        return p.first>q.first;
+    }
+    long long maxScore(vector<int>& nums1, vector<int>& nums2, int k) {
+        int n=nums1.size();
+        vector<pair<int,int>> v;
+        for(int i=0;i<n;i++)
+        {
+            v.push_back({nums2[i],nums1[i]});
+        }
+        sort(v.begin(),v.end(),cmp);
+        priority_queue<int,vector<int>,greater<int>> pq;
+        long long kSum;
+        for(int i=0;i<k;i++)
+        {
+            kSum+=v[i].second;
+            pq.push(v[i].second);
+        }
+        long long res=kSum*v[k-1].first;
+        for(int i=k;i<n;i++)
+        {
+            kSum-=pq.top();
+            pq.pop();
+            kSum+=v[i].second;
+            pq.push(v[i].second);
+            res=max(res,kSum*v[i].first);
+
+        }
+        return res;
+    }
    ```
