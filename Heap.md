@@ -1,10 +1,12 @@
 1.  kth smallest element
- priority_queue<int>pq;
+``` 
+priority_queue<int>pq;
         for(int i=l;i<=r;i++){
             pq.push(arr[i]);
             if(pq.size()>k) pq.pop();
         }
         return pq.top();
+```
 
  2. Car fleet https://www.youtube.com/watch?v=P99yS9jLr6o
 
@@ -596,3 +598,35 @@
         return res;
     }
    ```
+14. Single threaded CPU
+    ```
+     vector<int> getOrder(vector<vector<int>>& tasks) {
+        vector<int> ans;
+        int n = tasks.size();
+        vector<array<int, 3>> v;
+
+        for (int i = 0; i < n; i++) {
+            int st = tasks[i][0];
+            int pt = tasks[i][1];
+            v.push_back({st, pt, i});
+        }
+        sort(v.begin(), v.end());
+        long long curr_time = 0;
+        int idx = 0;
+        priority_queue<pair<int, int>, vector<pair<int, int>>, greater<>> pq;
+        while (idx < n || !pq.empty()) {
+            if (pq.empty() && curr_time < v[idx][0]) {
+                curr_time = v[idx][0];
+            }
+            while (idx < n && v[idx][0] <= curr_time) {
+                pq.push({v[idx][1], v[idx][2]});
+                idx++;
+            }
+            pair<int, int> curr_task = pq.top();
+            pq.pop();
+            curr_time += curr_task.first;
+            ans.push_back(curr_task.second);
+        }
+        return ans;
+    }
+    ```
