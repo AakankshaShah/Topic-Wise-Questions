@@ -227,7 +227,7 @@ https://www.youtube.com/playlist?list=PL_z_8CaSLPWdeOezg68SKkeLN4-T_jNHd
         return st.size() == 0;
     }
     ```
-10. Longest Valid Paratheses* 
+10. Longest Valid Paratheses
     ```
        int longestValidParentheses(string s) {
         stack<int> st;
@@ -250,7 +250,7 @@ https://www.youtube.com/playlist?list=PL_z_8CaSLPWdeOezg68SKkeLN4-T_jNHd
         return res;
     }
     ```
-11. Simplify Path* 
+11. Simplify Path
 
     ```
      stack<string> s;
@@ -285,46 +285,13 @@ https://www.youtube.com/playlist?list=PL_z_8CaSLPWdeOezg68SKkeLN4-T_jNHd
         }
         return ans;
     ```
-12. Polish Notation https://leetcode.com/problems/evaluate-reverse-polish-notation
+12. Polish Notation 
    Make use of stoi to convert string to int 
-13. Basic Calculator** https://leetcode.com/problems/basic-calculator
-14. Basic Calculator II https://leetcode.com/problems/basic-calculator-ii/
-15. Longest Absolute File path https://leetcode.com/problems/longest-absolute-file-path/
+13. Basic Calculator
+14. Basic Calculator II 
+15. Longest Absolute File path 
 
-``` 
-public int lengthLongestPath(String input) {
-        if (input == null || input.length() == 0) {
-            return 0;
-        }
-        String[] tokens = input.split("\n");
-        int[] dirs = new int[tokens.length];
-        int max = 0;
-        int curr;
-        for (int i = 0; i < tokens.length; i ++) {
-            String s = tokens[i];
-            int count = s.lastIndexOf("\t") + 1;
-            s = s.substring(count);
-            if (s.indexOf(".") != -1) {
-                //file
-                int cand = s.length();
-                if (count != 0) {
-                    cand = dirs[count - 1] + s.length();
-                }
-                max = Math.max(max, cand);
-            }
-            else {
-                //folder
-                dirs[count] = s.length() + 1;
-                if (count != 0) {
-                    dirs[count] += dirs[count - 1];
-                }
-            }
-        }
-        return max;
-        
-    }
-} 
-```
+
 ```
  string[] tokens = input.split("\n");
 
@@ -347,7 +314,7 @@ public int lengthLongestPath(String input) {
      return maxL;
 ```
 
-16. Remove K digits to get max https://leetcode.com/problems/remove-k-digits/
+16. Remove K digits to get max 
     ```
       int n = num.length();
         if (k >= n)
@@ -388,9 +355,9 @@ public int lengthLongestPath(String input) {
 
         return ans.substr(i).length() > 0 ? ans.substr(i) : "0";
     ```
-17. Parsing a boolean expression https://leetcode.com/problems/parsing-a-boolean-expression/
-18. Minimum remove to make valid parantheses https://leetcode.com/problems/minimum-remove-to-make-valid-parentheses/
-19. Check if Parathesis string can be made valid or not** https://leetcode.com/problems/check-if-a-parentheses-string-can-be-valid/
+17. Parsing a boolean expression 
+18. Minimum remove to make valid parantheses 
+19. Check if Parathesis string can be made valid or not
  ```
  int flip=0;
         int op=0;
@@ -442,7 +409,7 @@ public int lengthLongestPath(String input) {
         return true;  
 ```
 
-20 . Finding the Number of Visible Mountains https://leetcode.com/problems/finding-the-number-of-visible-mountains/
+20 . Finding the Number of Visible Mountains 
 
 ```
 vector<vector<int>> dis;
@@ -475,11 +442,12 @@ int curr=dis[i][1];
         return size;
 
 ```
-21. Implement k stacks single array https://www.geeksforgeeks.org/efficiently-implement-k-stacks-single-array/
-22. Redundant braces https://www.geeksforgeeks.org/expression-contains-redundant-bracket-not/
+21. Implement k stacks single array 
+22. Redundant braces 
 23. LRU Cache
 
-  ``` LRUCache(int cap)
+  ```
+LRUCache(int cap)
     {
        capa=cap;
        head->next=tail;
