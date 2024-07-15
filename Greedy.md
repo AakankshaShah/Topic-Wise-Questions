@@ -73,7 +73,7 @@
   
      ```
 
-    3. Sum of fibonacci numbers 
+3. Sum of fibonacci numbers 
 
        ```
            int Solution::fibsum(int n) {
@@ -107,7 +107,7 @@
    
        }
        ```
-   4. Minimum additions to make valid string 
+4. Minimum additions to make valid string 
 
        ```
         int addMinimum(string s) {
@@ -132,3 +132,63 @@
         return cnt;
         }
        ```
+5. Furthest building you can reach 
+   ```
+     //Recursion
+     //TLE 
+      int solve(int idx, int b, int l, vector<int>& heights, int n) {
+        if (idx == n - 1)
+            return 0;
+
+        if (heights[idx] >= heights[idx + 1]) {
+            return 1 + solve(idx + 1, b, l, heights, n);
+        } else {
+            int byBricks = 0;
+            int byLadder = 0;
+            int diff = heights[idx + 1] - heights[idx];
+
+            if (b >= diff)
+                byBricks = 1 + solve(idx+1, b - diff, l, heights, n);
+            if (l > 0)
+                byLadder = 1 + solve(idx+1, b, l - 1, heights, n);
+            return max(byBricks, byLadder);
+        }
+    }
+    int furthestBuilding(vector<int>& heights, int bricks, int ladders) {
+        int n = heights.size();
+        return solve(0, bricks, ladders, heights, n);
+    }
+
+   ```
+   ```
+    //Efficient approach
+     int furthestBuilding(vector<int> & heights, int bricks,
+                             int ladders){int n = heights.size();
+    priority_queue<int> maxHeap;
+
+    for (int i = 0; i < n - 1; i++) {
+        if (heights[i + 1] <= heights[i])
+            continue;
+
+        int diff = heights[i + 1] - heights[i];
+        if (diff <= bricks) {
+            bricks -= diff;
+            maxHeap.push(diff);
+        } else if (ladders > 0) {
+            if (!maxHeap.empty()) {
+                int maxPast = maxHeap.top();
+                if (diff < maxPast) {
+                    maxHeap.pop();
+                    bricks += maxPast;
+                    bricks -= diff;
+                    maxHeap.push(diff);
+                }
+            }
+            ladders--;
+        } else {
+            return i;
+        }
+    }
+    return n - 1;
+    }
+   ```
