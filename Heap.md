@@ -743,3 +743,35 @@ priority_queue<int>pq;
         return w;
     }
    ```
+19. Seat Manager
+   ```
+     class SeatManager {
+public:
+int last;
+    std::priority_queue<int, std::vector<int>, std::greater<int>> pq;
+    SeatManager(int n) {
+        last=0;
+        
+    }
+    
+    int reserve() {
+         if (pq.empty()) {
+            return ++last;
+        } else {
+            int seat = pq.top();
+            pq.pop();
+            return seat;
+        }
+        
+    }
+    
+    void unreserve(int seatNumber) {
+         if (seatNumber == last) {
+            --last;
+        } else {
+            pq.push(seatNumber);
+        }
+        
+    }
+};
+   ```
