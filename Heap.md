@@ -677,3 +677,17 @@ priority_queue<int>pq;
                room_meeting_count.begin();
     }
    ```
+16. Kth Largest element in an array 
+    ```
+       int findKthLargest(vector<int>& nums, int k) {
+        priority_queue<int, vector<int>, greater<int>> pq;
+
+        for (int i = 0; i < nums.size(); i++) {
+            pq.push(nums[i]);
+            if (pq.size() > k)
+                pq.pop();
+        }
+
+        return pq.top();
+    }
+    ```
