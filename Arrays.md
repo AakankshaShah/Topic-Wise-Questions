@@ -2,47 +2,7 @@
 
 ## Questions
 
-1. Median of 2 sorted arrays
-
-   ```
-     double findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2) {
-
-        if (nums1.size() > nums2.size())
-            return findMedianSortedArrays(nums2, nums1);
-
-        int low = 0;
-        int high = nums1.size();
-        int left = (nums1.size() + nums2.size() + 1) / 2;
-        int n = nums1.size() + nums2.size();
-        double ans = 0;
-
-        while (low <= high) {
-            int mid1 = (low + high) / 2;
-            int mid2 = left - mid1;
-
-            int l1 = (mid1 > 0) ? nums1[mid1 - 1] : INT_MIN;
-            int r1 = (mid1 < nums1.size()) ? nums1[mid1] : INT_MAX;
-            int l2 = (mid2 > 0) ? nums2[mid2 - 1] : INT_MIN;
-            int r2 = (mid2 < nums2.size()) ? nums2[mid2] : INT_MAX;
-
-            if (l1 <= r2 && l2 <= r1) {
-                if (n % 2 == 0) {
-                    ans = (max(l1, l2) + min(r1, r2)) / 2.0;
-                } else {
-                    ans = max(l1, l2);
-                }
-                break;
-            } else if (l1 > r2) {
-                high = mid1 - 1;
-            } else {
-                low = mid1 + 1;
-            }
-        }
-
-        return ans;
-    }
-   ```
-2. Container with  most water
+1. Container with  most water
 
     ```
       int maxArea(vector<int>& height) {
@@ -198,36 +158,7 @@
         }
         reverse(nums.begin() + ind + 1, nums.end());
      ```
-7. Search in rotated sorted array 
 
-    ```
-     int search(vector<int>& nums, int target) {
-        int l = 0;
-        int h = nums.size() - 1;
-        int ans = -1;
-
-        while (l <= h) {
-            int mid = (l + h) / 2;
-            if (nums[mid] == target) {
-                ans = mid;
-                return ans;
-            } else if (nums[l] <= nums[mid]) {
-                if (nums[l] <= target && target <= nums[mid]) {
-                    h = mid - 1;
-                } else {
-                    l = mid + 1;
-                }
-            } else {
-                if (nums[mid] <= target && target <= nums[h]) {
-                    l = mid + 1;
-                } else {
-                    h = mid - 1;
-                }
-            }
-        }
-        return -1;
-    }
-    ```
 8. Valid Sudoku
 
      ``` 
