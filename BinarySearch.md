@@ -367,5 +367,45 @@ sort(buses.begin(), buses.end());
         return ans;
     }
     ```
+15. Minimum number of days to make m bouquets
+    ```
+       class Solution {
+     public:
+    bool isValid(int m, int k, int day, vector<int>& bloomDay) {
+        int s = 0;
+        int c = 0;
+        for (int i = 0; i < bloomDay.size(); i++) {
+            if (bloomDay[i] <= day) {
+                s++;
+                if (s == k) {
+                    c++;
+                    s = 0;
+                }
+            } else {
+                s = 0;
+            }
+        }
+        if (c >= m)
+            return true;
+     return false;       
+    }
+    int minDays(vector<int>& bloomDay, int m, int k) {
+        int n = bloomDay.size();
+        if ((long long)m * k > n)
+            return -1;
 
+        int l = 1;
+        int h = *max_element(bloomDay.begin(), bloomDay.end());
+
+        while (l <= h) {
+            int mid = (h + l) / 2;
+            if (isValid(m, k, mid, bloomDay))
+                h=mid-1;
+            else
+               l=mid+1;
+        }
+        return l;
+    }
+    };
+    ```
 
