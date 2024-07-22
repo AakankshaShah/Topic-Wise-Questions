@@ -25,7 +25,7 @@
         
       }
     ```
-3. 3sum
+2. 3sum
     ```
       sort(nums.begin(), nums.end());
         vector<vector<int>> ans;
@@ -62,7 +62,7 @@
 
         return ans;
     ```
-4. Closet 3 sum
+3. Closet 3 sum
     ```
       sort(nums.begin(), nums.end());
         
@@ -93,7 +93,7 @@
 
         return closetSum;
     ```
-5. 4 sum 
+4. 4 sum 
 
      ```
        sort(nums.begin(), nums.end());
@@ -135,7 +135,7 @@
         return ans;
     }
     ```
-6. Next permutation
+5. Next permutation
 
      ```
       int ind = -1;
@@ -158,8 +158,7 @@
         }
         reverse(nums.begin() + ind + 1, nums.end());
      ```
-
-8. Valid Sudoku
+6. Valid Sudoku
 
      ``` 
        //Approach 1
@@ -229,7 +228,7 @@
         return true;
     }
     
-9. Sudoko solver [Backtracking]
+7. Sudoko solver [Backtracking]
     ```
       bool isSafe(int i, int j, char val, vector<vector<char>>& board) {
         for (int k = 0; k < 9; k++) {
@@ -276,7 +275,7 @@
     }
     void solveSudoku(vector<vector<char>>& board) { solve(board); }
     ```
-10. Combination Sum I
+8. Combination Sum I
     ```
        void findCombination(vector<int>& candidates, int ind, int target,
                          vector<int>& ds, vector<vector<int>>& ans) {
@@ -303,7 +302,7 @@
         return ans;
     }
     ```
-11. Combination Sum 2 
+9. Combination Sum 2 
      ```
      void findCombination(int index, int target, vector<int>& ds,
                          vector<vector<int>>& ans, vector<int> arr, int n) {
@@ -345,7 +344,7 @@
         return ans;
     }
      ```
-12. Misisng positive number 
+10. Misisng positive number 
 
      ```
       int n = A.size();
@@ -369,33 +368,7 @@
         return n + 1;
    
      ```
-   13. Trapping Rain water
-       
-       ```
-         int i=0;
-        int j=height.size()-1;
-
-        int maxL=0;
-        int maxR=0;
-        int res=0;
-        while(i<=j)
-        {
-            if(maxR<=maxL)
-            {
-                res+=max(0,maxR-height[j]);
-                maxR=max(maxR,height[j]);
-                j--;
-            }
-            else
-            {
-                res+=max(0,maxL-height[i]);
-                maxL=max(maxL,height[i]);
-                i++; 
-            }
-        }
-       return res; 
-       ```
-14. Jump Game II https://www.youtube.com/watch?v=wLPdkLM_BWo
+11. Jump Game II https://www.youtube.com/watch?v=wLPdkLM_BWo
      
     ```
       int jumps=0;
@@ -414,7 +387,7 @@
         return jumps;
 
     ```
-15. Permutations
+12. Permutations
 
      ```
       void recur(vector<vector<int>>& ans, vector<int>& ds, int freq[], vector<int>& nums) {
@@ -444,11 +417,11 @@
      }
        
      ```
-   16. Permutation II
+13. Permutation II
 
         ```
          private: 
-    void permuteUnique(vector<int>& nums, vector<vector<int>>& output, vector<int> temp, vector<bool>& visited){
+         void permuteUnique(vector<int>& nums, vector<vector<int>>& output, vector<int> temp, vector<bool>& visited){
         if(temp.size() == nums.size()){
             output.push_back(temp);
             return;
@@ -461,18 +434,18 @@
             temp.pop_back();
             visited[i] = false;
         }
-    }
-    public:
-    vector<vector<int>> permuteUnique(vector<int>& nums) {
+        }
+         public:
+        vector<vector<int>> permuteUnique(vector<int>& nums) {
         sort(nums.begin(), nums.end());
         vector<vector<int>> output;
         vector<int> temp;
         vector<bool> visited(nums.size(), 0); 
         permuteUnique(nums, output, temp, visited);
         return output;
-    }      
+        }      
         ```
-17. Rotate array - Transpose and reverse row
+14. Rotate array - Transpose and reverse row
      ```
       void rotate(vector<vector<int>>& matrix) {
         int row = matrix.size();
@@ -486,7 +459,7 @@
         }
     }
      ```
-   18. Group Anagrams 
+   15. Group Anagrams 
        ```
           string generate(string& s) {
         vector<int> count(26, 0);
@@ -517,7 +490,7 @@
         return ans;
     }
        ```
-19. N - Queens O(n!)
+16. N - Queens O(n!)
     ```
       bool isSafe(vector<string>& board, int row, int col, int n) {
         int i = row;
@@ -578,8 +551,8 @@
 
 
 
-1. Circular tour
-2.  Maximum non negative subarray sum
+17. Circular tour
+18.  Maximum non negative subarray sum
 
      ```
      vector<int> result;
@@ -618,7 +591,7 @@
 
      ```
 
-   3. Factorial of a large number https://www.youtube.com/watch?v=O3fwYjcMV_M
+   19. Factorial of a large number https://www.youtube.com/watch?v=O3fwYjcMV_M
 
        ```
         void multiplier( vector<int> &arr, int &size,int fact)
@@ -661,7 +634,7 @@
         
       }
       ```
-  4. Spiral order matrix traversal 
+  20. Spiral order matrix traversal 
 
    ```
     int n=A.size();
@@ -698,7 +671,7 @@
     }
     return arr;
    ```
-Part II
+   Part II
  ```
    int r1 = 0; int r2 = n-1; int c1 = 0; int c2 = n-1;
     vector<vector<int>> v(n, vector<int> (n,0));
@@ -725,7 +698,7 @@ Part II
     return v;
  ```
     
- 5. Pick from both sides! https://www.youtube.com/watch?v=XJZczN4wts0 Another approach 
+ 21. Pick from both sides! https://www.youtube.com/watch?v=XJZczN4wts0 Another approach 
        ```
          int left_sum[B + 1], right_sum[B + 1], max, i;
         int n = A.size();
@@ -758,7 +731,7 @@ Part II
 
        ```
        
-6. Min steps in infinite grid 
+22. Min steps in infinite grid 
 
      ```
       int dist= 0;
@@ -772,7 +745,7 @@ Part II
 
     ```
 
-7. Min lights to activate 
+23. Min lights to activate 
 
     ```
       int ans = 0;
@@ -795,7 +768,7 @@ Part II
     return ans;
     ```
 
-8. Maximum sum triplet
+24. Maximum sum triplet
 
     ```
      vector<int> suffix(A.size());
@@ -832,7 +805,7 @@ Part II
 
     ```
 
-9. Add 1 to number 
+25. Add 1 to number 
 
    ```
      int carry =1;
@@ -860,7 +833,7 @@ Part II
    ```
 
 
-10. Max absolute difference https://www.youtube.com/watch?v=KqDIeQ9S5Vc
+26. Max absolute difference https://www.youtube.com/watch?v=KqDIeQ9S5Vc
 
     ```
       int val1=INT_MAX;
@@ -884,7 +857,7 @@ Part II
       
     ```
 
-11. Find duplicate in an array [Hare & tortoise method] - Something is duplicating & array values can act as valid indices
+27. Find duplicate in an array [Hare & tortoise method] - Something is duplicating & array values can act as valid indices
     ```
       int slow = nums[0];
         int fast = nums[0];
@@ -905,7 +878,7 @@ Part II
         return slow;
     ```
 
-12. Partitions
+28. Partitions
      ```
        if (A < 3)
             return 0;
@@ -940,7 +913,7 @@ Part II
 
 
 
-14. Missing & repeat number
+29. Missing & repeat number
     ```
       long long n = a.size(); // size of the array
 
@@ -1028,7 +1001,7 @@ Part II
 
     ```
 
-15. Max area of triangle 
+30. Max area of triangle 
      ```
        int Solution::solve(vector<string>& A) {
     int rows = A.size(), cols = A[0].size();
@@ -1088,7 +1061,7 @@ Part II
     }
      ```
 
-16. Set intersecrtion
+31. Set intersecrtion
 
      ```
            static bool cmp(vector<int>& a, vector<int>& b) {
@@ -1137,7 +1110,7 @@ Part II
         return res;
       ```
 
-17. Max unsorted array 
+32. Max unsorted array 
 
      ```
        int n = arr.size();
@@ -1179,7 +1152,7 @@ Part II
     return {l, r};
 
      ```
-18. Merge intervals
+33. Merge intervals
 
     ```
      bool static cmp(Interval i1, Interval i2) { return i2.start > i1.start; }
@@ -1211,7 +1184,7 @@ Part II
     }
 
     ```
-19. Set matrix zero https://www.youtube.com/watch?v=coOCVuBx7YA
+34. Set matrix zero https://www.youtube.com/watch?v=coOCVuBx7YA
     
 ```
 int row = A.size();
@@ -1261,7 +1234,7 @@ if (y == 1) {
     }
 }
 ```
-20. Make array elements equal 
+35. Make array elements equal 
     
 ```
    // Method 1
@@ -1290,7 +1263,7 @@ for (int i = 0; i < A.length; i++) {
 return max - min == B * 2 ? 1 : 0;
 
  ```
-21. Max sum square submatrix https://www.youtube.com/watch?v=WxjYE4_agbo
+36. Max sum square submatrix https://www.youtube.com/watch?v=WxjYE4_agbo
 
     ``` 
     //Brute Method
@@ -1339,7 +1312,7 @@ return max - min == B * 2 ? 1 : 0;
     return max_sum;
 
     ```
-22. Peak element
+37. Peak element
     ```
      int maxi = A[0];
     vector<bool> greater(n, true);
@@ -1404,7 +1377,7 @@ return max - min == B * 2 ? 1 : 0;
         return 0;
     }
     ```
-23. Move zeroes to end
+38. Move zeroes to end
     ```
       int i=0;
     int n=A.size();
@@ -1417,7 +1390,7 @@ return max - min == B * 2 ? 1 : 0;
     return A;
     ```
 
-24. Kth row of pascal 
+39. Kth row of pascal 
 
      ```
        vector<int>ans;
@@ -1431,7 +1404,7 @@ return max - min == B * 2 ? 1 : 0;
     }
     return ans;
      ```
-25. Pascal triangle
+40. Pascal triangle
 
     ```
      vector<vector<int>>ans;
@@ -1469,7 +1442,7 @@ return max - min == B * 2 ? 1 : 0;
      return vect;   
     ```
       
-26. Largest number
+41. Largest number
     
     ```
       static bool cmp(int& a, int& b)
@@ -1520,7 +1493,7 @@ return max - min == B * 2 ? 1 : 0;
         return res;
     }
     ```
-27. Rotate array 
+42. Rotate array 
 
      ```
        void Solution::rotate(vector<vector<int>> & matrix) {
@@ -1531,32 +1504,8 @@ return max - min == B * 2 ? 1 : 0;
         }
     }
      ```
-28. Next permutation
-    ```
-     int ind = -1;
-    int n = A.size();
 
-    for (int i = n - 2; i >= 0; i--) {
-        if (A[i] < A[i + 1]) {
-            ind = i;
-            break;
-        }
-    }
-    if (ind == -1) {
-        reverse(A.begin(), A.end());
-        return A;
-    }
-
-    for (int i = n - 1; i >= 0; i--) {
-        if (A[i] > A[ind]) {
-            swap(A[i], A[ind]);
-            break;
-        }
-    }
-    reverse(A.begin() + ind + 1, A.end());
-    return A;
-    ```
-29. Next permutation
+43. Next permutation
      ```
       vector<int> res;
     int start = 1;
@@ -1573,7 +1522,7 @@ return max - min == B * 2 ? 1 : 0;
     }
     return res;
      ```
- 30. Anti diagonal traversal of array
+ 44. Anti diagonal traversal of array
      
      ```
        int n=A.size();
@@ -1610,7 +1559,7 @@ return max - min == B * 2 ? 1 : 0;
     }
     return ans;
     ```
-31. Triplets with sum in range
+45. Triplets with sum in range
      
      ```
        int i=0;
@@ -1632,7 +1581,7 @@ return max - min == B * 2 ? 1 : 0;
     }
     return 0;
      ```
-32. Balanced arrays https://www.youtube.com/watch?v=jcAsP5z41EM 
+46. Balanced arrays https://www.youtube.com/watch?v=jcAsP5z41EM 
     
      ```
       int n=A.size();
@@ -1683,7 +1632,7 @@ return max - min == B * 2 ? 1 : 0;
     return ans;
 
      ```
-33. N/3 repeat number
+47. N/3 repeat number
     
     ```
        int cnt1=0;
@@ -1736,7 +1685,7 @@ return max - min == B * 2 ? 1 : 0;
     }
     return -1;  
     ```
-34. Majority element N/ 2 (If more than n/2 then only one element)
+48. Majority element N/ 2 (If more than n/2 then only one element)
     
     ```
     int cnt=0;
@@ -1758,7 +1707,7 @@ return max - min == B * 2 ? 1 : 0;
     ```
 
 
-35. Max gap
+49. Max gap
     
    ```
     int mina = nums[0], maxa = nums[0], n = nums.size();
@@ -1794,7 +1743,7 @@ return max - min == B * 2 ? 1 : 0;
         return maxGap;
    ```
 
-36. Subarray with given sum 
+50. Subarray with given sum 
     ```
      int i=0,j=0;
         int sum=0;
@@ -1824,7 +1773,7 @@ return max - min == B * 2 ? 1 : 0;
         ans.push_back(-1);
         return ans;
     ```
-37. Count triplets
+51. Count triplets
     ```
      int c=0;
 	   sort(arr,arr+n);
@@ -1849,7 +1798,7 @@ return max - min == B * 2 ? 1 : 0;
 	    return c;
       ```
 
-38. Rearange array alternatively 
+52. Rearange array alternatively 
     ```
       	int min_ind=0;
     	int i=0;
@@ -1871,7 +1820,7 @@ return max - min == B * 2 ? 1 : 0;
     	 
     ```
 
-39. Merge sorted arrays without extra space 
+53. Merge sorted arrays without extra space 
     ```
       int x=n-1;
     int y=0;
@@ -1891,7 +1840,8 @@ return max - min == B * 2 ? 1 : 0;
         sort(arr2,arr2+m);// code here 
     ```
 
-40. Zig zag fashion
+54  Zig zag fashion
+
     ```
        void zigZag(int arr[], int n) {
         for(int i=0;i<n;i++)
@@ -1906,11 +1856,11 @@ return max - min == B * 2 ? 1 : 0;
                 
             }
         }
-        // code here
+       
     }
     ```
 
-41. Stock sell & buy Local mnima & local maxima
+55. Stock sell & buy Local minima & local maxima
     ```
       vector<vector<int>>ans;
         if (n == 1)
@@ -1948,7 +1898,7 @@ return max - min == B * 2 ? 1 : 0;
         
         ans.push_back(v);
     ```
-42. chocolate distribution problem 
+56. chocolate distribution problem 
 
         ```
           long long ans=INT_MAX;
@@ -1963,7 +1913,7 @@ return max - min == B * 2 ? 1 : 0;
         return ans;
 
         ```
-43. Minimum platforms https://www.youtube.com/watch?v=dxVcMDI7vyI
+57. Minimum platforms https://www.youtube.com/watch?v=dxVcMDI7vyI
 
         ```
           sort(arr,arr+n);
@@ -1990,7 +1940,7 @@ return max - min == B * 2 ? 1 : 0;
     	 }
     	 return res;
         ```
-44. Number of pairs 
+58. Number of pairs 
        
 ``` 
 long long int N_Y[1005];
@@ -2020,7 +1970,7 @@ for (int i = 0; i < M; i++) {
 }
 return c;
 ```
-45. Count inversions
+59. Count inversions
 
     ```
       void merge(long long arr[],long long  low,long long  mid, long long high)
@@ -2073,7 +2023,7 @@ return c;
         return count;
     }```
 
-46. Merge without extra space
+60. Merge without extra space
     
     ```
       {
@@ -2094,7 +2044,7 @@ return c;
      }
     ```
 
-47. Sort 0,1,2
+61. Sort 0,1,2
    ```
      void sort012(int a[], int n) {
     int l = 0, mid = 0, high = n - 1;
@@ -2115,7 +2065,7 @@ return c;
     }
 }
 ```
-48. No consecutive one https://www.youtube.com/watch?v=H7tshfFTSvw
+62. No consecutive one https://www.youtube.com/watch?v=H7tshfFTSvw
 
     ```
       	ll countStrings(int n) {
@@ -2134,7 +2084,7 @@ return c;
 	    return sum;
 	}
     ```
-49. Closet sum to zero 
+63. Closet sum to zero 
     ```
       sort(arr, arr + n);
     int low = 0;
@@ -2167,7 +2117,7 @@ return c;
     return ans;
     ```
 
-50. Odd even jump 
+64. Odd even jump 
 
     ```
       int n = arr.size();
@@ -2200,7 +2150,7 @@ return c;
         }
         return totalGoodStartingPoints;
     ```
-51. Intersection of two arrays 
+65. Intersection of two arrays 
     ```
       //We can also make use of sets 
       vector<int> intersection(vector<int>& nums1, vector<int>& nums2) {
@@ -2222,7 +2172,32 @@ return c;
         return ans;
     }
     ```
-     
+66. Missing number
+      Approach 1 - Sum of series 
+      Approach 2 - XOR
+      Approach 3 - Sort
+     ```
+     int missingNumber(vector<int>& nums) {
+        int n = nums.size();
+        sort(nums.begin(), nums.end());
+        int l   = 0;
+        int r   = n-1;
+        int result = n;
+        
+        while(l <= r) {
+            int mid = l + (r-l)/2;
+            if(nums[mid] > mid) {
+                result = mid;
+                r = mid-1;
+            } else {
+                l = mid+1;
+            }
+        }
+        
+        return result;
+        
+    }
+     ```
 
         
 
