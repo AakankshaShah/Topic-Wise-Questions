@@ -2212,8 +2212,29 @@ return c;
                 i++;
             }
             c++;
+          }
+          return ans[k - 1];
+         }
+     ```   
+
+68. Find nth digit   
+    ```
+      int findNthDigit(int n) {
+        int total=0;
+        int base=9;
+        long long digit=1;
+        while(total+base*digit<n)
+        {
+            total+=base*digit;
+            digit++;
+            base*=10;
         }
-        return ans[k - 1];
+        n-=total;
+        long long num = pow(10, (digit - 1)) + (n - 1) / digit;
+        long long index = (n - 1) % digit;
+
+        return to_string(num)[index] - '0';
+        
     }
-```       
+    ``` 
 
