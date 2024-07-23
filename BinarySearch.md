@@ -551,3 +551,24 @@ sort(buses.begin(), buses.end());
         
     }
     ```
+21. Nth Magical Number
+   ```
+    int nthMagicalNumber(int n, int a, int b) {
+        long long start = min(a, b);
+        long long end = n * start;
+        long long int d = a * b / gcd(a, b);//lcm
+        long long int ans = 0;
+        while (start <= end) {
+            long long mid = start + (end - start) / 2;
+            long long c = mid / a + mid / b - mid / d;
+            if (c < n) {
+                start = mid + 1;
+            } else {
+                ans = mid;
+                end = mid - 1;
+            }
+        }
+        int mod = 1e9 + 7;
+        return ans % mod;
+    }
+   ```
