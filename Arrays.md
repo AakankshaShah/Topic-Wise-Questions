@@ -2199,5 +2199,21 @@ return c;
     }
      ```
 
-        
+ 67. Kth missing positive number
+     ```
+        int findKthPositive(vector<int>& arr, int k) {
+        vector<int> ans;
+        int c = 1;
+        int i = 0;
+        while (ans.size() < k) {
+            if (i >= arr.size() || c < arr[i])
+                ans.push_back(c);
+            else {
+                i++;
+            }
+            c++;
+        }
+        return ans[k - 1];
+    }
+     ```       
 
