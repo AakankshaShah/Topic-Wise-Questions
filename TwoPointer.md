@@ -12,3 +12,22 @@
             i++;
         j++;
     ```
+2. Sum of square numbers
+   ```
+     bool judgeSquareSum(int c) {
+        if (c < 0) return false;
+        int l=0;
+        int r=int(sqrt(c));
+        
+        while(l<=r)
+        {
+            int s=c-l*l;
+            int sq=(int)sqrt(s);
+            if(sq*sq==s)
+            return true;
+            l++;
+        }
+        return false;
+        
+    }
+   ```
