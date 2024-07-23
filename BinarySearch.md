@@ -495,3 +495,19 @@ sort(buses.begin(), buses.end());
 
         return 0;
 ```
+19. Special Array With X Elements Greater Than or Equal X
+```
+ int specialArray(vector<int>& nums) {
+       
+        sort(nums.begin(), nums.end());
+        for (int i = 0; i <= 1000; ++i) {
+
+            int ind = lower_bound(nums.begin(), nums.end(), i) - nums.begin();
+            int len = nums.size() - ind;
+            if (len == i) {
+                return i;
+            }
+        }
+        return -1;
+    }
+```
