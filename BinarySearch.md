@@ -572,3 +572,36 @@ sort(buses.begin(), buses.end());
         return ans % mod;
     }
    ```
+22. Find a smallest divisor given a threshold 
+   ```
+      int isValid(vector<int>& nums, int mid) {
+        int s = 0;
+        for (int i = 0; i < nums.size(); i++) {
+            if (nums[i] % mid == 0)
+                s += nums[i] / mid;
+            else
+                s += (nums[i] / mid + 1);
+        }
+        return s;
+    }
+    int smallestDivisor(vector<int>& nums, int threshold) {
+        int l = 1;
+        int h = *max_element(nums.begin(), nums.end());
+        int ans = h;
+
+        while (l <= h) {
+            int mid = l + (h - l) / 2;
+            cout << mid << " " << isValid(nums, mid) << "\n";
+
+            if (isValid(nums, mid) <= threshold) {
+                ans = mid;
+                h = mid - 1;
+
+            }
+
+            else if (isValid(nums, mid) > threshold)
+                l = mid + 1;
+        }
+        return ans;
+    }
+   ```
