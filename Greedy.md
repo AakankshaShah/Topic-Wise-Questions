@@ -192,3 +192,35 @@
     return n - 1;
     }
    ```
+4. Minimum time to complete all tasks
+   ```
+     static bool compareTasks(const vector<int>& t1, const vector<int>& t2) {
+        return t1[1] < t2[1];
+    }
+    int findMinimumTime(vector<vector<int>>& tasks) {
+        // sort(tasks.begin(), tasks.end(),
+        //  [](const auto& t1, const auto& t2) { return t1[1] < t2[1]; });
+        sort(tasks.begin(), tasks.end(), compareTasks);
+        const int MaxTime = 2001;
+        bool onComputer[2001] = {0};
+        for (int i = 0; i < tasks.size(); i++) {
+            int s = tasks[i][0];
+            int e = tasks[i][1];
+            int d = tasks[i][2];
+            for (int j = s; j <= e; j++) {
+                if (onComputer[j])
+                    d--;
+            }
+            for (int k = e; d > 0; k--) {
+                if (onComputer[k] == false) {
+                    onComputer[k] = true;
+                    d--;
+                }
+            }
+        }
+        int countTimeOn = 0;
+        for (int i = 1; i <= 2000; i++)
+            countTimeOn += onComputer[i];
+        return countTimeOn;
+    }
+   ```
