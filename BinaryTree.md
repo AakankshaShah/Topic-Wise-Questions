@@ -684,4 +684,16 @@ int rh=height(node->right);
 return 1+max(lh,rh);
 }
 ```
-21. 
+21. Evaluate boolean binary tree
+    ```
+        bool evaluateTree(TreeNode* root) {
+        if(root->left==NULL||root->right==NULL)
+        return root->val;
+
+
+        if (root->val == 2)
+            return evaluateTree(root->left) | evaluateTree(root->right);
+        else
+            return evaluateTree(root->left) & evaluateTree(root->right);
+    }
+    ```
