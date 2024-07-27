@@ -641,4 +641,47 @@
         }
         return ans;
     ```
+18. Binary Tree inorder traversal
+    ```
+     vector<int> ans;
+    void inorder(TreeNode* root) {
+        if (root == NULL)
+            return;
 
+        inorder(root->left);
+        ans.push_back(root->val);
+        inorder(root->right);
+    }
+    vector<int> inorderTraversal(TreeNode* root) {
+        inorder(root);
+        return ans;
+    }
+    ```
+19. Diameter of a binary tree
+    ```
+       int findMax(TreeNode* node, int& maxi) {
+        if (node == NULL) {
+            return 0;
+        }
+        int lh = findMax(node->left, maxi);
+        int rh = findMax(node->right, maxi);
+        maxi = max(maxi, lh + rh);
+        return 1 + max(lh, rh);
+    }
+    int diameterOfBinaryTree(TreeNode* root) {
+        int maxi = 0;
+        findMax(root, maxi);
+        return maxi;
+    }
+    ```
+20. Height of binary tree
+ ```
+int height(TreeNode* node)
+{ if(node==null)
+return 0;
+int lh=height(node->left);
+int rh=height(node->right);
+return 1+max(lh,rh);
+}
+```
+21. 
