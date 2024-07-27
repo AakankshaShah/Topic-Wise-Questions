@@ -171,6 +171,88 @@ https://www.youtube.com/playlist?list=PL_z_8CaSLPWdeOezg68SKkeLN4-T_jNHd
         return res;
     ```
 7. Min Stack
+```
+class MinStack {
+public:
+    stack<long long > s;
+    int minEle;
+    MinStack() {}
+
+    void push(int x) {
+        if (s.empty()) {
+            minEle = x;
+            s.push(x);
+        } else if (x < minEle) {
+            s.push((long long)2 * x - minEle);
+            minEle = x;
+        } else {
+            s.push(x);
+        }
+    }
+
+    void pop() {
+        if (s.empty()) {
+            return;
+        }
+
+        int t = s.top();
+        s.pop();
+
+        if (t < minEle) {
+            minEle = 2 * minEle - t;
+        }
+    }
+
+    int top() {
+        if (s.empty()) {
+            return -1;  // or throw an exception
+        }
+
+        int t = s.top();
+
+        return (t < minEle) ? minEle : t;
+    }
+
+    int getMin() {
+        if (s.empty()) {
+            return -1;  // or throw an exception
+        } else {
+            return minEle;
+        }
+    }
+};
+
+/**
+ * Your MinStack object will be instantiated and called as such:
+ * MinStack* obj = new MinStack();
+ * obj->push(val);
+ * obj->pop();
+ * int param_3 = obj->top();
+ * int param_4 = obj->getMin();
+ */
+
+```
+```
+  class MinStack {
+public:
+    vector< pair<int,int> > s;
+	
+    MinStack() { }
+    
+    void push(int val) {
+        if(s.empty())
+            s.push_back({val,val});
+        else
+            s.push_back({val,min(s.back().second,val)});    
+    }
+    
+    void pop() { s.pop_back(); }
+    
+    int top() { return s.back().first; }
+    
+    int getMin() { return s.back().second; }
+};
+```
 8. Celebrity Problem
    ```
     int celebrity(int M[N][N], int n)
