@@ -697,3 +697,39 @@ return 1+max(lh,rh);
             return evaluateTree(root->left) & evaluateTree(root->right);
     }
     ```
+22. Balanced binary tree
+    ```
+      int isBT(TreeNode* root)
+    {
+        if(root==NULL)
+        return 0;
+
+
+        int lh= isBT(root->left);
+        int rh= isBT(root->right);
+
+        if(lh==-1||rh==-1)
+        return -1;
+
+        if(abs(lh-rh)>1)
+        return -1;
+
+        return 1+max(lh,rh);
+      
+        
+        
+    }
+    
+    bool isBalanced(TreeNode* root) 
+    {
+
+     if(isBT(root)==-1)
+     return false;
+
+     return true;
+
+
+
+        
+    }
+    ```
