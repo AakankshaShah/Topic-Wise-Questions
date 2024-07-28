@@ -740,8 +740,8 @@
     int sum(TreeNode* root, int& ans) {
         if (root == NULL)
             return 0;
-        int lh = sum(root->left, ans);
-        int rh = sum(root->right, ans);
+        int lh = max(0,sum(root->left, ans));
+        int rh = max(0,sum(root->right, ans));
         ans = max(ans, root->val + lh + rh);
         return root->val + max(lh, rh);
     }
@@ -749,6 +749,7 @@
         ans = INT_MIN;
         sum(root, ans);
         return ans;
+    }
     }
     ```
 24. Maximum Width 
