@@ -782,3 +782,19 @@
         return ans;
     }
     ```
+25. Distribute coins in a bt
+    ```
+      int solve(TreeNode* node) {
+        if (node == NULL)
+            return 0;
+        int lh = solve(node->left);
+        int rh = solve(node->right);
+        moves += abs(lh) + abs(rh);
+        return lh + rh + node->val - 1;
+    }
+    int distributeCoins(TreeNode* root) {
+        moves = 0;
+        solve(root);
+        return moves;
+    }
+    ```
