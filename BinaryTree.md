@@ -675,15 +675,16 @@
     }
     ```
 20. Height of binary tree
- ```
-int height(TreeNode* node)
-{ if(node==null)
-return 0;
-int lh=height(node->left);
-int rh=height(node->right);
-return 1+max(lh,rh);
-}
-```
+     ```
+        int height(TreeNode * node) {
+            if (node == null)
+                return 0;
+            int lh = height(node->left);
+            int rh = height(node->right);
+            return 1 + max(lh, rh);
+        }
+
+     ```
 21. Evaluate boolean binary tree
     ```
         bool evaluateTree(TreeNode* root) {
@@ -731,5 +732,52 @@ return 1+max(lh,rh);
 
 
         
+    }
+    ```
+23. Maximum path sum
+    ```
+       int ans;
+    int sum(TreeNode* root, int& ans) {
+        if (root == NULL)
+            return 0;
+        int lh = sum(root->left, ans);
+        int rh = sum(root->right, ans);
+        ans = max(ans, root->val + lh + rh);
+        return root->val + max(lh, rh);
+    }
+    int maxPathSum(TreeNode* root) {
+        ans = INT_MIN;
+        sum(root, ans);
+        return ans;
+    }
+    ```
+24. Maximum Width 
+    ```
+      int widthOfBinaryTree(TreeNode* root) {
+        if (root == NULL)
+            return 0;
+        int ans = 0;
+        queue<pair<TreeNode*, long long>> q;
+        q.push({root, 0});
+        while (!q.empty()) {
+            int size = q.size();
+            int mmin = q.front().second;
+            int first, last;
+            for (int i = 0; i < size; i++) {
+                int curr_id = q.front().second - mmin;
+                TreeNode* n = q.front().first;
+                q.pop();
+                if (i == 0)
+                    first = curr_id;
+                if (i == size - 1)
+                    last = curr_id;
+                if (n->left)
+                    q.push({n->left, (long long)curr_id * 2 + 1});
+                if (n->right)
+                    q.push({n->right, (long long)curr_id * 2 + 2});
+            }
+            ans = max(ans, last - first + 1);
+        }
+        return ans;
     }
     ```
