@@ -798,3 +798,39 @@
         return moves;
     }
     ```
+26. Binary tree paths https://www.youtube.com/watch?v=gSFcPOPyq-Y
+    ```
+       string convert(vector<int>& path) {
+        string ans = "";
+        int n = path.size();
+        for (int i = 0; i < n - 1; i++) {
+            ans += to_string(path[i]);
+            ans.push_back('-');
+            ans.push_back('>');
+        }
+        ans += to_string(path[n - 1]);
+        return ans;
+    }
+
+    void solve(TreeNode* root, vector<string>& path, vector<int>& ans) {
+        if (root == NULL) {
+            return;
+        }
+        if (root->left == NULL && root->right == NULL) {
+            ans.push_back(root->val);
+            path.push_back(convert(ans));
+            ans.pop_back();
+        }
+        ans.push_back(root->val);
+        solve(root->left, path, ans);
+        solve(root->right, path, ans);
+        ans.pop_back();
+    }
+
+    vector<string> binaryTreePaths(TreeNode* root) {
+        vector<string> path;
+        vector<int> ans;
+        solve(root, path, ans);
+        return path;
+    }
+    ```
