@@ -923,7 +923,7 @@ LRUCache(int cap)
         return ans;
     }
     ```
-21. Max score from removing substrings 
+29. Max score from removing substrings 
     ```
       string removeSubstring(string s, string str, int points, int& ans) {
         stack<char> st;
@@ -957,7 +957,7 @@ LRUCache(int cap)
         return ans;
     }
     ```
-22. Remove outermost parentheses
+30. Remove outermost parentheses
     ```
       string removeOuterParentheses(string s) {
         string result;
@@ -981,7 +981,7 @@ LRUCache(int cap)
         return result;
     }
     ```
-23. Create max number
+31. Create max number
     ```
       void merge(vector<int>& ans, vector<int>& v1, vector<int>& v2) {
     int m = v1.size();
@@ -1078,7 +1078,7 @@ LRUCache(int cap)
     }
     };
     ```
-24. Find permutation
+32. Find permutation
     ```
        // vector<int> ans;
         // for (int i = 0; i < l.length(); i++) {
@@ -1116,7 +1116,7 @@ LRUCache(int cap)
         return res;
 
     ```
-25. Asteroid collision
+33. Asteroid collision
      ```
        vector<int> asteroidCollision(vector<int>& asteroids) {
         stack<int> st;
@@ -1154,6 +1154,44 @@ LRUCache(int cap)
         return result;
     }
      ```
+34. Max chunks sorted 
+    ```
+     int maxChunksToSorted(vector<int>& arr) {
+        int srt=0,ans=0,n=arr.size();
+        for(int i=0;i<n;i++){
+            if(srt<arr[i])srt=arr[i];
+            if(srt==i)ans++;
+        }
+        return ans;
+        
+    }
+    We initialize two variables: srt to keep track of the maximum value encountered so far and ans to count the number of valid chunks.
+    We iterate through the array using a for loop.
+     For each element arr[i], we update srt to be the maximum of srt and arr[i].
+
+    If srt equals the current index i, it means all elements from the start up to i can form a valid chunk. Hence, we increment the chunk count ans.
+
+       Finally, we return ans which represents the maximum number of chunks.
+    ```
+35. Max chunks sorted II
+   ```
+     int maxChunksToSorted(vector<int>& arr) {
+        stack<int>st;
+        for(int i=0;i<arr.size();i++)
+        {
+            int x=arr[i];
+            while(!st.empty()&&st.top()>arr[i])
+            {
+                x=max(x,st.top());
+                st.pop();
+            }
+            st.push(x);
+
+        }
+        return st.size();
+        
+    }
+   ```
 ## Extras 
 
 Prefix , postfix & infix conversion
