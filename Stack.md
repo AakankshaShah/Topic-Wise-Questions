@@ -1210,6 +1210,32 @@ LRUCache(int cap)
         return ans;
     }
     ```
+37. Most competitive subsequence
+    ```
+        vector<int> mostCompetitive(vector<int>& arr, int k) {
+        int n = arr.size();
+        stack<int> st;
+
+        for (int i = 0; i < n; i++) {
+            int left = n - i;
+
+            while (st.size() > 0 && st.size() + left > k && st.top() > arr[i])
+                st.pop();
+
+            if (st.size() < k)
+                st.push(arr[i]);
+        }
+
+        vector<int> ans;
+        while (!st.empty()) {
+            ans.push_back(st.top());
+            st.pop();
+        }
+        reverse(ans.begin(), ans.end());
+
+        return ans;
+    }
+    ```
 
 ## Extras 
 
