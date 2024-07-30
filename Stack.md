@@ -1236,6 +1236,40 @@ LRUCache(int cap)
         return ans;
     }
     ```
+38. Subarray With Elements Greater Than Varying Threshold
+      ```
+         int validSubarraySize(vector<int>& a, int threshold) {
+        int n = a.size();
+
+        vector<int> stk;
+        vector<int> nextS(n, -1), prevS(n, -1);
+        for (int i = 0; i < n; i++) {
+            while (!stk.empty() && a[i] < a[stk.back()]) {
+                nextS[stk.back()] = i;
+                stk.pop_back();
+            }
+            stk.push_back(i);
+        }
+        stk.clear();
+        for (int i = n - 1; i >= 0; i--) {
+            while (!stk.empty() && a[i] < a[stk.back()]) {
+                prevS[stk.back()] = i;
+                stk.pop_back();
+            }
+            stk.push_back(i);
+        }
+        for(int i = 0; i < n; i++) {
+            int left = prevS[i];                           
+            int right = nextS[i] == -1 ? n : nextS[i];     
+            
+            int len = right - left - 1;                     
+            
+            if (a[i] > (threshold / ((double) len)))
+                return len;
+        }
+         return -1;
+    }
+      ```
 
 ## Extras 
 
