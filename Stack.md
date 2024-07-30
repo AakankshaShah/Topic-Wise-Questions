@@ -1097,6 +1097,25 @@ LRUCache(int cap)
         // }
         // return ans;
     ```
+    ```
+    //Approach 2
+     l+= 'I';
+        int currPointer = -1;
+        int len = l.size();
+        vector<int> res;
+        
+        for(int i=0;i<len;i++){
+            if(l[i] == 'I'){
+                for(int j=i;j>currPointer;j--){
+                    res.push_back(j+1);    
+                }
+                currPointer = i;
+            }
+        }
+        
+        return res;
+
+    ```
 ## Extras 
 
 Prefix , postfix & infix conversion
