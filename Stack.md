@@ -1040,9 +1040,9 @@ LRUCache(int cap)
         ans.push_back(v2[j]);
         j++;
     }
-}
-class Solution {
-public:
+     }
+    class Solution {
+     public:
     vector<int> solve(int k, vector<int>& nums) {
         int n = nums.size();
         if (k > n)
@@ -1077,6 +1077,25 @@ public:
         return ans;
     }
     };
+    ```
+24. Find permutation
+    ```
+       // vector<int> ans;
+        // for (int i = 0; i < l.length(); i++) {
+        //     s.push(i + 1);
+        //     if (l[i] == 'I') {
+        //         while (!s.empty()) {
+        //             ans.push_back(s.top());
+        //             s.pop();
+        //         }
+        //     }
+        // }
+        // s.push(l.length() + 1);
+        // while (!s.empty()) {
+        //     ans.push_back(s.top());
+        //     s.pop();
+        // }
+        // return ans;
     ```
 ## Extras 
 
