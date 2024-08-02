@@ -720,3 +720,39 @@
         return ans;
     }
     ```
+23. Plus one 
+    ```
+        ListNode* rev(ListNode* head) {
+        ListNode* prev = NULL;
+        ListNode* next;
+        ListNode* curr = head;
+        while (curr) {
+            next = curr->next;
+            curr->next = prev;
+            prev = curr;
+            curr = next;
+        }
+        return prev;
+    }
+    ListNode* plusOne(ListNode* head) {
+
+       if (head == NULL)
+            return head;
+
+        ListNode* nhead = rev(head);
+        ListNode* curr = nhead;
+        int carry = 1; // Initial carry is 1 because we are adding one
+
+        while (curr && carry) {
+            int sum = curr->val + carry;
+            curr->val = sum % 10;
+            carry = sum / 10;
+            if (carry && curr->next == NULL) {
+                curr->next = new ListNode(0); // Add a new node if we still have a carry
+            }
+            curr = curr->next;
+        }
+
+        return rev(nhead);
+    }
+    ```
