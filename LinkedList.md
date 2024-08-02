@@ -756,3 +756,25 @@
         return rev(nhead);
     }
     ```
+24. Linked List components
+    ```
+      int numComponents(ListNode* head, vector<int>& nums) {
+        set<int> st;
+        for (auto num : nums)
+            st.insert(num);
+        ListNode* curr = head;
+        int ans = 0, val;
+        while (curr) {
+            val = curr->val;
+            while (curr and st.count(curr->val)) {
+                val = curr->val;
+                curr = curr->next;
+            }
+            if (st.count(val))
+                ans++;
+            if (curr)
+                curr = curr->next;
+        }
+        return ans;
+    }
+    ```
