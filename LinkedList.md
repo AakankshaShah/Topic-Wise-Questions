@@ -778,3 +778,67 @@
         return ans;
     }
     ```
+25. Circular ll (ascending)
+    ```
+      Node* insert(Node* head, int insertVal) {
+        Node* curr = head;
+        Node* n = new Node(insertVal);
+        if (curr == NULL) {
+
+            n->next = n;
+            return n;
+        }
+        if (insertVal <= head->val) {
+            while (curr->next != head)
+                curr = curr->next;
+            curr->next = n;
+            n->next = head;
+
+            return n;
+        }
+
+        while (curr->next != head && curr->next->val < insertVal)
+            curr->next;
+        n->next = curr->next;
+        curr->next = n;
+        return head;
+    }
+    ```
+26. Descending 
+    ```
+       Node* insert(Node* head, int insertVal) {
+        Node *newNode = new Node(insertVal);
+        if (!head) {
+            newNode->next = newNode;
+            return newNode;
+        }
+
+        Node *prevNode = head;
+        Node *currNode = head->next;
+
+        while (true) {
+            if (insertVal >= prevNode->val && insertVal <= currNode->val) {
+                prevNode->next = newNode;
+                newNode->next = currNode;
+                return head;
+            }
+
+            if (prevNode->val > currNode->val && (insertVal <= currNode->val || insertVal >= prevNode->val)) {
+                prevNode->next = newNode;
+                newNode->next = currNode;
+                return head;
+            }
+
+            prevNode = currNode;
+            currNode = currNode->next;
+
+            if (prevNode == head) {
+                prevNode->next = newNode;
+                newNode->next = currNode;
+                return head;
+            }
+        }
+
+        return nullptr;
+    }
+    ```
