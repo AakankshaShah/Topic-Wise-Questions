@@ -931,6 +931,33 @@ return sans;
     }
     };
 
-```
+    ```
+33. Longest substring with atmost two distinct characters
+    ```
+      int lengthOfLongestSubstringTwoDistinct(string s) 
+    {
+        int i=0;
+        int j=0;
+        int n =s.length();
+        int ans=0;
+        unordered_map<char,int>m;
+        while(j<n)
+        {
+            m[s[j]]++;
+            while(m.size()>2)
+            {
+                m[s[i]]--;
+                if(m[s[i]]==0)
+                m.erase(s[i]);
+                i++;
+            }
+            ans=max(ans,j-i+1);
+            j++;
+
+        }
+        return ans;
+        
+    }
+    ```
 
    
