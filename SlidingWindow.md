@@ -1003,5 +1003,39 @@ return sans;
         }
         return result;
      ```
+36. Minimum window subsequence
+    ```
+      string minWindow(string s1, string s2) {
 
+        int right = 0, strRight = 0;
+
+        int result = -1;
+        int start = -1;
+
+        while (right < s1.size()) {
+            if (s1[right] == s2[strRight])
+                ++strRight;
+
+            if (strRight == s2.size()) {
+                int i = right;
+                --strRight;
+                while (strRight >= 0) {
+                    if (s2[strRight] == s1[i])
+                        --strRight;
+                    --i;
+                }
+                int dist = right - i;
+                if (result == -1 || dist < result) {
+                    result = dist;
+                    start = i + 1;
+                }
+                right = i + 1;
+                strRight = 0;
+            }
+            ++right;
+        }
+
+        return result == -1 ? "" : s1.substr(start, result);
+    }
+    ```
      
