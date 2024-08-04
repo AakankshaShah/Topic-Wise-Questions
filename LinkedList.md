@@ -844,4 +844,78 @@
     ```
 27. Design Skiplist
     ```
+     class Skiplist {
+    private:
+    struct ListNode {
+        int val;
+        ListNode* next;
+        ListNode* down;
+        ListNode(int v, ListNode* n, ListNode* d) : val(v), next(n), down(d) {}
+    };
+
+    public:
+    ListNode* head;
+    int numLevel;
+    int numCount;
+
+    Skiplist() : head(new ListNode(-1, nullptr, nullptr)), numLevel(0), numCount(0) {}
+
+    bool search(int target) {
+        ListNode* curr = head;
+        while (curr != nullptr) {
+            while (curr->next != nullptr && curr->next->val < target)
+                curr = curr->next;
+            if (curr->next != nullptr && curr->next->val == target)
+                return true;
+            curr = curr->down;
+        }
+        return false;
+    }
+
+    void add(int num) {
+        std::stack<ListNode*> st;
+        ListNode* current = head;
+        while (current != nullptr) {
+            while (current->next != nullptr && current->next->val < num) {
+                current = current->next;
+            }
+            st.emplace(current);
+            current = current->down;
+        }
+
+        bool insert = true;
+        ListNode* down = nullptr;
+
+        while (insert && !st.empty()) {
+            current = st.top();
+            st.pop();
+            current->next = new ListNode(num, current->next, down);
+            down = current->next;
+            insert = (rand() % 2 == 0);
+        }
+
+        if (insert) {
+            head = new ListNode(-1, nullptr, head);
+            numLevel++;
+        }
+        numCount++;
+    }
+
+    bool erase(int num) {
+        ListNode* current = head;
+        bool found = false;
+        while (current != nullptr) {
+            while (current->next != nullptr && current->next->val < num)
+                current = current->next;
+            if (current->next != nullptr && current->next->val == num) {
+                found = true;
+                ListNode* target = current->next;
+                current->next = current->next->next;
+                delete target;
+            }
+            current = current->down;
+        }
+        return found;
+    }
+
     ```
