@@ -1039,6 +1039,7 @@ return sans;
     }
     ```
    37. New 21 game
+
       ```
         double new21Game(int n, int k, int maxPts) {
 
@@ -1081,3 +1082,19 @@ return sans;
         
     }
     ```
+39. Minimum consecutive cards pick up 
+     ```
+       set<int> s;
+        int j = 0, i = 0, ans = INT_MAX;
+        int n = cards.size();
+        while (j < n) {
+            if (!s.insert(cards[j]).second) {
+                if (ans > s.size() + 1)
+                    ans = s.size() + 1;
+                s.erase(cards[i]);
+                i++;
+            } else
+                j++;
+        }
+        return ans == INT_MAX ? -1 : ans;
+     ```
