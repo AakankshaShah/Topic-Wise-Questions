@@ -1098,3 +1098,56 @@ return sans;
         }
         return ans == INT_MAX ? -1 : ans;
      ```
+40. Minimum Adjacent Swaps for K Consecutive Ones
+   ```
+   ```
+41. Continuous subarray 
+    ```
+      long long continuousSubarrays(vector<int>& nums) {
+        long long n = nums.size();
+        long long left = 0;
+        long long right = 0;
+        long long count = 0;
+        multiset<long long> window;
+        while (right < n) {
+
+            window.insert(nums[right]);
+
+            while (*window.rbegin() - *window.begin() > 2) {
+
+                count += (right - left);
+                auto it = window.find(nums[left]);
+                if (it != window.end()) {
+
+                    window.erase(it);
+                }
+                left++;
+            }
+
+            right++;
+        }
+
+      
+        long long x = right - left + 1;
+        long long sum = x * (x - 1) / 2;
+        count += sum;
+
+        return count;
+    }
+    ```
+42. Count subarrays with score less than k 
+     ```
+        long long countSubarrays(vector<int>& nums, long long k) {
+        int i = 0, j = 0, n = nums.size();
+        long long ans = 0, sum = 0;
+        while(j<n)
+        {
+            sum += nums[j];
+            while(sum*(j-i+1) >= k) sum -= nums[i++];
+            ans += j-i+1;
+            j++;
+        }
+        return ans;
+        
+    }
+     ```
