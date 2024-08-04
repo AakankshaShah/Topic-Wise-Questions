@@ -804,7 +804,7 @@
         return head;
     }
     ```
-26. Descending 
+26. Descending  3->4->1 , 3->4->2->1
     ```
        Node* insert(Node* head, int insertVal) {
         Node *newNode = new Node(insertVal);
@@ -841,4 +841,7 @@
 
         return nullptr;
     }
+    ```
+27. Design Skiplist
+    ```
     ```
