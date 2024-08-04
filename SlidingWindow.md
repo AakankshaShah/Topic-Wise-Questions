@@ -986,5 +986,22 @@ return sans;
         return res;
     }
     ```
+36. Max consecutive ones II
+     ```
+        int result = 0;
+        int current = 0;
+        int prev = -1;
+        for (int num: nums) {
+            if (num == 1) {
+                current++;
+                result = max(result, current + prev + 1);
+            } else {
+                prev = current;
+                result = max(result, current + 1);
+                current = 0;
+            }
+        }
+        return result;
+     ```
 
      
