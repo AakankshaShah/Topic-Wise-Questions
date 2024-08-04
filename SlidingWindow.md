@@ -1038,4 +1038,46 @@ return sans;
         return result == -1 ? "" : s1.substr(start, result);
     }
     ```
-     
+   37. New 21 game
+      ```
+        double new21Game(int n, int k, int maxPts) {
+
+        vector<double> P(n + 1);
+        P[0] = 1;
+
+        for (int i = 1; i <= n; i++) {
+
+            for (int j = 1; j <= maxPts; j++) {
+
+                if (i - j >= 0 && i - j < k) {
+
+                    // Probability of score j = 1/maxPts
+                    // Remaining points = (i-j);
+                    // So,  P[i] = Probability of j * Probability of remaining
+                    // i.e. P[i] = 1/maxPts * P[i-j]
+                    // Or, P[i] = P[i-j]/maxPts;
+
+                    P[i] += P[i - j] / maxPts;
+                }
+            }
+            }
+            return accumulate(P.begin() + k, P.end(), 0.0);
+           }
+      ```  
+38. Max value of equation
+    ```
+      priority_queue<vector<int>> pq;
+        pq.push({v[0][1]-v[0][0],v[0][0]});
+        int ans = INT_MIN,sum;
+        for(int i = 1; i < v.size(); i++){
+            sum = v[i][0]+v[i][1];
+            while(!pq.empty() && v[i][0]-pq.top()[1]>k)pq.pop();
+            if(!pq.empty()){
+                ans = max(ans,sum+pq.top()[0]);
+            }
+            pq.push({v[i][1]-v[i][0],v[i][0]});
+        }
+        return ans;
+        
+    }
+    ```
