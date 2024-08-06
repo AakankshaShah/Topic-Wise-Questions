@@ -926,3 +926,31 @@
         return root;
     }
     ```
+29. Path Sum 
+    ```
+      bool hasPathSum(TreeNode* root, int targetSum) {
+        if (root == NULL)
+            return false;
+        stack<TreeNode*> path;
+        stack<int> sum;
+        path.push(root);
+        sum.push(root->val);
+        while (!path.empty()) {
+            TreeNode* p = path.top();
+            int v = sum.top();
+            sum.pop();
+            path.pop();
+            if (p->left == NULL && p->right == NULL && v == targetSum)
+                return true;
+            if (p->left) {
+                path.push(p->left);
+                sum.push(p->left->val + v);
+            }
+            if (p->right) {
+                path.push(p->right);
+                sum.push(p->right->val + v);
+            }
+        }
+        return false;
+    }
+    ```
