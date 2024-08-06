@@ -649,3 +649,39 @@ bool DFS(vector<string> &A, int i, int j, string B, int idx , vector<vector<bool
         return ans;
         }
      ```
+21. Reorder Routes to Make All Paths Lead to the City Zero
+    ```
+      int count =0;
+void dfs(int node,int parent,unordered_map<int,vector<pair<int,int>>> & adj )
+{
+    for( auto & child : adj[node])
+    {
+        int a =child.first;
+        int check=child.second;
+        if(a!=parent)
+        {
+            if(check==1)
+            count++;
+            dfs(a,node,adj);
+        }
+        
+
+    }
+}
+    int minReorder(int n, vector<vector<int>>& connections) {
+        unordered_map<int,vector<pair<int,int>>> adj;
+
+
+        for(auto &connect : connections)
+        {
+            int a =connect[0];
+            int b=connect[1];
+            adj[a].push_back({b,1});
+            adj[b].push_back({a,0});
+
+        }
+        dfs(0,-1,adj);
+        return count ;
+        
+    }
+    ```
