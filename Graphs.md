@@ -652,8 +652,8 @@ bool DFS(vector<string> &A, int i, int j, string B, int idx , vector<vector<bool
 21. Reorder Routes to Make All Paths Lead to the City Zero
     ```
       int count =0;
-void dfs(int node,int parent,unordered_map<int,vector<pair<int,int>>> & adj )
-{
+     void dfs(int node,int parent,unordered_map<int,vector<pair<int,int>>> & adj )
+     {
     for( auto & child : adj[node])
     {
         int a =child.first;
@@ -667,7 +667,7 @@ void dfs(int node,int parent,unordered_map<int,vector<pair<int,int>>> & adj )
         
 
     }
-}
+    }
     int minReorder(int n, vector<vector<int>>& connections) {
         unordered_map<int,vector<pair<int,int>>> adj;
 
@@ -685,3 +685,54 @@ void dfs(int node,int parent,unordered_map<int,vector<pair<int,int>>> & adj )
         
     }
     ```
+22. Min number of operations to make x,y equal
+     ```
+       int minimumOperationsToMakeEqual(int x, int y) {
+       map<int,int>vis;
+        queue<pair<int, int>> q;
+        vis[x] = 1;
+        q.push({x, 0});
+        while (q.size() > 0) {
+            auto it = q.front();
+            q.pop();
+
+            int a = it.first;
+            int b = it.second;
+            if (a == y)
+                return b;
+            if (a % 11 == 0) {
+                if (vis[a /11] == 0) {
+                    if (a / 11 == y)
+                        return b + 1;
+                    vis[a / 11] = 1;
+                    q.push({a / 11, b + 1});
+                }
+            }
+            if (a % 5 == 0) {
+                if (vis[a / 5] == 0) {
+                    if (a / 5 == y)
+                        return b + 1;
+                    vis[a / 5] = 1;
+                    q.push({a / 5, b + 1});
+                }
+            }
+            if (a > 1) {
+                if (vis[a - 1] == 0) {
+                    if (a - 1 == y)
+                        return b + 1;
+                    vis[a - 1] = 1;
+                    q.push({a - 1, b + 1});
+                }
+            }
+            if (vis[a + 1] == 0) {
+                if (a + 1 == y)
+                    return b + 1;
+                vis[a + 1] = 1;
+                q.push({a + 1, b + 1});
+            }
+        }
+
+        return -1;
+    }
+     ```
+23.   
