@@ -735,4 +735,31 @@ bool DFS(vector<string> &A, int i, int j, string B, int idx , vector<vector<bool
         return -1;
     }
      ```
-23.   
+23. Jump Game 3
+   ```
+         queue<int> q;
+        set<int> s;
+        q.push(start);
+        unordered_map<int, int> mp;
+        mp[start]=1;
+        for (int i = 0; i < arr.size(); i++) {
+            if (arr[i] == 0)
+                s.insert(i);
+        }
+        while (!q.empty()) {
+            int a = q.front();
+            q.pop();
+            if (s.find(a) != s.end())
+                return true;
+            if (a - arr[a] >= 0 && mp[a - arr[a]] == 0) {
+                mp[a-arr[a]]=1;
+                q.push(a - arr[a]);
+            }
+            if (a + arr[a] < arr.size() && mp[a + arr[a]] == 0) {
+                mp[a+arr[a]]=1;
+                q.push(a + arr[a]);
+            }
+        }
+        return false;
+    }
+   ```
