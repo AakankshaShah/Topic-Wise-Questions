@@ -106,6 +106,31 @@
         }
         return root;
    ```
+   ```
+    //Part 2
+      Node* connect(Node* root) {
+        if(!root) return root;
+        queue<Node *> q;
+        q.push(root);
+
+        while(!q.empty()){
+            int size = q.size();
+            Node *prev = nullptr;
+
+            for(int i=0;i<size;i++){
+                Node *t = q.front();
+                q.pop();
+                if(!t) break;
+                t->next = prev;
+                prev = t;
+
+                if(t->right) q.push(t->right);
+                if(t->left) q.push(t->left);
+            }
+        }
+        return root;
+    }
+   ```
 4. Invert Binary tree
     ```
       void swap(TreeNode* curr) {
