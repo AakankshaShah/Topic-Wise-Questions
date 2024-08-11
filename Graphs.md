@@ -1223,6 +1223,9 @@ bool dfs(int x, int y, int z, int m, int curr, vector<int>& vis) {
      ```
 33. Min height tree
    ```
+     //A tree can have at most two centers (roots of MHTs). This is a well-known property in graph theory for trees. If you keep trimming the leaf nodes (nodes with a single connection), 
+      you eventually reach one or two nodes that form the core of the tree.
+
      vector<int> findMinHeightTrees(int n, vector<vector<int>>& edges) {
         if (n == 1)
             return {0};
