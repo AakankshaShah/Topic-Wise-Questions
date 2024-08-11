@@ -1271,4 +1271,44 @@ bool dfs(int x, int y, int z, int m, int curr, vector<int>& vis) {
         return ans;
     }
    ```
+34. Number of connected components in a graph 
+    ```
+      static constexpr int N = 2000;
+    int countComponents(int n, vector<vector<int>>& edges) {
+        vector<vector<int>> adj(n);
+        bool visit[N] = {false};
+        int connected = 0;
+
+        for (const auto& edge : edges) {
+            adj[edge[0]].push_back(edge[1]);
+            adj[edge[1]].push_back(edge[0]);
+        }
+
+        auto bfs = [=, &visit](int i) {
+            queue<int> q;
+            q.push(i);
+            visit[i] = true;
+
+            while (!q.empty()) {
+                int node = q.front();
+                q.pop();
+                for (const auto& neighbor : adj[node]) {
+                    if (!visit[neighbor]) {
+                        q.push(neighbor);
+                        visit[neighbor] = true;
+                    }
+                }
+            }
+        };
+
+        for (int i = 0; i < n; ++i) {
+            if (!visit[i]) {
+                bfs(i);
+                ++connected;
+            }
+        }
+
+        return connected;
+    }
+    ```
 
