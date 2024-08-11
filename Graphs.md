@@ -1416,3 +1416,50 @@ bool dfs(int x, int y, int z, int m, int curr, vector<int>& vis) {
     }
     };
      ```
+37. The maze 
+   ```
+     lass Solution {
+public:
+    vector<pair<int, int>> directions = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
+
+    bool isValid(int row, int col, int m, int n, vector<vector<int>>& maze) {
+        return row >= 0 && row < m && col >= 0 && col < n &&
+               maze[row][col] == 0;
+    }
+    bool bfs(vector<int> start, vector<vector<int>>& maze,
+             vector<vector<bool>>& visited, vector<int>& dst) {
+        queue<vector<int>> q;
+        q.emplace(start);
+
+        while (!q.empty()) {
+            auto start = q.front();
+            q.pop();
+
+            visited[start[0]][start[1]] = true;
+
+            if (start == dst)
+                return true;
+
+            for (auto [dx, dy] : directions) {
+                int row = start[0] + dx, col = start[1] + dy;
+
+                while (isValid(row, col, maze.size(), maze[0].size(), maze))
+                    row += dx, col += dy;
+
+                row -= dx, col -= dy;
+
+                if (!visited[row][col])
+                    q.emplace(vector<int>{row, col});
+            }
+        }
+        return false;
+    }
+    bool hasPath(vector<vector<int>>& maze, vector<int>& start,
+                 vector<int>& destination) {
+        int m = maze.size(), n = maze[0].size();
+        vector<vector<bool>> visited(m, vector<bool>(n, false));
+
+        return bfs(start, maze, visited, destination);
+    }
+};
+   ```
