@@ -980,3 +980,27 @@ public:
         return regions;
     }
     ```
+28. Keys & rooms 
+    ```
+     void dfs(vector<vector<int>>& rooms, int u, vector<bool>& visited) {
+        visited[u] = true;
+
+        for (int& node : rooms[u]) {
+            if (!visited[node])
+                dfs(rooms, node, visited);
+        }
+    }
+
+    bool canVisitAllRooms(vector<vector<int>>& rooms) {
+        int n = rooms.size();
+        vector<bool> visited(n, false);
+
+        dfs(rooms, 0, visited);
+
+        for (bool x : visited) {
+            if (x == false)
+                return false;
+        }
+        return true;
+    }
+    ```
