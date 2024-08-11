@@ -1075,4 +1075,29 @@ public:
     ```
 33. Deepest leave sum
    ```
+      int deepestLeavesSum(TreeNode* root) {
+        if (root == nullptr) {
+            return 0;
+        }
+        queue<TreeNode*> queue;
+        int sum = 0, depth;
+        queue.push(root);
+        while (!queue.empty()) {
+            TreeNode* temp;
+            depth = queue.size();
+            sum = 0;
+            for (int i = 0; i < depth; i++) {
+                temp = queue.front();
+                queue.pop();
+                if (temp->left != nullptr) {
+                    queue.push(temp->left);
+                }
+                if (temp->right != nullptr) {
+                    queue.push(temp->right);
+                }
+                sum += temp->val;
+            }
+        }
+        return sum;
+    }
    ```
