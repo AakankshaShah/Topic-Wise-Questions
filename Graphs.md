@@ -1147,7 +1147,7 @@ bool dfs(int x, int y, int z, int m, int curr, vector<int>& vis) {
         return (r - l + 1) * (b - t + 1);
     }
 
-private:
+     private:
     vector<vector<char>> img;
     int x, y;
 
@@ -1221,3 +1221,51 @@ private:
         return false;
     }
      ```
+33. Min height tree
+   ```
+     vector<int> findMinHeightTrees(int n, vector<vector<int>>& edges) {
+        if (n == 1)
+            return {0};
+
+        vector<vector<int>> adj(n);
+        vector<int> indegree(n, 0);
+
+        for (int i = 0; i < edges.size(); i++) {
+            adj[edges[i][0]].push_back(edges[i][1]);
+            adj[edges[i][1]].push_back(edges[i][0]);
+            indegree[edges[i][0]]++;
+            indegree[edges[i][1]]++;
+        }
+
+        vector<int> ans;
+        queue<int> q;
+
+        for (int i = 0; i < n; i++) {
+            if (indegree[i] == 1)
+                q.push(i);
+        }
+
+        while (n > 2) {
+            int size = q.size();
+            n -= size;
+
+            while (size--) {
+                int a = q.front();
+                q.pop();
+                for (int v : adj[a]) {
+                    indegree[v]--;
+                    if (indegree[v] == 1)
+                        q.push(v);
+                }
+            }
+        }
+
+        while (!q.empty()) {
+            ans.push_back(q.front());
+            q.pop();
+        }
+
+        return ans;
+    }
+   ```
+
