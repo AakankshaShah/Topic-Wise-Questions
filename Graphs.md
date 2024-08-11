@@ -402,41 +402,44 @@ bool DFS(vector<string> &A, int i, int j, string B, int idx , vector<vector<bool
 12.  Word ladder 1 
 
      ```
-       queue<pair<string,int>>q;
-    q.push({A,1});
-    unordered_set<string> st(C.begin(), C.end());
-    st.erase(A);
-    while(!q.empty())
-    {
-        string word=q.front().first;
-        int step=q.front().second;
-        q.pop();
-        if(word==B)
-        return step;
-        
-        for(int i=0;i<word.size();i++)
-        {
-            char org=word[i];
-            
-            
-            for(char k='a';k<='z';k++)
-            {
-                word[i]=k;
-                
-                if (st.find(word) != st.end())
-                    {
-                        st.erase(word);
-                        q.push({word, step + 1});
-                    }
-            }    
-                word[i] = org;
-          }
-        
-        
-        }
-        return 0;
+     int ladderLength(string beginWord, string endWord,
+                     vector<string>& wordList) {
 
-    ```
+        unordered_set<string> st(wordList.begin(), wordList.end());
+        if (st.find(beginWord) != st.end())
+            st.erase(beginWord);
+        queue<pair<string, int>> q;
+        q.push({beginWord, 1});
+       
+
+        int shortestLevel = 0;
+        while (!q.empty()) {
+            auto [word, level] = q.front();
+            q.pop();
+
+            if (word == endWord) {
+                shortestLevel = level;
+                break;
+            }
+
+            for (int i = 0; i < word.size(); i++) {
+                string str = word;
+
+                for (char ch = 'a'; ch <= 'z'; ch++) {
+                    str[i] = ch;
+
+                    if (st.find(str) != st.end()) {
+                        q.push({str, level + 1});
+                        st.erase(str);
+                    }
+                }
+            }
+        }
+        return shortestLevel;
+    }
+       
+
+     ```
 13.  Word ladder 2 https://www.youtube.com/watch?v=DREutrv2XD0 ***
 
 14.  Clone Graph https://www.youtube.com/watch?v=z7mPg_xT5xk
