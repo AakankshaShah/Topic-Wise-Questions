@@ -666,6 +666,34 @@
         }
         return ans;
     ```
+    ```
+     vector<vector<int>> verticalOrder(TreeNode* root) {
+        vector<vector<int>> result;
+        if (root == nullptr)
+            return result;
+        queue<pair<TreeNode*, int>> que;
+        que.push(make_pair(root, 0));
+        map<int, vector<int>> mp;
+        while (!que.empty()) {
+            int size = que.size();
+            for (int i = 0; i < size; i++) {
+                auto node = que.front();
+                que.pop();
+                mp[node.second].push_back(node.first->val);
+                if (node.first->left != nullptr) {
+                    que.push(make_pair(node.first->left, node.second - 1));
+                }
+                if (node.first->right != nullptr) {
+                    que.push(make_pair(node.first->right, node.second + 1));
+                }
+            }
+        }
+        for (auto it = mp.begin(); it != mp.end(); it++) {
+            result.push_back(it->second);
+        }
+        return result;
+    }
+    ```
 18. Binary Tree inorder traversal
     ```
      vector<int> ans;
