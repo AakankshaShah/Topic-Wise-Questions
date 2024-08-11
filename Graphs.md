@@ -1060,3 +1060,42 @@ public:
         return -1;
     }
     ```
+30. Course schedules 
+    ```
+      bool canFinish(int numCourses, vector<vector<int>>& prerequisites) {
+        int n = prerequisites.size();
+        vector<int> adj[numCourses];
+        vector<int> indegree(numCourses);
+
+        for (int i = 0; i < n; i++) {
+            int a = prerequisites[i][0];
+            int b = prerequisites[i][1];
+
+            adj[b].push_back(a);
+
+            indegree[a]++;
+        }
+
+        queue<int> q;
+        int count = 0;
+
+        for (int i = 0; i < indegree.size(); i++) {
+            if (indegree[i] == 0)
+                q.push(i);
+        }
+
+        while (!q.empty()) {
+            int curr = q.front();
+            q.pop();
+            count++;
+
+            for (auto& it : adj[curr]) {
+                indegree[it]--;
+                if (indegree[it] == 0)
+                    q.push(it);
+            }
+        }
+
+        return count == numCourses;
+    }
+    ```
