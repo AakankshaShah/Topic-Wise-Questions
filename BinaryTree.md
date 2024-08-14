@@ -1172,3 +1172,23 @@ public:
     }
 };
    ```
+35. Flatten a linked list 
+    ```
+     public:
+    TreeNode* prev;
+    void rpost(TreeNode* root) {
+        if (root == NULL)
+            return;
+        rpost(root->right);
+        rpost(root->left);
+        root->right = prev;
+        root->left = NULL;
+        prev = root;
+    }
+    void flatten(TreeNode* root) {
+
+        prev = NULL;
+
+        rpost(root);
+    }
+    ```
