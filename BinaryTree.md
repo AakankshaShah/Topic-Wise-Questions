@@ -1174,6 +1174,7 @@ public:
    ```
 35. Flatten a linked list 
     ```
+    //Reverse post order
      public:
     TreeNode* prev;
     void rpost(TreeNode* root) {
