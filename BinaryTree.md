@@ -1229,3 +1229,54 @@ public:
         return solve(inorder, postorder, istart, iend, pstart, pend);
     }
     ```
+37. LCA II
+    ```
+      bool findX = false;
+    bool findY = false;
+    TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
+        TreeNode* res = findTargetNode(root, p, q);
+        if (findX and findY)
+            return res;
+        return nullptr;
+    }
+    TreeNode* findTargetNode(TreeNode* curr, TreeNode* p, TreeNode* q) {
+        if (curr == nullptr)
+            return nullptr;
+        TreeNode* left = findTargetNode(curr->left, p, q);
+        TreeNode* right = findTargetNode(curr->right, p, q);
+        if (curr == p) {
+            findX = true;
+            return curr;
+        }
+        if (curr == q) {
+            findY = true;
+            return curr;
+        }
+        return left == nullptr ? right : right == nullptr ? left : curr;
+    }
+38. LCA III
+    ```
+         bool findNode(Node* root, Node* q) {
+        if (!root)
+            return false;
+
+        return (root == q) || findNode(root->left, q) ||
+               findNode(root->right, q);
+    }
+
+     public:
+    Node* lowestCommonAncestor(Node* p, Node* q) {
+        if (!p || !q)
+            return q;
+        if (p == q)
+            return q;
+
+        if (findNode(p, q))
+            return p;
+        else if (findNode(q, p))
+            return q;
+        else
+            return lowestCommonAncestor(p->parent, q->parent);
+    }
+    ```
+    ```
