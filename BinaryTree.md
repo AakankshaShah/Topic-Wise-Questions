@@ -1279,4 +1279,24 @@ public:
             return lowestCommonAncestor(p->parent, q->parent);
     }
     ```
+39. Sum root to leaf numbers
     ```
+      lass Solution {
+     public:
+    int total = 0;
+    void findSum(TreeNode* root, int s) {
+        if (root == NULL)
+            return;
+        if (root->left == NULL && root->right==NULL)
+            total += ((s * 10) + root->val);
+        s = s * 10 + root->val;
+        findSum(root->left, s);
+        findSum(root->right, s);
+    }
+    int sumNumbers(TreeNode* root) {
+        findSum(root, 0);
+        return total;
+    }
+    };
+    ```
+40. 
