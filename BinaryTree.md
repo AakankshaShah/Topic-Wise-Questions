@@ -1299,4 +1299,20 @@ public:
     }
     };
     ```
-40. 
+40. Right & left view of BT
+     ```
+       vector<int> res;
+    void recursion(TreeNode* root, int level) {
+        if (root == NULL)
+            return;
+        if (level == res.size())
+            res.push_back(root->val);
+        recursion(root->right, level + 1);
+        recursion(root->left, level + 1);
+    }
+    vector<int> rightSideView(TreeNode* root) {
+
+        recursion(root, 0);
+        return res;
+    }
+     ```
