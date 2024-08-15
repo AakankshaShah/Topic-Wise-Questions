@@ -1316,3 +1316,28 @@ public:
         return res;
     }
      ```
+41. Inorder successor in a bst 
+     ```
+       TreeNode* ans;
+    void findT(TreeNode* root, TreeNode* p) {
+        if (p == NULL || root == NULL)
+            return;
+        if (root->val <= p->val) {
+            inorderSuccessor(root->right, p);
+        }
+
+        else if (root->val > p->val) {
+            ans = root;
+            inorderSuccessor(root->left, p);
+        }
+        return ;
+
+   
+    }
+    TreeNode* inorderSuccessor(TreeNode* root, TreeNode* p) {
+        if (root == NULL || p == NULL)
+            return NULL;
+        findT(root, p);
+        return ans;
+    }
+     ```
