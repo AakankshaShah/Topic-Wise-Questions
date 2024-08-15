@@ -1193,3 +1193,6 @@ public:
         rpost(root);
     }
     ```
+36. Construct binary tree from inorder & post-order
+    ```
+    ```
