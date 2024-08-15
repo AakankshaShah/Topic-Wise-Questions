@@ -1195,4 +1195,37 @@ public:
     ```
 36. Construct binary tree from inorder & post-order
     ```
+     TreeNode* solve(vector<int>& inorder, vector<int>& postorder, int inStart,
+                      int inEnd, int postStart, int postEnd) {
+        if (inStart > inEnd)
+            return NULL;
+
+        TreeNode* root = new TreeNode(postorder[postEnd]);
+        int root_candidate = root->val;
+        int i = inStart;
+
+   
+        for (; i <= inEnd; i++) {
+            if (inorder[i] == root_candidate) {
+                break;
+            }
+        }
+        int leftSize = i - inStart;
+        int rightSize = inEnd - i;
+
+        root->left = solve(inorder, postorder, inStart, i - 1, postStart,
+                             postStart + leftSize - 1);
+        root->right = solve(inorder, postorder, i + 1, inEnd,
+                              postEnd - rightSize, postEnd - 1);
+
+        return root;
+    }
+    TreeNode* buildTree(vector<int>& inorder, vector<int>& postorder) {
+
+        int istart = 0;
+        int iend = inorder.size() - 1;
+        int pstart = 0;
+        int pend = postorder.size() - 1;
+        return solve(inorder, postorder, istart, iend, pstart, pend);
+    }
     ```
