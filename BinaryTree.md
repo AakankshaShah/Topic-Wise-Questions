@@ -1341,3 +1341,27 @@ public:
         return ans;
     }
      ```
+42. Max binary tree
+    ```
+       TreeNode* buildT(vector<int>& nums, int s, int e) {
+        if (s>e)
+            return NULL;
+        int mr = -1;
+        int pos;
+        for (int i = s; i <= e; i++) {
+            if (nums[i] > mr) {
+                pos = i;
+                mr = nums[i];
+            }
+        }
+        TreeNode* root = new TreeNode(mr);
+        root->left = buildT(nums, s, pos - 1);
+        root->right = buildT(nums, pos + 1, e);
+        return root;
+    }
+
+    TreeNode* constructMaximumBinaryTree(vector<int>& nums) {
+        int n = nums.size();
+        return buildT(nums, 0, n - 1);
+    }
+    ```
