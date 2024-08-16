@@ -1365,3 +1365,29 @@ public:
         return buildT(nums, 0, n - 1);
     }
     ```
+43. Lonley nodes 
+    ```
+       vector<int> getLonelyNodes(TreeNode* root) {
+
+        vector<int> ans;
+        if (root == NULL)
+            return ans;
+        queue<TreeNode*> q;
+        q.push(root);
+        while (!q.empty()) {
+            TreeNode* curr = q.front();
+            q.pop();
+            if (curr->left && curr->right == NULL) {
+                ans.push_back(curr->left->val);
+            }
+            if (curr->right && curr->left == NULL) {
+                ans.push_back(curr->right->val);
+            }
+            if (curr->left)
+                q.push(curr->left);
+            if (curr->right)
+                q.push(curr->right);
+        }
+        return ans;
+    }
+    ```
