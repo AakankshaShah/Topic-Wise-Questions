@@ -1391,3 +1391,23 @@ public:
         return ans;
     }
     ```
+44. Count number of good nodes
+    ```
+      vector<int> ans;
+    void solve(TreeNode* root, int maxr) {
+        if (root == NULL)
+            return;
+        if (root->val >= maxr) {
+            ans.push_back(root->val);
+            maxr = root->val;
+        }
+        solve(root->left, maxr);
+        solve(root->right, maxr);
+    }
+    int goodNodes(TreeNode* root) {
+
+        int maxr = root->val;
+        solve(root, maxr);
+        return ans.size();
+    }
+    ```
