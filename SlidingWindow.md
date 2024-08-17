@@ -1151,3 +1151,32 @@ return sans;
         
     }
      ```
+43. Number of unique flavours after sharing k candies 
+    ```
+      nt shareCandies(vector<int>& candies, int k) {
+        unordered_map<int, int> cnt;
+        int remain = 0;
+        int n = candies.size();
+        for (int i = k; i < n; i++) {
+            cnt[candies[i]]++;
+            if (cnt[candies[i]] == 1)
+                remain++;
+        }
+
+        int ans = remain;
+        for (int i = 0; i < n - k; i++) {
+
+            cnt[candies[i + k]]--;
+            if (cnt[candies[i + k]] == 0)
+                remain--;
+
+            cnt[candies[i]]++;
+            if (cnt[candies[i]] == 1)
+                remain++;
+
+            ans = max<int>(remain, ans);
+        }
+
+        return ans;
+    }
+    ```
