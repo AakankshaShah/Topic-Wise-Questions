@@ -1442,3 +1442,28 @@ public:
         return maxP % M;
     }
     ```
+46. Closest binary tree value 
+    ```
+      nt closestValue(TreeNode* root, double target) {
+        int closest = root->val;
+
+        while (root != nullptr) {
+            if (abs(root->val - target) == abs(closest - target)) {
+                closest = min(root->val, closest);
+            }
+
+            if (abs(root->val - target) < abs(closest - target)) {
+              
+                    closest = root->val;
+            }
+
+            if (target < root->val) {
+                root = root->left;
+            } else {
+                root = root->right;
+            }
+        }
+
+        return closest;
+    }
+    ```
