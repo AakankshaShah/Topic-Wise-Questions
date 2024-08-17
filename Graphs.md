@@ -1775,3 +1775,49 @@ public:
         return mans;
     }
     ```
+43. Rotteen oranges
+    ```
+      int dx[4] = {0, 0, 1, -1};
+    int dy[4] = {1, -1, 0, 0};
+
+    int orangesRotting(vector<vector<int>>& grid) {
+        int n = grid.size();
+        int m = grid[0].size();
+        queue<vector<int>> q;
+        vector<vector<int>> vis(n, vector<int>(m, 0));
+        int days = 0;
+        int count = 0;
+        int r = 0;
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                if (grid[i][j] == 2) {
+                    q.push({i, j, days});
+                    vis[i][j] = 1;
+                }
+                if (grid[i][j] == 1 || grid[i][j] == 2)
+                    count++;
+            }
+        }
+        while (!q.empty()) {
+            auto it = q.front();
+            r++;
+            int i = it[0];
+            int j = it[1];
+            days = it[2];
+            q.pop();
+            for (int k = 0; k < 4; k++) {
+                int nx = i + dx[k];
+                int ny = j + dy[k];
+                if (nx >= 0 & nx < n && ny >= 0 && ny < m &&
+                    grid[nx][ny] == 1 && vis[nx][ny] == 0) {
+                    vis[nx][ny] = 1;
+                    q.push({nx, ny, days + 1});
+                }
+            }
+        }
+
+        if (count == r)
+            return days;
+        return -1;
+    }
+    ```
