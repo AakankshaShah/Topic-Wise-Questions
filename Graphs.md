@@ -1966,3 +1966,45 @@ public:
         return ans;
     }
     ```
+46. Delete tree nodes 
+   ```
+     vector<int> vis;
+    int res = 0;
+
+    int deleteTreeNodes(int nodes, vector<int>& parent, vector<int>& value) {
+        vector<vector<int>> graph(nodes);
+        vis.resize(nodes, 0);
+
+        for (int i = 1; i < nodes; i++) {
+            graph[parent[i]].push_back(i);
+        }
+
+        dfs(graph, 0, value);
+        return nodes - res;
+    }
+
+    int dfs(vector<vector<int>>& graph, int node, vector<int>& value) {
+        int sum = value[node];
+        int subtreeCount = 1;
+
+        for (auto& nei : graph[node]) {
+            sum += dfs(graph, nei, value);
+        }
+
+        if (sum == 0) {
+            res += subtreeCountNodes(graph, node);
+        }
+        return sum;
+    }
+
+    int subtreeCountNodes(vector<vector<int>>& graph, int node) {
+        vis[node] = 1;
+        int count = 1;
+        for (auto& nei : graph[node]) {
+            if (!vis[nei]) {
+                count += subtreeCountNodes(graph, nei);
+            }
+        }
+        return count;
+    }
+   ```
