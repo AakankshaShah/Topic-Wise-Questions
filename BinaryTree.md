@@ -1526,3 +1526,39 @@ public:
         Traverse(a->right,A);
     }
     ```
+49. Max substree of same colour 
+    ```
+      int ans = INT_MIN;
+
+    pair<int, bool> dfs(int u, unordered_map<int, vector<int>>& adj,
+                        vector<int>& colors) {
+        int size = 1;
+        bool sameColor = true;
+
+        for (int v : adj[u]) {
+            auto [subtreeSize, isSameColor] = dfs(v, adj, colors);
+            size += subtreeSize;
+            if (!isSameColor || colors[u] != colors[v]) {
+                sameColor = false;
+            }
+        }
+
+        if (sameColor) {
+            ans = max(ans, size);
+        }
+
+        return {size, sameColor};
+    }
+
+    int maximumSubtreeSize(vector<vector<int>>& edges, vector<int>& colors) {
+        int n = colors.size();
+        unordered_map<int, vector<int>> adj;
+
+        for (auto& e : edges) {
+            adj[e[0]].push_back(e[1]);
+        }
+
+        dfs(0, adj, colors);
+        return ans;
+    }
+    ```
