@@ -1502,3 +1502,27 @@ public:
         return ans;
     }
     ```
+48. Two sum in a bst 
+    ```
+      bool TwoSum(int k, vector<int>& A) {
+        int l = 0, h = A.size() - 1, sum;
+        while (l < h) {
+            sum = A[l] + A[h];
+            if (sum == k)
+                return 1;
+            else if (sum < k)
+                l++;
+            else
+                h--;
+        }
+        return 0;
+    }
+    void Traverse(TreeNode* a,vector<int>& A)
+    {
+        if(!a) return;
+
+        Traverse(a->left,A);
+        A.push_back(a->val);
+        Traverse(a->right,A);
+    }
+    ```
