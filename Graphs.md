@@ -1825,7 +1825,7 @@ public:
     ```
       class DisjointSet {
 
-public:
+    public:
     vector<int> rank, parent, size;
     DisjointSet(int n) {
         rank.resize(n + 1, 0);
@@ -1872,9 +1872,9 @@ public:
             size[ulp_u] += size[ulp_v];
         }
     }
-};
-class Solution {
-public:
+    };
+    class Solution {
+    public:
     bool isValid(int newr, int newc, int n) {
         return newr >= 0 && newr < n && newc >= 0 && newc < n;
     }
@@ -1931,4 +1931,38 @@ public:
         return mx;
     }
     };
+    ```
+45. Min fuel to report to capital 
+    ```
+      long long ans;
+    int dfs(vector<vector<int>>& v, int node, vector<int>& vis, int seats) {
+        vis[node] = 1;
+        long long cnt = 1;
+        for (int child : v[node]) {
+            if (vis[child] == 0)
+                cnt +=dfs(v, child, vis, seats);
+        }
+        long long x = cnt / seats;
+        if (cnt % seats)
+            x++;
+        if (node != 0)
+            ans += x;
+        return cnt;
+    }
+    long long minimumFuelCost(vector<vector<int>>& roads, int seats) {
+        if (roads.size() == 0)
+            return 0;
+        int n = roads.size();
+        ans = 0;
+        vector<vector<int>> v(n + 1);
+        for (int  i= 0; i < roads.size(); i++) {
+            int x = roads[i][0];
+            int y = roads[i][1];
+            v[x].push_back(y);
+            v[y].push_back(x);
+        }
+        vector<int> vis(n + 1, 0);
+        dfs(v, 0, vis, seats);
+        return ans;
+    }
     ```
