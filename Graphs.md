@@ -1737,4 +1737,41 @@ public:
         return safeNodes;
     }
     ```
+42. Max number of islands
+    ```
+      nt dx[4] = {1, 0, -1, 0};
+    int dy[4] = {0, 1, 0, -1};
+    int m, n;
 
+    void dfs(vector<vector<int>>& grid, vector<vector<int>>& vis, int i, int j,int& ans) {
+        vis[i][j] = 1;
+       ans++;
+        for (int k = 0; k < 4; k++) {
+            int x = i + dx[k];
+            int y = j + dy[k];
+            if (x >= 0 && x < m && y >= 0 && y < n && vis[x][y] == 0 &&
+                grid[x][y] == 1) {
+                dfs(grid, vis, x, y, ans);
+            }
+        }
+    }
+
+    int maxAreaOfIsland(vector<vector<int>>& grid) {
+        m = grid.size();
+        n = grid[0].size();
+        vector<vector<int>> vis(m, vector<int>(n, 0));
+        int mans = 0; // Maximum area across all islands
+
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (grid[i][j] == 1 && vis[i][j] == 0) {
+                    int ans = 0; // Start with area 1 for the new island
+                    dfs(grid, vis, i, j,ans);
+                    mans =
+                        max(mans, ans); // Update the maximum area found so far
+                }
+            }
+        }
+        return mans;
+    }
+    ```
