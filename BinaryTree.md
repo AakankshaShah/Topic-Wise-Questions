@@ -1467,3 +1467,38 @@ public:
         return closest;
     }
     ```
+47. Largest BST subtree
+    ```
+      int ans = 0;
+
+    struct BSTInfo {
+        int size;
+        int minVal;
+        int maxVal;
+        bool isBST;
+    };
+
+    BSTInfo solve(TreeNode* root) {
+        if (!root) {
+            return {0, INT_MAX, INT_MIN, true}; // Base case
+        }
+
+        BSTInfo left = solve(root->left);
+        BSTInfo right = solve(root->right);
+
+        if (left.isBST && right.isBST && root->val > left.maxVal &&
+            root->val < right.minVal) {
+            int size = left.size + right.size + 1;
+            ans = max(ans, size);
+            return {size, min(root->val, left.minVal),
+                    max(root->val, right.maxVal), true};
+        } else {
+            return {0, 0, 0, false};
+        }
+    }
+
+    int largestBSTSubtree(TreeNode* root) {
+        solve(root);
+        return ans;
+    }
+    ```
