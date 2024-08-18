@@ -948,7 +948,39 @@ Ctrl+ACVVVV (6 key presses) gives 5 times increase
         return dp[n];
     ```
 
+30. Max number of operations with same score II
+    ```
+                vector<vector<int>>& dp) {
+        if (l >= r) {
+            return 0;
+        }
+        if (dp[l][r] != -1) {
+            return dp[l][r];
+        }
+        int mx = 0;
+        if (nums[l] + nums[r] == sum) {
+            mx = max(mx, 1 + solve(l + 1, r - 1, sum, nums, dp));
+        }
+        if (nums[l] + nums[l + 1] == sum) {
+            mx = max(mx, 1 + solve(l + 2, r, sum, nums, dp));
+        }
+        if (nums[r - 1] + nums[r] == sum) {
+            mx = max(mx, 1 + solve(l, r - 2, sum, nums, dp));
+        }
+        return dp[l][r] = mx;
+    }
 
+    int maxOperations(vector<int>& nums) {
+        int n = nums.size();
+        vector<vector<int>> dp(n + 1, vector<int>(n + 1, -1));
+        vector<vector<int>> dp1(n + 1, vector<int>(n + 1, -1));
+        vector<vector<int>> dp2(n + 1, vector<int>(n + 1, -1));
+        int mx = 1 + solve(1, n - 2, nums[0] + nums[n - 1], nums, dp);
+        mx = max(mx, 1 + solve(2, n - 1, nums[0] + nums[1], nums, dp1));
+        mx = max(mx, 1 + solve(0, n - 3, nums[n - 1] + nums[n - 2], nums, dp2));
+        return mx;
+    }
+    ```
 
 
 
