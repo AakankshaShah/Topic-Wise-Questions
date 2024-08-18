@@ -52,3 +52,20 @@ https://www.geeksforgeeks.org/largest-sum-contiguous-subarray/
     }
     return ans;
     ```
+3. Best time to buy and sell stock 
+    ```
+      int maxProfit(vector<int>& prices) {
+        int buy = prices[0];
+        int profit = 0;
+        for (int i = 1; i < prices.size(); i++) {
+            if (prices[i] < buy) {
+                buy = prices[i];
+            } else if (prices[i] - buy > profit) {
+                profit = prices[i] - buy;
+            }
+        }
+        return profit;
+        
+        
+    }
+    ```
