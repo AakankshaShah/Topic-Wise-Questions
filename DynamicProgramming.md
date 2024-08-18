@@ -906,12 +906,15 @@ int dp[n+1][w+1];
    ```
 28. 4 key keyboard
 
+```
 \\Ctrl+ACV (3 key presses) gives 2 times increase
 Ctrl+ACVV (4 key presses) gives 3 times increase
 Ctrl+ACVVV (5 key pressses) gives 4 times increase
 Ctrl+ACVVVV (6 key presses) gives 5 times increase
 
-      ```
+```
+
+ ```
         int memo[51];
     int dfs(int n) {
         if (n <= 0)
@@ -930,7 +933,20 @@ Ctrl+ACVVVV (6 key presses) gives 5 times increase
         memset(memo, -1, sizeof(int) * 51);
         return dfs(n);
     }
-      ```
+  ```
+29. Stone Game IV
+    ```
+      vector<bool> dp(n + 1, false);
+        for (int i = 1; i <= n; ++i) {
+            for (int k = 1; k * k <= i; ++k) {
+                if (!dp[i - k * k]) {
+                    dp[i] = true;
+                    break;
+                }
+            }
+        }
+        return dp[n];
+    ```
 
 
 
