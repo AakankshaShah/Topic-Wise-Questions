@@ -508,6 +508,37 @@ int dp[n+1][w+1];
       return t[nums.size()];
 
      ```
+     ```
+      int solve(vector<int>& nums){
+        int n = nums.size();
+        vector<int>dp(n+1,0);
+        dp[0]=0;
+        dp[1]=nums[0];
+        for(int i = 2 ; i <=n ; i++){
+            int incl = dp[i-2]+nums[i-1];
+            int excl = dp[i-1];
+            dp[i]= max(incl , excl);
+        }
+        return dp[n];
+    }
+    int rob(vector<int>& nums) {
+        int n = nums.size();
+        vector<int>first,second;
+        if(n==1){
+            return nums[0];
+        }
+        for(int i = 0 ; i < nums.size() ; i++){
+            if(i!=nums.size()-1){
+                first.push_back(nums[i]);
+            }
+            if(i!=0){
+                second.push_back(nums[i]);
+            }
+        }
+        return max(solve(first),solve(second)); 
+        
+    }
+     ```
 17. Ugly Numbers 2
     
      ```
