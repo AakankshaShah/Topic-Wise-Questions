@@ -734,8 +734,95 @@ int dp[n+1][w+1];
         return result;
     }
      ```
+    ```
+      int longestArithSeqLength(vector<int>& nums) {
+        int n = nums.size();
 
+        if (n <= 2)
+            return n;
 
+        vector<vector<int>> t(n, vector<int>(1001, 0));
+        // t[i][j] = Max AP length till ith index (0 to i) having common
+        // difference j
+
+        int result = 0;
+
+        for (int i = 1; i < n; i++) {
+
+            for (int j = 0; j < i; j++) {
+
+                int diff = nums[i] - nums[j] + 500; // to avoid negative diff
+
+                t[i][diff] = t[j][diff] > 0 ? t[j][diff] + 1 : 2;
+
+                result = max(result, t[i][diff]);
+            }
+        }
+
+        return result;
+    }
+    ```
+
+24. Min path sum 
+    ```
+      int minPathSum(vector<vector<int>>& grid) {
+        if (grid.empty() || grid[0].empty()) {
+            return 0;
+        }
+
+        int m = grid.size();
+        int n = grid[0].size();
+        vector<vector<int>> t(m, vector<int>(n, 0));
+
+        t[0][0] = grid[0][0];
+
+        for (int j = 1; j < n; ++j) {
+            t[0][j] = t[0][j - 1] + grid[0][j];
+        }
+
+        for (int i = 1; i < m; ++i) {
+            t[i][0] = t[i - 1][0] + grid[i][0];
+        }
+
+        for (int i = 1; i < m; ++i) {
+            for (int j = 1; j < n; ++j) {
+                t[i][j] = min(t[i - 1][j], t[i][j - 1]) + grid[i][j];
+            }
+        }
+
+        return t[m - 1][n - 1];
+    }
+    ```
+25. Palindrome partition
+     ```
+       bool ispalindrome(string s, int start, int end) {
+        while (start < end) {
+            if (s[start] != s[end])
+                return false;
+            start++;
+            end--;
+        }
+        return true;
+    }
+    int solve(string s, int i, int j) {
+        if (i >= j)
+            return 0;
+        if (ispalindrome(s, i, j))
+            return 0;
+        int ans = INT_MAX;
+        for (int k = i; k < j; k++) {
+            ans = min(1 + solve(s, i, k) + solve(s, k + 1, j), ans);
+        }
+        return ans;
+    }
+    int minCut(string s) {
+        if (s.length() == 0 || s.length() == 1)
+            return 0;
+
+        return solve(s, 0, s.length()-1);
+    }
+     ```
+    
 
 
 
