@@ -886,6 +886,36 @@ int dp[n+1][w+1];
         return getVal(dungeon, dp);
     }
     ```
+27. 2 key keyboard
+   ```
+   ```
+28. 4 key keyboard
+
+\\Ctrl+ACV (3 key presses) gives 2 times increase
+Ctrl+ACVV (4 key presses) gives 3 times increase
+Ctrl+ACVVV (5 key pressses) gives 4 times increase
+Ctrl+ACVVVV (6 key presses) gives 5 times increase
+
+      ```
+        int memo[51];
+    int dfs(int n) {
+        if (n <= 0)
+            return 0;
+        if (memo[n] != -1)
+            return memo[n];
+        int ans = 0;
+        ans = max(ans, dfs(n - 1) + 1);
+        ans = max(ans, dfs(n - 3) * 2);
+        ans = max(ans, dfs(n - 4) * 3);
+        ans = max(ans, dfs(n - 5) * 4);
+        return memo[n] = ans;
+    }
+    int maxA(int n) {
+
+        memset(memo, -1, sizeof(int) * 51);
+        return dfs(n);
+    }
+      ```
 
 
 
