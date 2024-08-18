@@ -48,6 +48,7 @@
 
 1. https://leetcode.com/discuss/interview-question/5427658/HLD-Topics-and-Concepts-or-Design-Interview-Practice
 2. https://leetcode.com/discuss/interview-question/5427668/LLD-Topics-and-Design-Patterns-or-Design-Interview-Practice
+3. https://lldcoding.com/
 
 ### Playlists :
 1. https://www.youtube.com/watch?v=L20bYFvdt6s&list=PLpIkg8OmuX-KrStViqRAIJV6MXej-tNy4&index=4
