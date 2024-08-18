@@ -224,3 +224,35 @@
         return countTimeOn;
     }
    ```
+5. Min time to make ropes colorful 
+   ```
+      nt minCost(string colors, vector<int>& neededTime) {
+        int ans = 0;
+        int n = colors.size();
+
+        for (int i = 0; i < n;) {
+            int j = i;
+            int max_index = i;
+            int max_cal = neededTime[i];
+
+            while (j < n && colors[j] == colors[i]) {
+                if (neededTime[j] > max_cal) {
+                    max_cal = neededTime[j];
+                    max_index = j;
+                }
+                j++;
+            }
+
+            int sum = 0;
+            for (int k = i; k < j; k++) {
+                if (k != max_index)
+                    sum += neededTime[k];
+            }
+            ans += sum;
+
+            i = j;
+        }
+
+        return ans;
+    }
+   ```
