@@ -1,4 +1,5 @@
 # Topic-Wise-Questions
+## Coding
 
 [RoadMap](https://neetcode.io/) : 
 
@@ -11,14 +12,14 @@
 
 
 
-## Question solving 
+### Question solving 
  
 1. https://www.geeksforgeeks.org/must-do-coding-questions-for-companies-like-amazon-microsoft-adobe/
 2. https://www.interviewbit.com/courses/programming/
 
 
 
-## Topics
+### Topics
 
 1. [Linked List](https://github.com/AakankshaShah/Topic-Wise-Questions/blob/main/LinkedList.md)
 2. [Stack](https://github.com/AakankshaShah/Topic-Wise-Questions/blob/main/Stack.md)
@@ -39,3 +40,15 @@
 17. Heap / Priority queue
 18. Hashing
 19. Intervals
+
+
+## System Design 
+
+### Topics 
+
+1. https://leetcode.com/discuss/interview-question/5427658/HLD-Topics-and-Concepts-or-Design-Interview-Practice
+2. https://leetcode.com/discuss/interview-question/5427668/LLD-Topics-and-Design-Patterns-or-Design-Interview-Practice
+
+### Playlists :
+1. https://www.youtube.com/watch?v=L20bYFvdt6s&list=PLpIkg8OmuX-KrStViqRAIJV6MXej-tNy4&index=4
+2. https://www.youtube.com/playlist?list=PLpIkg8OmuX-KiAbBKuNidN-c66aHwBh3t
