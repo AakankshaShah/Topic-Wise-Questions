@@ -639,7 +639,58 @@ int dp[n+1][w+1];
         return total;
     ```
 
-22.
+22. Decode ways 
+    ```
+      int dp[101][101];
+
+    bool check(string& s, int i, int j) {
+        string temp = s.substr(i, j - i + 1);
+        if (temp.size() > 2)
+
+            return false;
+
+        int y = stoi(temp);
+        if (y > 26 || y <= 0 || (temp.size() >= 2 && y < 10))
+
+            return false;
+
+        return true;
+    }
+    int solve(string& s, int i, int j) {
+
+        if (i > j)
+
+            return 0;
+
+        if (i == j)
+
+            return 1;
+
+        if (dp[i][j] != -1)
+
+            return dp[i][j];
+
+        int ans = 0;
+        for (int k = i; k < j; k++) {
+
+            if (check(s, i, k)) {
+                cout << "DP k+1 j " << dp[k + 1][j];
+                if (dp[k + 1][j] != -1) {
+                    ans += dp[k + 1][j];
+                } else {
+                    dp[k + 1][j] = solve(s, k + 1, j);
+                    ans += dp[k + 1][j];
+                }
+            }
+        }
+
+        return dp[i][j] = ans;
+    }
+    int numDecodings(string s) {
+        memset(dp, -1, sizeof(dp));
+        return solve(s, 0, s.size());
+    }
+    ```
 
 
 
