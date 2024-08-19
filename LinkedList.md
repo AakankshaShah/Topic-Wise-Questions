@@ -1088,3 +1088,31 @@
         return head;
     }
     ```
+33. Remove duplicate nodes from an unsorted list 
+    ```
+      ListNode* deleteDuplicatesUnsorted(ListNode* head) {
+        unordered_map<int, int> mp;
+
+        ListNode* tmp = head;
+        while (tmp != nullptr) {
+            mp[tmp->val]++;
+            tmp = tmp->next;
+        }
+
+        ListNode* prev = new ListNode(-1);
+
+        ListNode* curr = prev;
+        tmp = head;
+
+        while (tmp != nullptr) {
+            if (mp[tmp->val] == 1) {
+                curr->next = new ListNode(tmp->val);
+                curr = curr->next;
+            }
+
+            tmp = tmp->next;
+        }
+
+        return prev->next;
+    }
+    ```
