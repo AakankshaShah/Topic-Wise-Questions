@@ -844,3 +844,16 @@ int last;
         return count;
     }
     ```
+23. Min operations to make prefix sum non negative
+     ```
+       int makePrefSumNonNegative(vector<int>& nums) {
+        long long sum=0;
+        priority_queue<int, vector<int>, greater<int>> pq;
+        for (int i : nums) {
+            pq.push(i);
+            if ((sum += i) < 0)
+                sum -= pq.top(), pq.pop();
+        }
+        return nums.size() - pq.size();
+    }
+     ```
