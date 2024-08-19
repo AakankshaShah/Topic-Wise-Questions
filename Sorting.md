@@ -465,5 +465,30 @@ long long mergeSort(vector<int> &arr, long long low, long long high) {
     }
       
     ```
-   
+9. 3Sum smaller
+    ```
+      void twoSumSmaller(const vector<int>& nums, int target, int first,
+                       int& count) {
+        int second = first + 1;
+        int third = size(nums) - 1;
+
+        while (second < third) {
+            int sum = nums[first] + nums[second] + nums[third];
+            if (sum < target) {
+                count += (third - second);
+                ++second;
+            } else
+                --third;
+        }
+    }
+
+    int threeSumSmaller(vector<int>& nums, int target) {
+        int count = 0;
+        sort(begin(nums), end(nums));
+
+        for (int first = 0; first < size(nums); first++)
+            twoSumSmaller(nums, target, first, count);
+
+       
+    ```
 
