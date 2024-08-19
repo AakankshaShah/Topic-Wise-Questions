@@ -650,3 +650,39 @@ sort(buses.begin(), buses.end());
         return result;
     }
     ```
+24. Find the uniqueness of median array 
+     ```
+       int medianOfUniquenessArray(vector<int>& nums) {
+        int n = nums.size();
+        int l = 1;
+        int r = n;
+        while (l <= r) {
+            int m = (l + r) / 2;
+            if (rec1(nums, n, m) > (((long long)n * ((long long)n + 1)) / 2LL - 1) / 2LL) {
+                r = m - 1;
+            } else {
+                l = m + 1;
+            }
+        }
+        return l;
+    }
+
+    long long rec1(vector<int>& arr, int n, int k) {
+        long long cnt = 0;
+        int l = 0;
+        int r = 0;
+        unordered_map<int, int> map;
+        while (r < n) {
+            map[arr[r]]++;
+            while (map.size() > k) {
+                map[arr[l]]--;
+                if (map[arr[l]] == 0)
+                    map.erase(arr[l]);
+                l++;
+            }
+            cnt += r - l + 1;
+            r++;
+        }
+        return cnt;
+    }
+     ```
