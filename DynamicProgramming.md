@@ -981,6 +981,23 @@ Ctrl+ACVVVV (6 key presses) gives 5 times increase
         return mx;
     }
     ```
+31. Optimal Partition of string 
+    ```
+      int partitionString(string s) {
+        vector<int> dp(s.size() + 1, 0);
+        string curr = "";
+        for (int i = 1; i <= s.size(); i++) {
+            if (find(curr.begin(), curr.end(), s[i - 1]) != curr.end()) {
+                curr = s[i - 1];
+                dp[i] = 1 + dp[i - 1];
+            } else {
+                curr = curr + s[i - 1];
+                dp[i] = dp[i - 1];
+            }
+        }
+        return dp[s.size()] + 1;
+    }
+    ```
 
 
 
