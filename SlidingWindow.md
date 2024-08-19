@@ -1099,7 +1099,54 @@ return sans;
         return ans == INT_MAX ? -1 : ans;
      ```
 40. Minimum Adjacent Swaps for K Consecutive Ones
+
    ```
+     
+    int minMoves(vector<int>& nums, int k) {
+        vector<int> ones;
+        for (int i = 0; i < nums.size(); i++) {
+            if (nums[i] == 1) {
+                ones.push_back(i);
+            }
+        }
+
+        vector<long long> prefSum(ones.size());
+        prefSum[0] = ones[0];
+        for (int i = 1; i < ones.size(); i++) {
+            prefSum[i] = prefSum[i - 1] + ones[i];
+        }
+
+        long long minMoves = INT_MAX;
+        long long left = 0;
+        int right = k - 1;
+
+        while (right < ones.size()) {
+            long long mid = (left + right) / 2;
+            long long radius = mid - left;
+            long long excessMoves;
+            long long total = 0;
+
+            long long lsum = (mid == 0 ? 0 : prefSum[mid - 1]) -
+                       (left == 0 ? 0 : prefSum[left - 1]);
+            long long rsum = prefSum[right] - prefSum[mid];
+
+            if (k % 2 == 0) {
+                excessMoves = radius * (radius + 1) + (radius + 1);
+                total = rsum - lsum - ones[mid] - excessMoves;
+            } else {
+                excessMoves = radius * (radius + 1);
+                total = rsum - lsum - excessMoves;
+            }
+
+            minMoves = min(minMoves, total);
+
+            left++;
+            right++;
+        }
+
+        return minMoves;
+    }
+
    ```
 41. Continuous subarray 
     ```
