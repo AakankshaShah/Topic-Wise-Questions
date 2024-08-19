@@ -1009,9 +1009,9 @@
         }
         return NULL;
     }
-    ```
+     ```
 
-    ```
+```
        int length(ListNode *head){
         int len = 0;
         while(head){
@@ -1048,7 +1048,7 @@
         }
         return NULL;
     }
-    ```
+ ```
 31. Delete a node
     ```
       void deleteNode(ListNode* node) {
@@ -1056,5 +1056,35 @@
         node->next=node->next->next;
        
         
+    }
+    ```
+32. Delete N nodes after M nodes in a linked list 
+    ```
+        ListNode* deleteNodes(ListNode* head, int m, int n) {
+        if (!head) {
+            return head;
+        }
+
+        int mcnt = 0, ncnt = 0;
+        ListNode* curr = head;
+        ListNode* tmpNode;
+
+        while (curr != nullptr) {
+            mcnt += 1;
+            if (mcnt == m) {
+                tmpNode = curr;
+                while (tmpNode && ncnt != n + 1) {
+                    ncnt += 1;
+                    tmpNode = tmpNode->next;
+                }
+                curr->next = tmpNode;
+                mcnt = 0;
+                ncnt = 0;
+                curr = curr->next;
+            } else {
+                curr = curr->next;
+            }
+        }
+        return head;
     }
     ```
