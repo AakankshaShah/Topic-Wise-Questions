@@ -2362,3 +2362,26 @@ return c;
         return ans;
     }
     ```
+74. Longest consecutive sequence
+    ```
+      nt longestConsecutive(vector<int>& nums) {
+        int n = nums.size();
+        if(n==0 || n==1) return n;
+
+        
+        unordered_set<int> st;
+        for(int i : nums) st.insert(i);
+        int ans = 1;
+        for(int i : st){
+            if(st.find(i-1) == st.end()){ 
+                int count = 0;
+                while(st.find(i++) != st.end()){
+                    count++;
+                }
+                ans = max(ans, count);
+            }
+        }
+        return ans;
+        
+    }
+    ```
