@@ -1359,6 +1359,66 @@ LRUCache(int cap)
         return del;
     }
    ```
+42. Basic calculator III
+    ```
+      private:
+    void operation(int& res, int& prev, int& num, char& sign) {
+        if (sign == '+' || sign == '-') {
+            num = (sign == '+') ? num : -num;
+            res += prev;
+            prev = num;
+        } else if (sign == '*' || sign == '/')
+            prev = (sign == '*') ? prev * num : prev / num;
+        else
+            prev = num;
+    }
+
+public:
+    int calculate(string s) {
+        stack<int> results, prevNums;
+        stack<char> signs;
+
+        char sign = '\0';
+        int len = s.size(), res, prev, num;
+        res = prev = num = 0;
+
+        for (int i = 0; i < len; i++) {
+            if (isdigit(s[i]))
+                num = 10 * num + (s[i] - '0');
+
+            if (!isdigit(s[i]) || i == len - 1) {
+                if (s[i] == '(') {
+                    results.push(res);
+                    prevNums.push(prev);
+                    signs.push(sign);
+
+                    sign = '\0';
+                    res = 0;
+                } else if (s[i] == ')') {
+                    operation(res, prev, num, sign);
+                    num = 0;
+                    sign = '+';
+                    operation(res, prev, num, sign);
+
+                    num = res;
+                    sign = signs.top(), prev = prevNums.top(),
+                    res = results.top();
+                    signs.pop(), prevNums.pop(), results.pop();
+                    if (i == len - 1)
+                        operation(res, prev, num, sign);
+                } else {
+                    operation(res, prev, num, sign);
+                    sign = s[i];
+                    num = 0;
+                }
+            }
+        }
+
+        res += prev;
+
+        return res;
+    }
+    ```
 
 ## Extras 
 
