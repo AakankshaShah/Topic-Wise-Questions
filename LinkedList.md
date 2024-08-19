@@ -1010,6 +1010,7 @@
         return NULL;
     }
     ```
+
     ```
        int length(ListNode *head){
         int len = 0;
@@ -1018,8 +1019,8 @@
             head = head->next;
         }
         return len;
-    }
-     ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
+        }
+         ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
         if(!headA || !headB) return NULL;
 
 
@@ -1046,5 +1047,14 @@
             headB = headB->next;
         }
         return NULL;
+    }
+    ```
+31. Delete a node
+    ```
+      void deleteNode(ListNode* node) {
+        node->val=node->next->val;
+        node->next=node->next->next;
+       
+        
     }
     ```
