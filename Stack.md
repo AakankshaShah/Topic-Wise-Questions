@@ -1338,7 +1338,30 @@ LRUCache(int cap)
       return N - 1;
     return N + 1;
       }
+    ```
+41. Minimum deletions to make array beautiful 
    ```
+      int minDeletion(vector<int>& nums) {
+       stack<int> ba;
+        bool even = true;
+        for (auto n : nums) {
+            if (even) {
+                ba.push(n);
+                even = !even;
+            } else {
+                if (n == ba.top())
+                    continue;
+                ba.push(n);
+                even = !even;
+            }
+        }
+        int len = ba.size();
+        
+        return nums.size() - (len % 2 == 1 ? len - 1 : len);
+        
+    }
+   ```
+
 ## Extras 
 
 Prefix , postfix & infix conversion
