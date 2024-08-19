@@ -1337,8 +1337,8 @@ LRUCache(int cap)
     if (N % 4 == 3)
       return N - 1;
     return N + 1;
-  }
-    ```
+      }
+   ```
 ## Extras 
 
 Prefix , postfix & infix conversion
