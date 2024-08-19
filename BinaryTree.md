@@ -1562,3 +1562,24 @@ public:
         return ans;
     }
     ```
+50. BInary Search tree iterator 
+    ```
+      class BSTIterator {
+    public:
+    stack<TreeNode*> s;
+    BSTIterator(TreeNode* root) { pushAll(root); }
+
+    int next() {
+        TreeNode* tmp = s.top();
+        s.pop();
+        pushAll(tmp->right);
+        return tmp->val;
+    }
+
+    bool hasNext() { return !s.empty(); }
+    void pushAll(TreeNode* node) {
+        for(;node!=NULL;s.push(node),node=node->left);
+    }
+    };
+
+    ```
