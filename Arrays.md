@@ -2272,3 +2272,33 @@ return c;
         
     }
     ```
+71. Find smallest common element in all rows 
+    ```
+      int smallestCommonElement(vector<vector<int>>& mat) 
+    {
+        int n=mat.size();
+        int m=mat[0].size();
+        unordered_map<int,int>mp;
+        unordered_set<int>s;
+        for(int i=0;i<n;i++)
+        {
+            for(int j=0;j<m;j++)
+            {
+                s.insert(mat[i][j]);
+            }
+            for(auto it : s)
+            {
+                mp[it]++;
+            }
+            s.clear();
+        }
+        for(auto it : mp)
+        {
+            if(it.second==n)
+            return it.first;
+        }
+        return -1;
+        
+    }
+    };
+    ```
