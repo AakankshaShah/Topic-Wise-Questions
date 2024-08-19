@@ -1341,24 +1341,22 @@ LRUCache(int cap)
     ```
 41. Minimum deletions to make array beautiful 
    ```
-      int minDeletion(vector<int>& nums) {
-       stack<int> ba;
-        bool even = true;
-        for (auto n : nums) {
-            if (even) {
-                ba.push(n);
-                even = !even;
-            } else {
-                if (n == ba.top())
-                    continue;
-                ba.push(n);
-                even = !even;
+       int minDeletion(vector<int>& nums) {
+       stack<int> st;
+        int del=0;
+        for(int i=0;i<nums.size();i++){
+            if(st.empty()){
+                st.push(nums[i]);
             }
+            else if (st.top()==nums[i] && (st.size()-1)%2==0){
+                del++;
+                st.pop();
+                st.push(nums[i]);
+            }
+            else st.push(nums[i]);
         }
-        int len = ba.size();
-        
-        return nums.size() - (len % 2 == 1 ? len - 1 : len);
-        
+        if((nums.size()-del) %2 ) return del+1;
+        return del;
     }
    ```
 
