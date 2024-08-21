@@ -606,9 +606,9 @@ bool DFS(vector<string> &A, int i, int j, string B, int idx , vector<vector<bool
                 dfs(vis, temp, t, temp[i][j]);
             }
         }
-    }
+      }
 
-    int maximumDetonation(vector<vector<int>>& bombs) {
+       int maximumDetonation(vector<vector<int>>& bombs) {
         int n = bombs.size();
         vector<vector<int>> temp(n);
 
