@@ -265,29 +265,7 @@
         
     }
     ```
-10. Linked list cycle fast & slow pointers
-    ```
-      ListNode *fast = head;
-        ListNode *slow = head;
-        
-		// till fast and fast-> next not reaches NULL
-		// we will increment fast by 2 step and slow by 1 step
-        while(fast != NULL && fast ->next != NULL)
-        {
-            fast = fast->next->next;
-            slow = slow->next;
-            
-			
-			// At the point if fast and slow are at same address
-			// this means linked list has a cycle in it.
-            if(fast == slow)
-                return true;
-        }
-        
-		// if traversal reaches to NULL this means no cycle.
-        return false;
-    ```
-11. Reorder list
+10. Reorder list
 
      ```
       ListNode* reverse(ListNode* head) {
@@ -328,7 +306,7 @@
             second = temp2;
         }
      ```
-12. Double a number shows as linked list
+11. Double a number shows as linked list
      ```
         istNode* prev=NULL;
         if(head->val>=5)
@@ -351,7 +329,7 @@
         }
         return head;
      ```
-13. Delete duplicates
+12. Delete duplicates
     ```
        var deleteDuplicates = function (head) {
     let current = head;
@@ -367,7 +345,7 @@
     return head;
     }
     ```
-14. Rotate List 
+13. Rotate List 
      ```
        ListNode* rotateRight(ListNode* head, int k) {
         if (head == NULL || head->next == NULL || k == 0)
@@ -389,7 +367,7 @@
         return head;
     }
      ```
-15. Reverse List II
+14. Reverse List II
      ```
           ListNode* reverseBetween(ListNode* head, int left, int right) {
         if (head == NULL || head->next == NULL)
@@ -462,7 +440,7 @@
         return dummy->next;
     }
      ```
-16. Copy List with random Pointer
+15. Copy List with random Pointer
     ```
        Node* copyRandomList(Node* head) {
         if (!head)
@@ -539,7 +517,7 @@
         return newHead;
     }
     ```
-17. Middle of list 
+16. Middle of list 
 
     ```
       ListNode* middleNode(ListNode* head) {
@@ -557,7 +535,7 @@
         
     }
     ```
-18. Linked List Cycle 
+17. Linked List Cycle 
     ```
       bool hasCycle(ListNode *head) {
         ListNode *fast = head;
@@ -582,7 +560,7 @@
         
     }
     ```
-19. Linked List Cycle II
+18. Linked List Cycle II
 
      ```
       ListNode *detectCycle(ListNode *head) {
@@ -605,7 +583,7 @@
     }
       
      ```
-20. Sort List
+19. Sort List
     ```
       ListNode* sortList(ListNode* head) {
         
@@ -674,7 +652,7 @@
         return ptr->next;
     }
     ```
-21. LRU Cache
+20. LRU Cache
 
      ```
        class node {
@@ -743,7 +721,7 @@
     }
     };
      ```
-22. Delete Nodes From Linked List Present in Array
+21. Delete Nodes From Linked List Present in Array
     ```
      ListNode* modifiedList(vector<int>& nums, ListNode* head) {
         unordered_set<int> s;
@@ -766,7 +744,7 @@
         return ans;
     }
     ```
-23. Plus one 
+22. Plus one 
     ```
         ListNode* rev(ListNode* head) {
         ListNode* prev = NULL;
@@ -802,7 +780,7 @@
         return rev(nhead);
     }
     ```
-24. Linked List components
+23. Linked List components
     ```
       int numComponents(ListNode* head, vector<int>& nums) {
         set<int> st;
@@ -824,7 +802,7 @@
         return ans;
     }
     ```
-25. Circular ll (ascending)
+24. Circular ll (ascending)
     ```
       Node* insert(Node* head, int insertVal) {
         Node* curr = head;
@@ -850,7 +828,7 @@
         return head;
     }
     ```
-26. Descending  3->4->1 , 3->4->2->1
+25. Descending  3->4->1 , 3->4->2->1
     ```
        Node* insert(Node* head, int insertVal) {
         Node *newNode = new Node(insertVal);
@@ -888,7 +866,7 @@
         return nullptr;
     }
     ```
-27. Design Skiplist
+26. Design Skiplist
     ```
      class Skiplist {
     private:
@@ -965,7 +943,7 @@
     }
 
     ```
-28. Add two numbers II
+27. Add two numbers II
     ```
       ListNode* reverse(ListNode* head) {
         ListNode *p, *q;
@@ -1014,7 +992,7 @@
         return head;
     }
     ```
-29. Next greater element in linked list 
+28. Next greater element in linked list 
     ```
       ector<int> nextLargerNodes(ListNode* head) {
         vector<int>arr;
@@ -1042,7 +1020,7 @@
         
     }
     ```
-30.Intersection of two linked lists
+29.Intersection of two linked lists
     ```
       ListNode* getIntersectionNode(ListNode* headA, ListNode* headB) {
         unordered_map<ListNode*, int> mpp;
@@ -1095,7 +1073,7 @@
         return NULL;
     }
  ```
-31. Delete a node
+30. Delete a node
     ```
       void deleteNode(ListNode* node) {
         node->val=node->next->val;
@@ -1104,7 +1082,7 @@
         
     }
     ```
-32. Delete N nodes after M nodes in a linked list 
+31. Delete N nodes after M nodes in a linked list 
     ```
         ListNode* deleteNodes(ListNode* head, int m, int n) {
         if (!head) {
@@ -1134,7 +1112,7 @@
         return head;
     }
     ```
-33. Remove duplicate nodes from an unsorted list 
+32. Remove duplicate nodes from an unsorted list 
     ```
       ListNode* deleteDuplicatesUnsorted(ListNode* head) {
         unordered_map<int, int> mp;
@@ -1162,7 +1140,7 @@
         return prev->next;
     }
     ```
-34. Merge nodes in between the zero
+33. Merge nodes in between the zero
     ```
       ListNode* mergeNodes(ListNode* head) {
         ListNode* dummy = new ListNode(0);
