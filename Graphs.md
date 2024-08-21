@@ -402,7 +402,7 @@ bool DFS(vector<string> &A, int i, int j, string B, int idx , vector<vector<bool
 12.  Word ladder 1 
 
      ```
-     int ladderLength(string beginWord, string endWord,
+        int ladderLength(string beginWord, string endWord,
                      vector<string>& wordList) {
 
         unordered_set<string> st(wordList.begin(), wordList.end());
@@ -436,10 +436,10 @@ bool DFS(vector<string> &A, int i, int j, string B, int idx , vector<vector<bool
             }
         }
         return shortestLevel;
-    }
-       
-
+      }
+    
      ```
+    
 13.  Word ladder 2 https://www.youtube.com/watch?v=DREutrv2XD0 ***
 
 14.  Clone Graph https://www.youtube.com/watch?v=z7mPg_xT5xk
