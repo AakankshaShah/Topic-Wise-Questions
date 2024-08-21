@@ -531,7 +531,68 @@ public:
         return operand.top();
     }
     ```
-15. Longest Absolute File path 
+15. Basic Calculator III  
+    ```
+       private:
+       void operation(int& res, int& prev, int& num, char& sign) {
+        if (sign == '+' || sign == '-') {
+            num = (sign == '+') ? num : -num;
+            res += prev;
+            prev = num;
+        } else if (sign == '*' || sign == '/')
+            prev = (sign == '*') ? prev * num : prev / num;
+        else
+            prev = num;
+    }
+
+    public:
+    int calculate(string s) {
+        stack<int> results, prevNums;
+        stack<char> signs;
+
+        char sign = '\0';
+        int len = s.size(), res, prev, num;
+        res = prev = num = 0;
+
+        for (int i = 0; i < len; i++) {
+            if (isdigit(s[i]))
+                num = 10 * num + (s[i] - '0');
+
+            if (!isdigit(s[i]) || i == len - 1) {
+                if (s[i] == '(') {
+                    results.push(res);
+                    prevNums.push(prev);
+                    signs.push(sign);
+
+                    sign = '\0';
+                    res = 0;
+                } else if (s[i] == ')') {
+                    operation(res, prev, num, sign);
+                    num = 0;
+                    sign = '+';
+                    operation(res, prev, num, sign);
+
+                    num = res;
+                    sign = signs.top(), prev = prevNums.top(),
+                    res = results.top();
+                    signs.pop(), prevNums.pop(), results.pop();
+                    if (i == len - 1)
+                        operation(res, prev, num, sign);
+                } else {
+                    operation(res, prev, num, sign);
+                    sign = s[i];
+                    num = 0;
+                }
+            }
+        }
+
+        res += prev;
+
+        return res;
+    }
+    ```
+
+16. Longest Absolute File path 
 
 
 ```
@@ -556,7 +617,7 @@ public:
      return maxL;
 ```
 
-16. Remove K digits to get max 
+17. Remove K digits to get max 
     ```
       int n = num.length();
         if (k >= n)
@@ -597,8 +658,8 @@ public:
 
         return ans.substr(i).length() > 0 ? ans.substr(i) : "0";
     ```
-17. Parsing a boolean expression 
-18. Minimum remove to make valid parantheses 
+18. Parsing a boolean expression 
+19. Minimum remove to make valid parantheses 
     ```
       string minRemoveToMakeValid(string s) 
     {
@@ -643,7 +704,45 @@ public:
         return ans;
     }
     ```
-19. Check if Parathesis string can be made valid or not
+20. Min add to make parentheses valid 
+    ```
+      int minAddToMakeValid(string s) {
+        int n = s.length();
+        int ob = 0;
+        int cb = 0;
+
+        for (int i = 0; i < n; i++) {
+
+            if (s[i] == '(')
+                ob++;
+            if (s[i] == ')') {
+                if (ob == 0)
+                    s[i] = '#';
+                else
+                    ob--;
+            }
+        }
+        ob = 0;
+        for (int i = n - 1; i >= 0; i--) {
+
+            if (s[i] == ')')
+                ob++;
+            if (s[i] == '(') {
+                if (ob == 0)
+                    s[i] = '#';
+                else
+                    ob--;
+            }
+        }
+        int ans = 0;
+        for (int i = 0; i < n; i++) {
+            if (s[i] == '#')
+                ans++;
+        }
+        return ans;
+    }
+    ```
+21. Check if Parathesis string can be made valid or not
  ```
  int flip=0;
         int op=0;
@@ -695,7 +794,7 @@ public:
         return true;  
 ```
 
-20 . Finding the Number of Visible Mountains 
+22 . Finding the Number of Visible Mountains 
 
 ```
 vector<vector<int>> dis;
@@ -728,9 +827,9 @@ int curr=dis[i][1];
         return size;
 
 ```
-21. Implement k stacks single array 
-22. Redundant braces 
-23. LRU Cache
+23. Implement k stacks single array 
+24. Redundant braces 
+25. LRU Cache
 
   ```
 LRUCache(int cap)
@@ -801,7 +900,7 @@ LRUCache(int cap)
 
 ```
 
-24. Remove duplicate letter 
+26. Remove duplicate letter 
      ```
       vector<int> lastIndex(26, 0);
         for (int i = 0; i < s.length(); i++){
@@ -835,7 +934,7 @@ LRUCache(int cap)
         return res;
         
      ```
-25. Palindrome linked list 
+27. Palindrome linked list 
     ```
        stack<int> s;
         ListNode* curr = head;
@@ -884,7 +983,7 @@ LRUCache(int cap)
     }
     }
     ```
-26. Decode string 
+28. Decode string 
      ```
         stack<int> st1;
         stack<char> st2;
@@ -938,7 +1037,7 @@ LRUCache(int cap)
 
         return fans;
      ```
-27. Maximum ramp width
+29. Maximum ramp width
     ```
     //Method 1
        int n = A.size();
@@ -998,7 +1097,7 @@ LRUCache(int cap)
 
         return ans;
     ```
-28. No of atoms
+30. No of atoms
     ```
       typedef unordered_map<string, int> MAP;
 
@@ -1127,7 +1226,7 @@ LRUCache(int cap)
         return ans;
     }
     ```
-29. Max score from removing substrings 
+31. Max score from removing substrings 
     ```
       string removeSubstring(string s, string str, int points, int& ans) {
         stack<char> st;
@@ -1161,7 +1260,7 @@ LRUCache(int cap)
         return ans;
     }
     ```
-30. Remove outermost parentheses
+32. Remove outermost parentheses
     ```
       string removeOuterParentheses(string s) {
         string result;
@@ -1185,7 +1284,7 @@ LRUCache(int cap)
         return result;
     }
     ```
-31. Create max number
+33. Create max number
     ```
       void merge(vector<int>& ans, vector<int>& v1, vector<int>& v2) {
     int m = v1.size();
@@ -1282,7 +1381,7 @@ LRUCache(int cap)
     }
     };
     ```
-32. Find permutation
+34. Find permutation
     ```
        // vector<int> ans;
         // for (int i = 0; i < l.length(); i++) {
@@ -1320,7 +1419,7 @@ LRUCache(int cap)
         return res;
 
     ```
-33. Asteroid collision
+35. Asteroid collision
      ```
        vector<int> asteroidCollision(vector<int>& asteroids) {
         stack<int> st;
@@ -1358,7 +1457,7 @@ LRUCache(int cap)
         return result;
     }
      ```
-34. Max chunks sorted 
+36. Max chunks sorted 
     ```
      int maxChunksToSorted(vector<int>& arr) {
         int srt=0,ans=0,n=arr.size();
@@ -1377,7 +1476,7 @@ LRUCache(int cap)
 
        Finally, we return ans which represents the maximum number of chunks.
     ```
-35. Max chunks sorted II
+37. Max chunks sorted II
    ```
      int maxChunksToSorted(vector<int>& arr) {
         stack<int>st;
@@ -1396,7 +1495,7 @@ LRUCache(int cap)
         
     }
    ```
-36. No of visible people
+38. No of visible people
     ```
        vector<int> canSeePersonsCount(vector<int>& heights) {
         int n = heights.size();
@@ -1414,7 +1513,7 @@ LRUCache(int cap)
         return ans;
     }
     ```
-37. Most competitive subsequence
+39. Most competitive subsequence
     ```
         vector<int> mostCompetitive(vector<int>& arr, int k) {
         int n = arr.size();
@@ -1440,7 +1539,7 @@ LRUCache(int cap)
         return ans;
     }
     ```
-38. Subarray With Elements Greater Than Varying Threshold
+40. Subarray With Elements Greater Than Varying Threshold
       ```
          int validSubarraySize(vector<int>& a, int threshold) {
         int n = a.size();
@@ -1474,7 +1573,7 @@ LRUCache(int cap)
          return -1;
     }
       ```
-39. Min deletions to make string balanced
+41. Min deletions to make string balanced
     ```
       int minimumDeletions(string s) {
         int n     = s.length();
@@ -1494,7 +1593,7 @@ LRUCache(int cap)
         return count;
     }
     ```
-40. Clumsy factorial 
+42. Clumsy factorial 
     ```
      int clumsy(int n) {
 
@@ -1543,7 +1642,7 @@ LRUCache(int cap)
     return N + 1;
       }
     ```
-41. Minimum deletions to make array beautiful 
+43. Minimum deletions to make array beautiful 
    ```
        int minDeletion(vector<int>& nums) {
        stack<int> st;
@@ -1563,66 +1662,7 @@ LRUCache(int cap)
         return del;
     }
    ```
-42. Basic calculator III
-    ```
-      private:
-    void operation(int& res, int& prev, int& num, char& sign) {
-        if (sign == '+' || sign == '-') {
-            num = (sign == '+') ? num : -num;
-            res += prev;
-            prev = num;
-        } else if (sign == '*' || sign == '/')
-            prev = (sign == '*') ? prev * num : prev / num;
-        else
-            prev = num;
-    }
 
-    public:
-    int calculate(string s) {
-        stack<int> results, prevNums;
-        stack<char> signs;
-
-        char sign = '\0';
-        int len = s.size(), res, prev, num;
-        res = prev = num = 0;
-
-        for (int i = 0; i < len; i++) {
-            if (isdigit(s[i]))
-                num = 10 * num + (s[i] - '0');
-
-            if (!isdigit(s[i]) || i == len - 1) {
-                if (s[i] == '(') {
-                    results.push(res);
-                    prevNums.push(prev);
-                    signs.push(sign);
-
-                    sign = '\0';
-                    res = 0;
-                } else if (s[i] == ')') {
-                    operation(res, prev, num, sign);
-                    num = 0;
-                    sign = '+';
-                    operation(res, prev, num, sign);
-
-                    num = res;
-                    sign = signs.top(), prev = prevNums.top(),
-                    res = results.top();
-                    signs.pop(), prevNums.pop(), results.pop();
-                    if (i == len - 1)
-                        operation(res, prev, num, sign);
-                } else {
-                    operation(res, prev, num, sign);
-                    sign = s[i];
-                    num = 0;
-                }
-            }
-        }
-
-        res += prev;
-
-        return res;
-    }
-    ```
 ## Extras 
 
 Prefix , postfix & infix conversion
