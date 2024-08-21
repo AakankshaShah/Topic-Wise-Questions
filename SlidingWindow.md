@@ -1150,38 +1150,33 @@ return sans;
    ```
 41. Continuous subarray 
     ```
-      long long continuousSubarrays(vector<int>& nums) {
-        long long n = nums.size();
-        long long left = 0;
-        long long right = 0;
-        long long count = 0;
-        multiset<long long> window;
-        while (right < n) {
-
-            window.insert(nums[right]);
-
-            while (*window.rbegin() - *window.begin() > 2) {
-
-                count += (right - left);
-                auto it = window.find(nums[left]);
-                if (it != window.end()) {
-
-                    window.erase(it);
+       typedef long long ll;
+    long long continuousSubarrays(vector<int>& nums) {
+        ll totalSubarrays = 0;
+        int i = 0, j = 0;
+        multiset<int> ms;
+        while (j < nums.size()) {
+            while (!ms.empty()) {
+                auto lastElement = ms.rbegin();
+                auto firstElement = ms.begin();
+                if (abs(*lastElement - nums[j]) <= 2 &&
+                    abs(*firstElement - nums[j]) <= 2) {
+                    break;
                 }
-                left++;
+                auto erasingElement = ms.find(nums[i]);
+                ms.erase(erasingElement);
+                i++;
             }
-
-            right++;
+            ms.insert(nums[j]);
+            totalSubarrays += j - i + 1;
+            j++;
         }
-
-      
-        long long x = right - left + 1;
-        long long sum = x * (x - 1) / 2;
-        count += sum;
-
-        return count;
+        return totalSubarrays;
     }
+      
+    
     ```
+    
 42. Count subarrays with score less than k 
      ```
         long long countSubarrays(vector<int>& nums, long long k) {
