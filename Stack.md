@@ -1533,7 +1533,7 @@ LRUCache(int cap)
             prev = num;
     }
 
-public:
+    public:
     int calculate(string s) {
         stack<int> results, prevNums;
         stack<char> signs;
@@ -1579,7 +1579,6 @@ public:
         return res;
     }
     ```
-
 ## Extras 
 
 Prefix , postfix & infix conversion
