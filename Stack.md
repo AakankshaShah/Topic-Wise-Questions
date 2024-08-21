@@ -370,7 +370,167 @@ public:
 12. Polish Notation 
    Make use of stoi to convert string to int 
 13. Basic Calculator
+    ```
+      bool isDigit(char c)
+    {
+    if(c>='0'&&c<='9')
+    return true;
+
+    return false;
+    }
+
+    int calculate(string s) {
+        
+        stack<int>st;
+        int num=0;
+        int res=0;
+        int sign=1;
+
+        for(int i=0;i<s.length();i++)
+        {
+            if(isDigit(s[i]))
+            num=num*10+(s[i]-'0');
+
+        
+        else if(s[i]=='+')
+        {
+            res+=(num*sign);
+            num=0;
+            sign=1;
+        }
+        else if(s[i]=='-')
+        {
+            res+=(num*sign);
+            num=0;
+            sign=-1;
+        }
+        else if(s[i]=='(')
+        {
+            st.push(res);
+            st.push(sign);
+            res=0;
+            num=0;
+            sign=1;
+        }
+        else if(s[i]==')')
+        {
+            res+=(num*sign);
+            num=0;
+            int stack_sign=st.top();
+            st.pop();
+            int last_res=st.top();
+            st.pop();
+            res*=stack_sign;
+            res+=last_res;
+
+        }
+        }
+        res+=(num*sign);
+        return res;
+        
+
+        
+    }
+    ```
 14. Basic Calculator II 
+    ```
+      int applyCalc(int a, char c, int b) {
+        if (c == '+')
+            return a + b;
+        if (c == '-')
+            return b - a;
+        if (c == '*')
+            return a * b;
+        if (c == '/')
+            return b / a;
+        return 0;
+    }
+    int precedence(char c) {
+        if (c == '+')
+            return 1;
+        if (c == '-')
+            return 1;
+        if (c == '*')
+            return 2;
+        if (c == '/')
+            return 2;
+        return 0;
+    }
+    int calculate(string s) {
+        stack<int> operand;
+        stack<char> operators;
+
+        bool f = false;
+        for (int i = 0; i < s.length(); i++) {
+
+            if (s[i] == ' ') {
+                continue;
+            }
+
+            else if (s[i] == '(') {
+                operators.push(s[i]);
+            } else if (s[i] >= '0' && s[i] <= '9') {
+                int val = 0;
+
+                while (i < s.length() && s[i] >= '0' && s[i] <= '9') {
+                    val = (val * 10) + (s[i] - '0');
+                    i++;
+                }
+
+                operand.push(val);
+
+                i--;
+
+            } else if (s[i] == ')') {
+                while (operators.size() > 0 && operators.top() != '(' &&
+                       operand.size() >= 2) {
+                    int a = operand.top();
+                    operand.pop();
+                    int b = operand.top();
+                    operand.pop();
+                    char c = operators.top();
+                    operators.pop();
+                    operand.push(applyCalc(a, c, b));
+                }
+                operators.pop();
+
+            } else if (s[i] == '+' || s[i] == '-' || s[i] == '*' ||
+                       s[i] == '/') {
+                f = true;
+
+                while (operators.size() > 0 && operand.size() >= 2 &&
+                       precedence(operators.top()) >= precedence(s[i])) {
+                    int a = operand.top();
+                    operand.pop();
+                    cout << a;
+                    int b = operand.top();
+                    operand.pop();
+                    cout << b;
+                    char c = operators.top();
+                    operators.pop();
+                    cout << c;
+                    operand.push(applyCalc(a, c, b));
+                }
+                operators.push(s[i]);
+            }
+        }
+
+        while (operators.size() > 0 && operand.size() >= 2) {
+            int a = operand.top();
+            operand.pop();
+
+            int b = operand.top();
+            operand.pop();
+
+            char c = operators.top();
+            operators.pop();
+
+            operand.push(applyCalc(a, c, b));
+        }
+
+        return operand.top();
+    }
+    ```
 15. Longest Absolute File path 
 
 
