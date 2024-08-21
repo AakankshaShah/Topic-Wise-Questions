@@ -599,6 +599,50 @@ public:
     ```
 17. Parsing a boolean expression 
 18. Minimum remove to make valid parantheses 
+    ```
+      string minRemoveToMakeValid(string s) 
+    {
+        int n=s.length();
+        int ob=0;
+        int cb=0;
+
+        for(int i=0;i<n;i++)
+        {
+            
+            if(s[i]=='(')
+            ob++;
+            if(s[i]==')')
+            {
+                if(ob==0)
+                s[i]='#';
+                else
+                ob--;
+            }
+        }
+        ob=0;
+        for(int i=n-1;i>=0;i--)
+        {
+            
+            if(s[i]==')')
+            ob++;
+            if(s[i]=='(')
+            {
+                if(ob==0)
+                s[i]='#';
+                else
+                ob--;
+            }
+        }
+        string ans="";
+        for(int i=0;i<n;i++)
+        {
+            if(s[i]!='#')
+            ans+=s[i];
+
+        }
+        return ans;
+    }
+    ```
 19. Check if Parathesis string can be made valid or not
  ```
  int flip=0;
