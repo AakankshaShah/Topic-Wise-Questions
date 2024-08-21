@@ -1560,6 +1560,9 @@ LRUCache(int cap)
         vector<int> mostCompetitive(vector<int>& arr, int k) {
         int n = arr.size();
         stack<int> st;
+       //Next smaller
+       //Prev smaller
+   
 
         for (int i = 0; i < n; i++) {
             int left = n - i;
