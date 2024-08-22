@@ -57,3 +57,4 @@
 ###LLD
 1. https://www.youtube.com/watch?v=rliSgjoOFTs&list=PL6W8uoQQ2c61X_9e6Net0WdYZidm7zooW
 2. Tic tac toe https://www.youtube.com/watch?v=gktZsX9Z8Kw&list=PLMCXHnjXnTnvQVh7WsgZ8SurU1O2v_UM7
+3. https://dev-shivansh95.medium.com/low-level-design-for-bookmyshow-8db8465e560a
