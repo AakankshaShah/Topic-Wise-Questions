@@ -54,7 +54,11 @@
 1. https://www.youtube.com/watch?v=L20bYFvdt6s&list=PLpIkg8OmuX-KrStViqRAIJV6MXej-tNy4&index=4
 2. https://www.youtube.com/playlist?list=PLpIkg8OmuX-KiAbBKuNidN-c66aHwBh3t
 
-###LLD
+### LLD
 1. https://www.youtube.com/watch?v=rliSgjoOFTs&list=PL6W8uoQQ2c61X_9e6Net0WdYZidm7zooW
 2. Tic tac toe https://www.youtube.com/watch?v=gktZsX9Z8Kw&list=PLMCXHnjXnTnvQVh7WsgZ8SurU1O2v_UM7
 3. https://dev-shivansh95.medium.com/low-level-design-for-bookmyshow-8db8465e560a
+### Helpful links 
+1. https://docs.google.com/spreadsheets/d/1jpve7A2R6pjoyZd5povPdZ7lATCPnoSgtNgFZ-zmtLo/edit?gid=2103329868#gid=2103329868
+
+
