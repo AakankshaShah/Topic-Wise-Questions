@@ -53,6 +53,7 @@
 ### Playlists :
 1. https://www.youtube.com/watch?v=L20bYFvdt6s&list=PLpIkg8OmuX-KrStViqRAIJV6MXej-tNy4&index=4
 2. https://www.youtube.com/playlist?list=PLpIkg8OmuX-KiAbBKuNidN-c66aHwBh3t
+3. https://takeuforward.org/system-design/complete-system-design-roadmap-with-videos-for-sdes/
 
 ### LLD
 1. https://www.youtube.com/watch?v=rliSgjoOFTs&list=PL6W8uoQQ2c61X_9e6Net0WdYZidm7zooW
