@@ -2416,3 +2416,36 @@ public:
         return ans;
     }
     ```
+    55. Course schedules II
+      ```
+        vector<int> findOrder(int n, vector<vector<int>>& prerequisites) 
+    {
+        vector<int> adj[n];
+        vector<int> indegree(n,0);
+        for (int i=0; i<prerequisites.size(); i++){
+            adj[prerequisites[i][1]].push_back(prerequisites[i][0]);
+            indegree[prerequisites[i][0]]++;
+        }
+        vector<int> topo;
+        queue<int> q;
+       
+        
+        for (int i=0; i<n; i++){
+            if (indegree[i]==0)q.push(i);
+        }
+        while (!q.empty()){
+            int fr= q.front();
+            q.pop();
+            topo.push_back(fr);
+            for (auto val: adj[fr]){
+                indegree[val]--;
+                if (indegree[val]==0)q.push(val);
+            }
+        }
+        cout<<topo.size()<<endl;
+        if (topo.size()==n)return topo;
+        return {};
+       
+
+    }
+      ```
