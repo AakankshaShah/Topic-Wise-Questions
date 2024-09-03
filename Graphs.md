@@ -2449,3 +2449,30 @@ public:
 
     }
       ```
+56. Dijkstra Algorithm 
+    ```
+     vector <int> dijkstra(int V, vector<vector<int>> adj[], int S)
+    {
+       priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>>pq;
+       vector<int>ans(V,INT_MAX);
+       ans[S]=0;
+       pq.push({0,S});
+       while(!pq.empty())
+       {
+           int d=pq.top().first;
+           int n=pq.top().second;
+           pq.pop();
+           for(auto &vec:adj[n])
+           {
+               int n1=vec[0];
+               int wt=vec[1];
+               if(ans[n1]>wt+d)
+              { ans[n1]=wt+d;
+               pq.push({wt+d,n1});
+              }
+           }
+       }
+       return ans;
+       
+    }
+    ```
