@@ -2416,7 +2416,7 @@ public:
         return ans;
     }
     ```
-    55. Course schedules II
+55. Course schedules II
       ```
         vector<int> findOrder(int n, vector<vector<int>>& prerequisites) 
     {
