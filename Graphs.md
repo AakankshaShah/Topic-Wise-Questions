@@ -2246,3 +2246,42 @@ public:
         return true;
     }
     ```
+51. 0 1 Matrix
+     ```
+       vector<vector<int>> updateMatrix(vector<vector<int>>& mat) {
+        int n = mat.size(), m = mat[0].size();
+        vector<vector<int>> mat1(n, vector<int>(m, 0));
+        int vis[n][m];
+        queue<pair<pair<int, int>, int>> q;
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                if (mat[i][j] == 0) {
+                    vis[i][j] = 1;
+                    mat1[i][j] = 0;
+                    q.push({{i, j}, 0});
+                } else {
+                    vis[i][j] = 0;
+                }
+            }
+        }
+        int dx[4] = {-1, 0, 1, 0};
+        int dy[4] = {0, 1, 0, -1};
+        while (!q.empty()) {
+            int i1 = q.front().first.first;
+            int j1 = q.front().first.second;
+            int c = q.front().second;
+            q.pop();
+            for (int i = 0; i < 4; i++) {
+                int n1 = i1 + dx[i];
+                int m1 = j1 + dy[i];
+                if (n1 < n && n1 >= 0 && m1 < m && m1 >= 0 &&
+                    vis[n1][m1] == 0) {
+                    vis[n1][m1] = 1;
+                    mat1[n1][m1] = c + 1;
+                    q.push({{n1, m1}, c + 1});
+                }
+            }
+        }
+        return mat1;
+    }
+     ```
