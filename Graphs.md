@@ -2365,3 +2365,54 @@ public:
         
     }
     ```
+54. No of closed islands
+    ```
+      void dfs(int row, int col, vector<vector<int>>& grid,
+             vector<vector<int>>& vis, int delrow[], int delcol[]) {
+        vis[row][col] = 1;
+        grid[row][col] = 1;
+        int n = grid.size();
+        int m = grid[0].size();
+        for (int i = 0; i < 4; i++) {
+            int nr = row + delrow[i];
+            int nc = col + delcol[i];
+            if (nr >= 0 && nc >= 0 && nr < n && nc < m && grid[nr][nc] == 0 &&
+                vis[nr][nc] != 1) {
+                dfs(nr, nc, grid, vis, delrow, delcol);
+            }
+        }
+    }
+    int closedIsland(vector<vector<int>>& grid) {
+        int n = grid.size();
+        int m = grid[0].size();
+        int delrow[] = {-1, 0, 1, 0};
+        int delcol[] = {0, 1, 0, -1};
+        vector<vector<int>> vis(n, vector<int>(m, 0));
+        for (int i = 0; i < m; i++) {
+            if (grid[0][i] == 0 && vis[0][i] != 1) {
+                dfs(0, i, grid, vis, delrow, delcol);
+            }
+            if (grid[n - 1][i] == 0 && vis[n - 1][i] != 1) {
+                dfs(n - 1, i, grid, vis, delrow, delcol);
+            }
+        }
+        for (int i = 0; i < n; i++) {
+            if (grid[i][0] == 0 && vis[i][0] != 1) {
+                dfs(i, 0, grid, vis, delrow, delcol);
+            }
+            if (grid[i][m - 1] == 0 && vis[i][m - 1] != 1) {
+                dfs(i, m - 1, grid, vis, delrow, delcol);
+            }
+        }
+        int ans = 0;
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                if (grid[i][j] == 0 && vis[i][j] != 1) {
+                    ans++;
+                    dfs(i, j, grid, vis, delrow, delcol);
+                }
+            }
+        }
+        return ans;
+    }
+    ```
