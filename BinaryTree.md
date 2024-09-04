@@ -1642,3 +1642,111 @@ public:
         return false;
     }
      ```
+53. Binary tree longest consecutive subsequence
+    ```
+        int longestConsecutive(TreeNode* root) {
+        int res=0;
+        helper(root, res, 1);
+        return res;
+        
+    }
+    void helper(TreeNode* node, int& res, int len) {
+        if(node==nullptr) return;
+
+        res=max(res, len);
+
+        if(node->left) {
+            if(node->left->val==node->val+1) helper(node->left, res, len+1);
+            else helper(node->left, res, 1);
+        }
+
+        if(node->right) {
+            if(node->right->val==node->val+1) helper(node->right, res, len+1);
+            else helper(node->right, res, 1);
+        }
+    }
+    ```
+54. Verify preorder serilaization
+     ```
+       bool isValidSerialization(string preorder) {
+        stringstream ss(preorder);
+        string curr;
+        int nodes = 1;
+        while (getline(ss, curr, ',')) {
+            nodes--;
+            if (nodes < 0) return false;
+            if (curr != "#") nodes += 2;
+        }
+        return nodes == 0;
+        
+    }
+     ```
+     ```
+        vector<string> nodes = split(preorder, ',');
+        stack<string> st;
+        for (const string& curr : nodes) {
+
+            while (curr == "#" && !st.empty() && st.top() == "#") {
+                st.pop();
+                if (st.empty()) {
+                    return false;
+                }
+                st.pop(); // Pop the node that was supposed to be the parent of
+                          // the "#"
+            }
+            st.push(curr); // Push the current node onto the stack
+        }
+
+        return st.size() == 1 && st.top() == "#";
+    }
+    vector<string> split(const string& s, char delimiter) {
+        vector<string> result;
+        stringstream ss(s);
+        string item;
+
+        while (getline(ss, item, delimiter)) {
+            result.push_back(item);
+        }
+
+        return result;
+    }
+     ```
+     ```
+       bool isValidSerialization(string preorder) {
+        stringstream ss(preorder);
+        string item;
+
+        queue<string> q;
+        while (getline(ss, item, ',')) {
+            q.push(item);
+        }
+        string root = q.front();
+        q.pop();
+
+        if (root == "#")
+            return q.size() == 0;
+
+        return helper(root, q) && q.size() == 0;
+    }
+
+    bool helper(string root, queue<string>& q) {
+
+        if (root != "#" && q.size() < 2) {
+            return false;
+        }
+
+        string left = q.front();
+        q.pop();
+        string right = q.front();
+        q.pop();
+        bool flag = true;
+
+        if (left != "#")
+            flag = flag && helper(left, q);
+        if (right != "#")
+            flag = flag && helper(right, q);
+
+        return flag;
+    }
+     ```
+
