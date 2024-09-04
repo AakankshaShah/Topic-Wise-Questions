@@ -305,7 +305,7 @@
     ```
 12 . All nodes at distance k
 
-     ```
+  ```
        unordered_map<TreeNode*, TreeNode*> parent;
        void addParent(TreeNode* root) {
         if (!root)
@@ -370,7 +370,7 @@
         collectKDistanceNodes(target, k, result);
         return result;
     }
-     ```
+   ```
 12. Increasing order BST
      ```
       void inorder(TreeNode* root, queue<TreeNode*>& q) {
@@ -1562,7 +1562,7 @@ public:
         return ans;
     }
     ```
-50. BInary Search tree iterator 
+50. Binary Search tree iterator 
     ```
       class BSTIterator {
     public:
@@ -1582,4 +1582,40 @@ public:
     }
     };
 
+    ```
+51. Kth Smallest element in BST
+    ```
+     vector<int> ans;
+    void inorder(TreeNode* root) {
+        if (root == NULL)
+            return;
+        inorder(root->left);
+        ans.push_back(root->val);
+        inorder(root->right);
+    }
+
+    int kthSmallest(TreeNode* root, int k) {
+        inorder(root);
+        return ans[k - 1];
+    }
+    ```
+    ```
+       void solve(TreeNode* root, int &cnt, int &ans, int k){
+        if(root == NULL)    return;
+        //left, root, right 
+        solve(root->left, cnt, ans, k);
+        cnt++;
+        if(cnt == k){
+            ans = root->val;
+            return;
+        }
+        solve(root->right, cnt, ans, k);
+    }
+    int kthSmallest(TreeNode* root, int k) {
+        
+        int cnt = 0;        
+        int ans;
+        solve(root, cnt, ans, k);
+        return ans;
+    }
     ```
