@@ -1619,3 +1619,26 @@ public:
         return ans;
     }
     ```
+52. Binary tree coloring games
+     ```
+        int lc, rc;
+    int countNode(TreeNode* root, int x) {
+        if (!root)
+            return 0;
+        int l = countNode(root->left, x);
+        int r = countNode(root->right, x);
+        if (root->val == x) {
+            lc = l;
+            rc = r;
+        }
+        return l + r + 1;
+    }
+    bool btreeGameWinningMove(TreeNode* root, int n, int x) {
+        countNode(root, x);
+        int parentSize = n - (lc + rc + 1);
+        if (lc > n / 2 || rc > n / 2 || parentSize > n / 2) {
+            return true;
+        }
+        return false;
+    }
+     ```
