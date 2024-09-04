@@ -1642,7 +1642,7 @@ public:
         return false;
     }
      ```
-53. Binary tree longest consecutive subsequence
+53. Binary tree longest consecutive subsequence Part 1 & 2
     ```
         int longestConsecutive(TreeNode* root) {
         int res=0;
@@ -1664,6 +1664,43 @@ public:
             if(node->right->val==node->val+1) helper(node->right, res, len+1);
             else helper(node->right, res, 1);
         }
+    }
+    ```
+    ```
+      pair<int, int> dfs(TreeNode* node, int& maxLen) {
+        if (!node)
+            return {0, 0};
+
+        auto [leftInc, leftDec] = dfs(node->left, maxLen);
+        auto [rightInc, rightDec] = dfs(node->right, maxLen);
+
+        int inc = 1, dec = 1;
+
+        if (node->left) {
+            if (node->left->val == node->val + 1) {
+                inc = leftInc + 1;
+            } else if (node->left->val == node->val - 1) {
+                dec = leftDec + 1;
+            }
+        }
+
+        if (node->right) {
+            if (node->right->val == node->val + 1) {
+                inc = max(inc, rightInc + 1);
+            } else if (node->right->val == node->val - 1) {
+                dec = max(dec, rightDec + 1);
+            }
+        }
+        // -1 to not double count the current node
+        maxLen = max(maxLen, inc + dec - 1);
+
+        return {inc, dec};
+    }
+
+    int longestConsecutive(TreeNode* root) {
+        int maxLen = 0;
+        dfs(root, maxLen);
+        return maxLen;
     }
     ```
 54. Verify preorder serilaization
