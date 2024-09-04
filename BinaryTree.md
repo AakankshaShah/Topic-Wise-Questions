@@ -1786,4 +1786,95 @@ public:
         return flag;
     }
      ```
+56. Mode in a binary tree
+     ```
+       int currNum = 0;
+    int currStreak = 0;
+    int maxStreak = 0;
+    vector<int> result;
+
+    void dfs(TreeNode* root) {
+        if (!root)
+            return;
+
+        dfs(root->left);
+
+        if (root->val == currNum) {
+            currStreak++;
+        } else {
+            currNum = root->val;
+            currStreak = 1;
+        }
+
+        if (currStreak > maxStreak) {
+            result = {};
+            maxStreak = currStreak;
+        }
+
+        if (currStreak == maxStreak) {
+            result.push_back(root->val);
+        }
+
+        dfs(root->right);
+    }
+    vector<int> findMode(TreeNode* root) {
+        dfs(root);
+
+        return result;
+    }
+     ```
+57. Boundary of a binary tree
+     ```
+       vector<int> boundaryOfBinaryTree(TreeNode* root) {
+        vector<int> ans;
+        if (!root)
+            return ans;
+        if (!isLeaf(root))
+            ans.push_back(root->val);
+        LeftTree(root->left, ans);
+        Leaf(root, ans);
+        vector<int> rightBoundary;
+        RightTree(root->right, rightBoundary);
+        ans.insert(ans.end(), rightBoundary.rbegin(), rightBoundary.rend());
+
+        return ans;
+    }
+    bool isLeaf(TreeNode* node) { return !node->left && !node->right; }
+
+    void LeftTree(TreeNode* node, vector<int>& ans) {
+        while (node) {
+            if (!isLeaf(node))
+                ans.push_back(node->val);
+
+            if (node->left)
+                node = node->left;
+            else
+                node = node->right;
+        }
+    }
+
+    void Leaf(TreeNode* node, vector<int>& ans) {
+        if (!node)
+            return;
+        if (isLeaf(node)) {
+            ans.push_back(node->val);
+            return;
+        }
+        // Recursively check the left and right subtrees
+        Leaf(node->left, ans);
+        Leaf(node->right, ans);
+    }
+
+    void RightTree(TreeNode* node, vector<int>& rightBoundary) {
+        while (node) {
+            if (!isLeaf(node))
+                rightBoundary.push_back(node->val);
+            // Move to the next right boundary node (prefer right child)
+            if (node->right)
+                node = node->right;
+            else
+                node = node->left;
+        }
+    }
+     ```
 
