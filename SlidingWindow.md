@@ -1448,11 +1448,12 @@ return sans;
         return ans;
     }
       ```
-    48. kth Smallest subarray sum 
-        ```
+48. kth Smallest subarray sum 
+
+    ```
            int kthSmallestSubarraySum(vector<int>& nums, int k) {
-        int lo = 0, hi = 1e9;
-        while (lo < hi) {
+            int lo = 0, hi = 1e9;
+           while (lo < hi) {
             int mid = lo + (hi - lo) / 2;
 
             int count = 0, sum = 0;
@@ -1474,5 +1475,44 @@ return sans;
         return lo;
         
         }
-        ```
+     ```
+50. Max beauty of an array 
+     ```
+       //Line sweep
+           int n=nums.size();
+        
+        map<int, int> line;
+        for(int i=0;i<n;i++){
+            int l=nums[i]-k, r=k+nums[i]; // range of values for which num can be transformed [nums[i] - k, nums[i] + k]
+            
+            ++line[l];
+		    --line[r+1];
+        }
+        
+        int ans=0;
+        int c=0;
+        for(auto itr : line){
+            c += itr.second; // current possible intersection of ranges 
+            ans=max(ans,c);
+        }
+        
+        return and;
+      //Sliding window
+          int n = nums.size();
+
+        sort(nums.begin(), nums.end());
+
+        int i = 0, j = 0;
+        int ans = 0;
+        while (j < n) {
+            // for range intersection, [max value at i >= min value at j]
+            while (nums[i] + k < nums[j] - k && i <= j)
+                i++;
+            ans = max(ans, j - i + 1);
+            j++;
+        }
+
+        return ans;
+
+     ```
       
