@@ -1069,7 +1069,7 @@ return sans;
     ```
    37. New 21 game
 
-      ```
+       ```
         double new21Game(int n, int k, int maxPts) {
 
         vector<double> P(n + 1);
@@ -1093,7 +1093,7 @@ return sans;
             }
             return accumulate(P.begin() + k, P.end(), 0.0);
            }
-      ```  
+       ```  
 38. Max value of equation
     ```
       priority_queue<vector<int>> pq;
