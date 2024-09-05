@@ -1448,4 +1448,31 @@ return sans;
         return ans;
     }
       ```
+    48. kth Smallest subarray sum 
+        ```
+           int kthSmallestSubarraySum(vector<int>& nums, int k) {
+        int lo = 0, hi = 1e9;
+        while (lo < hi) {
+            int mid = lo + (hi - lo) / 2;
+
+            int count = 0, sum = 0;
+            for (int i = 0, j = 0; j < nums.size(); j++) {
+                sum += nums[j];
+                while (mid < sum) {
+                    sum -= nums[i++];
+                }
+                count += j - i + 1;
+            }
+
+            if (count >= k) {
+                hi = mid;
+            } else {
+                lo = mid + 1;
+            }
+        }
+
+        return lo;
+        
+        }
+        ```
       
