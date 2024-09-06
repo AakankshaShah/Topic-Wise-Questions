@@ -2480,7 +2480,7 @@ return c;
     ```
 79. Diagonal traverse 2
 
-         ```
+    ```
            vector<int> findDiagonalOrder(vector<vector<int>>& nums) {
         unordered_map<int, vector<int>> mp;
 
@@ -2504,5 +2504,27 @@ return c;
 
         return result;
         }
-         ```
+     ```
+     ```
+     //BFS 
+       queue<pair<int, int>> que;
+        que.push({0, 0});
+        vector<int> result;
+        
+        while (!que.empty()) {
+            auto [row, col] = que.front();
+            que.pop();
+            result.push_back(nums[row][col]);
+            
+            if (col == 0 && row + 1 < nums.size()) {
+                que.push({row + 1, col});
+            }
+            
+            if (col + 1 < nums[row].size()) {
+                que.push({row, col + 1});
+            }
+        }
+        
+        return result;
+     ```
 
