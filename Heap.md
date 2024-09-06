@@ -896,8 +896,9 @@ int last;
         
     }
      ```
-    25. Path with maximum probability
-        ```
+25. Path with maximum probability
+
+    ```
            double maxProbability(int n, vector<vector<int>>& edges,
                           vector<double>& succProb, int start_node,
                           int end_node) {
@@ -934,4 +935,53 @@ int last;
         }
         return 0.0;
         }
-        ```
+    ```
+26. Minimum Cost to Make at Least One Valid Path in a Grid
+     ```
+       int minCost(vector<vector<int>>& grid) {
+        int n = grid.size();
+        int m = grid[0].size();
+
+        map<pl, vector<pll>> graph;
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                if (j < m - 1)
+                    graph[{i, j}].push_back(
+                        {{i, j + 1}, grid[i][j] == 1 ? 0 : 1});
+                if (i < n - 1)
+                    graph[{i, j}].push_back(
+                        {{i + 1, j}, grid[i][j] == 3 ? 0 : 1});
+                if (j > 0)
+                    graph[{i, j}].push_back(
+                        {{i, j - 1}, grid[i][j] == 2 ? 0 : 1});
+                if (i > 0)
+                    graph[{i, j}].push_back(
+                        {{i - 1, j}, grid[i][j] == 4 ? 0 : 1});
+            }
+        }
+        priority_queue<plp, vector<plp>, greater<plp>> q;
+        q.push({0, {0, 0}});
+        vector<vector<int>> dist(n, vector<int>(m, 1e9));
+        dist[0][0] = 0;
+        while (!q.empty()) {
+            auto node = q.top().second;
+            int distance = q.top().first;
+            q.pop();
+            if (distance != dist[node.first][node.second])
+                continue;
+
+            for (auto& it : graph[node]) {
+                auto adj = it.first;
+                int weight = it.second;
+                int x = adj.first;
+                int y = adj.second;
+
+                if (weight + distance < dist[x][y]) {
+                    dist[x][y] = weight + distance;
+                    q.push({weight + distance, adj});
+                }
+            }
+        }
+        return dist[n - 1][m - 1] == 1e9 ? -1 : dist[n - 1][m - 1];
+    }
+     ```
