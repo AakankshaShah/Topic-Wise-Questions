@@ -985,3 +985,29 @@ int last;
         return dist[n - 1][m - 1] == 1e9 ? -1 : dist[n - 1][m - 1];
     }
      ```
+27. kth smallest element in a sorted matrix
+     ```
+       int kthSmallest(vector<vector<int>>& matrix, int k) {
+        int n = matrix.size();
+        priority_queue<vector<int>, vector<vector<int>>, greater<vector<int>>>
+            pq;
+        for (int i = 0; i < n; i++) {
+            pq.push({matrix[i][0], i, 0});
+        }
+        int result = 0;
+
+        for (int i = 0; i < k; i++) {
+            auto elem = pq.top();
+            pq.pop();
+            result = elem[0];
+            int row = elem[1];
+            int col = elem[2];
+
+            if (col + 1 < n) {
+                pq.push({matrix[row][col + 1], row, col + 1});
+            }
+        }
+
+        return result;
+    }
+     ```
