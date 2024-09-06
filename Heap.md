@@ -1051,3 +1051,38 @@ int last;
     }
   
      ```
+28. Stock price fluctuations 
+     ```
+       map<int, int> value;     // price,count
+    map<int, int> timeStock; // timestamp,price
+    StockPrice() {}
+
+    void update(int timestamp, int price) {
+        auto it = timeStock.find(timestamp);
+        if (it != timeStock.end()) {
+            int price = it->second;
+            value[price]--;
+            if (value[price] == 0)
+                value.erase(price);
+        }
+        timeStock[timestamp] = price;
+        value[price]++;
+    }
+
+    int current() {
+        auto it = timeStock.end();
+        it--;
+        return it->second;
+    }
+
+    int maximum() {
+        auto it = value.end();
+        it--;
+        return it->first;
+    }
+
+    int minimum() {
+        auto it = value.begin();
+        return it->first;
+    }
+     ```
