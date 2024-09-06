@@ -1087,7 +1087,8 @@ int last;
     }
      ```
 29. Last Stone weight 
-         ```
+
+     ```
            int lastStoneWeight(vector<int>& stones) {
         priority_queue<int> pq;
         for (int i = 0; i < stones.size(); i++) {
@@ -1108,7 +1109,7 @@ int last;
         else
             return 0;
          }
-         ```
+     ```
 30. Max score from removing stones
      ```
        int maximumScore(int a, int b, int c) {
