@@ -857,3 +857,42 @@ int last;
         return nums.size() - pq.size();
     }
      ```
+24. Find k pairs with smallest sums
+     ```
+       vector<vector<int>> kSmallestPairs(vector<int>& nums1, vector<int>& nums2, int k) {
+        vector<vector<int>> ans;
+
+       
+        auto comp = [](const vector<int>& a, const vector<int>& b) {
+            return a[0] > b[0];
+        };
+        priority_queue<vector<int>, vector<vector<int>>, decltype(comp)> pq(comp);
+
+      
+        for (int i = 0; i < nums1.size() && i < k; i++) {
+            pq.push({nums1[i] + nums2[0], i, 0});
+        }
+
+        // Extract the k smallest pairs
+        while (!pq.empty() && k > 0) {
+            vector<int> t = pq.top();
+            pq.pop();
+
+            int i = t[1];
+            int j = t[2];
+
+            // Add the current pair to the answer list
+            ans.push_back({nums1[i], nums2[j]});
+
+            // If possible, add the next pair in the current row to the heap
+            if (j + 1 < nums2.size()) {
+                pq.push({nums1[i] + nums2[j + 1], i, j + 1});
+            }
+
+            k--;
+        }
+
+        return ans;
+        
+    }
+     ```
