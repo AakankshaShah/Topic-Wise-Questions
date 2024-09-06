@@ -1515,11 +1515,12 @@ return sans;
         return ans;
 
      ```
-     51. Jump Game 7
-          ```
+51. Jump Game 7
+
+     ```
              bool canReach(string s, int minJump, int maxJump) {
-        int n = s.length();
-        if (s[n - 1] == '1')
+             int n = s.length();
+             if (s[n - 1] == '1')
             return false;
 
         queue<int> q;
@@ -1544,5 +1545,6 @@ return sans;
 
         return false;
         }
-       ```
+     ```
+
       
