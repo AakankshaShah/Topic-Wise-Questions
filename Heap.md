@@ -1344,9 +1344,9 @@ int last;
         return level[mp[n - 1][m - 1]];
     }
     ```
-   34. No of restricted path from first to last node
-        ```
-          const int MOD = 1e9 + 7;
+34. No of restricted path from first to last node
+    ```
+       const int MOD = 1e9 + 7;
     int dfs(int node, int end, vector<int>& dis,
             unordered_map<int, vector<pair<int, int>>>& adj, vector<int>& dp) {
         if (node == end) {
@@ -1411,8 +1411,13 @@ int last;
         int i = 1;                 // starting from node 1
         return dfs(i, n, dis, adj, dp);
     }
-        ```
+    ```
 
+   
+         
+
+
+ 
 35. Split Array into Consecutive Subsequences
      ```
          bool isPossible(vector<int>& nums) {
