@@ -712,13 +712,14 @@ sort(buses.begin(), buses.end());
         return lis.size();
     }
      ```
-    26. kth smallest pair distance
-         ```
-            int smallestDistancePair(std::vector<int>& nums, int k) {
-        sort(nums.begin(), nums.end());
+ 26. kth smallest pair distance
 
-        int left = 0;
-        int right = nums.back() - nums.front();
+      ```
+            int smallestDistancePair(std::vector<int>& nums, int k) {
+            sort(nums.begin(), nums.end());
+
+             int left = 0;
+          int right = nums.back() - nums.front();
 
         while (left < right) {
             int mid = left + (right - left) / 2;
@@ -741,4 +742,22 @@ sort(buses.begin(), buses.end());
         }
         return count >= k;
          }
-         ```
+      ```
+27.Find student that will replace chalk 
+
+```
+        int chalkReplacer(vector<int>& chalk, int k) {
+         int n=chalk.size();
+        vector<long long> sum(n, 0);
+        sum[0]=chalk[0];
+        for(int i=1; i<n; i++){
+            sum[i]=sum[i-1]+chalk[i];
+       
+        }
+        k%=sum[n-1];
+
+
+        return upper_bound(sum.begin(), sum.end(), k)-sum.begin();
+        
+    }
+```
