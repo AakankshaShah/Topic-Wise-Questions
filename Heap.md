@@ -1290,4 +1290,58 @@ int last;
     }
     };
       ```
+33. Minimum obstacle removal to reach corner
+    ```
+      bool isValid(int i, int j, vector<vector<int>>& grid) {
+        return (i >= 0 && j >= 0 && i < grid.size() && j < grid[0].size());
+    }
+    int X[4] = {0, 0, 1, -1};
+    int Y[4] = {1, -1, 0, 0};
+    int minimumObstacles(vector<vector<int>>& grid) {
+        int n = grid.size(), m = grid[0].size();
+
+        deque<pair<int, int>> dq;
+
+        vector<int> level(m * n, 1e6);
+
+        vector<vector<int>> mp(n, vector<int>(m, 0));
+
+        int k = 0;
+        for (int i = 0; i < n; ++i) {
+            for (int j = 0; j < m; ++j) {
+                mp[i][j] = k++;
+            }
+        }
+
+        dq.push_back({0, 0});
+        level[mp[0][0]] = 0;
+        while (!dq.empty()) {
+            auto curr = dq.front();
+            int x = curr.first, y = curr.second;
+            dq.pop_front();
+            if (x == n - 1 && y == m - 1)
+                return level[mp[n - 1][m - 1]];
+
+            for (int i = 0; i < 4; ++i) {
+                int newx = x + X[i], newy = y + Y[i];
+                if (isValid(newx, newy, grid)) {
+                    if (level[mp[x][y]] + grid[newx][newy] <
+                        level[mp[newx][newy]]) {
+
+                        level[mp[newx][newy]] =
+                            level[mp[x][y]] + grid[newx][newy];
+
+                        if (grid[newx][newy] == 1) {
+                            dq.push_back({newx, newy});
+                        } else {
+                            dq.push_front({newx, newy});
+                        }
+                    }
+                }
+            }
+        }
+
+        return level[mp[n - 1][m - 1]];
+    }
+    ```
   
