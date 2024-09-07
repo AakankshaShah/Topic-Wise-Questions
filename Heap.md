@@ -1141,4 +1141,153 @@ int last;
         return ans;
     }
      ```
+31. Minimum Path Cost in a Hidden Grid
+     ```
+       class Solution {
+     public:
+    vector<vector<int>> dxys{{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
+    vector<char> dirs{'U', 'D', 'L', 'R'};
+    vector<char> reverseDirs{'D', 'U', 'R', 'L'};
+    int findShortestPath(GridMaster& master) {
+        vector<vector<int>> grid(200, vector<int>(200, -1));
+        grid[99][99] = 0;
+        vector<int> target(2, -100);
+        fillGrid(master, 99, 99, grid, target);
+
+        vector<vector<bool>> visited(200, vector<bool>(200, false));
+        priority_queue<vector<int>, vector<vector<int>>, greater<>> pq;
+        pq.push({0, 99, 99});
+
+        while (!pq.empty()) {
+            auto cur = pq.top();
+            pq.pop();
+            int cost = cur[0], row = cur[1], col = cur[2];
+
+            if (row == target[0] && col == target[1]) {
+                return cost;
+            }
+
+            if (visited[row][col]) {
+                continue;
+            }
+
+            visited[row][col] = true;
+
+            for (const auto& dxy : dxys) {
+                int nextRow = row + dxy[0];
+                int nextCol = col + dxy[1];
+                if (nextRow < 0 || nextRow >= 200 || nextCol < 0 ||
+                    nextCol >= 200 || visited[nextRow][nextCol] ||
+                    grid[nextRow][nextCol] == -1) {
+                    continue;
+                }
+                int nextCost = cost + grid[nextRow][nextCol];
+                pq.push({nextCost, nextRow, nextCol});
+            }
+        }
+        return -1;
+    }
+    void fillGrid(GridMaster& master, int row, int col,
+                  vector<vector<int>>& grid, vector<int>& target) {
+        if (master.isTarget()) {
+            target[0] = row;
+            target[1] = col;
+        }
+
+        for (int i = 0; i < 4; i++) {
+            char ch = dirs[i];
+            auto dxy = dxys[i];
+            int nr = row + dxy[0];
+            int nc = col + dxy[1];
+
+            if (master.canMove(ch) && grid[nr][nc] == -1) {
+                int val = master.move(ch);
+                grid[nr][nc] = val;
+                fillGrid(master, nr, nc, grid, target);
+                master.move(reverseDirs[i]);
+            }
+        }
+    }
+    };
+     ```
+32. Shortest Path in a Hidden Grid
+
+      ```
+        class Solution {
+     public:
+    vector<vector<int>> grid;
+    bool foundDest;
+    map<pair<int, int>, char> directions = {
+        {{0, 1}, 'R'}, {{-1, 0}, 'U'}, {{1, 0}, 'D'}, {{0, -1}, 'L'}};
+    map<char, char> rev = {{'U', 'D'}, {'L', 'R'}, {'D', 'U'}, {'R', 'L'}};
+    int findShortestPath(GridMaster& master) {
+        grid.resize(1001, vector<int>(1001, -2));
+        if (!mapPaths(master)) {
+            return -1;
+        }
+        return getShortestPath();
+    }
+    bool mapPaths(GridMaster& master) {
+        int start = 500;
+        foundDest = false;
+        grid[start][start] = -1;
+        dfs(master, {500, 500});
+        return foundDest;
+    }
+    void dfs(GridMaster& master, pair<int, int> curr) {
+        if (master.isTarget()) {
+            grid[curr.first][curr.second] = 2;
+            foundDest = true;
+        }
+        for (auto& dir : directions) {
+            int newX = curr.first + dir.first.first;
+            int newY = curr.second + dir.first.second;
+            if (grid[newX][newY] != -2) {
+                continue;
+            } else {
+                if (master.canMove(dir.second)) {
+                    grid[newX][newY] = 1;
+                    master.move(dir.second);
+                    dfs(master, {newX, newY});
+                    master.move(rev[dir.second]);
+                } else {
+                    grid[newX][newY] = 0;
+                }
+            }
+        }
+    }
+    int getShortestPath() {
+        deque<pair<int, int>> q;
+        set<pair<int, int>> visited;
+        q.push_back({500, 500});
+        visited.insert({500, 500});
+        int dist = 0;
+        while (!q.empty()) {
+            int size = q.size();
+            dist++;
+            while (size-- > 0) {
+                auto curr = q.front();
+                q.pop_front();
+                for (auto& dir : directions) {
+                    int newX = curr.first + dir.first.first;
+                    int newY = curr.second + dir.first.second;
+                    if (grid[newX][newY] <= 0) {
+                        continue;
+                    }
+                    if (grid[newX][newY] == 2) {
+                        return dist;
+                    }
+                    pair<int, int> next = {newX, newY};
+                    if (visited.count(next)) {
+                        continue;
+                    }
+                    q.push_back(next);
+                    visited.insert(next);
+                }
+            }
+        }
+        return -1;
+    }
+    };
+      ```
   
