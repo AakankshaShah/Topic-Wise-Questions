@@ -1237,6 +1237,22 @@ Ctrl+ACVVVV (6 key presses) gives 5 times increase
         
     }
      ```
+37. Best time to buy & sel stocks
+    ```
+      int maxProfit(vector<int>& prices) {
+
+        int profit = 0;
+        int buy = prices[0];
+
+        for (int i = 1; i < prices.size(); i++) {
+            if (buy < prices[i]) {
+                profit += prices[i] - buy;
+            }
+            buy = prices[i];
+        }
+        return profit;
+    }
+    ```
      
 
 
