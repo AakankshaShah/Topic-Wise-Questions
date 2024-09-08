@@ -998,6 +998,56 @@ Ctrl+ACVVVV (6 key presses) gives 5 times increase
         return dp[s.size()] + 1;
     }
     ```
+32. Minimum Number of Increments on Subarrays to Form a Target Array
+    ```
+      int minNumberOperations(vector<int>& target) {
+
+        long long result = 0;
+        int n=target.size();
+
+        int curr = 0;
+        int prev = 0;
+
+        for(int i = 0; i < n; i++) {
+            curr = target[i];
+
+            if(abs(curr) > abs(prev)) {
+                result += abs(curr - prev);
+            }
+
+            prev = curr;
+        }
+
+        return result;
+        
+    }
+    ```
+33. Minimum Operations to Make Array Equal to Target
+    ```
+      long long minimumOperations(vector<int>& nums, vector<int>& target) {
+        int n = nums.size();
+
+        long long result = 0;
+
+        int curr = 0;
+        int prev = 0;
+
+        for (int i = 0; i < n; i++) {
+            curr = target[i] - nums[i];
+
+            if ((curr > 0 && prev < 0) || (curr < 0 && prev > 0)) {
+                result += abs(curr);
+            } else if (abs(curr) > abs(prev)) {
+                result += abs(curr - prev);
+            }
+
+            prev = curr;
+        }
+
+        return result;
+    }
+    ```
+
 
 
 
