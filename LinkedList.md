@@ -1021,7 +1021,8 @@
     }
     ```
 29.Intersection of two linked lists
-    ```
+
+```
       ListNode* getIntersectionNode(ListNode* headA, ListNode* headB) {
         unordered_map<ListNode*, int> mpp;
         for (auto p = headA; p != NULL; p = p->next) {
@@ -1033,7 +1034,7 @@
         }
         return NULL;
     }
-     ```
+```
 
 ```
        int length(ListNode *head){
