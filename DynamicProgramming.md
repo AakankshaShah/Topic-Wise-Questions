@@ -1297,6 +1297,7 @@ Ctrl+ACVVVV (6 key presses) gives 5 times increase
     }
      ```
   39. Maximal square
+
       ```
          int findMaxSquare(vector<vector<char>>& matrix, int row, int col, int &maxSideLength) {
         if (row >= matrix.size() || col >= matrix[0].size()) return 0;
@@ -1311,14 +1312,15 @@ Ctrl+ACVVVV (6 key presses) gives 5 times increase
             return currentSideLength;
         }
         return 0;
-    }
+       }
 
-    int maximalSquare(vector<vector<char>>& matrix) {
+       int maximalSquare(vector<vector<char>>& matrix) {
         int maxSideLength = 0;
         findMaxSquare(matrix, 0, 0, maxSideLength);
         return maxSideLength * maxSideLength;
-    }
-   ```
+        }
+       ```
+
 
    ```
     int findMaxSquare(vector<vector<char>>& matrix, int row, int col, int &maxSideLength,vector<vector<int>>&memo) {
