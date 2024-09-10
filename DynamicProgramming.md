@@ -1101,10 +1101,10 @@ Ctrl+ACVVVV (6 key presses) gives 5 times increase
      ```
 35.  Maximum Number of Points with Cost
 
-     ``` 
-     //TLE
+      ``` 
+         //TLE
          typedef long long ll;
-    ll maxPoints(vector<vector<int>>& points) {
+         ll maxPoints(vector<vector<int>>& points) {
         int m = points.size();
         int n = points[0].size();
         vector<ll> prev(n);
@@ -1124,11 +1124,13 @@ Ctrl+ACVVVV (6 key presses) gives 5 times increase
             prev = curr;
         }
         return *max_element(prev.begin(), prev.end());
-    }
-   ```
-   ```
+        }
+
+      ```
+
+      ```
      typedef long long ll;
-    ll maxPoints(vector<vector<int>>& points) {
+      ll maxPoints(vector<vector<int>>& points) {
         int m = points.size(), n = points[0].size();
         vector<ll> prev(n);
         int score = 0;
@@ -1162,9 +1164,11 @@ Ctrl+ACVVVV (6 key presses) gives 5 times increase
             prev = curr;
         }
         return *max_element(prev.begin(), prev.end());
-    }
-    ```
+        }
+       ```
+
 36. Edit distance
+
      ```
       int solve(string& a, string& b, int i, int j) {
         // Base case
@@ -1196,6 +1200,7 @@ Ctrl+ACVVVV (6 key presses) gives 5 times increase
         return solve(word1, word2, 0, 0);
     }
      ```
+
      ```
        int solveMem(string &a,string &b,int i,int j,vector<vector<int>> &dp)
     {
@@ -1237,7 +1242,8 @@ Ctrl+ACVVVV (6 key presses) gives 5 times increase
         
     }
      ```
-37. Best time to buy & sel stocks
+37. Best time to buy & sell stocks
+
     ```
       int maxProfit(vector<int>& prices) {
 
