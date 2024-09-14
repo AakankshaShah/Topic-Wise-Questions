@@ -317,3 +317,44 @@ vector<string> res;
     return result;  // Return all possible segmentations
    }
    ```
+9. Letter combinations of a phone number
+   ```
+     void solve(string& digits, string& s, vector<string>& ans, int start,
+               unordered_map<int, vector<char>>& m) {
+        if (start ==
+            digits.size()) { // Base case: if we've processed all digits
+            ans.push_back(s);
+            return;
+        }
+
+        int digit = digits[start] - '0';
+        for (char c : m[digit]) {
+            s.push_back(c);
+            solve(digits, s, ans, start + 1, m);
+            s.pop_back();
+        }
+    }
+
+    vector<string> letterCombinations(string digits) {
+        if (digits.empty()) {
+            return {};
+        }
+
+        // Create the mapping for each digit
+        unordered_map<int, vector<char>> m;
+        m[2] = {'a', 'b', 'c'};
+        m[3] = {'d', 'e', 'f'};
+        m[4] = {'g', 'h', 'i'};
+        m[5] = {'j', 'k', 'l'};
+        m[6] = {'m', 'n', 'o'};
+        m[7] = {'p', 'q', 'r', 's'};
+        m[8] = {'t', 'u', 'v'};
+        m[9] = {'w', 'x', 'y', 'z'};
+
+        vector<string> ans;
+        string s = "";
+        solve(digits, s, ans, 0, m);
+
+        return ans;
+    }
+   ```
