@@ -59,3 +59,34 @@ vector<string> res;
     return res;
    }
    ```
+   ```
+     string swapChars(int a, int b, string s) {
+        swap(s[a], s[b]);
+        return s;
+    }
+    void solve(string str, int k, int index, string& max) {
+        if (k == 0 || index == str.length() - 1) {
+            if (str.compare(max) > 0) {
+                max = str;
+            }
+            return;
+        }
+        
+        // Traverse the string starting from the current index
+        for (int i = index + 1; i < str.length(); i++) {
+            if (str[index] < str[i]) {
+                // Swap characters at index and i
+                str = swapChars(i,index,str);
+                
+                // Recur for the next index with one less swap
+                solve(str, k - 1, index + 1, max);
+                
+                // Backtrack (undo the swap)
+                str = swapChars(i,index,str);
+            }
+        }
+        // Recur without making any swap for the next index
+        solve(str, k, index + 1, max);
+    }
+    
+   ```
