@@ -232,3 +232,37 @@ vector<string> res;
         return k;
     }
    ```
+7. Word Break
+   ```
+      bool solve(string &s, unordered_map<string, bool> &st, int idx, vector<int> &dp) {
+    if (idx == s.size()) 
+        return true;
+
+    if (dp[idx] != -1) 
+        return dp[idx];
+
+  
+    for (int i = idx + 1; i <= s.size(); i++) {
+        string t = s.substr(idx, i - idx);  // Extract substring from idx to i-1
+        if (st.find(t) != st.end() && solve(s, st, i, dp)) {
+            return dp[idx] = true;
+        }
+    }
+
+    return dp[idx] = false;  // Mark the current idx as false if no valid break
+   }
+
+   bool wordBreak(string s, vector<string>& wordDict) {
+    unordered_map<string, bool> st;
+
+    // Populate the dictionary set
+    for (const string &word : wordDict)
+        st[word] = true;
+
+    // DP array for memoization, initialized to -1 (not processed)
+    vector<int> dp(s.size(), -1);
+
+    // Start solving from index 0
+    return solve(s, st, 0, dp);
+   }
+   ```
