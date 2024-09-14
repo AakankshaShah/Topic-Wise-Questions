@@ -358,3 +358,113 @@ vector<string> res;
         return ans;
     }
    ```
+   10. N queens
+
+      ```
+        bool isSafe(vector<string>& board, int row, int col, int n) {
+        int i = row;
+        int j = col;
+
+        while (row >= 0 && col >= 0) {
+            if (board[row][col] == 'Q')
+                return false;
+            row--;
+            col--;
+        }
+        col = j;
+        row = i;
+
+        while (col >= 0) {
+            if (board[row][col] == 'Q')
+                return false;
+            col--;
+        }
+        col = j;
+        while (col >= 0 && row < n) {
+            if (board[row][col] == 'Q')
+                return false;
+            col--;
+            row++;
+        }
+
+        return true;
+    }
+
+    void solve(vector<string>& board, int col, int n,
+               vector<vector<string>>& ans) {
+        if (col == n) {
+            ans.push_back(board);
+            return;
+        }
+        for (int row = 0; row < n; row++) {
+            if (isSafe(board, row, col, n)) {
+                board[row][col] = 'Q';
+                solve(board, col + 1, n, ans); // Corrected the recursive call
+                board[row][col] = '.';
+            }
+        }
+    }
+
+    vector<vector<string>> solveNQueens(int n) {
+        vector<vector<string>> ans;
+        vector<string> board(n);
+        string s(n, '.');
+        for (int i = 0; i < n; i++)
+            board[i] = s;
+
+        solve(board, 0, n, ans);
+        return ans;
+    }
+      ```
+11. Sudoku solver
+    ```
+      bool isSafe(int i, int j, char val, vector<vector<char>>& board) {
+        for (int k = 0; k < 9; k++) {
+            if (board[i][k] == val)
+                return false;
+            if (board[k][j] == val)
+                return false;
+            if (board[3 * (i / 3) + k / 3][3 * (j / 3) + k % 3] ==
+                val) // checks within submatrix
+                return false;
+        }
+        //  int r = i - i % 3;
+        //  int c = j - j % 3;
+
+        // for (int m = r; m < r + 3; m++) {
+        //     for (int n = c; n < c + 3; n++) {
+        //         if (board[m][n] == val)
+        //             return false;
+        //     }
+        // }
+
+        return true;
+    }
+
+    bool solve(vector<vector<char>>& board) {
+        int n = board.size();
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                if (board[i][j] == '.') {
+                    // insert
+                    for (char value = '1'; value <= '9'; value++) {
+                        // checking for safety of row,col and 3*3 box
+                        if (isSafe(i, j, value, board)) {
+                            board[i][j] = value;
+                            // baaki recursion sambhaal leha
+                            bool aageKaSolution = solve(board);
+                            if (aageKaSolution == true)
+                                return true;
+                            // else backtracking
+                            board[i][j] = '.';
+                        }
+                    }
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+    void solveSudoku(vector<vector<char>>& board) { solve(board); }
+    ```
+
