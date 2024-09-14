@@ -176,7 +176,7 @@ vector<string> res;
                 }
             }
 
-            visited[i][j] = false;
+            visited[i][j] = false;//Ek hi path me we cannot come to same point that is why
         }
 
         vector<string> findPath(vector<vector<int>> & mat) {
@@ -264,5 +264,56 @@ vector<string> res;
 
     // Start solving from index 0
     return solve(s, st, 0, dp);
+   }
+   ```
+8. Word Break 2
+   ```
+      bool solve(string &s, unordered_map<string, bool> &st, int idx, vector<int> &dp, vector<string> &result, vector<string> &currentPath) {
+    if (idx == s.size()) {
+        // If we've reached the end, save the current path (words found so far) into the result
+        result.push_back("");
+        for (int i = 0; i < currentPath.size(); ++i) {
+            result.back() += currentPath[i];
+            if (i != currentPath.size() - 1) result.back() += " ";
+        }
+        return true;
+    }
+
+    if (dp[idx] != -1)  // Memoization check
+        return dp[idx];
+
+    bool found = false;
+
+    // Try breaking the word from idx to any future index
+    for (int i = idx + 1; i <= s.size(); i++) {
+        string t = s.substr(idx, i - idx);  // Extract substring from idx to i-1
+        if (st.find(t) != st.end()) {
+            currentPath.push_back(t);  // Add the current word to the path
+            if (solve(s, st, i, dp, result, currentPath)) {
+                found = true;
+            }
+            currentPath.pop_back();  // Backtrack
+        }
+    }
+
+    return dp[idx] = found;  // Memoize and return the result for this index
+    }
+
+    vector<string> wordBreak(string s, vector<string>& wordDict) {
+    unordered_map<string, bool> st;
+
+    // Populate the dictionary set
+    for (const string &word : wordDict)
+        st[word] = true;
+
+    // DP array for memoization, initialized to -1 (not processed)
+    vector<int> dp(s.size(), -1);
+    
+    vector<string> result;       // Stores the final result of word combinations
+    vector<string> currentPath;  // Tracks the current path of words during recursion
+
+    solve(s, st, 0, dp, result, currentPath);  // Start solving from index 0
+    
+    return result;  // Return all possible segmentations
    }
    ```
