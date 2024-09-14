@@ -147,3 +147,50 @@ vector<string> res;
             solve(ds, n, ans);
         }
   ```
+5. Rat in a maze
+   ```
+      bool isValid(int i, int j, vector<vector<int>>& mat,
+                     vector<vector<bool>>& visited) {
+
+            return (i >= 0 && i < n && j >= 0 && j < n && mat[i][j] == 1 &&
+                    !visited[i][j]);
+        }
+
+        void solve(vector<vector<int>> & mat, int i, int j, vector<string>& ans,
+                   string& s, vector<vector<bool>>& visited) {
+            if (i == n - 1 && j == n - 1) {
+
+                ans.push_back(s);
+                return;
+            }
+
+            visited[i][j] = true;
+
+            for (int k = 0; k < 4; k++) {
+                int new_i = i + dx[k];
+                int new_j = j + dy[k];
+                if (isValid(new_i, new_j, mat, visited)) {
+                    s.push_back(p[k][0]);
+                    solve(mat, new_i, new_j, ans, s, visited);
+                    s.pop_back();
+                }
+            }
+
+            visited[i][j] = false;
+        }
+
+        vector<string> findPath(vector<vector<int>> & mat) {
+            vector<string> ans;
+            n = mat.size();
+
+            if (n == 0 || mat[0][0] == 0 || mat[n - 1][n - 1] == 0) {
+
+                return ans;
+            }
+
+            string s = "";
+            vector<vector<bool>> visited(n, vector<bool>(n, false));
+            solve(mat, 0, 0, ans, s, visited);
+            return ans;
+        }
+   ```
