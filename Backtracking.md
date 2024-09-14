@@ -90,3 +90,32 @@ vector<string> res;
     }
     
    ```
+3. Permuattions of a string 
+    ```
+          if (start == S.size() - 1) {
+                set.insert(S); // Insert the current permutation into the set
+                return;
+            }
+
+            // Traverse the string and swap characters
+            for (int i = start; i < S.size(); i++) {
+                swap(S[start], S[i]);
+                solve(S, start + 1, set); // Recur for the next index
+                swap(S[start],
+                     S[i]); // Backtrack to restore the original string
+            }
+        }
+        vector<string> find_permutation(string S) {
+            vector<string> v;
+            set<string> set;  // To store unique permutations
+            solve(S, 0, set); // Start the recursive process
+
+            // Copy all unique permutations from the set to the result vector
+            for (auto i : set) {
+                v.push_back(i);
+            }
+
+            return v;
+        }
+    
+    ```
