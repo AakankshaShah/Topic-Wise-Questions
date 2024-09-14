@@ -194,3 +194,41 @@ vector<string> res;
             return ans;
         }
    ```
+6. Palindrome partition
+
+   ```
+    bool isPalindrome(string& s) {
+        int l = 0;
+        int r = s.length() - 1;
+        while (l <= r) {
+            if (s.at(l) != s.at(r)) {
+                return false;
+            }
+            l++;
+            r--;
+        }
+        return true;
+    }
+    void sum(string s, vector<string> a, vector<vector<string>>& k) {
+        if (s == "" || s.length() == 0) {
+            k.push_back(a);
+            return;
+        }
+        for (int i = 1; i <= s.length(); i++) {
+            string temp = s.substr(0, i);
+            if (!isPalindrome(temp)) {
+                continue;
+            }
+            a.push_back(temp);
+            sum(s.substr(i, s.length()), a, k);
+            a.pop_back();
+        }
+        return;
+    }
+
+    vector<vector<string>> partition(string s) {
+        vector<vector<string>> k;
+        sum(s, {}, k);
+        return k;
+    }
+   ```
