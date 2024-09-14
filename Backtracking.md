@@ -90,7 +90,7 @@ vector<string> res;
     }
     
    ```
-3. Permuattions of a string 
+3. Permutations of a string 
     ```
           if (start == S.size() - 1) {
                 set.insert(S); // Insert the current permutation into the set
@@ -119,3 +119,31 @@ vector<string> res;
         }
     
     ```
+4. N Digit numbers with digits in increasing order
+
+  ```
+      void solve(string ds, int n, vector<int>& ans) {
+            if (n == 0) {
+                ans.push_back(stoi(ds));
+                return;
+            }
+
+            for (char i = '1'; i <= '9'; i++) {
+                if (ds.size() == 0 || ds.back() < i) {
+                    ds.push_back(i);
+                    solve(ds, n - 1, ans);
+                    ds.pop_back();
+                }
+            }
+        }
+        vector<int> increasingNumbers(int n) {
+            vector<int> ans;
+            if (n == 1) {
+                for (int i = 0; i < 10; i++)
+                    ans.push_back(i);
+                return ans;
+            }
+            string ds = "";
+            solve(ds, n, ans);
+        }
+  ```
