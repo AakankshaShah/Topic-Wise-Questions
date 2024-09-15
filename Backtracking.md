@@ -495,4 +495,56 @@ vector<string> res;
     return ans; 
     }
     ```
+13. Android unlock patterns
+    ```
+      int dfs(int mid_element[10][10], vector<bool>&visited, int curr, int remaining_len){
+
+        // If remaining length is negative, this path is invalid
+        if(remaining_len < 0) return 0;
+
+        // If remaining length is zero, we found a valid pattern
+        if(remaining_len == 0) return 1;
+
+        visited[curr] = true;
+
+        int count = 0;
+
+        for(int i=1; i<=9; i++){
+
+            // Check if the next key is not visited and meets the conditions
+            if(!visited[i] && (!mid_element[curr][i] || visited[mid_element[curr][i]]))
+                count += dfs(mid_element, visited, i, remaining_len-1);
+        }
+
+        // Backtrack: mark the current key as not visited
+        visited[curr] = false;
+        
+        return count;
+    }
+    int numberOfPatterns(int m, int n) {
+         int mid_element[10][10] = {0};
+        mid_element[1][3] = mid_element[3][1] = 2;
+        mid_element[1][7] = mid_element[7][1] = 4;
+        mid_element[3][9] = mid_element[9][3] = 6;
+        mid_element[7][9] = mid_element[9][7] = 8;
+        mid_element[1][9] = mid_element[9][1] = mid_element[3][7] = mid_element[7][3] = 
+        mid_element[2][8] = mid_element[8][2] = mid_element[4][6] = mid_element[6][4] = 5;
+
+        vector<bool>visited(10, false);
+
+        int count = 0;
+
+        for(int i=m; i<=n; i++){
+
+        // For keys 1 and 2, we multiply the count by 4 because they have symmetries: 1, 3, 7, and 9 are symmetrically opposite, and similarly for 2, 4, 6, and 8.
+            count += dfs(mid_element, visited, 1, i-1 )*4;
+            count += dfs(mid_element, visited, 2, i-1 )*4;//2,4,6,8
+        // For key 5, we don't multiply by 4 because it's in the center and doesn't have symmetrical patterns.
+            count += dfs(mid_element, visited, 5, i-1 );
+        }
+
+        return count;
+        
+    }
+    ```
 
