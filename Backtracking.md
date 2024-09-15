@@ -753,4 +753,30 @@ vector<string> res;
         
     }
     ```
+19. Smallest string starting from root
+     ```
+         string smallestFromLeaf(TreeNode* root) {
+        string s = "", result = "";
+        helper(root, s, result);
+        return result;
+        
+    }
+    void helper(TreeNode* node, string& s, string& result) {
+
+        if (node == NULL) return;
+
+ 
+        s.push_back(node->val + 'a');
+        if ((node->left == NULL) && (node->right == NULL)) {
+            string t = s;
+            reverse(t.begin(), t.end());
+            if (result.empty() || (t < result)) result = t;
+        }
+        else {
+            helper(node->left, s, result);
+            helper(node->right, s, result);
+        }
+        s.pop_back();
+    }
+     ```
 
