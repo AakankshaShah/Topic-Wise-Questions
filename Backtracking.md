@@ -358,7 +358,7 @@ vector<string> res;
         return ans;
     }
    ```
-   10. N queens
+10. N queens
 
       ```
         bool isSafe(vector<string>& board, int row, int col, int n) {
