@@ -902,4 +902,48 @@ vector<string> res;
         return res;
     }
      ```
+25. Brace expansion
+
+   ```
+        int j;
+    vector<char> adj[50];
+    vector<string> ans;
+    void dfs(int level, string temp) {
+        if (level == j) {
+            ans.push_back(temp);
+            return;
+        }
+        for (int i = 0; i < adj[level].size(); i++) {
+            temp += adj[level][i];
+            dfs(level + 1, temp);
+            temp.pop_back();
+        }
+    }
+    vector<string> expand(string s) {
+        int n = s.size();
+        int j = 0;
+        stack<char> st;
+        for (int i = 0; i < n; i++) {
+            if (s[i] == ',')
+                continue;
+            if (s[i] == '{')
+                st.push('{');
+            else if (s[i] == '}') {
+                st.pop();
+                j++;
+            } else if ((s[i] >= 'a' || s[i] <= 'z') && st.size()) {
+                adj[j].push_back(s[i]);
+            }
+
+            else if ((s[i] >= 'a' || s[i] <= 'z') && st.size() == 0) {
+                adj[j].push_back(s[i]);
+                j++;
+            }
+        }
+        this->j = j;
+        dfs(0, "");
+        sort(ans.begin(), ans.end());
+        return ans;
+    }   
+   ```
 
