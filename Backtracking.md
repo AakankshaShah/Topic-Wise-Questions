@@ -617,4 +617,29 @@ vector<string> res;
         return ans;
     }
     ```
+15. Subsets
+    ```
+        void solve(vector<vector<int>>& ans, vector<int>& v, vector<int>& nums,
+               int start) {
+
+        ans.push_back(v);
+
+        for (int i = start; i < nums.size(); i++) {
+
+            v.push_back(nums[i]);
+
+            solve(ans, v, nums, i + 1);
+
+            v.pop_back();
+        }
+    }
+
+    vector<vector<int>> subsets(vector<int>& nums) {
+        vector<int> v;
+        vector<vector<int>> ans;
+
+        solve(ans, v, nums, 0);
+        return ans;
+    }
+    ```
 
