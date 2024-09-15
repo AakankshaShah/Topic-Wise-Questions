@@ -807,4 +807,44 @@ vector<string> res;
         return result.size();
     }
      ```
+22. Restore ip address
+     ```
+         bool isValid(const string& segment) {
+        int m = segment.length();
+        if (m > 3)
+            return false;
+        if (segment[0] == '0')
+            return m == 1; // Leading zeros are only valid for "0"
+        return stoi(segment) <= 255;
+    }
+
+    void sum(const string& s, string current, vector<string>& result,
+             int count) {
+       
+        if (count == 4) {
+            if (s.empty()) { // Ensure the entire string is used
+                result.push_back(current);
+            }
+            return;
+        }
+
+        for (int i = 1; i <= 3 && i <= s.length(); i++) {
+            string segment = s.substr(0, i);
+            if (isValid(segment)) {
+               
+                string newCurrent =
+                    count == 0 ? segment : current + "." + segment;
+                sum(s.substr(i), newCurrent, result, count + 1);
+            }
+        }
+    }
+
+    vector<string> restoreIpAddresses(const string& s) {
+        vector<string> result;
+        if (s.length() >= 4 && s.length() <= 12) {
+            sum(s, "", result, 0);
+        }
+        return result;
+    }
+     ```
 
