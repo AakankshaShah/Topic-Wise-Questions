@@ -779,4 +779,32 @@ vector<string> res;
         s.pop_back();
     }
      ```
+21. Letter Tiles Possibilities
+     ```
+         set<string> result;
+
+    void solve(string& tiles, string s, map<char, int>& count) {
+        if (!s.empty()) {
+            result.insert(s);
+        }
+        for (auto& [ch, cnt] : count) {
+            if (cnt > 0) {
+                s.push_back(ch);
+                count[ch]--;
+                solve(tiles, s, count);
+                s.pop_back();
+                count[ch]++;
+            }
+        }
+    }
+
+    int numTilePossibilities(string tiles) {
+        map<char, int> count;
+        for (char ch : tiles) {
+            count[ch]++;
+        }
+        solve(tiles, "", count);
+        return result.size();
+    }
+     ```
 
