@@ -716,4 +716,41 @@ vector<string> res;
         return ans;
     }
      ```
+18. Next closest time
+    ```
+        string nextClosestTime(string time) {
+         set<char> digits;
+        string out = time;
+
+        for (const auto& digit : time) {
+            if (digit != ':') digits.insert(digit);
+        }
+
+        // Parse time right to left
+        for (auto i = 4; i >= 0; i--) {
+            if (i == 2) continue; // skip colon
+
+            auto currTime = i > 2 ? out.substr(3, 2):out.substr(0,2);
+            const auto maxTime = i > 2 ? "60":"24";
+            const auto idx = i > 2 ? i-3:i;
+
+            auto it = ++digits.find(out[i]);
+            if (it == digits.end()) {
+                out[i] = *(digits.begin());
+            } else {
+                currTime[idx] = *it;
+                if (currTime >= maxTime) {
+                    out[i] = *(digits.begin());
+                } else {
+                    out[i] = *it;
+                    return out;
+                }
+            }
+
+        }
+
+        return out;
+        
+    }
+    ```
 
