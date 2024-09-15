@@ -847,4 +847,21 @@ vector<string> res;
         return result;
     }
      ```
+23. Flip Game 2
+    ```
+        bool canWin(string curState) {
+        int sz = curState.size();
+        if (sz < 2)
+            return false;
+        for (int i = 0; i + 1 < sz; i++) {
+            if (curState.substr(i, 2) == "++") {
+                string nextStr =
+                    curState.substr(0, i) + "--" + curState.substr(i + 2);
+                if (!canWin(nextStr))
+                    return true;
+            }
+        }
+        return false;
+    }
+    ```
 
