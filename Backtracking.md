@@ -864,4 +864,42 @@ vector<string> res;
         return false;
     }
     ```
+24. Genralize abbreviation
+     ```
+         void backtrack(int idx, const string& word, string& cur_combi,
+                   vector<string>& res, const int& n) {
+        if (idx >= n) {
+            res.push_back(cur_combi);
+            return;
+        }
+
+        bool last_char_is_digit =
+            cur_combi.empty() ? false : isdigit(cur_combi.back());
+        if (!last_char_is_digit) {
+            for (int i = idx; i < n; ++i) {
+                int cur_len = i - idx + 1;
+                cur_combi += to_string(cur_len);
+
+                backtrack(i + 1, word, cur_combi, res, n);
+
+                cur_combi.pop_back();
+                // If the len is greater than 10, we need to pop back twice.
+                if (cur_len >= 10)
+                    cur_combi.pop_back();
+            }
+        }
+
+        // Add index of current char into our cur_combi and carry on to the next
+        // index.
+        cur_combi += word[idx];
+        backtrack(idx + 1, word, cur_combi, res, n);
+        cur_combi.pop_back();
+    }
+    vector<string> generateAbbreviations(string word) {
+        vector<string> res;
+        string cur_combi = "";
+        backtrack(0, word, cur_combi, res, word.length());
+        return res;
+    }
+     ```
 
