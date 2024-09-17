@@ -1693,7 +1693,7 @@ Ctrl+ACVVVV (6 key presses) gives 5 times increase
     }
 
     vector<TreeNode*> generateTrees(int n) { return solve(1, n); }
-};
+
     ```
      
 
