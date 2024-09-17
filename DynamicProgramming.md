@@ -1741,6 +1741,21 @@ Ctrl+ACVVVV (6 key presses) gives 5 times increase
         return dp[n];
     }
     ```
+48. Minimum number to eat n oranges
+     ```
+        int solve(int n) {
+       if(n==0)return 0;
+        int a = 1+solve(n-1);
+        int b = INT_MAX,c=INT_MAX;
+        if(n%2==0)
+        b = 1+solve(n/2);
+        if(n%3==0)
+        c = 1+solve(n-(n/3)*2);
+        return min(a,min(b,c));
+        
+    }
+    int minDays(int n) { return solve(n); }
+     ```
      
 
 
