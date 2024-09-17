@@ -1756,6 +1756,22 @@ Ctrl+ACVVVV (6 key presses) gives 5 times increase
     }
     int minDays(int n) { return solve(n); }
      ```
+     ```
+           {
+        if(n==0)return 0;
+        if(n==1)return 1;
+        if(dp.find(n)!= dp.end()) return dp[n];
+  
+        int x = n%2 + recurdp(n/2,dp);
+        int y = n%3 + recurdp(n/3,dp);
+
+        return dp[n] = 1+min(x,y);
+    }
+    int minDays(int n) {
+        unordered_map<int,int>dp;
+        return recurdp(n,dp);
+    }
+     ```
      
 
 
