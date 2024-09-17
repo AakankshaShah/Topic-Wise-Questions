@@ -387,6 +387,39 @@ int dp[n+1][w+1];
 
      int tans = solve(nums, i, k - 1) + solve(nums, k + 1, j) +
                        nums[i - 1] * nums[k] * nums[j + 1];
+    ```
+       int dp[301][301];
+
+    int solve(vector<int>& nums, int i, int j) {
+        if (i > j)
+            return 0;
+
+        if (dp[i][j] != -1)
+            return dp[i][j];
+
+        int ans = INT_MIN;
+        for (int k = i; k <= j; k++) {
+
+            int tans = solve(nums, i, k - 1) + solve(nums, k + 1, j) +
+                       nums[i - 1] * nums[k] * nums[j + 1];
+            ans = max(ans, tans);
+        }
+        return dp[i][j] = ans;
+    }
+
+    int maxCoins(vector<int>& nums) {
+
+        nums.insert(nums.begin(), 1);
+        nums.insert(nums.end(), 1);
+
+        int n = nums.size();
+        memset(dp, -1, sizeof(dp));
+
+        int ans = solve(nums, 1, n - 2);
+
+        return ans;
+    }
+    ```
 
 6. Palindromic Parition
 
