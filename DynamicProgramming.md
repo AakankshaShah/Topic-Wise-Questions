@@ -1719,6 +1719,28 @@ Ctrl+ACVVVV (6 key presses) gives 5 times increase
         return sol[n];
     }
    ```
+47. Perfect squares
+    ```
+       int numSquares(int n) {
+        std::vector<int> power(201), dp(n + 1);
+
+        for (int i = 0; i < 200; i++) {
+            power[i] = (i + 1) * (i + 1);
+        }
+
+        for (int i = 1; i <= n; i++) {
+            dp[i] = INT_MAX;
+            int j = 0;
+
+            while (power[j] <= i) {
+                dp[i] = min(dp[i], dp[i - power[j]] + 1);
+                j++;
+            }
+        }
+
+        return dp[n];
+    }
+    ```
      
 
 
