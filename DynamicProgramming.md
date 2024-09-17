@@ -1695,6 +1695,30 @@ Ctrl+ACVVVV (6 key presses) gives 5 times increase
     vector<TreeNode*> generateTrees(int n) { return solve(1, n); }
 
     ```
+   ```
+     //Part 1
+        For a given number of nodes i (where i >= 2), the function considers each value j (from 1 to i) as the root. It calculates the number of BSTs possible by multiplying:
+
+       The number of BSTs that can be formed with j-1 nodes (i.e., nodes less than j) on the left subtree: sol[j-1].
+       The number of BSTs that can be formed with i-j nodes (i.e., nodes greater than j) on the right subtree: sol[i-j].
+       So, for each root j, the number of BSTs is sol[j-1] * sol[i-j].
+       int numTrees(int n) {
+       
+        std::vector<int> sol(n + 1, 0);
+        sol[0] = sol[1] = 1;
+
+        // Run a loop from 2 to n...
+        for (int i = 2; i <= n; i++) {
+            // Within the above loop, run a nested loop from 1 to i...
+            for (int j = 1; j <= i; j++) {
+                // Update the i-th position of the vector by adding the multiplication of the respective index...
+                sol[i] += sol[i - j] * sol[j - 1];
+            }
+        }
+        // Return the value of the nth index of the vector to get the solution...
+        return sol[n];
+    }
+   ```
      
 
 
