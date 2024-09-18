@@ -1772,6 +1772,32 @@ Ctrl+ACVVVV (6 key presses) gives 5 times increase
         return recurdp(n,dp);
     }
      ```
+49. Min cost for tickets
+     ```
+        int ans = 0;
+    int solve(vector<int>& days, vector<int>& costs, int i) {
+        int n = days.size();
+        if (i >= days.size())
+            return 0;
+        int c1 = costs[0] + solve(days, costs, i + 1);
+        int j = i;
+        int md = days[i] + 7;
+        while (j < n && days[j] < md)
+            j++;
+        int c7 = costs[1] + solve(days, costs, j);
+        j = i;
+        md = days[i] + 30;
+        while (j < n && days[j] < md)
+            j++;
+        int c30 = costs[2] + solve(days, costs, j);
+        return min({c1, c7, c30});
+    }
+
+    int mincostTickets(vector<int>& days, vector<int>& costs) {
+
+        return solve(days, costs, 0);
+    }
+     ```
      
 
 
