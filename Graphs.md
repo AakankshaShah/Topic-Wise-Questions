@@ -2614,7 +2614,7 @@ public:
         return subIslands;
     }
     ```
-    59. Nearest exit from Maze
+59. Nearest exit from Maze
        ```
          ector<vector<int>> directions{{0, 1}, {0, -1}, {1, 0}, {-1, 0}};
     int nearestExit(vector<vector<char>>& maze, vector<int>& entrance) {
