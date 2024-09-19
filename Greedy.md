@@ -595,6 +595,7 @@
     int integerReplacement(int n) { return operate(n); }
      ```
    22. Gas station
+
        ```
            int canCompleteCircuit(vector<int>& gas, vector<int>& cost) {
         int n = gas.size();
@@ -619,7 +620,33 @@
             }
         }
         return result;
+         }
+        ```
+23. Maximum Number of Operations to Move Ones to the End
+
+   ```
+       int maxOperations(string s) {
+        int n = s.length();
+        int cnt = 0;
+        int ans = 0;
+        int check = 1;
+        for (int i = 0; i < n; i++) {
+            if (s[i] == '1' && check == 1)
+                cnt++;
+
+            if (s[i] == '0' && check == 1)
+                check = 0;
+
+            if (s[i] == '1' && check == 0) {
+                ans += cnt;
+                cnt += 1;
+                check = 1;
+            }
+        }
+        if (check == 0)
+            ans += cnt;
+        return ans;
     }
-       ```
+   ```
  
 
