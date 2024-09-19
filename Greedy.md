@@ -480,7 +480,7 @@
         
     }
      ```
- 17. Divide array in sets of k consecutive num
+ 17. Divide array in sets of k consecutive num/ Hand of straights
       ```
            bool isPossibleDivide(vector<int>& nums, int k) {
         if(nums.size() % k != 0)return false;
