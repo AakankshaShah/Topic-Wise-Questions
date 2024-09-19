@@ -767,5 +767,55 @@
         
     }
        ```
+28. Reach End of Array With Max Score
+     ```
+         long long findMaximumScore(vector<int>& nums) {
+        int n = nums.size();
+        long long res = 0;
+        int x = nums[0], j = 1, i = 0;
+
+        while (j < n - 1) {
+            if (nums[i] < nums[j]) {
+                res += x * 1LL * (j - i);
+                i = j;
+                x = nums[i];
+            }
+            j++;
+        }
+
+        return res + x * 1LL * (n - 1 - i);
+    }
+     ```
+29. Bag of Tokens
+     ```
+         int bagOfTokensScore(vector<int>& tokens, int power) {
+        int n = tokens.size();
+        sort(tokens.begin(), tokens.end());
+        int P=power;
+
+        int currScore = 0;
+        int maxScore = 0;
+        int l = 0, r = n - 1;
+
+        while (l <= r) {
+            if (P >= tokens[l]) {
+                currScore++;
+                maxScore = max(maxScore, currScore); 
+                P -= tokens[l];                    
+                l++;
+
+            } else if (currScore >= 1) {
+                currScore--;
+                P += tokens[r]; // choose largest token
+                r--;
+
+            } else {
+                // no way further to increase score
+                return maxScore;
+            }
+        }
+        return maxScore;
+    }
+     ```
  
 
