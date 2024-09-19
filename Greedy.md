@@ -698,5 +698,33 @@
         return accumulate(begin(count), end(count), 0);
     }
      ```
+25. Boats to save people
+     ```
+         int numRescueBoats(vector<int>& people, int limit) {
+
+        sort(people.begin(), people.end());
+        int left = 0;
+        int right = people.size() - 1;
+        int boats = 0;
+
+    
+        while (left <= right) {
+           
+            if (people[left] + people[right] <= limit) {
+                // If they can, move on to the next lightest person
+                left++;
+            }
+            // Move on to the next heaviest person
+            right--;
+
+            // Add a boat for the current group of people
+            boats++;
+        }
+        // Return the total number of boats needed
+        return boats;
+        
+    }
+     ```
+26.  
  
 
