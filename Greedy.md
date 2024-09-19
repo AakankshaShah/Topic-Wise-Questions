@@ -480,3 +480,25 @@
         
     }
      ```
+ 17. Divide array in sets of k consecutive num
+      ```
+           bool isPossibleDivide(vector<int>& nums, int k) {
+        if(nums.size() % k != 0)return false;
+        map<int,int> umap;
+        for(int i=0; i<nums.size(); i++){
+            umap[nums[i]]++;
+        }
+        int start = 0;
+        int curr;
+        while(umap.size()>0){
+            curr = umap.begin()->first;
+            for(int i=0; i<k; i++){
+                if(umap[curr+i] == 0)return false;
+                --umap[curr+i];
+                if(umap[curr+i] == 0)umap.erase(curr+i);
+            }
+        }
+        return true;
+        
+    }
+      ```
