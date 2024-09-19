@@ -500,5 +500,36 @@
         }
         return true;
         
+       }
+     ```
+18. Minimum dominoe rotation for equal row
+    ```
+           int minDominoRotations(vector<int>& tops, vector<int>& bottoms) {
+        int ans=INT_MAX;
+        for (int i=1;i<=6;i++)
+        {
+            int cntTop=0;
+            int cntBottom=0;
+            for (int j=0;j<tops.size();j++)
+            {
+               if (tops[j]!=i && bottoms[j]!=i)
+               {
+                   cntTop=-1;
+                   cntBottom=-1;
+                   break;
+               }
+              else if (tops[j]!=i) cntTop++;
+              else if (bottoms[j]!=i) cntBottom++;
+              
+            }
+             if (cntTop!=-1)
+               {
+                   ans=min(ans,min(cntTop,cntBottom));
+               }
+        }
+     return ans==INT_MAX?-1:ans;
+        
     }
-      ```
+    ```
+ 
+
