@@ -365,3 +365,17 @@
         
     }
     ```
+12. Wiggle sort
+    ```
+        void wiggleSort(vector<int>& nums) {
+         bool inc = true;
+        for (size_t i = 0; i < nums.size() - 1; ++i) {
+            if (inc != (nums[i]<=nums[i+1])) {
+                std::swap(nums[i], nums[i+1]);
+            }
+            inc = !inc;
+        }
+        
+    }
+    ```
+13. Wiggle sort 2
