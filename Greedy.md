@@ -423,3 +423,38 @@
         
     }
     ```
+15. Rearrange string k distnace apart
+     ```
+        string rearrangeString(string str, int k) {
+        if (k == 0)
+            return str;
+        unordered_map<char, int> dict;
+        for (char ch : str)
+            dict[ch]++;
+        int left = (int)str.size();
+        priority_queue<pair<int, char>> pq;
+        for (auto it = dict.begin(); it != dict.end(); it++) {
+            pq.push(make_pair(it->second, it->first));
+        }
+        string res;
+
+        while (!pq.empty()) {
+            vector<pair<int, char>> cache;
+            int count = min(k, left);
+            for (int i = 0; i < count; i++) {
+                if (pq.empty())
+                    return "";
+                auto tmp = pq.top();
+                pq.pop();
+                res.push_back(tmp.second);
+                if (--tmp.first > 0)
+                    cache.push_back(tmp);
+                left--;
+            }
+            for (auto p : cache) {
+                pq.push(p);
+            }
+        }
+        return res;
+    }
+     ```
