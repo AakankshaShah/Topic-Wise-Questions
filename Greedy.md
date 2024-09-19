@@ -576,5 +576,23 @@
         return m;
     }
      ```
+21. Integer replacement
+     ```
+        int operate(long long num) {
+        if (num == 1)
+            return 0;
+        if (num == 3)
+            return 2;
+        if (num % 2 == 0)
+            return operate(num / 2) + 1;
+        else {
+            if ((num + 1) % 4 == 0)
+                return operate(num + 1) + 1;
+            else
+                return operate(num - 1) + 1;
+        }
+    }
+    int integerReplacement(int n) { return operate(n); }
+     ```
  
 
