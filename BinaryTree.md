@@ -2119,4 +2119,47 @@ public:
         return NULL;
     }
      ```
+67. Create Binary Tree From Descriptions
+     ```
+         TreeNode* createBinaryTree(vector<vector<int>>& descriptions) {
+        unordered_map<int, TreeNode*> mp; // To store node pointers
+        unordered_set<int> childNodes;    // To track which nodes are children
+
+        for (int i = 0; i < descriptions.size(); i++) {
+            int p = descriptions[i][0];  // Parent node value
+            int c = descriptions[i][1];  // Child node value
+            int l = descriptions[i][2];  // Is it a left child? (1 for left, 0 for right)
+
+            // Create parent node if not already present
+            if (mp.find(p) == mp.end()) {
+                mp[p] = new TreeNode(p);
+            }
+
+            // Create child node if not already present
+            if (mp.find(c) == mp.end()) {
+                mp[c] = new TreeNode(c);
+            }
+
+            // Link parent and child based on 'l' (left/right)
+            if (l) {
+                mp[p]->left = mp[c];
+            } else {
+                mp[p]->right = mp[c];
+            }
+
+            // Mark the child node
+            childNodes.insert(c);
+        }
+
+        // Find the root node (a node that is not a child of any other node)
+        for (const auto& desc : descriptions) {
+            int parentVal = desc[0];
+            if (childNodes.find(parentVal) == childNodes.end()) {
+                return mp[parentVal];
+            }
+        }
+
+        return nullptr;  // Shouldn't reach here if the input is valid
+    }
+     ```
 
