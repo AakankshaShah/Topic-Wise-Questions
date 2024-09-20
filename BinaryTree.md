@@ -1939,3 +1939,26 @@ public:
      };
 
      ```
+61. Longest Univalue Path
+     ```
+         int maxlen;
+    int solve(TreeNode* root) {
+        if (root == NULL)
+            return 0;
+        int lh=solve(root->left);
+        int rh=solve(root->right);
+        int l=0,r=0;
+        if(root->left&&root->left->val==root->val)
+        l+=lh+1;
+        if(root->right&&root->right->val==root->val)
+        r+=rh+1;
+        maxlen=max(maxlen,l+r);
+        return max(l,r);
+
+    }
+    int longestUnivaluePath(TreeNode* root) {
+        maxlen = 0;
+        solve(root);
+        return maxlen;
+    }
+     ```
