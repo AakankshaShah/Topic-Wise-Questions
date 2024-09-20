@@ -1907,4 +1907,35 @@ public:
         return pathFrom + pathTo;
     }
      ```
+60. Linked list in a binary tree
+     ```
+         class Solution {
+     public:
+     bool solve(TreeNode* root, ListNode* head) {
+        if (head == NULL)
+            return true; 
+        if (root == NULL)
+            return false;
 
+ 
+        if (root->val == head->val) {
+            if (solve(root->left, head->next) || solve(root->right, head->next)) {
+                return true; 
+            }
+        }
+        
+        return false; 
+    }
+
+    bool isSubPath(ListNode* head, TreeNode* root) {
+        if (root == NULL)
+            return false; 
+        if (solve(root, head))
+            return true;  
+
+        // Recursively check the left and right subtrees
+        return isSubPath(head, root->left) || isSubPath(head, root->right);
+     }
+     };
+
+     ```
