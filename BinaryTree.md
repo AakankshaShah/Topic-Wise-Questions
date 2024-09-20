@@ -1986,4 +1986,47 @@ public:
     }
     bool flipEquiv(TreeNode* root1, TreeNode* root2) { return f(root1, root2); }
      ```
+63. Complete Binary Tree Inserter
+    ```
+           class CBTInserter {
+     public:
+    queue<TreeNode*> q;
+    TreeNode *root = nullptr, *Ins = nullptr;
+    CBTInserter(TreeNode* a) {
+        root = a;
+        q.push(a);
+
+        while (1) {
+            a = q.front();
+            q.pop();
+            Ins = a;
+
+            if (a->left)
+                q.push(a->left);
+            else
+                break;
+            if (a->right)
+                q.push(a->right);
+            else
+                break;
+        }
+    }
+
+    int insert(int x) {
+        TreeNode *a = new TreeNode(x), *par = Ins;
+
+        if (Ins->left) {
+            Ins->right = a;
+            Ins = q.front();
+            q.pop();
+        } else
+            Ins->left = a;
+
+        q.push(a);
+        return par->val;
+    }
+
+    TreeNode* get_root() { return root; }
+    };
+    ```
 
