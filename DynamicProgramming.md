@@ -707,7 +707,7 @@ int dp[n+1][w+1];
 
 18. Count Palindromic substrings https://www.youtube.com/watch?v=XmSOWnL6T_I
 
-          ```
+    ```
             int n = s.size();
         bool dp[n][n];
         int cnt = 0;
@@ -726,7 +726,7 @@ int dp[n+1][w+1];
             }
         }
         return cnt;
-          ```
+     ```
 
 
 19. Distinct palindromic substring 
