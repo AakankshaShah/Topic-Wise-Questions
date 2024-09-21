@@ -591,6 +591,36 @@ int dp[n+1][w+1];
         
     }
  ```
+ ```
+       bool solve(string& s, unordered_map<string, bool>& st, int idx,
+               vector<int>& dp) {
+        if (idx == s.size())
+            return true;
+
+        if (dp[idx] != -1)
+            return dp[idx];
+
+        for (int i = idx + 1; i <= s.size(); i++) {
+            string t = s.substr(idx, i - idx);
+            if (st.find(t) != st.end() && solve(s, st, i, dp)) {
+                return dp[idx] = true;
+            }
+        }
+
+        return dp[idx] = false;
+    }
+
+    bool wordBreak(string s, vector<string>& wordDict) {
+        unordered_map<string, bool> st;
+
+        for (const string& word : wordDict)
+            st[word] = true;
+
+        vector<int> dp(s.size(), -1);
+
+        return solve(s, st, 0, dp);
+    }
+ ```
 
 16. House robbery 1 & 2
      ```
