@@ -75,7 +75,7 @@
 
 3. Sum of fibonacci numbers 
 
-       ```
+    ```
            int Solution::fibsum(int n) {
    
          vector<int>fb;
@@ -106,10 +106,10 @@
        return cnt;
    
        }
-       ```
+    ```
 4. Minimum additions to make valid string 
 
-       ```
+   ```
         int addMinimum(string s) {
         int n = s.size();
         int cnt = 0;
@@ -131,7 +131,7 @@
         }
         return cnt;
         }
-       ```
+    ```
 5. Furthest building you can reach 
    ```
      //Recursion
