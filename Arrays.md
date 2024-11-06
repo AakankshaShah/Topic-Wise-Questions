@@ -2598,4 +2598,58 @@ return c;
         
     }
      ```
+82. Song shuffler
+     ```
+         class SongShuffler {
+    private:
+        std::vector<std::string> songs; // Array of songs
+        int playedIndex;                // Index to track the played songs
+        int playIndex;    // Index to track the current song to be played
+        int k;            // The number of recent songs to track
+        std::rand random; // Random number generator
+
+        // Helper function to swap two elements in the song list
+        void swap(int i, int j) {
+            std::string temp = songs[i];
+            songs[i] = songs[j];
+            songs[j] = temp;
+        }
+
+    public:
+        // Constructor to initialize the playlist and k
+        SongShuffler(std::vector<std::string>& songList, int k) {
+            songs = songList;
+            this->k = k;
+            playedIndex = 0;
+            playIndex = 0;
+            std::srand(std::time(0)); // Seed the random number generator
+        }
+
+        // Function to play a shuffled song
+        std::string playShuffleSong() {
+            // Generate a random index between playIndex and the length of the
+            // song list
+            int nextSong = std::rand() % (songs.size() - playIndex) + playIndex;
+            std::string ret = songs[nextSong];
+
+            // Swap the song at playIndex with the selected random song
+            swap(playIndex, nextSong);
+
+            // Update the playIndex
+            if (playIndex < k)
+                playIndex++;
+
+            // If playIndex equals k, reset and adjust playedIndex
+            if (playIndex == k) {
+                swap(playedIndex, playIndex);
+                playedIndex++;
+                if (playedIndex == k)
+                    playedIndex = 0;
+            }
+
+            return ret;
+        }
+    };
+
+     ```
 
