@@ -125,3 +125,136 @@ public:
 };
 
 ```
+2. Snake & ladder
+```     
+         class Square {
+public:
+    int number;  // Position on the board
+    bool hasSnake;
+    bool hasLadder;
+    int snakeTailPosition;  // If there's a snake, this stores the tail position
+    int ladderTopPosition;  // If there's a ladder, this stores the top position
+
+    Square(int number) : number(number), hasSnake(false), hasLadder(false), snakeTailPosition(-1), ladderTopPosition(-1) {}
+};
+
+class Board {
+private:
+    int size;  // Number of squares
+    vector<Square> squares;
+
+public:
+    Board(int size) : size(size) {
+        // Initialize squares
+        for (int i = 1; i <= size; ++i) {
+            squares.push_back(Square(i));
+        }
+    }
+
+    void addSnake(int mouth, int tail) {
+        squares[mouth - 1].hasSnake = true;
+        squares[mouth - 1].snakeTailPosition = tail;
+    }
+
+    void addLadder(int base, int top) {
+        squares[base - 1].hasLadder = true;
+        squares[base - 1].ladderTopPosition = top;
+    }
+
+    Square& getSquare(int position) {
+        return squares[position - 1];
+    }
+
+    int getSize() {
+        return size;
+    }
+};
+class Dice {
+private:
+    int sides;
+
+public:
+    Dice(int sides) : sides(sides) {
+        if (sides < 6 || sides > 18) throw invalid_argument("Dice sides must be between 6 and 18.");
+    }
+
+    int roll() {
+        return rand() % sides + 1;  // Random number between 1 and sides
+    }
+};
+class Player {
+private:
+    int id;
+    string name;
+    int position;
+
+public:
+    Player(int id, const string& name) : id(id), name(name), position(1) {}
+
+    void move(int steps) {
+        position += steps;
+    }
+
+    int getPosition() const {
+        return position;
+    }
+
+    string getName() const {
+        return name;
+    }
+
+    void setPosition(int newPosition) {
+        position = newPosition;
+    }
+};
+class Game {
+private:
+    Board board;
+    Dice dice;
+    vector<Player> players;
+    int currentPlayerIndex;
+
+public:
+    Game(int boardSize, int diceSides, vector<string> playerNames)
+        : board(boardSize), dice(diceSides), currentPlayerIndex(0) {
+        
+        // Create players
+        for (int i = 0; i < playerNames.size(); ++i) {
+            players.push_back(Player(i + 1, playerNames[i]));
+        }
+    }
+
+    void playTurn() {
+        Player& currentPlayer = players[currentPlayerIndex];
+        int rollResult = dice.roll();
+        cout << currentPlayer.getName() << " rolled a " << rollResult << endl;
+        currentPlayer.move(rollResult);
+
+        // Check for snake or ladder
+        Square& square = board.getSquare(currentPlayer.getPosition());
+        if (square.hasSnake) {
+            cout << currentPlayer.getName() << " hit a snake! Moving to " << square.snakeTailPosition << endl;
+            currentPlayer.setPosition(square.snakeTailPosition);
+        } else if (square.hasLadder) {
+            cout << currentPlayer.getName() << " climbed a ladder! Moving to " << square.ladderTopPosition << endl;
+            currentPlayer.setPosition(square.ladderTopPosition);
+        }
+
+        // Check if the player has won
+        if (currentPlayer.getPosition() >= board.getSize()) {
+            cout << currentPlayer.getName() << " wins!" << endl;
+            return;
+        }
+
+        // Move to the next player
+        currentPlayerIndex = (currentPlayerIndex + 1) % players.size();
+    }
+
+    void startGame() {
+        while (true) {
+            playTurn();
+        }
+    }
+};
+
+```
