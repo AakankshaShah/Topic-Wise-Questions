@@ -258,3 +258,128 @@ public:
 };
 
 ```
+3. Distributed Logger system
+```
+  #include <iostream>
+#include <vector>
+#include <string>
+#include <unordered_map>
+#include <queue>
+#include <ctime>
+
+using namespace std;
+
+class Log {
+public:
+    string timestamp;
+    string service;
+    string level;
+    string message;
+    string correlationId;
+
+    Log(string service, string level, string message, string correlationId) {
+        time_t now = time(0);
+        timestamp = ctime(&now);
+        this->service = service;
+        this->level = level;
+        this->message = message;
+        this->correlationId = correlationId;
+    }
+
+    string toString() {
+        return timestamp + " | " + service + " | " + level + " | " + message + " | CorrelationID: " + correlationId;
+    }
+};
+
+class LogStorage {
+public:
+    unordered_map<string, vector<Log>> logs;  // key = service name, value = list of logs for that service
+
+    void storeLog(Log log) {
+        logs[log.service].push_back(log);
+    }
+
+    vector<Log> getLogsByService(const string& service) {
+        return logs[service];
+    }
+};
+
+class LogCollector {
+private:
+    LogStorage* logStorage;
+public:
+    LogCollector(LogStorage* storage) : logStorage(storage) {}
+
+    void collectLog(Log log) {
+        logStorage->storeLog(log);
+    }
+};
+class LogAggregator {
+private:
+    LogStorage* logStorage;
+
+public:
+    LogAggregator(LogStorage* storage) : logStorage(storage) {}
+
+    vector<Log> aggregateLogs(const string& service) {
+        return logStorage->getLogsByService(service);
+    }
+
+    vector<Log> searchLogsByLevel(const string& level) {
+        vector<Log> filteredLogs;
+        for (auto& entry : logStorage->logs) {
+            for (auto& log : entry.second) {
+                if (log.level == level) {
+                    filteredLogs.push_back(log);
+                }
+            }
+        }
+        return filteredLogs;
+    }
+};
+class LogProducer {
+private:
+    LogCollector* logCollector;
+
+public:
+    LogProducer(LogCollector* collector) : logCollector(collector) {}
+
+    void produceLog(const string& service, const string& level, const string& message, const string& correlationId) {
+        Log log(service, level, message, correlationId);
+        logCollector->collectLog(log);
+    }
+};
+int main() {
+    // Create a log storage system and a collector
+    LogStorage logStorage;
+    LogCollector logCollector(&logStorage);
+    LogAggregator logAggregator(&logStorage);
+
+    // Create some log producers (simulating different services)
+    LogProducer producer1(&logCollector);
+    LogProducer producer2(&logCollector);
+
+    // Simulating logs being produced by services
+    producer1.produceLog("payment-service", "ERROR", "Failed to process payment", "123");
+    producer1.produceLog("payment-service", "INFO", "Payment processed successfully", "124");
+    producer2.produceLog("user-service", "INFO", "User registered", "125");
+    producer2.produceLog("payment-service", "ERROR", "Payment gateway timeout", "126");
+
+    // Aggregate logs for the payment-service
+    vector<Log> paymentLogs = logAggregator.aggregateLogs("payment-service");
+    cout << "Payment Service Logs: \n";
+    for (const Log& log : paymentLogs) {
+        cout << log.toString() << endl;
+    }
+
+    // Search for ERROR level logs across all services
+    vector<Log> errorLogs = logAggregator.searchLogsByLevel("ERROR");
+    cout << "\nERROR Logs: \n";
+    for (const Log& log : errorLogs) {
+        cout << log.toString() << endl;
+    }
+
+    return 0;
+}
+
+```
