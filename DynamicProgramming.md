@@ -1929,6 +1929,33 @@ Ctrl+ACVVVV (6 key presses) gives 5 times increase
         return maxP(prices, 0, n, true);
     }
      ```
+51. Number of Ways to Rearrange Sticks With K Sticks Visible
+    ```
+         int mod = 1e9 + 7;
+    int dp[1001][1001];
+    long long f(int n, int k) {
+        if (k == 0 || k > n)
+            return 0;
+        if (n <= 2)
+            return 1;
+        if (dp[n][k] != -1)
+            return dp[n][k];
+
+        ll ans = 0;
+
+        ans = (ans + f(n - 1, k - 1)) %
+              mod; // tallest stick at rightmost position
+        ans = (ans + (n - 1) * f(n - 1, k)) %
+              mod; // non-tallest stick at rightmost position
+
+        return dp[n][k] = ans;
+    }
+    int rearrangeSticks(int n, int k) {
+        memset(dp, -1, sizeof(dp));
+        return f(n, k);
+    }
+    ```
+
      
 
 
