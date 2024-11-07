@@ -946,4 +946,28 @@ vector<string> res;
         return ans;
     }   
    ```
+26. Subset II
+    ```
+         void solve(vector<vector<int>>& ans, vector<int>& nums, int start, int end,
+               vector<int> temp) {
+        ans.push_back(temp);
+        for (int i = start; i < end; i++) {
+            if (i > start && nums[i] == nums[i - 1])
+                continue;
+            temp.push_back(nums[i]);
+            solve(ans, nums, i + 1, end, temp);
+            temp.pop_back();
+        }
+    }
+
+    vector<vector<int>> subsetsWithDup(vector<int>& nums) {
+        vector<vector<int>> ans;
+        vector<int> temp;
+        sort(nums.begin(), nums.end());
+        int n = nums.size();
+        solve(ans, nums, 0, n, temp);
+
+        return ans;
+    }
+    ```
 
