@@ -1167,3 +1167,43 @@
         
     }
     ```
+34. Flatten a multilevel linked list
+    ```
+        Node* flatten(Node* head) {
+        Node* curr = head;
+        Node* tail = head;
+        stack<Node*> s;
+        while (curr != nullptr) {
+            if (curr->child != nullptr) {
+                if (curr->next != nullptr) {
+                    Node* nx = curr->next;
+                    nx->prev = nullptr;
+                    s.push(nx);
+                }
+
+                // dealing with childrens
+                Node* child = curr->child;
+                curr->next = child;
+                child->prev = curr;
+                curr->child = nullptr;
+            }
+            tail = curr;
+            curr = curr->next;
+        }
+
+        // now we will try to link the remaining part
+        while (!s.empty()) {
+            curr = s.top(); // as current become null so we can say it to point
+                            // the top most node of stack.
+            tail->next = curr;
+            curr->prev = tail;
+            while (curr != nullptr) {
+                tail = curr;
+                curr = curr->next;
+            }
+            s.pop();
+        }
+
+        return head;
+    }
+    ```
