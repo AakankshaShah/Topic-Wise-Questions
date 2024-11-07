@@ -550,10 +550,9 @@ class Library {
 ```
 5. Retail point of sale
 ```
-     // Represents a denomination within a currency
-class Denomination {
-    private double value;   // e.g., 0.5 for 50 cents
-    private String name;    // e.g., "50 Cent Coin"
+    class Denomination {
+    private double value;   // e.g., 0.25 for 25 cents
+    private String name;    // e.g., "25 Cent Coin"
 
     public Denomination(double value, String name) {
         this.value = value;
@@ -563,63 +562,23 @@ class Denomination {
     public double getValue() { return value; }
     public String getName() { return name; }
 }
+lass BalanceCalculator {
+    // Predefined list of USD denominations, sorted from highest to lowest
+    private List<Denomination> denominations = List.of(
+        new Denomination(100, "100 Dollar Bill"),
+        new Denomination(50, "50 Dollar Bill"),
+        new Denomination(20, "20 Dollar Bill"),
+        new Denomination(10, "10 Dollar Bill"),
+        new Denomination(5, "5 Dollar Bill"),
+        new Denomination(1, "1 Dollar Bill"),
+        new Denomination(0.25, "25 Cent Coin"),
+        new Denomination(0.10, "10 Cent Coin"),
+        new Denomination(0.05, "5 Cent Coin"),
+        new Denomination(0.01, "1 Cent Coin")
+    );
 
-// Represents a currency and its denominations
-class Currency {
-    private String code;   // e.g., "USD", "EUR"
-    private List<Denomination> denominations;
-
-    public Currency(String code, List<Denomination> denominations) {
-        this.code = code;
-        this.denominations = denominations;
-    }
-
-    public String getCode() { return code; }
-    public List<Denomination> getDenominations() { return denominations; }
-}
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-class CurrencyRepository {
-    private Map<String, Currency> currencies = new HashMap<>();
-
-    // Initializes available currencies and denominations
-    public CurrencyRepository() {
-        // Initialize with some sample currencies and denominations
-        currencies.put("USD", new Currency("USD", List.of(
-            new Denomination(100, "100 Dollar Bill"),
-            new Denomination(50, "50 Dollar Bill"),
-            new Denomination(20, "20 Dollar Bill"),
-            new Denomination(10, "10 Dollar Bill"),
-            new Denomination(5, "5 Dollar Bill"),
-            new Denomination(1, "1 Dollar Bill"),
-            new Denomination(0.25, "25 Cent Coin")
-        )));
-        // Add more currencies as needed
-    }
-
-    public Currency getCurrency(String code) {
-        return currencies.get(code);
-    }
-}
-import java.util.*;
-
-class BalanceCalculator {
-    private CurrencyRepository currencyRepo;
-
-    public BalanceCalculator(CurrencyRepository currencyRepo) {
-        this.currencyRepo = currencyRepo;
-    }
-
-    public Map<Denomination, Integer> calculateBalance(double balance, String currencyCode) {
-        Currency currency = currencyRepo.getCurrency(currencyCode);
-        List<Denomination> denominations = currency.getDenominations();
-
+    public Map<Denomination, Integer> calculateBalance(double balance) {
         Map<Denomination, Integer> balanceDistribution = new LinkedHashMap<>();
-
-        // Sort denominations in descending order for optimal balance calculation
-        denominations.sort((d1, d2) -> Double.compare(d2.getValue(), d1.getValue()));
 
         for (Denomination denom : denominations) {
             int count = (int) (balance / denom.getValue());
@@ -638,18 +597,18 @@ class POS {
         this.balanceCalculator = balanceCalculator;
     }
 
-    public void processTransaction(double amountPaid, double totalCost, String currencyCode) {
+    public void processTransaction(double amountPaid, double totalCost) {
         if (amountPaid < totalCost) {
             System.out.println("Insufficient payment.");
             return;
         }
 
         double balance = amountPaid - totalCost;
-        System.out.println("Total balance to return: " + balance + " " + currencyCode);
+        System.out.println("Total balance to return: $" + balance);
 
-        Map<Denomination, Integer> balanceDistribution = balanceCalculator.calculateBalance(balance, currencyCode);
+        Map<Denomination, Integer> balanceDistribution = balanceCalculator.calculateBalance(balance);
 
-        System.out.println("Balance breakdown:");
+        System.out.println("Balance breakdown in USD:");
         for (Map.Entry<Denomination, Integer> entry : balanceDistribution.entrySet()) {
             System.out.println(entry.getValue() + " x " + entry.getKey().getName());
         }
@@ -657,12 +616,11 @@ class POS {
 }
 public class RetailPOSApplication {
     public static void main(String[] args) {
-        CurrencyRepository currencyRepo = new CurrencyRepository();
-        BalanceCalculator balanceCalculator = new BalanceCalculator(currencyRepo);
+        BalanceCalculator balanceCalculator = new BalanceCalculator();
         POS pos = new POS(balanceCalculator);
 
-        // Test case: Customer pays $200 for a $157.75 bill in USD
-        pos.processTransaction(200.0, 157.75, "USD");
+        // Test case: Customer pays $200 for a $157.75 bill
+        pos.processTransaction(200.0, 157.75);
     }
 }
 ```
