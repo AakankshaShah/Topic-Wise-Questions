@@ -491,4 +491,40 @@ long long mergeSort(vector<int> &arr, long long low, long long high) {
 
        
     ```
+10. Time Shifts
+    ```
+         vector<pair<int, set<string>>> getWorkingIntervals(vector<Shift> &shifts) {
+    // Sort the shifts by start time
+    sort(shifts.begin(), shifts.end(), compareShifts);
+
+    vector<pair<int, set<string>>> result;
+    set<string> activePersons;
+
+    // Start with the first shift
+    int currentStart = shifts[0].start;
+    int currentEnd = shifts[0].end;
+    activePersons.insert(shifts[0].name);
+
+    // Loop through the shifts and merge overlapping intervals
+    for (size_t i = 1; i < shifts.size(); ++i) {
+        if (shifts[i].start <= currentEnd) {
+            // There is overlap, extend the current interval
+            currentEnd = max(currentEnd, shifts[i].end);
+            activePersons.insert(shifts[i].name);
+        } else {
+            // No overlap, store the current interval and start a new one
+            result.push_back({currentStart, activePersons});
+            currentStart = shifts[i].start;
+            currentEnd = shifts[i].end;
+            activePersons.clear();
+            activePersons.insert(shifts[i].name);
+        }
+    }
+
+    // Don't forget to push the last interval
+    result.push_back({currentStart, activePersons});
+
+    return result;
+    }
+    ```
 
