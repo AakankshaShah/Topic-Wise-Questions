@@ -1007,6 +1007,33 @@
         return false;
     }
     ```
+   ```
+/From any node
+      bool pathSumFromNode(TreeNode* node, int currentSum, int targetSum) {
+    if (!node) return false;
+
+    // Add the current node's value to the current sum
+    currentSum += node->value;
+
+    // If the current sum equals the target sum, we've found a valid path
+    if (currentSum == targetSum) return true;
+
+    // Recur for left and right children
+    return pathSumFromNode(node->left, currentSum, targetSum) || pathSumFromNode(node->right, currentSum, targetSum);
+}
+
+// Function for Condition (ii): Check if any path in the tree sums to the target
+bool hasPathSumAnywhere(TreeNode* node, int targetSum) {
+    if (!node) return false;
+
+    // Check paths starting from the current node
+    if (pathSumFromNode(node, 0, targetSum)) return true;
+
+    // Recur for left and right subtrees
+    return hasPathSumAnywhere(node->left, targetSum) || hasPathSumAnywhere(node->right, targetSum);
+}
+
+   ```
 30. Bottom value of binary tree
     ```
       int findBottomLeftValue(TreeNode* root) {
