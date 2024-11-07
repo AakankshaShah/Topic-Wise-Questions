@@ -383,3 +383,168 @@ int main() {
 }
 
 ```
+4. Library Management System
+```
+     class Book {
+    private int id;
+    private String title;
+    private String author;
+    private String genre;
+    private boolean isAvailable;
+
+    public Book(int id, String title, String author, String genre) {
+        this.id = id;
+        this.title = title;
+        this.author = author;
+        this.genre = genre;
+        this.isAvailable = true;  // Initially, all books are available
+    }
+
+    // Getters and Setters
+
+    public boolean isAvailable() {
+        return isAvailable;
+    }
+
+    public void setAvailable(boolean available) {
+        isAvailable = available;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    // Other Getters and Setters
+}
+import java.util.List;
+
+class User {
+    private int id;
+    private String name;
+    private List<Book> issuedBooks;
+
+    public User(int id, String name) {
+        this.id = id;
+        this.name = name;
+        this.issuedBooks = new ArrayList<>();
+    }
+
+    // Methods to add and remove books from issuedBooks list
+    public void issueBook(Book book) {
+        issuedBooks.add(book);
+    }
+
+    public void returnBook(Book book) {
+        issuedBooks.remove(book);
+    }
+
+    public boolean hasIssuedBook(Book book) {
+        return issuedBooks.contains(book);
+    }
+
+    // Getters and Setters
+}
+
+import java.util.Date;
+
+class Transaction {
+    private Book book;
+    private User user;
+    private Date issueDate;
+    private Date returnDate;
+
+    public Transaction(Book book, User user) {
+        this.book = book;
+        this.user = user;
+        this.issueDate = new Date();
+    }
+
+    // Getters and Setters
+    public void returnBook() {
+        this.returnDate = new Date();
+    }
+
+    public boolean isReturned() {
+        return returnDate != null;
+    }
+}
+import java.util.*;
+
+class Library {
+    private Map<Integer, Book> bookCatalog;
+    private Map<Integer, User> users;
+    private List<Transaction> transactions;
+
+    public Library() {
+        bookCatalog = new HashMap<>();
+        users = new HashMap<>();
+        transactions = new ArrayList<>();
+    }
+
+    public void addBook(Book book) {
+        bookCatalog.put(book.getId(), book);
+    }
+
+    public void registerUser(User user) {
+        users.put(user.getId(), user);
+    }
+
+    public boolean issueBook(int userId, int bookId) {
+        User user = users.get(userId);
+        Book book = bookCatalog.get(bookId);
+
+        if (user != null && book != null && book.isAvailable()) {
+            book.setAvailable(false);
+            user.issueBook(book);
+            transactions.add(new Transaction(book, user));
+            return true;
+        }
+        return false;
+    }
+
+    public boolean returnBook(int userId, int bookId) {
+        User user = users.get(userId);
+        Book book = bookCatalog.get(bookId);
+
+        if (user != null && book != null && user.hasIssuedBook(book)) {
+            book.setAvailable(true);
+            user.returnBook(book);
+            // Mark transaction as returned
+            for (Transaction t : transactions) {
+                if (t.getBook().equals(book) && t.getUser().equals(user) && !t.isReturned()) {
+                    t.returnBook();
+                    break;
+                }
+            }
+            return true;
+        }
+        return false;
+    }
+
+    public Book searchBookByTitle(String title) {
+        for (Book book : bookCatalog.values()) {
+            if (book.getTitle().equalsIgnoreCase(title)) {
+                return book;
+            }
+        }
+        return null;
+    }
+
+    public List<Book> getAvailableBooks() {
+        List<Book> availableBooks = new ArrayList<>();
+        for (Book book : bookCatalog.values()) {
+            if (book.isAvailable()) {
+                availableBooks.add(book);
+            }
+        }
+        return availableBooks;
+    }
+
+    public List<User> getTopUsersWithMostBooks() {
+        List<User> sortedUsers = new ArrayList<>(users.values());
+        sortedUsers.sort((u1, u2) -> Integer.compare(u2.getIssuedBooks().size(), u1.getIssuedBooks().size()));
+        return sortedUsers;
+    }
+}
+
+```
