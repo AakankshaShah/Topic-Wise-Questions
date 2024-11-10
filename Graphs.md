@@ -1856,7 +1856,7 @@ public:
         return safeNodes;
     }
     ```
-42. Max number of islands
+42. Max area of islands
     ```
       nt dx[4] = {1, 0, -1, 0};
     int dy[4] = {0, 1, 0, -1};
@@ -1892,6 +1892,43 @@ public:
             }
         }
         return mans;
+    }
+    ```
+    ```
+      int[] dx = { 1, 0, -1, 0 };
+    int[] dy = { 0, 1, 0, -1 };
+    int m, n;
+
+    void dfs(int[][] grid, boolean[][] vis, int i, int j, int[] ans) {
+        vis[i][j] = true;
+        ans[0]++;
+        for (int k = 0; k < 4; k++) {
+            int x = i + dx[k];
+            int y = j + dy[k];
+            if (x >= 0 && x < m && y >= 0 && y < n && vis[x][y] == false &&
+                    grid[x][y] == 1) {
+                dfs(grid, vis, x, y, ans);
+            }
+        }
+    }
+
+    public int maxAreaOfIsland(int[][] grid) {
+        m = grid.length;
+        n = grid[0].length;
+        boolean[][] vis = new boolean[m][n];
+        int mans = 0;
+
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (grid[i][j] == 1 && vis[i][j] == false) {
+                    int[] ans = { 0 };
+                    dfs(grid, vis, i, j, ans);
+                    mans = Math.max(mans, ans[0]);
+                }
+            }
+        }
+        return mans;
+
     }
     ```
 43. Rotteen oranges
@@ -2752,3 +2789,4 @@ public:
         return -1;
     }
        ```
+
