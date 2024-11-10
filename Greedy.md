@@ -831,5 +831,55 @@
         return count;
     }
      ```
+31. Min number of taps to open to water a garden 
+    ```
+         vector<int> startEnd(n + 1, 0);
+
+        for (int i = 0; i < ranges.size(); i++) {
+            int l = max(0, i - ranges[i]);
+            int r = min(n, i + ranges[i]);
+            startEnd[l] = max(startEnd[l], r);
+        }
+        int taps = 0;
+        int maxEnd = 0;
+        int curr = 0;
+        for (int i = 0; i <= n; i++) {
+            if (i > maxEnd) {
+                return -1;
+            }
+            if (i > curr) {
+                taps++;
+                curr = maxEnd;
+            }
+            maxEnd = max(maxEnd, startEnd[i]);
+        }
+
+        return taps;
+    ```
+    ```
+        // vector<int> startEnd(n + 1, 0);
+        int[] startEnd = new int[n + 1];
+
+        for (int i = 0; i < ranges.length; i++) {
+            int l = Math.max(0, i - ranges[i]);
+            int r = Math.min(n, i + ranges[i]);
+            startEnd[l] = Math.max(startEnd[l], r);
+        }
+        int taps = 0;
+        int maxEnd = 0;
+        int curr = 0;
+        for (int i = 0; i <= n; i++) {
+            if (i > maxEnd) {
+                return -1;
+            }
+            if (i > curr) {
+                taps++;
+                curr = maxEnd;
+            }
+            maxEnd = Math.max(maxEnd, startEnd[i]);
+        }
+
+        return taps;
+    ```
  
 
