@@ -2510,6 +2510,43 @@ public:
 
     }
       ```
+      ```
+         public int[] findOrder(int n, int[][] prerequisites) {
+
+        List<Integer>[] adj = new ArrayList[n];
+        int[] indegree = new int[n];
+        for (int i = 0; i < n; i++) {
+            adj[i] = new ArrayList<>();
+        }
+        for (int i = 0; i < prerequisites.length; i++) {
+            adj[prerequisites[i][1]].add(prerequisites[i][0]);
+            indegree[prerequisites[i][0]]++;
+        }
+        int[] topo = new int[n];
+        int index = 0;
+        Queue<Integer> q = new LinkedList<>();
+
+        for (int i = 0; i < n; i++) {
+            if (indegree[i] == 0)
+                q.add(i);
+        }
+        while (!q.isEmpty()) {
+            int fr = q.poll();
+            topo[index++] = fr;
+
+            for (int val : adj[fr]) {
+                indegree[val]--;
+                if (indegree[val] == 0)
+                    q.add(val);
+            }
+        }
+
+        if (index == n)
+            return topo;
+        return new int[0];
+
+    }
+      ```
 56. Dijkstra Algorithm 
     ```
      vector <int> dijkstra(int V, vector<vector<int>> adj[], int S)
