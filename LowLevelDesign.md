@@ -627,3 +627,38 @@ public class RetailPOSApplication {
     }
 }
 ```
+6. Tic tac toe in O(1)
+    ```
+          bool?[][] board; // X = true, O = false, empty space = null
+    int[] row;
+   int[] column;
+   int diag = 0;       // Counter for main diagonal
+   int antiDiag = 0;   // Counter for anti-diagonal
+
+   bool XWon(int r, int c) {
+    int boardSize = board.Length;
+
+    // Ensure arrays are initialized based on board size
+    if (row == null) row = new int[boardSize];
+    if (column == null) column = new int[boardSize];
+
+    // Check if it's X's turn
+    if (board[r][c] != true) {
+        throw new InvalidOperationException("Invalid move for X!");
+    }
+
+    // Update row, column, and diagonals
+    row[r]++;
+    column[c]++;
+    if (r == c) diag++; // Main diagonal
+    if (r + c == boardSize - 1) antiDiag++; // Anti-diagonal
+
+    // Check if any condition for a win is satisfied
+    if (row[r] == boardSize || column[c] == boardSize || diag == boardSize || antiDiag == boardSize) {
+        return true; // X wins
+    }
+
+    return false; // X has not won yet
+   
+
+    ```
