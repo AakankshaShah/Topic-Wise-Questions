@@ -38,3 +38,16 @@ Set<Integer> set = new HashSet<>();
         }
       set.contains(nums1[i])
 ```
+7.
+```
+ int[][] result = new int[m][n];
+        for (int[] row : result) {
+            Arrays.fill(row, Integer.MAX_VALUE);
+        }
+```
+8.
+```
+   PriorityQueue<int[]> pq = new PriorityQueue<>(Comparator.comparingInt(a -> a[0]));
+     pq.offer(new int[] { 0, 0, 0 });
+
+```
