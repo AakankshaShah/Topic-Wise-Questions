@@ -698,6 +698,52 @@ bool DFS(vector<string> &A, int i, int j, string B, int idx , vector<vector<bool
         return ans;  
        
        ```
+       ```
+         private void dfs(List<List<Integer>> adjList, boolean[] vis, int[] t, int i) {
+        vis[i] = true;
+        t[0]++;
+        for (int neighbor : adjList.get(i)) {
+            if (!vis[neighbor]) {
+                dfs(adjList, vis, t, neighbor);
+            }
+        }
+    }
+
+    public int maximumDetonation(int[][] bombs) {
+        int n = bombs.length;
+        List<List<Integer>> adjList = new ArrayList<>();
+
+        for (int i = 0; i < n; i++) {
+            adjList.add(new ArrayList<>());
+        }
+
+        for (int i = 0; i < n; i++) {
+            long x = bombs[i][0];
+            long y = bombs[i][1];
+            long r = bombs[i][2];
+            for (int j = 0; j < n; j++) {
+                if (i != j) {
+                    long dx = bombs[j][0] - x;
+                    long dy = bombs[j][1] - y;
+                    if (dx * dx + dy * dy <= r * r) {
+                        adjList.get(i).add(j);
+                    }
+                }
+            }
+        }
+
+        int ans = 0;
+
+        for (int i = 0; i < n; i++) {
+            boolean[] vis = new boolean[n];
+            int[] t = new int[1];
+            dfs(adjList, vis, t, i);
+            ans = Math.max(ans, t[0]);
+        }
+
+        return ans;
+    }
+       ```
  19. Possible recipes
        ```
           vector<string> findAllRecipes(vector<string>& recipes, vector<vector<string>>& ingredients, vector<string>& supplies) {
