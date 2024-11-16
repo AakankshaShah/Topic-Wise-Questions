@@ -2753,6 +2753,53 @@ public:
         
     }
     ```
+    ```
+       private boolean isSafe(int x, int y, int m, int n) {
+        return x >= 0 && x < m && y >= 0 && y < n;
+    }
+    public int shortestPathBinaryMatrix(int[][] grid) {
+        int n = grid[0].length;
+        int m=grid.length;
+
+        if (m == 0 || n == 0 || grid[0][0] != 0) {
+            return -1;
+        }
+        int[][] directions = {
+                { 1, 1 }, { 0, 1 }, { 1, 0 }, { 0, -1 },
+                { -1, 0 }, { -1, -1 }, { 1, -1 }, { -1, 1 }
+        };
+
+        int[][] result = new int[m][n];
+        for (int[] row : result) {
+            Arrays.fill(row, Integer.MAX_VALUE);
+        }
+        PriorityQueue<int[]> pq = new PriorityQueue<>(Comparator.comparingInt(a -> a[0]));
+
+        pq.offer(new int[] { 0, 0, 0 });
+        result[0][0] = 0;
+        while (!pq.isEmpty()) {
+            int[] current = pq.poll();
+            int d = current[0];
+            int x = current[1];
+            int y = current[2];
+
+            for (int[] dir : directions) {
+                int x_ = x + dir[0];
+                int y_ = y + dir[1];
+                int dist = 1;
+
+                if (isSafe(x_, y_,m,n) && grid[x_][y_] == 0 && d + dist < result[x_][y_]) {
+                    pq.offer(new int[] { d + dist, x_, y_ });
+                    grid[x_][y_] = 1;
+                    result[x_][y_] = d + dist;
+                }
+            }
+        }
+
+        return result[m - 1][n - 1] == Integer.MAX_VALUE ? -1 : result[m - 1][n - 1] + 1;
+
+    }
+    ```
 58. Count sub islands
     ```
        bool checkForSub(vector<vector<int>>& grid2, vector<vector<int>>& grid1,
