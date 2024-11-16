@@ -881,5 +881,66 @@
 
         return taps;
     ```
+32. Get the max score
+    ```
+       const int mod = 1e9 + 7;
+    int maxSum(vector<int>& nums1, vector<int>& nums2) {
+        set<int> s;
+        for (int i : nums2) {
+            s.insert(i);
+        }
+        long long int a = 0, b = 0, j = 0, m = nums1.size(), n = nums2.size(),
+                      cnt = 0;
+        for (int i = 0; i < m; i++) {
+            a += nums1[i] % mod;
+            if (s.count(nums1[i])) {
+                while (j < n && nums2[j] != nums1[i]) {
+                    b += nums2[j++] % mod;
+                }
+                b += nums2[j++] % mod;
+                cnt += max(a, b);
+                a = 0, b = 0;
+            }
+        }
+
+        while (j < n) {
+            b += nums2[j++] % mod;
+        }
+        cnt += max(a, b) % mod;
+        return cnt % mod;
+    }
+    ```
+    ```
+      private static final long mod = (int) 1e9 + 7;
+
+    public int maxSum(int[] nums1, int[] nums2) {
+        Set<Integer> set = new HashSet<>();
+        for (int num : nums2) {
+            set.add(num);
+        }
+        long a = 0, b = 0, cnt = 0;
+        int j = 0, m = nums1.length, n = nums2.length;
+        for (int i = 0; i < m; i++) {
+            a += nums1[i] % mod;
+            if (set.contains(nums1[i])) {
+                while (j < n && nums2[j] != nums1[i]) {
+                    b += nums2[j++] % mod;
+                }
+                b += nums2[j++] % mod;
+                cnt += Math.max(a, b);
+                a = 0;
+                b = 0;
+            }
+        }
+
+        while (j < n) {
+            b += nums2[j++] % mod;
+        }
+
+        cnt = (cnt + Math.max(a, b)) % mod;
+        return (int) cnt;
+
+    }
+    ```
  
 
