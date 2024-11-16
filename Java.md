@@ -51,3 +51,8 @@ Set<Integer> set = new HashSet<>();
      pq.offer(new int[] { 0, 0, 0 });
 
 ```
+9.
+```
+// memset(t, -1, sizeof(t));
+        Arrays.fill(t, -1);
+```
