@@ -29,4 +29,12 @@ Has poll & add methods
 ```
      boolean[] visited = new boolean[n]
 ```
-5.
+5.   private static final long mod = (int) 1e9 + 7;
+6.  
+ ```
+Set<Integer> set = new HashSet<>();
+        for (int num : nums2) {
+            set.add(num);
+        }
+      set.contains(nums1[i])
+```
