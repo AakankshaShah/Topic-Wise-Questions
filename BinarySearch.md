@@ -248,6 +248,21 @@ bool search(int len, string S) {
         
     }
 ```
+```
+vector<int>dp(n,1);
+int maxi=1;
+for(int i=0;i<n;i++)
+{
+for(int prev=0;prev<i;prev++)
+{
+if(arr[prev]<arr[i]
+{
+dp[i]=dp[prev]+1;
+
+}
+maxi=max(maxi,dp[i);
+
+```
 
 
 11. Minimum Cost to Make Array Equal
