@@ -1991,6 +1991,37 @@ Ctrl+ACVVVV (6 key presses) gives 5 times increase
         return f(n, k);
     }
     ```
+52. Number of LIS
+     ```
+        int findNumberOfLIS(vector<int>& arr) {
+        int n = arr.size();
+        vector<int> dp(n, 1);
+        vector<int> cnt(n, 1);
+        int maxi = 1;
+
+        for (int i = 0; i < n; i++) {
+            for (int prev = 0; prev < i; prev++) {
+                if (arr[prev] < arr[i] && 1 + dp[prev] > dp[i]) {
+
+                    dp[i] = dp[prev] + 1;
+                    cnt[i] = cnt[prev];
+                }
+
+                else if (arr[prev] < arr[i] && 1 + dp[prev] == dp[i]) {
+                    cnt[i] += cnt[prev];
+                }
+            }
+            maxi = max(maxi, dp[i]);
+        }
+        int totalCount = 0;
+        for (int i = 0; i < n; i++) {
+            if (dp[i] == maxi) {
+                totalCount += cnt[i];
+            }
+        }
+        return totalCount;
+    }
+     ```
 
      
 
