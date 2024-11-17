@@ -992,10 +992,10 @@ vector<string> res;
     bool canPartitionKSubsets(vector<int>& nums, int k) {
         int sum = 0;
         int n = nums.size();
-        unordered_map<int, int> mp;
+  
         for (int i = 0; i < n; i++) {
             sum += nums[i];
-            mp[nums[i]]++;
+           
         }
 
         if (sum % k != 0)
@@ -1007,5 +1007,43 @@ vector<string> res;
         return backtrack(n - 1, nums, sums, targetSum);
     }
      ```
+    ```
+        boolean backtrack(int inx, int[] nums, int[] sums,
+            int targetSum) {
+        if (inx < 0)
+            return true;
+        for (int i = 0; i < sums.length; i++) {
+            if (sums[i] + nums[inx] > targetSum)
+                continue;
+
+            sums[i] += nums[inx];
+            if (backtrack(inx - 1, nums, sums, targetSum))
+                return true;
+            sums[i] -= nums[inx];
+            if (sums[i] == 0)
+                break;
+        }
+        return false;
+    }
+
+    public boolean canPartitionKSubsets(int[] nums, int k) {
+        int sum = 0;
+        int n = nums.length;
+
+        for (int i = 0; i < n; i++) {
+            sum += nums[i];
+
+        }
+
+        if (sum % k != 0)
+            return false;
+
+        int targetSum = sum / k;
+        Arrays.sort(nums);
+        int[] sums = new int[k];
+        return backtrack(n - 1, nums, sums, targetSum);
+
+    }
+    ```
 
 
