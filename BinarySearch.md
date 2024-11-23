@@ -776,7 +776,7 @@ sort(buses.begin(), buses.end());
         
     }
 ```
-28.Maximum beauty of garden
+28. Maximum beauty of garden
    ```
       long long maximumBeauty(vector<int>& flowers, long long newFlowers,
                             int target, int full, int partial) {
@@ -838,5 +838,80 @@ sort(buses.begin(), buses.end());
         }
 
         return res;
+    }
+   ```
+   ```
+       public long maximumBeauty(int[] flowers, long newFlowers, int target, int full, int partial) {
+
+        int n = flowers.length;
+        Arrays.sort(flowers);
+        if (n == 0)
+            return 0;
+
+        long[] pre = new long[n + 1];
+
+        for (int i = 1; i <= n; i++)
+            pre[i] = pre[i - 1] + (long) flowers[i - 1];
+
+        long res = Long.MIN_VALUE;
+
+        for (int t = n; t >= 0; t--) {
+
+            long fullCost = 0;
+            long partialCost = 0;
+
+            if (t < n) {
+                if (flowers[t] < target) {
+                    long need = (long) target - (long) flowers[t];
+
+                    if (need > newFlowers)
+                        break;
+                    newFlowers -= need;
+                }
+            }
+
+            fullCost = (long) (n - t) * full;
+
+            int l = 0;
+            int r = target - 1;
+
+            while (l <= r) {
+                int mid = l + (r - l) / 2;
+                int idx = upperBound(flowers, t, mid);
+
+                if (idx == 0) {
+                    l = mid + 1;
+                } else {
+
+                    long needToPlant = ((long) mid * (long) idx - pre[idx]);
+
+                    if (needToPlant > newFlowers)
+                        r = mid - 1;
+                    else {
+                        l = mid + 1;
+                        partialCost = (long) mid * partial;
+                    }
+                }
+            }
+
+            res = Math.max(res, fullCost + partialCost);
+        }
+
+        return res;
+    }
+
+    private int upperBound(int[] flowers, int t, int value) {
+        int l = 0;
+        int r = t-1;
+
+        while (l <= r) {
+            int mid = l + (r - l) / 2;
+            if (flowers[mid] <= value) {
+                l = mid + 1;
+            } else {
+                r = mid - 1;
+            }
+        }
+        return l;
     }
    ```
