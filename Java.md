@@ -12,6 +12,7 @@ Has poll & add methods
 3. Adjacency list
  ```
        vector<vector<int>> temp(n);  
+
       
        List<List<Integer>> adjList = new ArrayList<>();
 
