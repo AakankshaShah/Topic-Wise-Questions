@@ -38,3 +38,44 @@ public:
 };
 
 ```
+```
+class TrieNode {
+    TrieNode[] links = new TrieNode[26];
+
+    boolean containsKey(char ch) {
+        return links[ch - 'a'] != null;
+    }
+
+    void put(char ch, TrieNode node) {
+        links[ch - 'a'] = node;
+    }
+
+    TrieNode get(char ch) {
+        return links[ch - 'a'];
+    }
+}
+
+class Solution {
+    public int countDistinct(String s) {
+        int cnt = 0;
+        TrieNode root = new TrieNode();
+
+        for (int i = 0; i < s.length(); i++) {
+            TrieNode node = root;
+
+            for (int j = i; j < s.length(); j++) {
+
+                if (!node.containsKey(s.charAt(j))) {
+                    cnt++;
+                    node.put(s.charAt(j), new TrieNode());
+                }
+
+                node = node.get(s.charAt(j));
+            }
+        }
+
+        return cnt;
+    }
+}
+
+```
