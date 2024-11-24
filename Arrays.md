@@ -2889,4 +2889,54 @@ return c;
 
     }
     ```
+87. No. of substrings with fixed ratio 
+    ```
+       long long fixedRatio(string s, int num1, int num2) {
+        long long result = 0;
+        vector<int> count(2, 0); 
+        unordered_map<long long, int> map; 
+        map[0] = 1;
+
+        for (char c : s) {
+          
+            ++count[c - '0'];
+            //key=(num2×count[0])−(num1×count[1])
+            //When two subarrays (prefixes) have the same key, the difference between them (a subarray) has the same 0-to-1 ratio as num1:num2.
+
+
+            long long key = (long long)(num2) * count[0] 
+                          - (long long)(num1) * count[1];
+
+            result += map[key];
+
+   
+            ++map[key];
+        }
+
+        return result;
+        
+    }
+    ```
+    ```
+      long result = 0;
+
+        int[] count = new int[2];
+
+        Map<Long, Integer> map = new HashMap<>();
+        map.put(0L, 1);
+
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+
+            ++count[c - '0'];
+
+            long key = (long) num2 * count[0] - (long) num1 * count[1];
+
+            result += map.getOrDefault(key, 0);
+
+            map.put(key, map.getOrDefault(key, 0) + 1);
+        }
+
+        return result;
+    ```
 
