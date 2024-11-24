@@ -2053,6 +2053,32 @@ Ctrl+ACVVVV (6 key presses) gives 5 times increase
         }
         return totalCount;
      ```
+53.  Length of the Longest Subsequence That Sums to Target
+    ```
+     int dp[1001][1001];
+    int solve(int ind, int target, vector<int>& nums, int n) {
+        if (target < 0)
+            return -1e5;
+        if (target == 0) {
+            return 0;
+        }
+        if (ind == n)
+            return -1e5;
+        if (dp[ind][target] != -1)
+            return dp[ind][target];
+        int nontake = solve(ind + 1, target, nums, n);
+        int take = 1 + solve(ind + 1, target - nums[ind], nums, n);
+        return dp[ind][target] = max(take, nontake);
+    }
+    int lengthOfLongestSubsequence(vector<int>& nums, int target) {
+        int n = nums.size();
+        memset(dp, -1, sizeof(dp));
+        int ans = solve(0, target, nums, n);
+        if (ans >= -1e5 && ans <= -1e4)
+            return -1;
+        return ans;
+    }
+    ```
 
      
 
