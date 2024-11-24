@@ -2079,6 +2079,45 @@ Ctrl+ACVVVV (6 key presses) gives 5 times increase
         return ans;
     }
     ```
+54. Max score difference in a grid 
+    ```
+       vector<vector<ll>> dp;
+    vector<vector<int>> grid;
+    int rows, cols;
+    ll MaxScore(int r, int c) {
+        if (r == rows - 1 && c == cols - 1)
+            return -INF;
+
+        ll& ans = dp[r][c];
+        if (ans != -INF)
+            return ans;
+
+        for (int rgt = c + 1; rgt < cols; rgt++) {
+            ans = max(ans, (ll)grid[r][rgt] - grid[r][c] +
+                               max(0LL, MaxScore(r, rgt)));
+        }
+        for (int dwn = r + 1; dwn < rows; dwn++) {
+            ans = max(ans, (ll)grid[dwn][c] - grid[r][c] +
+                               max(0LL, MaxScore(dwn, c)));
+        }
+        dp[r][c]=ans;
+        return ans;
+    }
+    int maxScore(vector<vector<int>>& _grid) {
+        grid = _grid;
+        rows = grid.size();
+        cols = grid[0].size();
+
+        dp.clear();
+        dp.resize(rows + 1, vector<ll>(cols + 1, -INF));
+
+        ll ans = -INF;
+        for (int r = 0; r < rows; r++)
+            for (int c = 0; c < cols; c++)
+                ans = max(ans, MaxScore(r, c));
+        return ans;
+    }
+    ```
 
      
 
