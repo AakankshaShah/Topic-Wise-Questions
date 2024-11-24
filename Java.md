@@ -5,7 +5,7 @@
 Queue<Integer> q = new LinkedList<>();
 Has poll & add methods
 ```
-1. Vector
+2. Vector
 ```
    int[] indegree = new int[n];
 ```
@@ -57,3 +57,9 @@ Set<Integer> set = new HashSet<>();
 // memset(t, -1, sizeof(t));
         Arrays.fill(t, -1);
 ```
+10. Map In java
+   ```
+      Map<Integer, Integer> freqMap = new HashMap<>();
+      freqMap.put(mod, freqMap.getOrDefault(mod, 0) + 1);
+      freqMap.get(num % space)
+   ```
