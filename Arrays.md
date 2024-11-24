@@ -2847,4 +2847,46 @@ return c;
         }
         return ans;
     ```
+86. Destroy sequential targets
+     ```
+        int destroyTargets(vector<int>& nums, int space) {
+        map<int, int> mp;
+        int high = INT_MIN;
+
+        for (int i = 0; i < nums.size(); i++) {
+            mp[nums[i] % space]++;
+            high = max(high, mp[nums[i] % space]);
+        }
+        int ans = INT_MAX;
+        for (int i = 0; i < nums.size(); i++) {
+            if (high == mp[nums[i] % space])
+                
+            ans = min(ans, nums[i]);
+        }
+        return ans;
+    }
+     ```
+    ```
+       public int destroyTargets(int[] nums, int space) {
+        Map<Integer, Integer> freqMap = new HashMap<>();
+        int high = Integer.MIN_VALUE;
+
+        for (int num : nums) {
+            int mod = num % space;
+            freqMap.put(mod, freqMap.getOrDefault(mod, 0) + 1);
+            high = Math.max(high, freqMap.get(mod));
+        }
+
+        int ans = Integer.MAX_VALUE;
+
+        for (int num : nums) {
+            if (freqMap.get(num % space) == high) {
+                ans = Math.min(ans, num);
+            }
+        }
+
+        return ans;
+
+    }
+    ```
 
