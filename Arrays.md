@@ -2962,4 +2962,41 @@ return c;
         chars[j] = t;
     }
      ```
+89. Insert Delete GetRandom O(1)
+    ```
+        std::unordered_map<int, int> val_to_index;
+    std::vector<int> values;
+    RandomizedSet() {}
+
+    bool insert(int val) {
+
+        if (val_to_index.find(val) != val_to_index.end())
+            return false;
+        values.push_back(val);
+        val_to_index[val] = values.size() - 1; // Store index in the map
+        return true;
+    }
+
+    bool remove(int val) {
+        if (val_to_index.find(val) == val_to_index.end())
+            return false;
+
+        int index_to_remove = val_to_index[val];
+        int last_val = values.back();
+
+      
+        values[index_to_remove] = last_val;
+        val_to_index[last_val] = index_to_remove;
+
+     
+        values.pop_back();
+        val_to_index.erase(val); 
+        return true;
+    }
+
+    int getRandom() {
+        int random_index = rand() % values.size();
+        return values[random_index];
+    }
+    ```
 
