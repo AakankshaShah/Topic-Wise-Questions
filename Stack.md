@@ -1742,6 +1742,24 @@ LRUCache(int cap)
         return x;
     }
 ```
+45. 132 Pattern 
+    ```
+       bool find132pattern(vector<int>& nums) {
+        stack<int> s;
+        int third = INT_MIN;//1
+         for (int i = nums.size() - 1; i >= 0; i--) {
+            if (nums[i] < third) return true;
+            while (!s.empty() && s.top() < nums[i]) {
+                third = s.top();//2
+                s.pop();
+            }
+            s.push(nums[i]);//3
+        }
+        return false;
+
+        
+    }
+    ```
 
 ## Extras 
 
