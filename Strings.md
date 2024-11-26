@@ -50,3 +50,20 @@
         return result;
 
     ```
+2. Unique mail address
+    ```
+      unordered_set<string> st;
+        for (string& email : emails) {
+            string cleanEmail;
+            for (char c : email) {
+                if (c == '+' || c == '@')
+                    break;
+                if (c == '.')
+                    continue;
+                cleanEmail += c;
+            }
+            cleanEmail += email.substr(email.find('@'));
+            st.insert(cleanEmail);
+        }
+        return st.size();
+    ```
