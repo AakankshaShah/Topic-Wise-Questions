@@ -2999,4 +2999,32 @@ return c;
         return values[random_index];
     }
     ```
+90. Zig zag string 
+    ```
+       string convert(string s, int numRows) {
+
+    string ans;
+    int n = s.length();
+    vector<string> rows(min(numRows, n)); // Use vector of strings to store rows
+    int i = 0;
+
+    while (i < n) {
+        // Fill downwards
+        for (int index = 0; index < numRows && i < n; index++) {
+            rows[index] += s[i++];
+        }
+        // Fill diagonally upwards
+        for (int index = numRows - 2; index > 0 && i < n; index--) {
+            rows[index] += s[i++];
+        }
+    }
+
+    // Combine all rows into the final answer
+    for (const string& row : rows) {
+        ans += row;
+    }
+
+    return ans;
+    }
+    ```
 
