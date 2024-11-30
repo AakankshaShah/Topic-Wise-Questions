@@ -548,11 +548,7 @@
     }
     ```
 
-
-
-
-17. Circular tour
-18.  Maximum non negative subarray sum
+17.  Maximum non negative subarray sum
 
      ```
      vector<int> result;
@@ -591,7 +587,7 @@
 
      ```
 
-   19. Factorial of a large number https://www.youtube.com/watch?v=O3fwYjcMV_M
+   18. Factorial of a large number https://www.youtube.com/watch?v=O3fwYjcMV_M
 
        ```
         void multiplier( vector<int> &arr, int &size,int fact)
@@ -634,7 +630,7 @@
         
       }
       ```
-  20. Spiral order matrix traversal 
+  19. Spiral order matrix traversal 
 
    ```
     int n=A.size();
@@ -671,7 +667,7 @@
     }
     return arr;
    ```
-   Part II
+20.   Part II
  ```
    int r1 = 0; int r2 = n-1; int c1 = 0; int c2 = n-1;
     vector<vector<int>> v(n, vector<int> (n,0));
@@ -1153,6 +1149,30 @@
 
      ```
 33. Merge intervals
+   ```
+     vector<vector<int>> merge(vector<vector<int>>& intervals) {
+        sort(intervals.begin(), intervals.end(), [](const vector<int>& a, const vector<int>& b) {
+            return a[0] < b[0];
+        });
+         vector<vector<int>> merged;
+        vector<int> prev = intervals[0];
+
+        for (int i = 1; i < intervals.size(); ++i) {
+            vector<int> interval = intervals[i];
+            if (interval[0] <= prev[1]) {
+                prev[1] = max(prev[1], interval[1]);
+            } else {
+                merged.push_back(prev);
+                prev = interval;
+            }
+        }
+
+        merged.push_back(prev);
+        return merged;        
+
+        
+    }
+   ```
 
     ```
      bool static cmp(Interval i1, Interval i2) { return i2.start > i1.start; }
