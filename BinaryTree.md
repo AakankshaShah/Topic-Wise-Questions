@@ -371,7 +371,7 @@
         return result;
     }
    ```
-12. Increasing order BST
+13. Increasing order BST
      ```
       void inorder(TreeNode* root, queue<TreeNode*>& q) {
         if (!root)
@@ -400,7 +400,7 @@
     }
      
      ```
-13. Range sum BT
+14. Range sum BT
      ```
       void traverse(TreeNode* node, int low, int high)
      {
@@ -444,7 +444,7 @@
     }
      ```
 
-14. Height of tree after substree removal queries**
+15. Height of tree after substree removal queries**
     ```
      unordered_map<int, int> lheight;
     unordered_map<int, int> rheight;
@@ -484,7 +484,7 @@
         return answer;
     }
     ```
-15. Avg substree 
+16. Avg substree 
 
     ```
      int countNodes(TreeNode* root) {
@@ -513,7 +513,7 @@
     }
 
     ```
-16. Distance between two nodes
+17. Distance between two nodes
     ```
      TreeNode* LCA(TreeNode* root, int n1, int n2) {
         // Your code here
@@ -557,7 +557,7 @@
     }
     ```
 
-17. Delete node & return forest 
+18. Delete node & return forest 
     ```
       TreeNode* deleteNodes(TreeNode* root, set<int> st,
                           vector<TreeNode*>& result) {
@@ -594,7 +594,7 @@
     }
     ```
 
-18. Complete binary tree
+19. Complete binary tree
 
     ```
      queue<TreeNode*> que;
@@ -622,7 +622,7 @@
         return true;
     ```
 
-19. Valid Binary Tree
+20. Valid Binary Tree
     ```
      bool util(TreeNode* root, long min, long max) {
         if (root == NULL)
@@ -636,7 +636,7 @@
     bool isValidBST(TreeNode* root) { return util(root, LONG_MIN, LONG_MAX); }
     ```
 
-17. Vertical order of BT
+21. Vertical order of BT
     ```
      map < int, map < int, multiset < int > >> nodes;
         queue < pair < TreeNode*, pair < int, int >>> todo;
@@ -694,7 +694,7 @@
         return result;
     }
     ```
-18. Binary Tree inorder traversal
+22. Binary Tree inorder traversal
     ```
      vector<int> ans;
     void inorder(TreeNode* root) {
@@ -710,7 +710,7 @@
         return ans;
     }
     ```
-19. Diameter of a binary tree
+23. Diameter of a binary tree
     ```
        int findMax(TreeNode* node, int& maxi) {
         if (node == NULL) {
@@ -727,7 +727,7 @@
         return maxi;
     }
     ```
-20. Height of binary tree
+24. Height of binary tree
      ```
         int height(TreeNode * node) {
             if (node == null)
@@ -738,7 +738,7 @@
         }
 
      ```
-21. Evaluate boolean binary tree
+25. Evaluate boolean binary tree
     ```
         bool evaluateTree(TreeNode* root) {
         if(root->left==NULL||root->right==NULL)
@@ -751,7 +751,7 @@
             return evaluateTree(root->left) & evaluateTree(root->right);
     }
     ```
-22. Balanced binary tree
+26. Balanced binary tree
     ```
       int isBT(TreeNode* root)
     {
@@ -787,7 +787,7 @@
         
     }
     ```
-23. Maximum path sum
+27. Maximum path sum
     ```
        int ans;
     int sum(TreeNode* root, int& ans) {
@@ -805,7 +805,7 @@
     }
     }
     ```
-24. Maximum Width 
+28. Maximum Width 
     ```
       int widthOfBinaryTree(TreeNode* root) {
         if (root == NULL)
@@ -835,7 +835,7 @@
         return ans;
     }
     ```
-25. Distribute coins in a bt
+29. Distribute coins in a bt
     ```
       int solve(TreeNode* node) {
         if (node == NULL)
@@ -851,7 +851,7 @@
         return moves;
     }
     ```
-26. Binary tree paths https://www.youtube.com/watch?v=gSFcPOPyq-Y
+30. Binary tree paths https://www.youtube.com/watch?v=gSFcPOPyq-Y
     ```
        string convert(vector<int>& path) {
         string ans = "";
@@ -887,7 +887,7 @@
         return path;
     }
     ```
-27. Binary Tree zig zag traversal 
+31. Binary Tree zig zag traversal 
     ```
        vector<vector<int>> zigzagLevelOrder(TreeNode* root) {
         vector<vector<int>> ans;
@@ -918,7 +918,7 @@
         return ans;
     }
     ```
-28. Serialize  deserailize
+32. Serialize  deserailize
     ```
       string serialize(TreeNode* root) {
         if (!root) {
@@ -979,7 +979,7 @@
         return root;
     }
     ```
-29. Path Sum 
+33. Path Sum 
     ```
       bool hasPathSum(TreeNode* root, int targetSum) {
         if (root == NULL)
@@ -1034,7 +1034,7 @@ bool hasPathSumAnywhere(TreeNode* node, int targetSum) {
 }
 
    ```
-30. Bottom value of binary tree
+34. Bottom value of binary tree
     ```
       int findBottomLeftValue(TreeNode* root) {
         queue<TreeNode*> levelQue;
@@ -1056,7 +1056,7 @@ bool hasPathSumAnywhere(TreeNode* node, int targetSum) {
         
     }
     ```
-31. Minimum Absolute Difference in BST
+35. Minimum Absolute Difference in BST
    ```
      class Solution {
 public:
@@ -1087,7 +1087,7 @@ public:
     }
 };
    ```
-32. Graph valid tree
+36. Graph valid tree
     ```
      bool validTree(int n, vector<vector<int>>& edges) {
         if (edges.size() == 0 and n == 1) {
@@ -1128,7 +1128,7 @@ public:
         return true;
     }
     ```
-33. Deepest leave sum
+37. Deepest leave sum
    ```
       int deepestLeavesSum(TreeNode* root) {
         if (root == nullptr) {
@@ -1157,7 +1157,7 @@ public:
     }
    ```
 
-35. Flatten a linked list 
+38. Flatten a linked list 
     ```
     //Reverse post order
      public:
@@ -1178,7 +1178,7 @@ public:
         rpost(root);
     }
     ```
-36. Construct binary tree from inorder & post-order
+39. Construct binary tree from inorder & post-order
     ```
      TreeNode* solve(vector<int>& inorder, vector<int>& postorder, int inStart,
                       int inEnd, int postStart, int postEnd) {
@@ -1214,7 +1214,7 @@ public:
         return solve(inorder, postorder, istart, iend, pstart, pend);
     }
     ```
-37. LCA II
+40. LCA II
     ```
       bool findX = false;
     bool findY = false;
@@ -1239,7 +1239,7 @@ public:
         }
         return left == nullptr ? right : right == nullptr ? left : curr;
     }
-38. LCA III
+41. LCA III
     ```
          bool findNode(Node* root, Node* q) {
         if (!root)
@@ -1264,7 +1264,7 @@ public:
             return lowestCommonAncestor(p->parent, q->parent);
     }
     ```
-39. Sum root to leaf numbers
+42. Sum root to leaf numbers
     ```
       lass Solution {
      public:
@@ -1284,7 +1284,7 @@ public:
     }
     };
     ```
-40. Right & left view of BT
+43. Right & left view of BT
      ```
        vector<int> res;
     void recursion(TreeNode* root, int level) {
@@ -1301,7 +1301,7 @@ public:
         return res;
     }
      ```
-41. Inorder successor in a bst 
+44. Inorder successor in a bst 
      ```
        TreeNode* ans;
     void findT(TreeNode* root, TreeNode* p) {
@@ -1326,7 +1326,7 @@ public:
         return ans;
     }
      ```
-42. Max binary tree
+45. Max binary tree
     ```
        TreeNode* buildT(vector<int>& nums, int s, int e) {
         if (s>e)
@@ -1350,7 +1350,7 @@ public:
         return buildT(nums, 0, n - 1);
     }
     ```
-43. Lonley nodes 
+46. Lonley nodes 
     ```
        vector<int> getLonelyNodes(TreeNode* root) {
 
@@ -1376,7 +1376,7 @@ public:
         return ans;
     }
     ```
-44. Count number of good nodes
+47. Count number of good nodes
     ```
       vector<int> ans;
     void solve(TreeNode* root, int maxr) {
@@ -1396,7 +1396,7 @@ public:
         return ans.size();
     }
     ```
-45. Max product of splitted array 
+48. Max product of splitted array 
     ```
        long M = 1e9 + 7;
     long totalSum = 0, maxP = 0;
@@ -1427,7 +1427,7 @@ public:
         return maxP % M;
     }
     ```
-46. Closest binary tree value 
+49. Closest binary tree value 
     ```
       nt closestValue(TreeNode* root, double target) {
         int closest = root->val;
@@ -1452,7 +1452,7 @@ public:
         return closest;
     }
     ```
-47. Largest BST subtree
+50. Largest BST subtree
     ```
       int ans = 0;
 
@@ -1487,7 +1487,7 @@ public:
         return ans;
     }
     ```
-48. Two sum in a bst 
+51. Two sum in a bst 
     ```
       bool TwoSum(int k, vector<int>& A) {
         int l = 0, h = A.size() - 1, sum;
@@ -1511,7 +1511,7 @@ public:
         Traverse(a->right,A);
     }
     ```
-49. Max substree of same colour 
+52. Max substree of same colour 
     ```
       int ans = INT_MIN;
 
@@ -1547,7 +1547,7 @@ public:
         return ans;
     }
     ```
-50. Binary Search tree iterator 
+53. Binary Search tree iterator 
     ```
       class BSTIterator {
     public:
@@ -1568,7 +1568,7 @@ public:
     };
 
     ```
-51. Kth Smallest element in BST
+54. Kth Smallest element in BST
     ```
      vector<int> ans;
     void inorder(TreeNode* root) {
@@ -1604,7 +1604,7 @@ public:
         return ans;
     }
     ```
-52. Binary tree coloring games
+55. Binary tree coloring games
      ```
         int lc, rc;
     int countNode(TreeNode* root, int x) {
@@ -1627,7 +1627,7 @@ public:
         return false;
     }
      ```
-53. Binary tree longest consecutive subsequence Part 1 & 2
+56. Binary tree longest consecutive subsequence Part 1 & 2
     ```
         int longestConsecutive(TreeNode* root) {
         int res=0;
@@ -1688,7 +1688,7 @@ public:
         return maxLen;
     }
     ```
-54. Verify preorder serilaization
+57. Verify preorder serilaization
      ```
        bool isValidSerialization(string preorder) {
         stringstream ss(preorder);
@@ -1771,7 +1771,7 @@ public:
         return flag;
     }
      ```
-56. Mode in a binary tree
+58. Mode in a binary tree
      ```
        int currNum = 0;
     int currStreak = 0;
@@ -1808,7 +1808,7 @@ public:
         return result;
     }
      ```
-57. Boundary of a binary tree
+59. Boundary of a binary tree
      ```
        vector<int> boundaryOfBinaryTree(TreeNode* root) {
         vector<int> ans;
@@ -1862,7 +1862,7 @@ public:
         }
     }
      ```
-58. Path Sum 3
+60. Path Sum 3
      ```
       void dfs(TreeNode* root, long long targetSum, int& count,
              unordered_map<long long, int>& mp, long long sum) {
@@ -1894,7 +1894,7 @@ public:
         return count;
     }
      ```
-59. Step-By-Step Directions From a Binary Tree Node to Another
+61. Step-By-Step Directions From a Binary Tree Node to Another
      ```
        static TreeNode* LCA(TreeNode* root, int x, int y) {
         if (root == NULL || root->val == x || root->val == y)
@@ -1934,7 +1934,7 @@ public:
         return pathFrom + pathTo;
     }
      ```
-60. Linked list in a binary tree
+62. Linked list in a binary tree
      ```
          class Solution {
      public:
@@ -1966,7 +1966,7 @@ public:
      };
 
      ```
-61. Longest Univalue Path
+63. Longest Univalue Path
      ```
          int maxlen;
     int solve(TreeNode* root) {
@@ -1989,7 +1989,7 @@ public:
         return maxlen;
     }
      ```
-62. Flip Equivalent Binary Trees
+64. Flip Equivalent Binary Trees
      ```
           bool f(TreeNode* root1, TreeNode* root2) {
         if (root1 == NULL && root2 != NULL) {
@@ -2013,7 +2013,7 @@ public:
     }
     bool flipEquiv(TreeNode* root1, TreeNode* root2) { return f(root1, root2); }
      ```
-63. Complete Binary Tree Inserter
+65. Complete Binary Tree Inserter
     ```
            class CBTInserter {
      public:
@@ -2056,7 +2056,7 @@ public:
     TreeNode* get_root() { return root; }
     };
     ```
-64. Construct binary tree from pre & post order
+66. Construct binary tree from pre & post order
      ```
            TreeNode* build(vector<int>& pre, int preLow, int preHigh,
                     vector<int>& post, int postLow, int postHigh) {
@@ -2088,7 +2088,7 @@ public:
         return build(preorder, 0, n - 1, postorder, 0, n - 1);
     }
      ```
-65. Maximum Level Sum of a Binary Tree
+67. Maximum Level Sum of a Binary Tree
     ```
        int maxLevelSum(TreeNode* root) {
         int res;
@@ -2119,7 +2119,7 @@ public:
         return res;
     }
     ```
-66. Find Nearest Right Node in Binary Tree
+68. Find Nearest Right Node in Binary Tree
      ```
          TreeNode* findNearestRightNode(TreeNode* root, TreeNode* u) {
         queue<TreeNode*> q;
@@ -2146,7 +2146,7 @@ public:
         return NULL;
     }
      ```
-67. Create Binary Tree From Descriptions
+69. Create Binary Tree From Descriptions
      ```
          TreeNode* createBinaryTree(vector<vector<int>>& descriptions) {
         unordered_map<int, TreeNode*> mp; // To store node pointers
@@ -2189,7 +2189,7 @@ public:
         return nullptr;  // Shouldn't reach here if the input is valid
     }
      ```
-68. Max profitable path in a tree
+70. Max profitable path in a tree
      ```
         void AliceDfs(int node, int par, int dis, vector<int>& parent,
                   vector<int>& distance, vector<int> adj[]) {
