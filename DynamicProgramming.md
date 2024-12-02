@@ -2054,7 +2054,8 @@ Ctrl+ACVVVV (6 key presses) gives 5 times increase
         return totalCount;
      ```
 53.  Length of the Longest Subsequence That Sums to Target
-    ```
+
+   ```
      int dp[1001][1001];
     int solve(int ind, int target, vector<int>& nums, int n) {
         if (target < 0)
@@ -2078,7 +2079,7 @@ Ctrl+ACVVVV (6 key presses) gives 5 times increase
             return -1;
         return ans;
     }
-    ```
+   ```
 54. Max score difference in a grid **
     ```
        vector<vector<ll>> dp;
