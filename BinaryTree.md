@@ -694,6 +694,38 @@
         return result;
     }
     ```
+    ```
+       public List<List<Integer>> verticalOrder(TreeNode root) {
+         List<List<Integer>>  ans=new ArrayList<>();
+        if (root == null)
+            return ans;
+
+       Queue<Pair<TreeNode, Integer>> q = new LinkedList<>();
+        Map<Integer, List<Integer>> mp = new TreeMap<>();
+        q.offer(new Pair<>(root, 0)); 
+         while (!q.isEmpty()) {
+            Pair<TreeNode, Integer> f = q.poll();
+            TreeNode node = f.getKey();
+            int level = f.getValue();
+
+     
+            mp.computeIfAbsent(level, k -> new ArrayList<>()).add(node.val);
+
+            if (node.left != null)
+                q.offer(new Pair<>(node.left, level - 1));  
+            if (node.right != null)
+                q.offer(new Pair<>(node.right, level + 1)); 
+        }
+
+       
+        for (List<Integer> values : mp.values()) {
+            ans.add(values);
+        }
+
+        return ans;
+        
+    }
+    ```
 22. Binary Tree inorder traversal
     ```
      vector<int> ans;
