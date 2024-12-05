@@ -97,3 +97,33 @@
         return l1 == word.length() && l2 == abbr.length();
     }
     ```
+    ```
+      public boolean validWordAbbreviation(String word, String abbr) {
+        int l1 = 0;
+        int l2 = 0;
+
+        while (l2 < abbr.length() && l1 < word.length()) {
+            int num = 0;
+            boolean start = false;
+            while (l2 < abbr.length() && Character.isDigit(abbr.charAt(l2))) {
+                if (!start && abbr.charAt(l2) == '0')
+                    return false;
+                num = num * 10 + abbr.charAt(l2) - '0';
+                l2++;
+                start = true;
+            }
+
+            if (num == 0) {
+                if (word.charAt(l1) != abbr.charAt(l2))
+                    return false;
+                l1++;
+                l2++;
+            } else {
+                l1 += num;
+            }
+        }
+
+        return l1 == word.length() && l2 == abbr.length();
+
+    }
+    ```
