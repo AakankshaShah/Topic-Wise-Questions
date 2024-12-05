@@ -704,6 +704,47 @@ public:
         return ans;
     }
     ```
+    ```
+       public String minRemoveToMakeValid(String s) {
+        int n = s.length();
+        int ob = 0;
+        int cb = 0;
+        int i = 0;
+        char[] c = s.toCharArray();
+
+        while (i < n) {
+            if (s.charAt(i) == '(')
+                ob++;
+            if (s.charAt(i) == ')') {
+                if (ob == 0)
+                    c[i] = '#';
+                else
+                    ob--;
+            }
+            i++;
+        }
+        i = n - 1;
+        ob = 0;
+        while (i >= 0) {
+            if (s.charAt(i) == ')')
+                ob++;
+            if (s.charAt(i) == '(') {
+                if (ob == 0)
+                    c[i] = '#';
+                else
+                    ob--;
+            }
+            i--;
+        }
+        String ans = "";
+        for (i = 0; i < n; i++) {
+            if (c[i] != '#')
+                ans += c[i];
+        }
+        return ans;
+
+    }
+    ```
 20. Min add to make parentheses valid 
     ```
       int minAddToMakeValid(string s) {
