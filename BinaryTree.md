@@ -1296,6 +1296,29 @@ public:
             return lowestCommonAncestor(p->parent, q->parent);
     }
     ```
+    ```
+      oolean findNode(Node root, Node q) {
+        if (root==null)
+            return false;
+
+        return (root == q) || findNode(root.left, q) ||
+               findNode(root.right, q);
+    }
+    public Node lowestCommonAncestor(Node p, Node q) {
+        
+        if (p==null || q==null)
+            return null;
+        if (p == q)
+            return q;
+
+        if (findNode(p, q))
+            return p;
+        else if (findNode(q, p))
+            return q;
+        else
+            return lowestCommonAncestor(p.parent, q.parent);
+    }
+    ```
 42. Sum root to leaf numbers
     ```
       lass Solution {
