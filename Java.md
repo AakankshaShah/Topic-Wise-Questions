@@ -50,6 +50,9 @@ Set<Integer> set = new HashSet<>();
 ```
    PriorityQueue<int[]> pq = new PriorityQueue<>(Comparator.comparingInt(a -> a[0]));
      pq.offer(new int[] { 0, 0, 0 });
+    pq.add(nums[i]);
+    pq.poll();
+    return pq.peek();
 
 ```
 9.
