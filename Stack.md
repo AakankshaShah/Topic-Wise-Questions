@@ -367,6 +367,49 @@ public:
         }
         return ans;
     ```
+    ```
+        public String simplifyPath(String path) {
+        Stack<String> s = new Stack<>();
+        StringBuilder a = new StringBuilder();
+        int n = path.length();
+        int i = 0;
+
+        while (i < n) {
+
+            while (i < n && path.charAt(i) == '/') {
+                i++;
+            }
+
+            while (i < n && path.charAt(i) != '/') {
+                a.append(path.charAt(i));
+                i++;
+            }
+
+            String segment = a.toString();
+
+            if (segment.equals(".")) {
+
+            } else if (segment.equals("..")) {
+
+                if (!s.isEmpty()) {
+                    s.pop();
+                }
+            } else if (!segment.isEmpty()) {
+
+                s.push(segment);
+            }
+
+            a.setLength(0);
+        }
+
+        StringBuilder ans = new StringBuilder();
+        while (!s.isEmpty()) {
+            ans.insert(0, "/" + s.pop());
+        }
+
+        return ans.length() > 0 ? ans.toString() : "/";
+    }
+    ```
 12. Polish Notation 
    Make use of stoi to convert string to int 
 13. Basic Calculator
