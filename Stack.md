@@ -531,6 +531,90 @@ public:
         return operand.top();
     }
     ```
+    ```
+       private int applyCalc(int a, char c, int b) {
+        switch (c) {
+            case '+':
+                return a + b;
+            case '-':
+                return b - a; // Note the order
+            case '*':
+                return a * b;
+            case '/':
+                return b / a; // Note the order
+            default:
+                return 0;
+        }
+    }
+
+    private int precedence(char c) {
+        if (c == '+' || c == '-') {
+            return 1;
+        }
+        if (c == '*' || c == '/') {
+            return 2;
+        }
+        return 0;
+    }
+
+    public int calculate(String s) {
+        Stack<Integer> operand = new Stack<>();
+        Stack<Character> operators = new Stack<>();
+
+        for (int i = 0; i < s.length(); i++) {
+            char ch = s.charAt(i);
+
+            if (ch == ' ') {
+                continue;
+            }
+
+            else if (ch == '(') {
+                operators.push(ch);
+            }
+
+            else if (Character.isDigit(ch)) {
+                int val = 0;
+
+                while (i < s.length() && Character.isDigit(s.charAt(i))) {
+                    val = (val * 10) + (s.charAt(i) - '0');
+                    i++;
+                }
+
+                operand.push(val);
+                i--;
+            }
+
+            else if (ch == ')') {
+                while (!operators.isEmpty() && operators.peek() != '(') {
+                    int a = operand.pop();
+                    int b = operand.pop();
+                    char op = operators.pop();
+                    operand.push(applyCalc(a, op, b));
+                }
+                operators.pop();
+            }
+
+            else if (ch == '+' || ch == '-' || ch == '*' || ch == '/') {
+                while (!operators.isEmpty() && precedence(operators.peek()) >= precedence(ch)) {
+                    int a = operand.pop();
+                    int b = operand.pop();
+                    char op = operators.pop();
+                    operand.push(applyCalc(a, op, b));
+                }
+                operators.push(ch);
+            }
+        }
+
+        while (!operators.isEmpty()) {
+            int a = operand.pop();
+            int b = operand.pop();
+            char op = operators.pop();
+            operand.push(applyCalc(a, op, b));
+        }
+
+        return operand.pop();
+    }
+    ```
 15. Basic Calculator III  
     ```
        private:
