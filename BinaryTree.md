@@ -1379,6 +1379,37 @@ public:
         return res;
     }
      ```
+     ```
+        public List<Integer> rightSideView(TreeNode root) {
+        Queue<TreeNode> q = new LinkedList<>();
+        List<Integer> ans = new ArrayList<>();
+        int last = 0;
+        if (root == null)
+            return ans;
+        q.offer(root);
+
+        while (!q.isEmpty()) {
+            int s = q.size();
+            last = 0;
+            while (s > 0) {
+                TreeNode n = q.poll();
+                if (last == 0)
+                    ans.add(n.val);
+
+                if (n.right != null)
+                    q.offer(n.right);
+                if (n.left != null)
+                    q.offer(n.left);
+                s--;
+                last++;
+
+            }
+
+        }
+        return ans;
+
+    }
+     ```
 44. Inorder successor in a bst 
      ```
        TreeNode* ans;
