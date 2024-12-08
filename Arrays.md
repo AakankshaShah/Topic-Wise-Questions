@@ -3106,4 +3106,31 @@ return c;
         
     }
     ```
+92. Random Pick weight 
+     ```
+        private int[] prefixSums;
+    private Random random;
+
+    public Solution(int[] w) {
+        for (int i = 1; i < w.length; i++) {
+            w[i] += w[i - 1];
+        }
+        this.prefixSums = w;
+        this.random = new Random();
+        
+    }
+    
+    public int pickIndex() {
+        int hi = prefixSums[prefixSums.length - 1];
+        int index = random.nextInt(hi) + 1;
+
+       
+        int lower = Arrays.binarySearch(prefixSums, index);
+        if (lower < 0) {
+            lower = -lower - 1; 
+        }
+        return lower;
+        
+    }
+     ```
 
