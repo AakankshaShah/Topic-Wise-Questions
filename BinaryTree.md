@@ -443,6 +443,29 @@
         return dfs(root,low,high);
     }
      ```
+     ```
+       int sum = 0;
+
+    void solve(TreeNode root, int low, int high) {
+        if (root == null)
+            return;
+
+        if (root.val >= low && root.val <= high)
+            sum += root.val;
+
+        if (root.val >= low)
+            solve(root.left, low, high);
+
+        if (root.val <= high)
+            solve(root.right, low, high);
+    }
+
+    public int rangeSumBST(TreeNode root, int low, int high) {
+        solve(root, low, high);
+        return sum;
+
+    }
+     ```
 
 15. Height of tree after substree removal queries**
     ```
