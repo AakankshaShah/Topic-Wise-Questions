@@ -517,6 +517,31 @@
         return newHead;
     }
     ```
+    ```
+     lass Solution {
+    public Node copyRandomList(Node head) {
+        if (head == null) {
+            return null;
+        }
+
+        Map<Node, Node> mp = new HashMap<>();
+        Node current = head;
+        while (current != null) {
+            mp.put(current, new Node(current.val));
+            current = current.next;
+        }
+        current = head;
+        while (current != null) {
+            Node copy = mp.get(current);
+            copy.next = mp.get(current.next);
+            copy.random = mp.get(current.random);
+            current = current.next;
+        }
+
+        return mp.get(head);
+
+    }
+    ```
 16. Middle of list 
 
     ```
