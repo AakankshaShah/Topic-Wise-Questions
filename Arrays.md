@@ -3233,4 +3233,118 @@ return c;
         return result;
     }
    ```
+   ```
+      I got asked this question on FB on-site. I immediately came up with hashset solution but the interviewer asked to solve it with something else other than dictionary, then I came up with the stack based solution more like Approach 3 keeping the non-zero indices and popping stacks and comparing if indices equal to add to total, otherwise ignore.
+   ```
+  ```
+     private List<int[]> indexValueList;
+
+    SparseVector(int[] nums) {
+        indexValueList = new ArrayList<>();
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] != 0) {
+                indexValueList.add(new int[]{i, nums[i]});
+            }
+        }
+    }
+
+    // Compute dot product using two pointers
+    public int dotProduct(SparseVector vec) {
+        List<int[]> list1 = this.indexValueList;
+        List<int[]> list2 = vec.indexValueList;
+        int i = 0, j = 0, result = 0;
+
+        while (i < list1.size() && j < list2.size()) {
+            int index1 = list1.get(i)[0];
+            int index2 = list2.get(j)[0];
+
+            if (index1 == index2) {
+                result += list1.get(i)[1] * list2.get(j)[1];
+                i++;
+                j++;
+            } else if (index1 < index2) {
+                i++;
+            } else {
+                j++;
+            }
+        }
+
+        return result;
+    }
+  ```
+  ```
+    //WHEN ONLY ONE SPARSE
+     import java.util.ArrayList;
+import java.util.List;
+
+class SparseVector {
+    // A list of index-value pairs representing the sparse vector
+    List<int[]> indexValueList;
+
+    // Constructor to initialize the sparse vector
+    SparseVector(int[] nums) {
+        indexValueList = new ArrayList<>();
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] != 0) {
+                indexValueList.add(new int[]{i, nums[i]}); // Store index and value
+            }
+        }
+    }
+
+    // Dot product of sparse vector with a dense vector using binary search
+    public int dotProductSparseToDenseWithBinarySearch(SparseVector sparseVec, int[] denseVec) {
+        List<int[]> sparseList = sparseVec.indexValueList; // Sparse list of the input vector
+        int result = 0;
+
+        // Iterate through the non-zero elements of the sparse vector
+        for (int[] pair : sparseList) {
+            int index = pair[0]; // Index of the non-zero element
+            int value = pair[1]; // Value at the index
+
+            // Binary search to check if the index exists in the dense vector
+            if (binarySearchDenseVector(denseVec.length, index)) {
+                result += value * denseVec[index];
+            }
+        }
+
+        return result;
+    }
+
+    // Helper method to perform binary search on the dense vector
+    private boolean binarySearchDenseVector(int length, int targetIndex) {
+        // Dense vector has implicit indices [0, 1, 2, ..., length-1]
+        int left = 0, right = length - 1;
+
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+
+            if (mid == targetIndex) {
+                return true;
+            } else if (mid < targetIndex) {
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
+        }
+
+        return false; // Target index not found
+    }
+}
+
+// Test case to validate the implementation
+public class Main {
+    public static void main(String[] args) {
+        int[] nums1 = {1, 0, 0, 2, 3}; // Sparse vector 1
+        int[] denseVec = {1, 2, 3, 4, 5}; // Dense vector
+
+        SparseVector vec1 = new SparseVector(nums1);
+
+        // Calculate the dot product using binary search
+        int result = vec1.dotProductSparseToDenseWithBinarySearch(vec1, denseVec);
+        System.out.println("Dot Product: " + result); // Output: 24 (1*1 + 2*4 + 3*5)
+    }
+}
+
+  ```
+
 
