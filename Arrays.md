@@ -3156,4 +3156,41 @@ return c;
 
     }
     ```
+94. Nested List Weight Sum
+    ```
+      int DFS(vector<NestedInteger>& nestedList, int depth){
+            int n = (int)nestedList.size();
+            int sum = 0;
+            for(int i=0;i<n;i++){
+                if(nestedList[i].isInteger()){
+                    sum += nestedList[i].getInteger()*depth;
+                }
+                else{
+                    sum += DFS(nestedList[i].getList(),depth+1);
+                }
+            }
+            return sum;
+        }
+    public:
+        int depthSum(vector<NestedInteger>& nestedList) {
+            return DFS(nestedList, 1);
+        }
+    ```
+```
+    private int dfs(List<NestedInteger> nestedList, int depth) {
+        int sum = 0;
+        for (NestedInteger ni : nestedList) {
+            if (ni.isInteger()) {
+                sum += ni.getInteger() * depth;
+            } else {
+                sum += dfs(ni.getList(), depth + 1);
+            }
+        }
+        return sum;
+    }
+    public int depthSum(List<NestedInteger> nestedList) {
+        return dfs(nestedList, 1);
+        
+    } 
+```
 
