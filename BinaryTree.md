@@ -2404,4 +2404,38 @@ public:
 
     }
      ```
+71. Convert Binary Search Tree to Sorted Doubly Linked List
+     ```
+      Node* treeToDoublyList(Node* root) {
+
+        if (!root) {
+            return NULL;
+        }
+
+        vector<Node*> sortedNodes;
+        inorderTraverse(root, sortedNodes);
+
+        Node* prev = sortedNodes.back();
+
+        for (int index = 0; index < sortedNodes.size(); index++) {
+            sortedNodes[index]->left = prev;
+            sortedNodes[index]->right = index < sortedNodes.size() - 1
+                                            ? sortedNodes[index + 1]
+                                            : sortedNodes[0];
+            prev = sortedNodes[index];
+        }
+
+        return sortedNodes[0];
+    }
+
+    void inorderTraverse(Node* root, vector<Node*>& sortedNodes) {
+        if (!root) {
+            return;
+        }
+
+        inorderTraverse(root->left, sortedNodes);
+        sortedNodes.push_back(root);
+        inorderTraverse(root->right, sortedNodes);
+    }
+     ```
 
