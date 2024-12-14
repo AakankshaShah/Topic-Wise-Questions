@@ -107,4 +107,26 @@ public:
     }
 };
 ```
+4. Moving avg from data stream
+   ```
+      int windowSize;
+    int sum;
+    queue<int> window;
+    MovingAverage(int size) : windowSize(size), sum(0) {}
+
+    double next(int val) {
+       window.push(val);
+        sum += val;
+
+        
+        if (window.size() > windowSize) {
+            sum -= window.front();
+            window.pop();
+        }
+
+
+        return (double)sum / window.size();
+    }
+
+   ```
   
