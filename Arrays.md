@@ -3346,5 +3346,27 @@ public class Main {
 }
 
   ```
+96. Building with ocean view
+    ```
+      vector<int> findBuildings(vector<int>& heights) {
+
+        vector<int> ans;
+        int n = heights.size();
+
+        int maxRight = 0;
+
+        for (int i = n - 1; i >= 0; i--) {
+
+            if (heights[i] > maxRight) {
+                ans.push_back(i);
+                maxRight = heights[i];
+            }
+        }
+
+        reverse(ans.begin(), ans.end());
+
+        return ans;
+    }
+    ```
 
 
