@@ -910,6 +910,30 @@ public:
         return ans;
     }
     ```
+    ```
+       int minAddToMakeValid(string s) {
+        int n = s.length();
+        int ob = 0;
+        int cb = 0;
+        int ans=0;
+
+        for (int i = 0; i < n; i++) {
+
+            if (s[i] == '(')
+                ob++;
+            if (s[i] == ')') {
+                if (ob == 0)
+                  { s[i] = '#';
+                  ans++;
+                  }
+                else
+                    ob--;
+            }
+        }
+        
+         return ans+ob;
+    }
+    ```
 21. Check if Parathesis string can be made valid or not
  ```
  int flip=0;
