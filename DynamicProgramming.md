@@ -1632,6 +1632,45 @@ Ctrl+ACVVVV (6 key presses) gives 5 times increase
         return solve(0, 0, text, pattern);
     }
     ```
+    ```
+       int[][] t = new int[21][21]; // Memoization table
+
+    boolean solve(int i, int j, String text, String pattern) {
+
+        if (j == pattern.length()) {
+            return i == text.length();
+        }
+
+        if (t[i][j] != -1) {
+            return t[i][j] == 1;
+        }
+
+        boolean ans = false;
+
+        boolean firstMatch = (i < text.length() &&
+                (pattern.charAt(j) == text.charAt(i) || pattern.charAt(j) == '.'));
+
+        if (j + 1 < pattern.length() && pattern.charAt(j + 1) == '*') {
+            ans = (solve(i, j + 2, text, pattern) ||
+                    (firstMatch && solve(i + 1, j, text, pattern)));
+        } else {
+            ans = firstMatch && solve(i + 1, j + 1, text, pattern);
+        }
+
+        t[i][j] = ans ? 1 : 0;
+        return ans;
+    }
+
+    public boolean isMatch(String s, String p) {
+
+        for (int[] row : t) {
+            java.util.Arrays.fill(row, -1);
+        }
+
+     
+        return solve(0, 0, s, p);
+    }
+    ```
 43. No of unique subarrays
 
     <img width="797" alt="image" src="https://github.com/user-attachments/assets/a0cb2fa2-a3d2-4727-8630-e4c639b7d380">
