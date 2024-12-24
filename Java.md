@@ -67,3 +67,8 @@ Set<Integer> set = new HashSet<>();
       freqMap.get(num % space)
       freq.containsKey(target - nums[i]) 
    ```
+11. Stack
+    ```
+       Stack<Character> st = new Stack<>();
+         st.peek()
+    ```
