@@ -3386,5 +3386,22 @@ public class Main {
         }
         return new int[] {};
     ```
+98. Palindrome number
+    ```
+      public boolean isPalindrome(int x) {
+        if (x < 0) {
+            return false;
+        }
+
+        int n = x;
+        long s = 0;
+        while (n != 0) {
+            s = (s * 10 + n % 10);
+            n = n / 10;
+        }
+        return s == x;
+
+    }
+    ```
 
 
