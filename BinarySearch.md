@@ -1001,3 +1001,37 @@ sort(buses.begin(), buses.end());
         return ans;
     }
     ```
+30. Longest Common Prefix
+    ```
+       boolean checker(String[] strs, int n) {
+        String s = strs[0].substring(0, n);
+        for (int i = 1; i < strs.length; i++) {
+            if (!strs[i].startsWith(s)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public String longestCommonPrefix(String[] strs) {
+        int minLen = Integer.MAX_VALUE;
+        if (strs.length == 0)
+            return "";
+        if (strs.length == 1)
+            return strs[0];
+        for (int i = 0; i < strs.length; i++) {
+            if (strs[i].length() < minLen)
+                minLen = strs[i].length();
+        }
+        int l = 1, h = minLen, m;
+        while (l <= h) {
+            m = l + (h - l) / 2;
+            if (checker(strs, m))
+                l = m + 1;
+            else
+                h = m - 1;
+        }
+        return strs[0].substring(0, h);
+
+    }
+    ```
