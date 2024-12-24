@@ -309,6 +309,33 @@ public:
         return st.size() == 0;
     }
     ```
+    ```
+      public boolean isValid(String s) {
+        Stack<Character> st = new Stack<>();
+
+        for (int i = 0; i < s.length(); i++) {
+            if (s.charAt(i) == '(' || s.charAt(i) == '{' || s.charAt(i) == '[')
+                st.push(s.charAt(i));
+
+            else if (s.charAt(i) == ')') {
+                if (!(st.size() > 0 && st.peek() == '('))
+                    return false;
+                st.pop();
+            } else if (s.charAt(i) == '}') {
+                if (!(st.size() > 0 && st.peek() == '{'))
+                    return false;
+                st.pop();
+            } else if (s.charAt(i) == ']') {
+                if (!(st.size() > 0 && st.peek() == '['))
+                    return false;
+                st.pop();
+            }
+        }
+
+        return st.size() == 0;
+
+    }
+    ```
 10. Longest Valid Paratheses
     ```
        int longestValidParentheses(string s) {
