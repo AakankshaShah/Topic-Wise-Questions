@@ -515,6 +515,55 @@ int dp[n+1][w+1];
         return result;
        }
 
+
+      ```
+      ```
+         public String longestPalindrome(String s) {
+        int n = s.length();
+        String s1 = s;
+        String s2 = new StringBuilder(s).reverse().toString(); // Reversed string
+
+        int[][] dp = new int[n + 1][n + 1];
+        int ans = 0;
+        int pi = 0;
+        int pj = 0;
+
+        for (int i = 0; i <= n; i++) {
+            for (int j = 0; j <= n; j++) {
+                if (i == 0 || j == 0) {
+                    dp[i][j] = 0;
+                } else if (s1.charAt(i - 1) == s2.charAt(j - 1)) {
+                    dp[i][j] = dp[i - 1][j - 1] + 1;
+
+                    if (dp[i][j] > ans) {
+                        String temp = s1.substring(i - dp[i][j], i); // Extract substring
+                        String temp2 = new StringBuilder(temp).reverse().toString();
+                        if (temp.equals(temp2)) {
+                            ans = dp[i][j];
+                            pi = i;
+                            pj = j;
+                        }
+                    }
+                } else {
+                    dp[i][j] = 0;
+                }
+            }
+        }
+
+        StringBuilder result = new StringBuilder();
+        for (int i = pi, j = pj; i > 0 && j > 0;) {
+            if (dp[i][j] > 0) {
+                result.append(s1.charAt(i - 1));
+                i--;
+                j--;
+            } else {
+                break;
+            }
+        }
+
+        return result.reverse().toString();
+
+    }
       ```
 
 12.  Wildcard matching***  https://www.youtube.com/watch?v=ZmlQ3vgAOMo
