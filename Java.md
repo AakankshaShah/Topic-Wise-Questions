@@ -65,4 +65,5 @@ Set<Integer> set = new HashSet<>();
       Map<Integer, Integer> freqMap = new HashMap<>();
       freqMap.put(mod, freqMap.getOrDefault(mod, 0) + 1);
       freqMap.get(num % space)
+      freq.containsKey(target - nums[i]) 
    ```
