@@ -358,6 +358,47 @@ vector<string> res;
         return ans;
     }
    ```
+   ```
+      private void solve(int index, String digits, List<String> ans, StringBuilder temp, HashMap<Character, String> mp) {
+        if (index >= digits.length()) {
+            ans.add(temp.toString());
+            return;
+        }
+
+        char digit = digits.charAt(index);
+        String letters = mp.get(digit);
+
+        for (char letter : letters.toCharArray()) {
+            temp.append(letter);
+            solve(index + 1, digits, ans, temp, mp);
+            temp.deleteCharAt(temp.length() - 1);
+        }
+    }
+
+    public List<String> letterCombinations(String digits) {
+
+        if (digits.isEmpty()) {
+            return new ArrayList<>();
+        }
+
+        HashMap<Character, String> mp = new HashMap<>();
+        mp.put('2', "abc");
+        mp.put('3', "def");
+        mp.put('4', "ghi");
+        mp.put('5', "jkl");
+        mp.put('6', "mno");
+        mp.put('7', "pqrs");
+        mp.put('8', "tuv");
+        mp.put('9', "wxyz");
+
+        List<String> ans = new ArrayList<>();
+        StringBuilder temp = new StringBuilder(); 
+
+        solve(0, digits, ans, temp, mp); 
+        return ans;
+
+    }
+   ```
 10. N queens
 
       ```
