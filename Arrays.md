@@ -3368,5 +3368,23 @@ public class Main {
         return ans;
     }
     ```
+97. Two sum
+    ```
+       HashMap<Integer, Integer> freq = new HashMap<>();
+        int[] ans;
+
+        for (int i = 0; i < nums.length; i++) {
+            freq.put(nums[i], i);
+
+        }
+
+        for (int i = 0; i < nums.length; i++) {
+            int complement = target - nums[i];
+            if (freq.containsKey(target - nums[i]) && freq.get(target - nums[i]) != i) {
+                return new int[] { i, freq.get(complement) };
+            }
+        }
+        return new int[] {};
+    ```
 
 
