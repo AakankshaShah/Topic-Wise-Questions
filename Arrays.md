@@ -3403,5 +3403,34 @@ public class Main {
 
     }
     ```
+99. String to integer(atoi)
+    ```
+      public int myAtoi(String s) {
+        int len = s.length();
+        double num = 0;
+        int i = 0;
+        while (i < len && s.charAt(i) == ' ') {
+            i++;
+        }
+        boolean positive = i < len && s.charAt(i) == '+';
+        boolean negative = i < len && s.charAt(i) == '-';
+        if (positive == true)
+            i++;
+        if (negative == true)
+            i++;
+
+        while (i < len && s.charAt(i) >= '0' && s.charAt(i) <= '9') {
+            num = num * 10 + (s.charAt(i) - '0');
+            i++;
+        }
+        num = negative ? -num : num;
+
+        num = (num > Integer.MAX_VALUE) ? Integer.MAX_VALUE : num;
+        num = (num < Integer.MIN_VALUE) ? Integer.MIN_VALUE : num;
+
+        return (int) num;
+
+    }
+    ```
 
 
