@@ -490,6 +490,27 @@
         return ans;
     }
        ```
+       ```
+         public List<List<String>> groupAnagrams(String[] strs) {
+        HashMap<String, List<String>> mp = new HashMap<>();
+        List<List<String>> ans = new ArrayList<>();
+        ;
+
+        for (int i = 0; i < strs.length; i++) {
+            char[] charArray = strs[i].toCharArray();
+            Arrays.sort(charArray);
+            String key = new String(charArray);
+            if (!mp.containsKey(key)) {
+                mp.put(key, new ArrayList<>());
+            }
+            mp.get(key).add(strs[i]);
+        }
+
+        ans.addAll(mp.values());
+        return ans;
+
+    }
+       ```
 16. N - Queens O(n!)
     ```
       bool isSafe(vector<string>& board, int row, int col, int n) {
