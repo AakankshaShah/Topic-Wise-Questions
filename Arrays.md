@@ -3525,7 +3525,7 @@ public class Main {
      ```
 103. Valid number
       ```
-          public boolean isNumber(String s) {
+         public boolean isNumber(String s) {
         s = s.trim();
         if (s.isEmpty())
             return false;
@@ -3559,10 +3559,11 @@ public class Main {
         return hasNumber;
 
     }
-       ```
-104. Multiplu strings
+          
+      ```
+104. Multiply strings
      ```
-        public String multiply(String num1, String num2) {
+             public String multiply(String num1, String num2) {
         if (num1.equals("0") || num2.equals("0")) {
             return "0";
         }
@@ -3587,6 +3588,7 @@ public class Main {
         return sb.toString();
 
     }
+   
      ``` 
 
 
