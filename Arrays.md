@@ -3523,5 +3523,42 @@ public class Main {
         nums[j] = temp;
     }
      ```
+103. Valid number
+      ```
+          public boolean isNumber(String s) {
+        s = s.trim();
+        if (s.isEmpty())
+            return false;
+        boolean hasNumber = false;
+        boolean hasDot = false;
+        boolean hasExp = false;
+        int n = s.length();
+
+        for (int i = 0; i < n; i++) {
+            char c = s.charAt(i);
+
+            if (c >= '0' && c <= '9') {
+                hasNumber = true;
+            } else if (c == '.') {
+                if (hasDot || hasExp)
+                    return false; 
+                hasDot = true;
+            } else if (c == 'e' || c == 'E') {
+                if (!hasNumber || hasExp)
+                    return false; 
+                hasExp = true;
+                hasNumber = false;
+            } else if (c == '+' || c == '-') {
+                if (i > 0 && s.charAt(i - 1) != 'e' && s.charAt(i - 1) != 'E')
+                    return false;
+            } else {
+                return false; 
+            }
+        }
+
+        return hasNumber;
+
+    }
+      ```
 
 
