@@ -77,3 +77,7 @@ Set<Integer> set = new HashSet<>();
      List<int[]> result = new ArrayList<>();
      return result.toArray(new int[result.size()][]);
   ```
+13. TreeMap for sorted
+     ```
+        Map<Integer, List<int[]>> map = new TreeMap<>();
+     ```
