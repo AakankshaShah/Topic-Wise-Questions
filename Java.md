@@ -72,3 +72,8 @@ Set<Integer> set = new HashSet<>();
        Stack<Character> st = new Stack<>();
          st.peek()
     ```
+12. 
+  ``` 
+     List<int[]> result = new ArrayList<>();
+     return result.toArray(new int[result.size()][]);
+  ```
