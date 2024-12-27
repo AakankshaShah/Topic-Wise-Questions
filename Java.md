@@ -4,6 +4,8 @@
 ```
 Queue<Integer> q = new LinkedList<>();
 Has poll & add methods
+//add & offer
+//poll and peek
 ```
 2. Vector
 ```
