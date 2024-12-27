@@ -1086,5 +1086,38 @@ vector<string> res;
 
     }
     ```
+28. Path Sum 2
+    ```
+          public void solve(TreeNode root, int targetSum, List<Integer> temp, List<List<Integer>> ans, int sum) {
+        if (root == null)
+            return;
+        temp.add(root.val);
+        sum += root.val;
+
+        if (root.left == null && root.right == null && sum == targetSum) {
+            ans.add(new ArrayList<>(temp));
+         
+        }
+        if (root.left != null) {
+            solve(root.left, targetSum, temp, ans, sum);
+        }
+        if (root.right != null) {
+            solve(root.right, targetSum, temp, ans, sum);
+        }
+        temp.remove(temp.size() - 1);
+
+    }
+
+    public List<List<Integer>> pathSum(TreeNode root, int targetSum) {
+
+        List<List<Integer>> ans = new ArrayList<>();
+        List<Integer> temp = new ArrayList<>();
+        int s = 0;
+
+        solve(root, targetSum, temp, ans, s);
+        return ans;
+
+    }
+    ```
 
 
