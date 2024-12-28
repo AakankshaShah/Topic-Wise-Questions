@@ -3779,8 +3779,39 @@ public class Main {
             h++;
         }
 
-    }
+    
      ```
+109. Random Pick Index
+   ```
+      class Solution {
+
+    private int[] nums; 
+    private Random rand; 
+    public Solution(int[] nums) {
+        this.nums = nums;
+        this.rand = new Random();
+    }
+    
+
+    public int pick(int target) {
+        int result = -1; 
+        int count = 0;   
+
+
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] == target) {
+                count++;
+              
+                if (rand.nextInt(count) == 0) {//Reservoir Sampling of processimng each element is 1/i and here of getting each element is 1/count
+                    result = i;
+                }
+            }
+        }
+
+        return result;  
+    }
+}
+   ```
 
 
 
