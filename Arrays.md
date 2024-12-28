@@ -3709,6 +3709,30 @@ public class Main {
 
         return num;
      ```
+106. Missing Range
+     ```
+       public List<List<Integer>> findMissingRanges(int[] nums, int lower, int upper) {
+        int start = lower;
+
+        List<List<Integer>> ans = new ArrayList<>();
+
+        int n = nums.length;
+        if (n == 0) {
+            ans.add(List.of(lower, upper));
+            return ans;
+        }
+
+        for (int i = 0; i <= n; i++) {
+            int end = (i < n ? nums[i] - 1 : upper);
+            if (start <= end) {
+
+                ans.add(List.of(start, end));
+            }
+            start = (i < n ? nums[i] + 1 : upper + 1);
+
+        }
+       
+     ```
 
 
 
