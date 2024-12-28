@@ -3757,6 +3757,28 @@ public class Main {
         }
         return true;
 
+    
+     ```
+108. Move zeroes
+     ```
+         public void moveZeroes(int[] nums) {
+        if (nums.length == 0 || nums.length == 1)
+            return;
+
+        int l = 0;
+        int h = 0;
+
+        while (h < nums.length) {
+            if (nums[h] != 0) {
+
+                int temp = nums[l];
+                nums[l] = nums[h];
+                nums[h] = temp;
+                l++;
+            }
+            h++;
+        }
+
     }
      ```
 
