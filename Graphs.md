@@ -2168,6 +2168,84 @@ public:
         return ans;
     }
     ```
+45. Accounts merge
+    ```
+       lass DisjointSet {
+    vector<int> parent, rank;
+
+public:
+    DisjointSet(int n) {
+        rank.resize(n + 1, 0);
+        parent.resize(n + 1, 0);
+        for (int i = 0; i <= n; i++) {
+            parent[i] = i;
+            rank[i] = 1;
+        }
+    }
+
+    int find(int x) {
+        if (x == parent[x]) return x;
+        return parent[x] = find(parent[x]); 
+    }
+
+    void Union(int x, int y) {
+        int px = find(x);
+        int py = find(y);
+        if (px == py) return;
+
+
+        if (rank[px] > rank[py])
+            parent[py] = px;
+        else if (rank[px] < rank[py])
+            parent[px] = py;
+        else {
+            parent[py] = px;
+            rank[px]++;
+        }
+    }
+};
+
+class Solution {
+public:
+    vector<vector<string>> accountsMerge(vector<vector<string>>& accounts) {
+        int n = accounts.size();
+        unordered_map<string, int> mp;  
+        DisjointSet ds(n);
+
+      
+        for (int i = 0; i < n; i++) {
+            for (int j = 1; j < accounts[i].size(); j++) {  
+                string mail = accounts[i][j];
+                if (mp.find(mail) == mp.end()) {
+                    mp[mail] = i;
+                } else {
+                    ds.Union(i, mp[mail]);
+                }
+            }
+        }
+
+
+        vector<vector<string>> ans(n);
+        for (auto it : mp) {
+            string mail = it.first;
+            int node = ds.find(it.second); 
+            ans[node].push_back(mail);
+        }
+
+        vector<vector<string>> result;
+        for (int i = 0; i < n; i++) {
+            if (ans[i].size() > 0) {
+                sort(ans[i].begin(), ans[i].end());  
+                vector<string> temp = {accounts[i][0]};  
+                temp.insert(temp.end(), ans[i].begin(), ans[i].end());  
+                result.push_back(temp);
+            }
+        }
+
+        return result;
+    }
+    ```
+
 46. Delete tree nodes 
    ```
      vector<int> vis;
