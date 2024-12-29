@@ -193,3 +193,31 @@
         return result;
     }
     ```
+6. Add Strings
+     ```
+        public String addStrings(String num1, String num2) {
+        int a = num1.length() - 1;
+        int b = num2.length() - 1;
+        int c = 0;
+        StringBuilder s = new StringBuilder();
+        while (a >= 0 || b >= 0 || c != 0) {
+            int sum = c;
+            if (a >= 0) {
+                sum += num1.charAt(a) - '0';
+                a--;
+
+            }
+            if (b >= 0) {
+                sum += num2.charAt(b) - '0';
+                b--;
+
+            }
+
+            c = sum / 10;
+            s.append(sum % 10);
+
+        }
+        return s.reverse().toString();
+
+    }
+     ```
