@@ -732,6 +732,57 @@ vector<string> res;
         
     }
     ```
+    ```
+       private void solve(List<String> ans, StringBuilder path, String num, int target,
+                       int pos, long curr, long latest) {
+       
+        if (pos == num.length()) {
+            if (curr == target) {
+                ans.add(path.toString()); 
+            }
+            return;
+        }
+
+        for (int i = pos; i < num.length(); ++i) {
+           
+            if (i != pos && num.charAt(pos) == '0') break;
+
+            String part = num.substring(pos, i + 1);  
+            long n = Long.parseLong(part);  
+
+            if (pos == 0) {
+              
+                path.append(part);
+                solve(ans, path, num, target, i + 1, n, n);
+                path.delete(path.length() - part.length(), path.length());  
+            } else {
+              
+                path.append('+').append(part);
+                solve(ans, path, num, target, i + 1, curr + n, n);
+                path.delete(path.length() - part.length() - 1, path.length());  
+
+                // Add "-" operator
+                path.append('-').append(part);
+                solve(ans, path, num, target, i + 1, curr - n, -n);
+                path.delete(path.length() - part.length() - 1, path.length());  
+
+                // Add "*" operator
+                path.append('*').append(part);
+                solve(ans, path, num, target, i + 1, curr - latest + latest * n, latest * n);
+                path.delete(path.length() - part.length() - 1, path.length());  
+            }
+        }
+    }
+
+    public List<String> addOperators(String num, int target) {
+        List<String> ans = new ArrayList<>();
+        if (num.isEmpty()) return ans;
+
+        StringBuilder path = new StringBuilder();
+        solve(ans, path, num, target, 0, 0, 0);  // Start the recursive backtracking
+        return ans;
+    }
+    ```
 17. Beautiful arrangement
      ```
        void helper(vector<int> nums, int start, int& ans) {
