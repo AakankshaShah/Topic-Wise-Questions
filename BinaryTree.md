@@ -107,6 +107,26 @@
         return root;
    ```
    ```
+     public Node connect(Node root) {
+        if(root==null)
+        return null;
+        Node curr=root;
+        while(curr.left!=null)
+        {
+            Node temp=curr;
+            while(curr!=null)
+            {
+                curr.left.next=curr.right;
+                curr.right.next=curr.next==null?null:curr.next.left;
+                curr=curr.next;
+            }
+            curr=temp.left;
+        }
+        return root;
+        
+    }
+   ```
+   ```
     //Part 2
       Node* connect(Node* root) {
         if(!root) return root;
@@ -131,6 +151,7 @@
         return root;
     }
    ```
+
 4. Invert Binary tree
     ```
       void swap(TreeNode* curr) {
