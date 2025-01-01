@@ -3963,7 +3963,38 @@ public class Main {
         }
         ans = ans.substr(0, ans.size() - 1);
         return ans;
-    }
+    
+      ```
+      ```
+           unordered_set<char> vowels = {'a', 'e', 'i', 'o', 'u',
+                                      'A', 'E', 'I', 'O', 'U'};
+        string result;
+        string word;
+        int wordIndex = 1;
+
+        stringstream ss(sentence); // Use a stringstream to split words
+        while (ss >> word) {       // Extract words one by one
+            if (vowels.count(word[0])) {
+
+                word += "ma";
+            } else {
+
+                word = word.substr(1) + word[0] + "ma";
+            }
+
+            word += string(wordIndex, 'a');
+            wordIndex++;
+
+            result += word + " ";
+        }
+
+
+        if (!result.empty()) {
+            result.pop_back();
+        }
+
+        return result;
+    
       ```
 
 
