@@ -108,6 +108,24 @@ priority_queue<int>pq;
         return ans;
     }
 ``` 
+```
+   int left = 0, right = arr.length - 1;
+
+        while (right - left >= k) {
+            if (Math.abs(arr[left] - x) > Math.abs(arr[right] - x)) {
+                left++;
+            } else {
+                right--;
+            }
+        }
+
+        List<Integer> ans = new ArrayList<>();
+        for (int i = left; i <= right; i++) {
+            ans.add(arr[i]);
+        }
+
+        return ans;
+```
 5. Meeting Rooms II
      ```
         int minMeetingRooms(vector<vector<int>>& intervals) {
