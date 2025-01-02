@@ -2484,4 +2484,45 @@ public:
 
     }
       ```
+      ```
+            private ListNode current;
+
+    public TreeNode sortedListToBST(ListNode head) {
+        if (head == null)
+            return null;
+
+        int size = getSize(head);
+        current = head;
+
+        return buildTree(0, size - 1);
+    }
+
+    private int getSize(ListNode head) {
+        int size = 0;
+        while (head != null) {
+            size++;
+            head = head.next;
+        }
+        return size;
+    }
+
+    private TreeNode buildTree(int start, int end) {
+        if (start > end)
+            return null;
+
+        int mid = start + (end - start) / 2;
+
+        TreeNode left = buildTree(start, mid - 1);
+
+        TreeNode root = new TreeNode(current.val);
+        current = current.next;
+
+        TreeNode right = buildTree(mid + 1, end);
+
+        root.left = left;
+        root.right = right;
+
+        return root;
+    }
+      ```
 
