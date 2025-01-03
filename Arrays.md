@@ -4066,6 +4066,47 @@ public class Main {
 
     
      ```
+116. Plus One
+      ```
+    
+         //Approach 1
+         int n = digits.length;
+         int c = 1;
+
+        for (int i = n - 1; i >= 0; i--) {
+        int s = digits[i] + c;
+
+        c = s / 10;
+
+        digits[i] = s % 10;
+
+        }
+
+        if (c != 0) {
+        int[] ans = new int[n + 1];
+        ans[0] = c;
+        for (int i = 0; i < n; i++)
+        ans[i + 1] = digits[i];
+        return ans;
+
+        } else
+        return digits;
+
+        /Approach 2
+        for (int i = n - 1; i >= 0; i--) {
+
+            digits[i] += 1;
+
+            if (digits[i] < 10) {
+                return digits;
+            }
+
+            digits[i] = 0;
+        }
+        int[] result = new int[n + 1];
+        result[0] = 1;
+        return result;
+      ```
 
 
 
