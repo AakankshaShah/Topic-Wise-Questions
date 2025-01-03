@@ -3161,4 +3161,40 @@ public:
 
     }
       ```
+64. Robot Room Cleaner
+      ```
+          class Solution {
+public:
+    // {-1, 0} -> go up
+    // {0, 1} -> go right
+    // {1, 0} -> go down
+    // {0, -1} -> go left
+    // face direction: 0(up), 1(right), 2(down), 3(left)
+    vector<vector<int>> directions = {{-1, 0}, {0, 1}, {1, 0}, {0, -1}};
+    unordered_set<string> visited;
+    void cleanRoom(Robot& robot) { cleanRoomRecursive(robot, 1, 1, 0); }
+    void cleanRoomRecursive(Robot& robot, int i, int j, int faceDirection) {
+
+        visited.insert(to_string(i) + "," + to_string(j));
+
+        robot.clean();
+        for (int k = 0; k < 4; ++k) {
+            int nextFaceDirection = (faceDirection + k) % 4;
+            int iNext = i + directions[nextFaceDirection][0];
+            int jNext = j + directions[nextFaceDirection][1];
+
+            if (!visited.count(to_string(iNext) + "," + to_string(jNext)) &&
+                robot.move()) {
+                cleanRoomRecursive(robot, iNext, jNext, nextFaceDirection);
+
+                robot.turnRight();
+                robot.turnRight();
+                robot.move();
+                robot.turnRight();
+                robot.turnRight();
+            }
+            robot.turnRight();// to turn to new direction
+        }
+    }
+      ```
 
