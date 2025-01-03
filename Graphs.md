@@ -3163,8 +3163,8 @@ public:
       ```
 64. Robot Room Cleaner
       ```
-          class Solution {
-public:
+           class Solution {
+     public:
     // {-1, 0} -> go up
     // {0, 1} -> go right
     // {1, 0} -> go down
