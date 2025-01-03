@@ -4109,6 +4109,7 @@ public class Main {
       ```
 
 117. Minimum Number of Changes to Make Binary String Beautiful
+
     ```
        public int minChanges(String s) {
         int minChangesRequired = 0;
@@ -4121,6 +4122,38 @@ public class Main {
         }
         return minChangesRequired;
 
+    
+    ```
+118. Product of Two Run-Length Encoded Arrays
+
+    ```
+        vector<vector<int>> findRLEArray(vector<vector<int>>& encoded1,
+                                     vector<vector<int>>& encoded2) {
+        vector<vector<int>> ans;
+        int i = 0, j = 0;
+
+        while (i < encoded1.size() && j < encoded2.size()) {
+            int minFreq = min(encoded1[i][1], encoded2[j][1]);
+            int product = encoded1[i][0] * encoded2[j][0];
+
+            if (ans.size() && ans.back()[0] == product)
+                ans.back()[1] += minFreq;
+            else
+                ans.push_back({product, minFreq});
+
+        
+            if (encoded1[i][1] < encoded2[j][1]) {
+                encoded2[j][1] -= minFreq;
+                i++;
+            } else if (encoded1[i][1] > encoded2[j][1]) {
+                encoded1[i][1] -= minFreq;
+                j++;
+            } else {
+                i++;
+                j++;
+            }
+        }
+        return ans;
     }
     ```
       
