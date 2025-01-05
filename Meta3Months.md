@@ -140,6 +140,25 @@
 139. Product of Two Run-Length Encoded Arrays
 140. Reorder List
 141. Robot Room Cleaner
+142. Reverse Linked List
+143. String compression
+144. Remove Element
+145. Search insert position
+146. Binary Tree Zig Zag Traversal
+147. Best time to buy and sell stock 2
+148. Word Ladder 2
+149. Palindrome Partitioning
+150. Single Number
+151. House Robber
+152. Is subsequence
+153. Add two integer
+154. Add bold tag in String
+155. Strobogrammatic Number
+156. Shortest distance from all buildings
+157. Koko eating bananas
+158. Binary Tree Prunning
+159. Zigzag conversion
+
 
 
 
