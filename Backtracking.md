@@ -1170,5 +1170,94 @@ vector<string> res;
 
     }
     ```
+29. Word Ladder 2
+     ```
+       vector<vector<string>> findLadders(string beginWord, string endWord,
+                                       vector<string>& wordList) {
+        unordered_set<string> wordSet(wordList.begin(), wordList.end());
+
+        if (!wordSet.count(endWord))
+            return {};
+
+        bfs(beginWord, endWord, wordSet);
+
+        currPath = {endWord};
+        backtrack(endWord, beginWord);
+
+        return shortestPaths;
+    }
+    unordered_map<string, vector<string>> adjList;
+    vector<string> currPath;
+    vector<vector<string>> shortestPaths;
+    vector<string> findNeighbors(string& word,
+                                 unordered_set<string>& wordList) {
+        vector<string> neighbors;
+        string originalWord = word;
+
+        for (int i = 0; i < word.size(); i++) {
+            char originalChar = word[i];
+
+            for (char c = 'a'; c <= 'z'; c++) {
+                word[i] = c;
+
+                if (c == originalChar || !wordList.count(word))
+                    continue;
+
+                neighbors.push_back(word);
+            }
+
+            word[i] = originalChar;
+        }
+
+        return neighbors;
+    }
+    void bfs(string& beginWord, string& endWord,
+             unordered_set<string>& wordList) {
+        queue<string> q;
+        q.push(beginWord);
+
+        unordered_map<string, bool> isEnqueued;
+        isEnqueued[beginWord] = true;
+
+        while (!q.empty()) {
+            int size = q.size();
+            vector<string> visitedInThisLevel;
+
+            for (int i = 0; i < size; i++) {
+                string currentWord = q.front();
+                q.pop();
+
+                vector<string> neighbors = findNeighbors(currentWord, wordList);
+                for (string& neighbor : neighbors) {
+                    adjList[neighbor].push_back(currentWord);
+
+                    if (!isEnqueued[neighbor]) {
+                        q.push(neighbor);
+                        isEnqueued[neighbor] = true;
+                    }
+
+                    visitedInThisLevel.push_back(neighbor);
+                }
+            }
+
+            for (string& word : visitedInThisLevel) {
+                wordList.erase(word);
+            }
+        }
+    }
+    void backtrack(string& currentWord, string& beginWord) {
+        if (currentWord == beginWord) {
+            shortestPaths.push_back(
+                vector<string>(currPath.rbegin(), currPath.rend()));
+            return;
+        }
+
+        for (string& predecessor : adjList[currentWord]) {
+            currPath.push_back(predecessor);
+            backtrack(predecessor, beginWord);
+            currPath.pop_back();
+        }
+    }
+     ```
 
 
