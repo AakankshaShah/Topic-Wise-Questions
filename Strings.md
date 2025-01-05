@@ -268,5 +268,61 @@
         return write;
     }
      ```
+9. Add bold tag in String 
+     ```
+         string addBoldTag(string str, vector<string>& words) {
+        int n = str.size();
+        vector<vector<int>> intervals;
+      
+
+        for (auto& word : words) {
+            size_t pos = str.find(word);
+            while (pos != string::npos) {
+                int start = pos, end = pos + word.size();
+                intervals.pb({start, end});
+                pos = str.find(word, pos + 1);
+            }
+        }
+        if (intervals.empty())
+            return str;
+        sort(intervals.begin(), intervals.end(),
+             [&](const vector<int>& a, const vector<int>& b) {
+                 return a[0] < b[0];
+             });
+        int start = intervals[0][0], end = intervals[0][1];
+        map<int, int> tagInsertionStore;
+        for (int i = 1; i < intervals.size(); i++) {
+            if (start <= intervals[i][0] && intervals[i][0] <= end) {
+                end = max(end, intervals[i][1]);
+            } else {
+
+                tagInsertionStore[start] = 0;
+                tagInsertionStore[end] = 1;
+                start = intervals[i][0], end = intervals[i][1];
+            }
+        }
+        tagInsertionStore[start] = 0; // 0 indicates opening tag
+        tagInsertionStore[end] = 1;
+        string res = "";
+        string opening = "<b>";
+        string closing = "</b>";
+        for (int i = 0; i < n; i++) {
+            if (tagInsertionStore.count(i)) {
+                if (!tagInsertionStore[i])
+                    res += opening;
+                else
+                    res += closing;
+                res.pb(str[i]);
+            } else
+                res.pb(str[i]);
+        }
+
+        if (tagInsertionStore.count(n))
+            res += closing; 
+
+        return res;
+    }
+     ```
+     
    
   
