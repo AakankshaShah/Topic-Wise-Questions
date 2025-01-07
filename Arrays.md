@@ -4236,16 +4236,16 @@ public class Main {
 122. Design Tic Tac Toe
       ```
          class TicTacToe {
-    private:
-    vector<int> rowJudge;
-    vector<int> colJudge;
-    int diag, anti;
-    int total;
+       private:
+       vector<int> rowJudge;
+       vector<int> colJudge;
+       int diag, anti;
+       int total;
 
-    public:
-    TicTacToe(int n) : total(n), rowJudge(n), colJudge(n), diag(0), anti(0) {}
+       public:
+        TicTacToe(int n) : total(n), rowJudge(n), colJudge(n), diag(0), anti(0) {}
 
-    int move(int row, int col, int player) {
+       int move(int row, int col, int player) {
         int add = player == 1 ? 1 : -1;
         diag += row == col ? add : 0;
         anti += row == total - col - 1 ? add : 0;
@@ -4255,9 +4255,31 @@ public class Main {
             abs(diag) == total || abs(anti) == total)
             return player;
         return 0;
-    }
-};
+        }
+        };
       ```
+123. Add binary
+     ```
+        string addBinary(string a, string b) {
+        int i=a.length()-1;
+        int j=b.length()-1;
+        int c=0;
+        string res;
+        while(i>=0||j>=0||c)
+        {
+            if (i >= 0) c += a[i--] - '0';
+            if (j >= 0) c += b[j--] - '0';
+            res += c % 2 + '0';
+            c /= 2;
+            
+
+
+        }
+        reverse(begin(res), end(res));
+        return res;  
+        
+      }
+     ```
       
  
 
