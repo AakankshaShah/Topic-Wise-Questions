@@ -158,6 +158,15 @@
 157. Koko eating bananas
 158. Binary Tree Prunning
 159. Zigzag conversion
+160. Unique length 3-palindrome subsequence
+161. Search in a rotated sorted array 2
+162. Design Tic Tac Toe
+163. Binary Tree inorder traversal
+164. Find first occurrence of a string
+165. Add binary
+166. 3 sum closest
+167. Min no of operations to move all balls to box
+168. Roman to Integer
 
 
 
