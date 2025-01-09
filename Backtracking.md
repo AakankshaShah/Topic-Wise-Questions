@@ -1259,5 +1259,29 @@ vector<string> res;
         }
     }
      ```
+30. Combinations
+      ```
+          void solve(int s, int e, int k, vector<vector<int>>& ans,
+               vector<int>& temp) {
+        if (temp.size() == k) {
+            ans.push_back(temp);
+            return;
+        }
+        if (s > e)
+            return;
+        for (int i = s; i <= e; i++) {
+            temp.push_back(i);
+            solve(i + 1, e, k, ans, temp);
+            temp.pop_back();
+        }
+    }
+
+    vector<vector<int>> combine(int n, int k) {
+        vector<vector<int>> ans;
+        vector<int> temp;
+        solve(1, n, k, ans, temp);
+        return ans;
+    }
+      ```
 
 
