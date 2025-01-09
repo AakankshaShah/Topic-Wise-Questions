@@ -167,6 +167,14 @@
 166. 3 sum closest
 167. Min no of operations to move all balls to box
 168. Roman to Integer
+169. Ransom Note
+170. Summary Ranges
+171. Rotate string
+172. Verifying an Alien Dictionary
+173. Power of 2
+
+
+
 
 
 
