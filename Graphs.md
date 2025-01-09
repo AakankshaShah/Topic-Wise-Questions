@@ -3361,5 +3361,47 @@ public:
         return ans;
     }
      ```
-67. 
+67. Minimum Knight Moves
+     ```
+        int minKnightMoves(int x, int y) {
+        int dx[] = {1, 1, -1, -1, 2, 2, -2, -2};
+        int dy[] = {2, -2, -2, 2, 1, -1, 1, -1};
+        x = abs(x); //Imp
+        y = abs(y);
+
+        queue<pair<int, int>> q;
+        set<pair<int, int>> visited;
+        q.push({0, 0});
+        visited.insert({0, 0});
+
+        int moves = 0;
+        while (!q.empty()) {
+            int s = q.size();
+            for (int k = 0; k < s; k++) {
+                auto it = q.front();
+                q.pop();
+                int x1 = it.first;
+                int y1 = it.second;
+                if (x1 == x && y1 == y)
+                    return moves;
+
+                for (int i = 0; i < 8; i++) {
+                    int nx = x1 + dx[i];
+                    int ny = y1 + dy[i];
+                    if (visited.find({nx, ny}) == visited.end() && nx >= -2 &&
+                        ny >= -2 && nx <= x + 2 && ny <= y + 2) {//Imp
+                        q.push({nx, ny});
+                        visited.insert({nx, ny});
+                    }
+                    //  if (visited.find({nx, ny}) == visited.end()) {
+                    //     q.push({nx, ny});
+                    //     visited.insert({nx, ny});
+                    // }
+                }
+            }
+            moves++;
+        }
+        return moves;
+    }
+     ```
 
