@@ -1546,5 +1546,46 @@ return sans;
         return false;
         }
      ```
+52. K Radius Subarray Averages
+   ```
+       vector<int> getAverages(vector<int>& nums, int k) {
+        int n = nums.size();
+        vector<int> result(n, -1);
+
+        if (k == 0)
+            return nums;
+        if (n < 2 * k + 1)
+            return result;
+
+        long long windowSum = 0;
+
+        int left = 0;
+        int right = 2 * k;
+        int i = k;
+
+        for (int j = left; j <= right; j++) {
+            windowSum += nums[j];
+        }
+
+        result[i] = windowSum / (2 * k + 1);
+
+        i++;
+        right++;
+
+        while (right < n) {
+
+            int out_of_window = nums[left];
+            int came_to_window = nums[right];
+
+            windowSum = windowSum - out_of_window + came_to_window;
+
+            result[i] = windowSum / (2 * k + 1);
+            i++;
+            left++;
+            right++;
+        }
+        return result;
+    }
+   ```
 
       
