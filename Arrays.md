@@ -4313,25 +4313,38 @@ public class Main {
     ```
 124. Divide two integers
       ```
-           int divide(int dividend, int divisor) {
-        if (dividend == divisor)
-            return 1;
-        bool isPositive = (dividend < 0 == divisor < 0);
-        unsigned int a = abs(dividend);
-        unsigned int b = abs(divisor);
+          int divide(int dividend, int divisor) {
+        if (dividend == divisor) return 1;
+
         unsigned int ans = 0;
-        while (a >= b) { 
-            short q = 0;
-            while (a > (b << (q + 1)))//b*2 to power of q+1
-                q++;
-            ans += (1 << q); 
-            a = a -
-                (b << q); 
+        int sign = 1;
+
+
+        if ((dividend < 0 && divisor > 0) || (dividend > 0 && divisor < 0))
+            sign = -1;
+
+    
+        long n = abs((long)dividend);
+        long d = abs((long)divisor);
+
+
+        while (n >= d) {
+            int count = 0;
+            while (n > (d << (count + 1)))
+                count++;
+            n -= d << count;
+            ans += 1 << count;
         }
-        if(isPositive)
+
+
+        if (ans == (1 << 31) && sign == 1) return INT_MAX;
+
+        if(sign==1)
         return ans;
         return -ans;
-    }
+        
+       }  
+    
       ```
 125.  
 
