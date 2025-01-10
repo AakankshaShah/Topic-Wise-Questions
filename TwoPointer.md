@@ -139,3 +139,27 @@
         
     }
     ```
+7. Number of Subsequences That Satisfy the Given Sum Condition
+    ```
+       int numSubseq(vector<int>& nums, int target) {
+        sort(nums.begin(), nums.end());
+        int l = 0;
+        int n = nums.size();
+        int r = n - 1;
+        int mod = 1000000007;
+        int res = 0;
+        vector<int> pows(n, 1);
+        for (int i = 1; i < n; ++i)
+            pows[i] = pows[i - 1] * 2 % mod;
+
+        while (l <= r) {
+            if (nums[l] + nums[r] > target) {
+                r--;
+            } else {
+                res = (res + pows[r - l++]) % mod;
+            }
+        }
+
+        return res;
+    }
+    ```
