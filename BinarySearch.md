@@ -1098,3 +1098,24 @@ sort(buses.begin(), buses.end());
         return false;
     }
      ```
+33. Peak Index In a Mountain Array
+     ```
+         int peakIndexInMountainArray(vector<int>& arr) {
+        int l=1;
+        int h=arr.size()-2;
+        int ans;
+
+        while(l<=h)
+        {
+            int mid=l+(h-l)/2;
+            if(arr[mid-1]<arr[mid]&&arr[mid]>arr[mid+1])
+            return mid;
+            else if(arr[mid-1]<arr[mid])
+            l=mid+1;
+            else
+            h=mid-1;
+        }
+        return -1;
+        
+    }
+     ```
