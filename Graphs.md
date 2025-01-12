@@ -3503,4 +3503,58 @@ public:
         return res;
     }
      ```
+69.  unordered_map<string, int> dp;
+
+    int helper(string target,
+               vector<unordered_map<char, int>>& stickerFrequencies) {
+
+        if (dp.find(target) != dp.end())
+            return dp[target];
+
+        if (target.empty())
+            return 0;
+
+        int minStickers = INT_MAX;
+
+        unordered_map<char, int> targetFreq;
+        for (char c : target) {
+            targetFreq[c]++;
+        }
+
+        for (int i = 0; i < stickerFrequencies.size(); i++) {
+            if (stickerFrequencies[i][target[0]] == 0)
+                continue;
+            string newTarget = "";
+            for (auto& entry : targetFreq) {
+                int remaining =
+                    entry.second - stickerFrequencies[i][entry.first];
+                if (remaining > 0) {
+                    newTarget += string(remaining, entry.first);
+                }
+            }
+
+            int temp = helper(newTarget, stickerFrequencies);
+            if (temp != -1) {
+                minStickers = min(minStickers, 1 + temp);
+            }
+        }
+
+        if (minStickers == INT_MAX)
+            return dp[target] = -1;
+
+        return dp[target] = minStickers;
+    }
+
+    int minStickers(vector<string>& stickers, string target) {
+        int numStickers = stickers.size();
+
+        // Create frequency maps for each sticker.
+        vector<unordered_map<char, int>> stickerFrequencies(numStickers);
+        for (int i = 0; i < numStickers; i++) {
+            for (char c : stickers[i]) {
+                stickerFrequencies[i][c]++;
+            }
+        }
+
+      
 
