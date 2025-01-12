@@ -1283,5 +1283,34 @@ vector<string> res;
         return ans;
     }
       ```
+31. Word Break 2
+     ```
+       void solve(const string& s, const set<string>& st, int start, int end,
+               vector<string>& ans, string temp) {
+        if (start > end) {
+            ans.push_back(temp);
+            return;
+        }
+
+        for (int i = start + 1; i <= end + 1; i++) {
+            string s_temp = s.substr(start, i - start);
+            if (st.find(s_temp) != st.end()) {
+                string new_temp = temp;
+                if (!new_temp.empty()) {
+                    new_temp += " ";
+                }
+                new_temp += s_temp;
+                solve(s, st, i, end, ans, new_temp);
+            }
+        }
+    }
+
+    vector<string> wordBreak(string s, vector<string>& wordDict) {
+        set<string> st(wordDict.begin(), wordDict.end());
+        vector<string> ans;
+        solve(s, st, 0, s.length() - 1, ans, "");
+        return ans;
+    }
+     ```
 
 
