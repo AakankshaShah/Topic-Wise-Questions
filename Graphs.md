@@ -3451,4 +3451,56 @@ public:
         return -1;
     }
      ```
+     ```
+        unordered_map<string, int> dp;
+
+    int helper(string s, vector<unordered_map<char, int>>& mp) {
+
+        if (dp.find(s) != dp.end())
+            return dp[s];
+        if (s.size() == 0)
+            return 0;
+
+        int res = 1e6;
+
+        unordered_map<char, int> mp1;
+
+        for (auto c : s)
+            mp1[c]++;
+
+        for (int j = 0; j < mp.size(); j++) {
+
+            if (mp[j][s[0]] == 0)
+                continue;
+
+            string str = "";
+            for (auto itr : mp1) {
+                str += string(max(0, itr.second - mp[j][itr.first]), itr.first);
+            }
+
+            int temp = helper(str, mp);
+            if (temp != -1)
+                res = min(res, 1 + temp);
+        }
+
+        if (res == 1e6)
+            return dp[s] = -1;
+        return dp[s] = res;
+    }
+
+    int minStickers(vector<string>& stickers, string target) {
+        int m = stickers.size();
+        vector<unordered_map<char, int>> mp(m);
+
+        for (int i = 0; i < stickers.size(); i++) {
+            for (auto c : stickers[i]) {
+                mp[i][c]++;
+            }
+        }
+
+        int res = helper(target, mp);
+
+        return res;
+    }
+     ```
 
