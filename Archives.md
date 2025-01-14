@@ -46,6 +46,22 @@ No upness monitoring — if one service is not reachable, we will not be able to
 Hard to get service metadata — we can store the service metadata in the exporter
 
 ```
+```
+   Pull:
+Use Case: When services are in a controlled network or support service discovery.
+Example: Prometheus scraping Kubernetes pods.
+Best For:
+Systems with dynamic targets.
+Centralized control over metrics collection.
+Low-overhead metric retrieval.
+Push:
+Use Case: When services are in different networks, or you need real-time updates.
+Example: IoT devices pushing metrics to a central system.
+Best For:
+Systems with firewalls/NAT.
+Real-time applications needing low-latency updates.
+Scenarios where service discovery is difficult.
+```
 
 
 
