@@ -196,8 +196,13 @@
 195. Word Beeak 2
 196. Shortest subarray with or atleast k 2
 197. Stickers to spell words
-198. 
-199. 
+198. Integer to english words
+199. battleships in a board
+200. Delete nodes in a bst
+201. Sort characters by frequenecy
+202. Next Greater Element 1
+203. 
+204. 
 
 
 
