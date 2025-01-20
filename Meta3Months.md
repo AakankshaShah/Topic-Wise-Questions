@@ -186,7 +186,18 @@
 185. Palindrome Linked List
 186. Move Pieces to Obtain a String
 187. K Radius Subarray Averages
-188. 
+188. Root equals sum of children
+189. odd even linked list
+190. Happy number
+191. Contains Duplicate
+192. Majority Element 2
+193. Valid Anagram
+194. Course schedule 2
+195. Word Beeak 2
+196. Shortest subarray with or atleast k 2
+197. Stickers to spell words
+198. 
+199. 
 
 
 
