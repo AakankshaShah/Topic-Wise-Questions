@@ -201,8 +201,18 @@
 200. Delete nodes in a bst
 201. Sort characters by frequenecy
 202. Next Greater Element 1
-203. 
-204. 
+203. Minimum time difference
+204. Find score of an array after marking all elements
+205. Valid paranthesis string
+206. Middle of linked list
+207. Sort an array
+208. Smallest subtree with deepest nodes
+209. Shortest subarray with Sum at least k
+210. Binary Search
+211. Kth Largest Element in a stream
+212. Sliding Puzzle
+213. 
+214. 
 
 
 
