@@ -2625,4 +2625,29 @@ public:
     }
     }
      ```
+76. Smallest Subtree with all the Deepest Nodes
+   ```
+       TreeNode* subtreeWithAllDeepest(TreeNode* root) {
+        return findDeepest(root).second;
+    }
+    pair<int, TreeNode*> findDeepest(TreeNode* root) {
+        if (root == nullptr) {
+            return {0, nullptr};
+        }
+
+        auto left = findDeepest(root->left);
+        auto right = findDeepest(root->right);
+
+        if (left.first == right.first) {
+
+            return {left.first + 1, root};
+        } else if (left.first > right.first) {
+
+            return {left.first + 1, left.second};
+        } else {
+
+            return {right.first + 1, right.second};
+        }
+    }
+   ```
 
