@@ -211,8 +211,15 @@
 210. Binary Search
 211. Kth Largest Element in a stream
 212. Sliding Puzzle
-213. 
-214. 
+213. Max Level Sum of a Binary Tree
+214. Delete nodes and return forest
+215. Find Longest Special Substring That Occurs Thrice I
+216. Shortest Bridge
+217. Element Appearing More Than 25% In Sorted Array
+218. Rank Transform of an array
+219. Balance of a binary tree
+220. Remove Sub-Folders from the Filesystem
+
 
 
 
