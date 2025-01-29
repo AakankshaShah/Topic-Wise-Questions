@@ -1587,5 +1587,29 @@ return sans;
         return result;
     }
    ```
+55. Number of Substrings Containing All Three Characters
+     ```
+         int numberOfSubstrings(string s) {
+        unordered_map<char,int> mp;
+        int j = 0;
+        int i = 0;
+        int ans = 0;
+
+        while (j < s.length()) {
+            mp[s[j]]++;
+
+            while (mp.size() == 3) {
+                  ans += s.length() - j;
+             
+                mp[s[i]]--;
+                if (mp[s[i]] == 0)
+                    mp.erase(s[i]);
+                i++;
+            }
+            j++;
+        }
+        return ans;
+    }
+     ```
 
       
