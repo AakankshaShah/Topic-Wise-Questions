@@ -4818,6 +4818,27 @@ public class Main {
 
       }
      ```
+138. Maximum Score After Splitting a String
+      ```
+         int maxScore(string s) {
+        int n=s.length();
+        int sum=0;
+        int curr_sum=0;
+        int ans=0;
+
+
+        for(int i =0;i<n;i++)
+        sum+=s[i]-'0';
+        for(int i =0;i<n-1;i++)
+        {
+            curr_sum+=s[i]-'0';
+            ans=max(ans,sum-curr_sum+i-curr_sum+1);
+        }
+       return ans;
+
+        
+    }
+      ```
 
      
 
