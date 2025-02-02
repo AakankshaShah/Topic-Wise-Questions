@@ -69,5 +69,269 @@ Scenarios where service discovery is difficult.
 
    
 2. Parking lot 
+     Design :
+     ![WhatsApp Image 2025-02-02 at 9 48 00 PM](https://github.com/user-attachments/assets/052f3247-dd8c-4801-8e41-f844d6485b38)  
      ```
+       public class Vehicle {
+    private String id; // Vehicle ID (e.g., license plate)
+    private String type; // Vehicle type: "2W", "4W", "Heavy"
+    private String owner; // Owner's name
+
+    public Vehicle(String id, String type, String owner) {
+        this.id = id;
+        this.type = type;
+        this.owner = owner;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public String getOwner() {
+        return owner;
+    }
+    }
+
      ```
+    ```
+      public class ParkingSlot {
+    private String id; // Slot ID
+    private boolean isEmpty; // Status of the slot
+    private double price; // Hourly rate for the slot
+    private Vehicle vehicle; // Assigned vehicle (if any)
+
+    public ParkingSlot(String id, double price) {
+        this.id = id;
+        this.price = price;
+        this.isEmpty = true;
+        this.vehicle = null;
+    }
+
+    public boolean isEmpty() {
+        return isEmpty;
+    }
+
+    public void bookSlot(Vehicle vehicle) {
+        if (!isEmpty) {
+            throw new IllegalStateException("Slot is already occupied!");
+        }
+        this.vehicle = vehicle;
+        this.isEmpty = false;
+    }
+
+    public void freeSlot() {
+        this.vehicle = null;
+        this.isEmpty = true;
+    }
+
+    public Vehicle getVehicle() {
+        return vehicle;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+   }
+
+    ```
+    ```
+         import java.time.LocalDateTime;
+
+    public class Ticket {
+    private String id; // Ticket ID
+    private Vehicle vehicle; // Vehicle associated with the ticket
+    private ParkingSlot parkingSlot; // Slot where the vehicle is parked
+    private LocalDateTime entryTime; // Entry time of the vehicle
+
+    public Ticket(String id, Vehicle vehicle, ParkingSlot parkingSlot) {
+        this.id = id;
+        this.vehicle = vehicle;
+        this.parkingSlot = parkingSlot;
+        this.entryTime = LocalDateTime.now();
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public Vehicle getVehicle() {
+        return vehicle;
+    }
+
+    public ParkingSlot getParkingSlot() {
+        return parkingSlot;
+    }
+
+    public LocalDateTime getEntryTime() {
+        return entryTime;
+    }
+   }
+
+    ```
+    ```
+      public class ParkingSlotManager {
+    private TwoWheelerParkingManager twoWheelerManager;
+    private FourWheelerParkingManager fourWheelerManager;
+
+    public ParkingSlotManager() {
+        this.twoWheelerManager = new TwoWheelerParkingManager();
+        this.fourWheelerManager = new FourWheelerParkingManager();
+    }
+
+    public void addTwoWheelerSlot(ParkingSlot slot) {
+        twoWheelerManager.addSlot(slot);
+    }
+
+    public void addFourWheelerSlot(ParkingSlot slot) {
+        fourWheelerManager.addSlot(slot);
+    }
+
+    public ParkingSlot findAvailableSlot(String vehicleType) {
+        if (vehicleType.equals("2W")) {
+            return twoWheelerManager.findAvailableSlot();
+        } else if (vehicleType.equals("4W")) {
+            return fourWheelerManager.findAvailableSlot();
+        }
+        return null; // No slots available for this type
+    }
+
+    public void bookSlot(ParkingSlot slot, Vehicle vehicle) {
+        if (vehicle.getType().equals("2W")) {
+            twoWheelerManager.bookSlot(slot, vehicle);
+        } else if (vehicle.getType().equals("4W")) {
+            fourWheelerManager.bookSlot(slot, vehicle);
+        }
+    }
+
+    public void freeSlot(ParkingSlot slot, String vehicleType) {
+        if (vehicleType.equals("2W")) {
+            twoWheelerManager.freeSlot(slot);
+        } else if (vehicleType.equals("4W")) {
+            fourWheelerManager.freeSlot(slot);
+        }
+    }
+   }
+
+
+    ```
+    ```
+      import java.util.ArrayList;
+    import java.util.List;
+
+    public class TwoWheelerParkingManager {
+    private List<ParkingSlot> twoWheelerSlots;
+
+    public TwoWheelerParkingManager() {
+        this.twoWheelerSlots = new ArrayList<>();
+    }
+
+    public void addSlot(ParkingSlot slot) {
+        twoWheelerSlots.add(slot);
+    }
+
+    public ParkingSlot findAvailableSlot() {
+        for (ParkingSlot slot : twoWheelerSlots) {
+            if (slot.isEmpty()) {
+                return slot;
+            }
+        }
+        return null; // No available slot
+    }
+
+    public void bookSlot(ParkingSlot slot, Vehicle vehicle) {
+        slot.bookSlot(vehicle);
+    }
+
+    public void freeSlot(ParkingSlot slot) {
+        slot.freeSlot();
+    }
+   }
+
+    ```
+    ```
+       import java.util.UUID;
+
+    public class EntranceGate {
+    private ParkingSlotManager parkingSlotManager;
+
+    public EntranceGate(ParkingSlotManager parkingSlotManager) {
+        this.parkingSlotManager = parkingSlotManager;
+    }
+
+    public Ticket generateTicket(Vehicle vehicle) {
+        ParkingSlot slot = parkingSlotManager.findAvailableSlot(vehicle.getType());
+
+        if (slot == null) {
+            throw new IllegalStateException("No parking slot available for vehicle type: " + vehicle.getType());
+        }
+
+        parkingSlotManager.bookSlot(slot, vehicle);
+        return new Ticket(UUID.randomUUID().toString(), vehicle, slot);
+    }
+   }
+
+    ```
+    ```
+       import java.time.Duration;
+
+    public class ExitGate {
+    private ParkingSlotManager parkingSlotManager;
+
+    public ExitGate(ParkingSlotManager parkingSlotManager) {
+        this.parkingSlotManager = parkingSlotManager;
+    }
+
+    public double processPayment(Ticket ticket) {
+        ParkingSlot slot = ticket.getParkingSlot();
+        long parkedHours = Duration.between(ticket.getEntryTime(), LocalDateTime.now()).toHours();
+        double totalCost = parkedHours * slot.getPrice();
+
+        parkingSlotManager.freeSlot(slot); // Free the parking slot
+        return totalCost;
+     }
+     }
+
+   ```
+   ```
+      public class ParkingSystem {
+    public static void main(String[] args) {
+        // Initialize ParkingSlotManager
+        ParkingSlotManager manager = new ParkingSlotManager();
+
+        // Add slots
+        manager.addTwoWheelerSlot(new ParkingSlot("T1", 20)); // 2W Slot
+        manager.addFourWheelerSlot(new ParkingSlot("F1", 50)); // 4W Slot
+
+        // Entrance Gate
+        EntranceGate entrance = new EntranceGate(manager);
+
+        // Vehicle Example
+        Vehicle bike = new Vehicle("V123", "2W", "John Doe");
+        Ticket bikeTicket = entrance.generateTicket(bike);
+        System.out.println("Bike Ticket: " + bikeTicket.getId() + ", Slot: " + bikeTicket.getParkingSlot().getId());
+
+        // Vehicle Example 2
+        Vehicle car = new Vehicle("V456", "4W", "Jane Smith");
+        Ticket carTicket = entrance.generateTicket(car);
+        System.out.println("Car Ticket: " + carTicket.getId() + ", Slot: " + carTicket.getParkingSlot().getId());
+
+        // Exit Gate
+        ExitGate exit = new ExitGate(manager);
+        double bikePayment = exit.processPayment(bikeTicket);
+        System.out.println("Bike Payment: $" + bikePayment);
+
+        double carPayment = exit.processPayment(carTicket);
+        System.out.println("Car Payment: $" + carPayment);
+    }
+    }
+
+   ```
+    
