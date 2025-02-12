@@ -4840,12 +4840,13 @@ public class Main {
       }
       ```
 139. Tuple with same product
+
       ```
          long long nC2(int n) {
     if (n < 2) return 0; 
     return (1LL * n * (n - 1)) / 2;
     }
-    int tupleSameProduct(vector<int>& nums) {
+       int tupleSameProduct(vector<int>& nums) {
         int n = nums.size();
         vector<int> hash(1e4, 0);
         map<int, int> mp;
@@ -4864,9 +4865,53 @@ public class Main {
         }
         return ans;
         
-    }
-    };
+           }
+           };
       ```
+140. Find celebrity
+     ```
+          int findCelebrity(int n) {
+        // vector<int>ind(n,0);
+        // for(int i=0;i<n;i++)
+        // {
+        //     for(int j=0;j<n;j++)
+        //     {
+        //         if(i!=j)
+        //         {
+        //             if(knows(j,i))
+        //             ind[i]++;
+        //         }
+        //     }
+        //     if(ind[i]==n-1)
+        //     return i;
+        // }
+        // return -1;
+        for (int i = 0; i < n; ++i) {
+            bool isCelebrity = true;
+
+  
+            for (int j = 0; j < n; ++j) {
+                if (i != j) {
+                    if (!knows(j, i) || knows(i, j)) {
+                        isCelebrity = false;
+                        break;  
+                    }
+                }
+            }
+
+
+            if (isCelebrity) {
+                return i;
+            }
+        }
+
+
+        return -1;
+        
+       }
+     ```
+
+
 
      
 
