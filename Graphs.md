@@ -3755,5 +3755,43 @@ public:
         return maxAmount;
     }
    ```
+74.  Find Minimum Time to Reach Last Room I
+   ```
+       int minTimeToReach(vector<vector<int>>& moveTime) {
+        int n = moveTime.size();
+        int m = moveTime[0].size();
+        vector<pair<int, int>> directions = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
+        vector<vector<int>> minTime(n, vector<int>(m, INT_MAX));
+        priority_queue<pair<int, pair<int, int>>,
+                       vector<pair<int, pair<int, int>>>,
+                       greater<pair<int, pair<int, int>>>>
+            pq;
+        pq.push({0, {0, 0}});
+        minTime[0][0] = 0;
+        while (!pq.empty()) {
+            auto it = pq.top();
+            int currTime = it.first;
+            int row = it.second.first;
+            int col = it.second.second;
+            pq.pop();
+            if (row == n - 1 && col == m - 1)
+                return currTime;
+            for (auto dir : directions) {
+                int Nrow = row + dir.first;
+                int Ncol = col + dir.second;
+                if (Nrow >= 0 && Nrow < n && Ncol >= 0 && Ncol < m) {
+                    int diff = max(currTime, moveTime[Nrow][Ncol]) + 1;
+                    if (diff < minTime[Nrow][Ncol]) {
+                        minTime[Nrow][Ncol] = diff;
+                        pq.push({diff, {Nrow, Ncol}});
+                    }
+                }
+            }
+        }
+        return -1;
+    }
+   ```
+   ```
+   ```
       
 
