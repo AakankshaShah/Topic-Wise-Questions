@@ -1119,3 +1119,61 @@ sort(buses.begin(), buses.end());
         
     }
      ```
+34. Block Placement Queries
+     ```
+          void breakSpaces(int pos) {
+
+        auto it = obstacles.upper_bound(pos);
+        int pos_next = *it;
+        int pos_prev = *prev(it);
+
+        int orig_size = pos_next - pos_prev;
+        spaces[orig_size].erase(pos_prev);
+        if (spaces[orig_size].size() == 0) {
+            spaces.erase(orig_size);
+        }
+        spaces[pos - pos_prev].insert(pos_prev);
+        spaces[pos_next - pos].insert(pos);
+    }
+    bool findSpace(int maxi_dist, int block_size) {
+        auto it = spaces.lower_bound(block_size);
+        while (it != spaces.end()) {
+
+            set<int>& start_positions = it->second;
+            int first_pos = *start_positions.begin();
+            if (first_pos + block_size <= maxi_dist) {
+                return true;
+            }
+            advance(it, 1);
+        }
+        return false;
+    }
+
+     public:
+    vector<bool> ans;
+    set<int> obstacles;
+    map<int, set<int>> spaces;
+    vector<bool> getResults(vector<vector<int>>& queries) {
+        int const n = queries.size();
+        ans.reserve(n);
+        int maxi_dist = min(5 * 10e4, 3.0 * n);
+        obstacles.insert(0);
+        obstacles.insert(maxi_dist);
+        spaces[maxi_dist].insert(0);
+
+        for (auto const& query : queries) {
+            int op = query[0];
+
+            if (op == 1) {
+                breakSpaces(query[1]);
+                obstacles.insert(query[1]);
+            }
+
+            else {
+                ans.push_back(findSpace(query[1], query[2]));
+            }
+        }
+
+        return ans;
+    }
+     ```
