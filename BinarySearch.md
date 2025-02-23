@@ -1177,3 +1177,37 @@ sort(buses.begin(), buses.end());
         return ans;
     }
      ```
+35. LeftMost Column with at least 1
+     ```
+         int leftMostColumnWithOne(BinaryMatrix binaryMatrix) {
+        vector<int> dim = binaryMatrix.dimensions();
+        int row = dim[0];
+        int col = dim[1];
+        int high = col;
+        int colIndex = -1;
+
+        for (int i = 0; i < row; i++) {
+            int index = leftMostOneIndex(binaryMatrix, i, 0, high);
+            high = index;
+        }
+
+        if (high == col) {
+            return -1;
+        }
+
+        return high;
+    }
+
+    int leftMostOneIndex(BinaryMatrix& binaryMatrix, int rowNum, int low,
+                         int high) {
+        while (low < high) {
+            int mid = low + (high - low) / 2;
+            if (binaryMatrix.get(rowNum, mid) == 1) {
+                high = mid;
+            } else {
+                low = mid + 1;
+            }
+        }
+        return high;
+    }
+     ```
