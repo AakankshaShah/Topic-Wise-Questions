@@ -261,3 +261,40 @@ class Solution {
         return result;
     }
    ```
+5. Map sum pairs
+     ```
+          private:
+    struct Trie {
+        int sum = 0;
+        unordered_map<char, Trie*> children;
+    };
+
+    Trie* root;
+    unordered_map<string, int> keymap;
+
+    public:
+    MapSum() { root = new Trie(); }
+
+    void insert(string key, int val) {
+        int delta = val - keymap[key];
+        keymap[key] = val;
+        Trie* curr = root;
+        for (char c : key) {
+            if (!curr->children.count(c)) {
+                curr->children[c] = new Trie();
+            }
+            curr = curr->children[c];
+            curr->sum += delta;
+        }
+    }
+
+    int sum(string prefix) {
+        Trie* curr = root;
+        for (char ch : prefix) {
+            if (!curr->children.count(ch))
+                return 0; // Prefix not found
+            curr = curr->children[ch];
+        }
+        return curr->sum;
+    } 
+     ```
