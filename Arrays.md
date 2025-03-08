@@ -5389,7 +5389,81 @@ public class Main {
         return res;
       }
      ```
+154. All O`one Data Structure
+       ```
+               class AllOne {
+     private:
+    unordered_map<string, int> keyCount;               // Key -> Frequency
+    unordered_map<int, unordered_set<string>> freqMap; // Frequency -> Keys
+    int maxFreq = 0, minFreq = 0;                      // Proper initialization
 
+    public:
+    AllOne() {}
+
+    void inc(string key) {
+        int freq = keyCount[key]++;
+        int newFreq = freq + 1;
+
+        if (freq > 0) {
+            freqMap[freq].erase(key);
+            if (freqMap[freq].empty()) {
+                freqMap.erase(freq);
+                if (minFreq == freq)
+                    minFreq++;
+            }
+        }
+
+        freqMap[newFreq].insert(key);
+        maxFreq = max(maxFreq, newFreq);
+        if (minFreq == 0 || newFreq < minFreq)
+            minFreq = newFreq;
+    }
+
+    void dec(string key) {
+        if (keyCount.find(key) == keyCount.end())
+            return; // Key does not exist
+
+        int freq = keyCount[key]--;
+
+        freqMap[freq].erase(key);
+        if (freqMap[freq].empty()) {
+            freqMap.erase(freq);
+            if (maxFreq == freq)
+                maxFreq--;
+            if (minFreq == freq) {
+                // 🚨 Fix: Find the next smallest frequency in freqMa
+                if (freqMap.empty()) {
+                    minFreq = INT_MAX; // If empty, reset minFreq
+                } else {
+                    minFreq = freqMap.begin()->first; // Get smallest frequency
+                }
+            }
+        }
+
+        if (freq > 1) {
+            freqMap[freq - 1].insert(key);
+            minFreq = min(minFreq, freq - 1); // Update minFreq correctly
+        } else {
+            keyCount.erase(key); // Key completely removed
+        }
+    }
+
+    string getMaxKey() {
+        if (keyCount.empty() || freqMap.find(maxFreq) == freqMap.end() ||
+            freqMap[maxFreq].empty())
+            return "";
+        return *freqMap[maxFreq].begin();
+    }
+
+    string getMinKey() {
+        if (keyCount.empty() || freqMap.find(minFreq) == freqMap.end() ||
+            freqMap[minFreq].empty())
+            return "";
+        return *freqMap[minFreq].begin();
+    }
+    };
+
+       ```
 
 
      
