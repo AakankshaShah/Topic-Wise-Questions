@@ -457,7 +457,7 @@
         return res;
         }
        ```
-  19. Spiral order matrix traversal 
+  14. Spiral order matrix traversal 
 
    ```
     int n=A.size();
@@ -494,7 +494,7 @@
     }
     return arr;
    ```
-20.   Part II
+15.   Part II
  ```
    int r1 = 0; int r2 = n-1; int c1 = 0; int c2 = n-1;
     vector<vector<int>> v(n, vector<int> (n,0));
@@ -521,7 +521,7 @@
     return v;
  ```
     
- 21. Pick from both sides! https://www.youtube.com/watch?v=XJZczN4wts0 Another approach 
+ 16. Pick from both sides! https://www.youtube.com/watch?v=XJZczN4wts0 Another approach 
        ```
          int left_sum[B + 1], right_sum[B + 1], max, i;
         int n = A.size();
@@ -554,7 +554,7 @@
 
        ```
        
-22. Min steps in infinite grid 
+17. Min steps in infinite grid 
 
      ```
       int dist= 0;
@@ -568,7 +568,7 @@
 
     ```
 
-23. Min lights to activate 
+18. Min lights to activate 
 
     ```
       int ans = 0;
@@ -591,7 +591,7 @@
     return ans;
     ```
 
-24. Maximum sum triplet
+19. Maximum sum triplet
 
     ```
      vector<int> suffix(A.size());
@@ -628,7 +628,7 @@
 
     ```
 
-25. Add 1 to number 
+20. Add 1 to number 
 
    ```
      int carry =1;
@@ -656,7 +656,7 @@
    ```
 
 
-26. Max absolute difference https://www.youtube.com/watch?v=KqDIeQ9S5Vc
+21. Max absolute difference https://www.youtube.com/watch?v=KqDIeQ9S5Vc
 
     ```
       int val1=INT_MAX;
@@ -680,7 +680,7 @@
       
     ```
 
-27. Find duplicate in an array [Hare & tortoise method] - Something is duplicating & array values can act as valid indices
+22. Find duplicate in an array [Hare & tortoise method] - Something is duplicating & array values can act as valid indices
     ```
       int slow = nums[0];
         int fast = nums[0];
