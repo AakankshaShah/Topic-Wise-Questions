@@ -271,6 +271,17 @@
         return jumps;
 
     ```
+    ```
+       vector<int> dp(nums.size(), INT_MAX);
+        dp[0] = 0;
+        for (int i = 0; i < nums.size(); i++) {
+            for (int k = i + 1; k < nums[i] + i + 1 && k < nums.size(); k++) {
+                dp[k] = min(1 + dp[i], dp[k]);
+            }
+        }
+        return dp[nums.size() - 1];
+      
+    ```
 12. Permutations
 
      ```
@@ -310,7 +321,7 @@
             output.push_back(temp);
             return;
         }
-        for(int i=0; i<nums.size(); i++){
+        for(int i=0; i<nums.size(); i++){ˀ
             if(visited[i] || (i>0 && nums[i] == nums[i-1] && !visited[i-1])) continue;
             visited[i] = true;
             temp.push_back(nums[i]);
