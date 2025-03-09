@@ -377,7 +377,7 @@
        }
        ```
 
-13.  Maximum non negative subarray sum
+12.  Maximum non negative subarray sum
 
      ```
      vector<int> result;
@@ -416,7 +416,7 @@
 
      ```
 
-   18. Factorial of a large number https://www.youtube.com/watch?v=O3fwYjcMV_M
+   13. Factorial of a large number https://www.youtube.com/watch?v=O3fwYjcMV_M
 
        ```
         void multiplier( vector<int> &arr, int &size,int fact)
@@ -455,10 +455,8 @@
             res.push_back(arr[i]);
         }
         return res;
-
-        
-      }
-      ```
+        }
+       ```
   19. Spiral order matrix traversal 
 
    ```
