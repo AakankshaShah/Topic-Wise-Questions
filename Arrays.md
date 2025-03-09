@@ -2479,7 +2479,7 @@ return c;
     void leave(int p) {
         seats.erase(p);
     }
-};
+    };
 
      ```
 75. Best time to buy and sell stock
@@ -2516,7 +2516,7 @@ return c;
             songs[j] = temp;
         }
 
-    public:
+        public:
         // Constructor to initialize the playlist and k
         SongShuffler(std::vector<std::string>& songList, int k) {
             songs = songList;
