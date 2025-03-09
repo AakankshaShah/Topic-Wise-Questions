@@ -3842,7 +3842,7 @@ public class Main {
 
 110. Minimum Number of Changes to Make Binary String Beautiful
 
-    ```
+```
        public int minChanges(String s) {
         int minChangesRequired = 0;
 
@@ -3855,10 +3855,10 @@ public class Main {
         return minChangesRequired;
 
     
-    ```
+```
 118. Product of Two Run-Length Encoded Arrays
 
-    ```
+```
         vector<vector<int>> findRLEArray(vector<vector<int>>& encoded1,
                                      vector<vector<int>>& encoded2) {
         vector<vector<int>> ans;
@@ -3887,7 +3887,7 @@ public class Main {
         }
         return ans;
     
-    ```
+ ```
 119. Remove element
        ```
            int removeElement(vector<int>& nums, int val) {
