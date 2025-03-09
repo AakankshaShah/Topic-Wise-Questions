@@ -1408,12 +1408,12 @@ return max - min == B * 2 ? 1 : 0;
      
      ```
        int n=A.size();
-    int row;
-    int col;
-      vector<vector<int> > ans;
+       int row;
+       int col;
+       vector<vector<int> > ans;
     
-    for(int i=0;i<n;i++)
-    {
+       for(int i=0;i<n;i++)
+       {
         row=0;
         col=i;
         vector<int> result;
@@ -1424,9 +1424,9 @@ return max - min == B * 2 ? 1 : 0;
             col--;
         }
         ans.push_back(result);
-    }
-    for(int i=1;i<n;i++)
-    {
+        }
+       for(int i=1;i<n;i++)
+       {
         col=n-1;
         row=i;
         vector<int> result;
@@ -1438,9 +1438,9 @@ return max - min == B * 2 ? 1 : 0;
         }
         ans.push_back(result);
         
-    }
-    return ans;
-    ```
+       }
+       return ans;
+     ```
 40. Triplets with sum in range
      
      ```
