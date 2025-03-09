@@ -282,36 +282,6 @@
         return dp[nums.size() - 1];
       
     ```
-12. Permutations
-
-     ```
-      void recur(vector<vector<int>>& ans, vector<int>& ds, int freq[], vector<int>& nums) {
-    if (ds.size() == nums.size()) {
-        ans.push_back(ds);
-        return;
-    }
-
-    for (int i = 0; i < nums.size(); i++) {
-        if (freq[i] == 0) {
-            freq[i]++;
-            ds.push_back(nums[i]);
-            recur(ans, ds, freq, nums);
-            freq[i]--;
-            ds.pop_back();
-        }
-    }
-    }
-
-    vector<vector<int>> permute(vector<int>& nums) {
-    vector<vector<int>> ans;
-    vector<int> ds;
-    int freq[nums.size()];
-    memset(freq,0,sizeof(freq));
-     recur(ans, ds, freq, nums);
-    return ans; 
-     }
-       
-     ```
 13. Permutation II
 
         ```
