@@ -1001,7 +1001,7 @@
     }
    ```
 
-    ```
+   ```
      bool static cmp(Interval i1, Interval i2) { return i2.start > i1.start; }
 
      vector<Interval> Solution::insert(vector<Interval>& intervals,
@@ -1030,7 +1030,7 @@
     return ans;
     }
 
-    ```
+   ```
 29. Set matrix zero https://www.youtube.com/watch?v=coOCVuBx7YA
     
 ```
@@ -2167,7 +2167,7 @@ return c;
         
     }
     ```
-64. Find smallest common element in all rows 
+65. Find smallest common element in all rows 
     ```
       int smallestCommonElement(vector<vector<int>>& mat) 
     {
@@ -2293,7 +2293,7 @@ return c;
        }
      ```
 
-71. Max sum pair in an array 
+70. Max sum pair in an array 
     ```
       int findMax(int number) {
         int maxDigit = INT_MIN;
@@ -2324,7 +2324,7 @@ return c;
         return answer;
     }
     ```
-72. Reverse words in a string 
+71. Reverse words in a string 
     ```
       string reverseWords(string s) {
         reverse(s.begin(), s.end());
@@ -2349,7 +2349,7 @@ return c;
         return s;
     }
     ```
-73. Diagonal traverse 2
+72. Diagonal traverse 2
 
     ```
            vector<int> findDiagonalOrder(vector<vector<int>>& nums) {
@@ -2398,7 +2398,7 @@ return c;
         
         return result;
      ```
-74.Diagonal Traverse
+73.Diagonal Traverse
 
    ```
        class Solution {
@@ -2440,61 +2440,49 @@ return c;
 
     }
    ```
-75. Exam room 
+74. Exam room 
      ```
-       class ExamRoom {
-       private:
-	set<int> seats;
-	int capacity;
+         class ExamRoom {
+    private:
+    set<int> seats;
+    int capacity;
 
-       public:
+    public:
+    ExamRoom(int N) : capacity(N) {}
 
-	ExamRoom(int N)
-	{
-		capacity = N;
-	}
+    int seat() {
+        int curr = 0;  
 
-	int seat()
-	{
-		int dist = 0;
-		int curr = 0;
-
-		if (!seats.empty()) {
-			auto itr = seats.begin();
+        if (!seats.empty()) {
+            int maxDist = *seats.begin();  
             
-            //calculate distance at the begining
-			dist = *itr;
-
-			if (dist == 0) {
-				itr++;
-			}
+            auto prev = seats.begin();
+            for (auto itr = next(seats.begin()); itr != seats.end(); ++itr) {
+                int dist = (*itr - *prev) / 2;
+                if (dist > maxDist) {
+                    maxDist = dist;
+                    curr = *prev + dist;
+                }
+                prev = itr;
+            }
             
-            //calculate distance in between
-			while (itr != seats.end()) {
-                int mid_dist = (*itr - *prev(itr)) / 2;
-				if (dist < mid_dist) {
-					dist = mid_dist;
-					curr = *prev(itr) + dist;
-				}
-				itr++;
-			}
-            
-            //calculate distance at the end
-			if (dist < ((capacity - 1) - *(seats.rbegin()))) {
-				curr = capacity - 1;
-			}
-		}
 
-		return *(seats.insert(curr).first);
-	}
+            if (capacity - 1 - *seats.rbegin() > maxDist) {
+                curr = capacity - 1;
+            }
+        }
 
-	void leave(int p)
-	{
-		seats.erase(p);
-	}
-       };
+        seats.insert(curr);
+        return curr;
+    }
+
+    void leave(int p) {
+        seats.erase(p);
+    }
+};
+
      ```
-81. Best time to buy and sell stock
+75. Best time to buy and sell stock
      ```
         int maxProfit(vector<int>& prices) {
         int buy = prices[0];
@@ -2511,7 +2499,7 @@ return c;
         
     }
      ```
-82. Song shuffler
+76. Song shuffler
      ```
          class SongShuffler {
     private:
@@ -2565,7 +2553,7 @@ return c;
     };
 
      ```
-83. Max product of 3 numbers
+77. Max product of 3 numbers
     ```
       int l = nums.size(); 
         sort(nums.begin(), nums.end()); 
@@ -2605,7 +2593,7 @@ return c;
         
     }
     ```
-85. Largest plus sign 
+78. Largest plus sign 
     ```
       int[][] inputGrid = new int[n][n];
         for (int[] row : inputGrid) {
@@ -2760,7 +2748,7 @@ return c;
         }
         return ans;
     ```
-86. Destroy sequential targets
+79. Destroy sequential targets
      ```
         int destroyTargets(vector<int>& nums, int space) {
         map<int, int> mp;
@@ -2802,7 +2790,7 @@ return c;
 
     }
     ```
-87. No. of substrings with fixed ratio 
+80. No. of substrings with fixed ratio 
     ```
        long long fixedRatio(string s, int num1, int num2) {
         long long result = 0;
@@ -2852,7 +2840,7 @@ return c;
 
         return result;
     ```
-88. Make strings anti palindrome 
+81. Make strings anti palindrome 
      ```
         public String makeAntiPalindrome(String s) {
         char[] chars = s.toCharArray();
@@ -2875,7 +2863,7 @@ return c;
         chars[j] = t;
     }
      ```
-89. Insert Delete GetRandom O(1)
+82. Insert Delete GetRandom O(1)
     ```
         std::unordered_map<int, int> val_to_index;
     std::vector<int> values;
@@ -2912,7 +2900,7 @@ return c;
         return values[random_index];
     }
     ```
-90. Zig zag string 
+83. Zig zag string 
     ```
        string convert(string s, int numRows) {
 
@@ -2940,7 +2928,7 @@ return c;
     return ans;
     }
     ```
-91. Pow(x,n)
+84. Pow(x,n)
      ```
         double binaryExp(double x, long long n) {
         if (n == 0) {
@@ -2999,7 +2987,7 @@ return c;
         
     }
     ```
-92. Random Pick weight 
+85. Random Pick weight 
      ```
         private int[] prefixSums;
     private Random random;
@@ -3026,7 +3014,7 @@ return c;
         
     }
      ```
-93. Subarray sum equals k
+86. Subarray sum equals k
     ```
        public int subarraySum(int[] nums, int k) {
 
@@ -3049,7 +3037,7 @@ return c;
 
     }
     ```
-94. Nested List Weight Sum
+87. Nested List Weight Sum
     ```
       int DFS(vector<NestedInteger>& nestedList, int depth){
             int n = (int)nestedList.size();
@@ -3086,7 +3074,7 @@ return c;
         
     } 
 ```
-95.Dot product of two sparse vector
+88.Dot product of two sparse vector
    ```
       private int[] array;
 
@@ -3239,7 +3227,7 @@ public class Main {
 }
 
   ```
-96. Building with ocean view
+89. Building with ocean view
     ```
       vector<int> findBuildings(vector<int>& heights) {
 
@@ -3261,7 +3249,7 @@ public class Main {
         return ans;
     }
     ```
-97. Two sum
+90. Two sum
     ```
        HashMap<Integer, Integer> freq = new HashMap<>();
         int[] ans;
@@ -3279,7 +3267,7 @@ public class Main {
         }
         return new int[] {};
     ```
-98. Palindrome number
+91. Palindrome number
     ```
       public boolean isPalindrome(int x) {
         if (x < 0) {
@@ -3296,7 +3284,7 @@ public class Main {
 
     }
     ```
-99. String to integer(atoi)
+92. String to integer(atoi)
     ```
       public int myAtoi(String s) {
         int len = s.length();
@@ -3325,7 +3313,7 @@ public class Main {
 
     }
     ```
-100. Reverse integer
+93. Reverse integer
      ```
         public int reverse(int x) {
         long s = 0;
@@ -3341,7 +3329,7 @@ public class Main {
 
     }
      ```
-101. Count and say
+94. Count and say
      ```
          String solve(int n) {
         if (n == 1) {
@@ -3370,7 +3358,7 @@ public class Main {
         return solve(n);
     }
      ```
-102. Sort colors
+95. Sort colors
      ```
          public void sortColors(int[] nums) {
         int zero = 0, one = 0, two = nums.length - 1;
@@ -3395,7 +3383,7 @@ public class Main {
         nums[j] = temp;
     }
      ```
-103. Valid number
+96. Valid number
       ```
         
 
@@ -3433,7 +3421,7 @@ public class Main {
         return hasNumber;
           
       ```
-104. Multiply strings
+97. Multiply strings
      ```
           public String multiply(String num1, String num2) {
         if (num1.equals("0") || num2.equals("0")) {
@@ -3463,7 +3451,7 @@ public class Main {
            
    
      ``` 
-105. Maximum Swap
+98. Maximum Swap
      ```
        public int maximumSwap(int num) {
         
@@ -3546,7 +3534,7 @@ public class Main {
 
         return num;
      ```
-106. Missing Range
+99. Missing Range
      ```
        public List<List<Integer>> findMissingRanges(int[] nums, int lower, int upper) {
         int start = lower;
@@ -3570,7 +3558,7 @@ public class Main {
         }
        
      ```
-107. Toeplitz Matrix
+100. Toeplitz Matrix
      ```
        public boolean isToeplitzMatrix(int[][] matrix) {
 
@@ -3584,7 +3572,7 @@ public class Main {
 
     
      ```
-108. Move zeroes
+101. Move zeroes
      ```
          public void moveZeroes(int[] nums) {
         if (nums.length == 0 || nums.length == 1)
@@ -3606,7 +3594,7 @@ public class Main {
 
     
      ```
-109. Random Pick Index
+102. Random Pick Index
    ```
       class Solution {
 
@@ -3637,27 +3625,7 @@ public class Main {
     }
 }
    ```
-110. Majority element
-      ```
-        int majorityElement(vector<int>& nums) {
-        int count = 0;
-        int m;
-
-        for (int i = 0; i < nums.size(); i++) {
-            if (count == 0) {
-                m = nums[i];
-                count++;
-            } else if (m == nums[i])
-                count++;
-            else
-
-                count--;
-        }
-        return m;
-    
-      
-      ```
-111. Group shifted strings
+104. Group shifted strings
    ```
         string key(string& s) {
         string t;
@@ -3684,7 +3652,7 @@ public class Main {
         return groups;
     }
    ```
-112. Continuous Subarray Sum
+105. Continuous Subarray Sum
       ```
           bool checkSubarraySum(vector<int>& nums, int k) {
 
@@ -3713,7 +3681,7 @@ public class Main {
         return false;
     
       ```
-113. Goat Latin
+106. Goat Latin
       ```
          string toGoatLatin(string sentence) {
         deque<string> a;
@@ -3779,7 +3747,7 @@ public class Main {
         return result;
     
       ```
-114. Can place flowers
+107. Can place flowers
      ```
        bool canPlaceFlowers(vector<int>& flowerbed, int n) {
         int count = 0;
@@ -3802,7 +3770,7 @@ public class Main {
         return count >= n;
     
      ```
-115. Maximum size subarray sum equals k
+108. Maximum size subarray sum equals k
      ```
         public int maxSubArrayLen(int[] nums, int k) {
 
@@ -3830,7 +3798,7 @@ public class Main {
 
     
      ```
-116. Plus One
+109. Plus One
       ```
     
          //Approach 1
@@ -3872,7 +3840,7 @@ public class Main {
         return result;
       ```
 
-117. Minimum Number of Changes to Make Binary String Beautiful
+110. Minimum Number of Changes to Make Binary String Beautiful
 
     ```
        public int minChanges(String s) {
