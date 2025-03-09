@@ -2282,7 +2282,7 @@ return c;
     ```
 69.  Rotate array 
 
-    ```
+     ```
        void rotate(vector<int>& nums, int k) {
          int n = nums.size();
         k = k % n; 
@@ -2290,33 +2290,9 @@ return c;
         std::reverse(nums.begin(), nums.begin() + k);     
         std::reverse(nums.begin() + k, nums.end());   
         
-    }
-    ```
-70. Merge intervals
-    ```
-      vector<vector<int>> merge(vector<vector<int>>& intervals) {
-        sort(intervals.begin(), intervals.end(), [](const vector<int>& a, const vector<int>& b) {
-            return a[0] < b[0];
-        });
-         vector<vector<int>> merged;
-        vector<int> prev = intervals[0];
+       }
+     ```
 
-        for (int i = 1; i < intervals.size(); ++i) {
-            vector<int> interval = intervals[i];
-            if (interval[0] <= prev[1]) {
-                prev[1] = max(prev[1], interval[1]);
-            } else {
-                merged.push_back(prev);
-                prev = interval;
-            }
-        }
-
-        merged.push_back(prev);
-        return merged;        
-
-        
-    }
-    ```
 71. Max sum pair in an array 
     ```
       int findMax(int number) {
