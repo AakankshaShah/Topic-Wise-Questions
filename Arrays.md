@@ -376,67 +376,8 @@
 
        }
        ```
- 
-    
-12. N - Queens O(n!)
-    ```
-      bool isSafe(vector<string>& board, int row, int col, int n) {
-        int i = row;
-        int j = col;
 
-        while (row >= 0 && col >= 0) {
-            if (board[row][col] == 'Q')
-                return false;
-            row--;
-            col--;
-        }
-        col = j;
-        row = i;
-
-        while (col >= 0) {
-            if (board[row][col] == 'Q')
-                return false;
-            col--;
-        }
-        col = j;
-        while (col >= 0 && row < n) {
-            if (board[row][col] == 'Q')
-                return false;
-            col--;
-            row++;
-        }
-
-        return true;
-    }
-
-    void solve(vector<string>& board, int col, int n,
-               vector<vector<string>>& ans) {
-        if (col == n) {
-            ans.push_back(board);
-            return;
-        }
-        for (int row = 0; row < n; row++) {
-            if (isSafe(board, row, col, n)) {
-                board[row][col] = 'Q';
-                solve(board, col + 1, n, ans); // Corrected the recursive call
-                board[row][col] = '.';
-            }
-        }
-    }
-
-    vector<vector<string>> solveNQueens(int n) {
-        vector<vector<string>> ans;
-        vector<string> board(n);
-        string s(n, '.');
-        for (int i = 0; i < n; i++)
-            board[i] = s;
-
-        solve(board, 0, n, ans);
-        return ans;
-    }
-    ```
-
-17.  Maximum non negative subarray sum
+13.  Maximum non negative subarray sum
 
      ```
      vector<int> result;
