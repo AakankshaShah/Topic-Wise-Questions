@@ -228,7 +228,7 @@
         return true;
     }
     ```
-9. Misisng positive number 
+7. Misisng positive number 
 
      ```
       int n = A.size();
@@ -252,7 +252,7 @@
         return n + 1;
    
      ```
-11. Jump Game II https://www.youtube.com/watch?v=wLPdkLM_BWo
+8. Jump Game II https://www.youtube.com/watch?v=wLPdkLM_BWo
      
     ```
       int jumps=0;
@@ -282,9 +282,9 @@
         return dp[nums.size() - 1];
       
     ```
-13. Permutation II
+9. Permutation II
 
-        ```
+   ```
          private: 
          void permuteUnique(vector<int>& nums, vector<vector<int>>& output, vector<int> temp, vector<bool>& visited){
         if(temp.size() == nums.size()){
@@ -309,8 +309,8 @@
         permuteUnique(nums, output, temp, visited);
         return output;
         }      
-        ```
-14. Rotate array - Transpose and reverse row
+   ```
+10. Rotate array - Transpose and reverse row
      ```
       void rotate(vector<vector<int>>& matrix) {
         int row = matrix.size();
@@ -324,39 +324,39 @@
         }
     }
      ```
-   15. Group Anagrams 
+   11. Group Anagrams 
        ```
           string generate(string& s) {
         vector<int> count(26, 0);
         for (char c : s) {
             count[c - 'a']++;
-        }
+          }
 
-        string ss;
-        for (int i = 0; i < 26; i++) {
+          string ss;
+          for (int i = 0; i < 26; i++) {
             if (count[i] != 0) {
                 ss += string(count[i], 'a' + i);
             }
-        }
-        return ss;
-    }
-    vector<vector<string>> groupAnagrams(vector<string>& strs) {
-        unordered_map<string, vector<string>> mp;
-        vector<vector<string>> ans;
+           }
+           return ss;
+           }
+          vector<vector<string>> groupAnagrams(vector<string>& strs) {
+          unordered_map<string, vector<string>> mp;
+          vector<vector<string>> ans;
 
-        for (int i = 0; i < strs.size(); i++) {
+          for (int i = 0; i < strs.size(); i++) {
             string temp = strs[i];
             string new_word = generate(temp);
             mp[new_word].push_back(temp);
-        }
-        for (auto it : mp) {
+            }
+            for (auto it : mp) {
             ans.push_back(it.second);
-        }
-        return ans;
-    }
+            }
+            return ans;
+            }
        ```
        ```
-         public List<List<String>> groupAnagrams(String[] strs) {
+             public List<List<String>> groupAnagrams(String[] strs) {
         HashMap<String, List<String>> mp = new HashMap<>();
         List<List<String>> ans = new ArrayList<>();
         ;
@@ -374,9 +374,11 @@
         ans.addAll(mp.values());
         return ans;
 
-    }
+       }
        ```
-16. N - Queens O(n!)
+ 
+    
+12. N - Queens O(n!)
     ```
       bool isSafe(vector<string>& board, int row, int col, int n) {
         int i = row;
