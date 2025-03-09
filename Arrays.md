@@ -701,7 +701,7 @@
         return slow;
     ```
 
-28. Partitions
+23. Partitions
      ```
        if (A < 3)
             return 0;
@@ -736,7 +736,7 @@
 
 
 
-29. Missing & repeat number
+24. Missing & repeat number
     ```
       long long n = a.size(); // size of the array
 
@@ -824,7 +824,7 @@
 
     ```
 
-30. Max area of triangle 
+25. Max area of triangle 
      ```
        int Solution::solve(vector<string>& A) {
     int rows = A.size(), cols = A[0].size();
@@ -884,7 +884,7 @@
     }
      ```
 
-31. Set intersecrtion
+26. Set intersecrtion
 
      ```
            static bool cmp(vector<int>& a, vector<int>& b) {
@@ -933,7 +933,7 @@
         return res;
       ```
 
-32. Max unsorted array 
+27. Max unsorted array 
 
      ```
        int n = arr.size();
@@ -975,7 +975,7 @@
     return {l, r};
 
      ```
-33. Merge intervals
+28. Merge intervals
    ```
      vector<vector<int>> merge(vector<vector<int>>& intervals) {
         sort(intervals.begin(), intervals.end(), [](const vector<int>& a, const vector<int>& b) {
@@ -1031,7 +1031,7 @@
     }
 
     ```
-34. Set matrix zero https://www.youtube.com/watch?v=coOCVuBx7YA
+29. Set matrix zero https://www.youtube.com/watch?v=coOCVuBx7YA
     
 ```
 int row = A.size();
@@ -1081,7 +1081,7 @@ if (y == 1) {
     }
 }
 ```
-35. Make array elements equal 
+30. Make array elements equal 
     
 ```
    // Method 1
@@ -1110,7 +1110,7 @@ for (int i = 0; i < A.length; i++) {
 return max - min == B * 2 ? 1 : 0;
 
  ```
-36. Max sum square submatrix https://www.youtube.com/watch?v=WxjYE4_agbo
+31. Max sum square submatrix https://www.youtube.com/watch?v=WxjYE4_agbo
 
     ``` 
     //Brute Method
@@ -1159,7 +1159,7 @@ return max - min == B * 2 ? 1 : 0;
     return max_sum;
 
     ```
-37. Peak element
+32. Peak element
     ```
      int maxi = A[0];
     vector<bool> greater(n, true);
@@ -1224,7 +1224,7 @@ return max - min == B * 2 ? 1 : 0;
         return 0;
     }
     ```
-38. Move zeroes to end
+33. Move zeroes to end
     ```
       int i=0;
     int n=A.size();
@@ -1237,7 +1237,7 @@ return max - min == B * 2 ? 1 : 0;
     return A;
     ```
 
-39. Kth row of pascal 
+34. Kth row of pascal 
 
      ```
        vector<int>ans;
@@ -1251,7 +1251,7 @@ return max - min == B * 2 ? 1 : 0;
     }
     return ans;
      ```
-40. Pascal triangle
+35. Pascal triangle
 
     ```
      vector<vector<int>>ans;
@@ -1324,7 +1324,7 @@ return max - min == B * 2 ? 1 : 0;
         
     ```
       
-41. Largest number
+36. Largest number
     
     ```
       static bool cmp(int& a, int& b)
@@ -1375,7 +1375,7 @@ return max - min == B * 2 ? 1 : 0;
         return res;
     }
     ```
-42. Rotate array 
+37. Rotate array 
 
      ```
        void Solution::rotate(vector<vector<int>> & matrix) {
@@ -1387,7 +1387,7 @@ return max - min == B * 2 ? 1 : 0;
     }
      ```
 
-43. Next permutation
+38. Next permutation
      ```
       vector<int> res;
     int start = 1;
@@ -1404,7 +1404,7 @@ return max - min == B * 2 ? 1 : 0;
     }
     return res;
      ```
- 44. Anti diagonal traversal of array
+ 39. Anti diagonal traversal of array
      
      ```
        int n=A.size();
@@ -1441,7 +1441,7 @@ return max - min == B * 2 ? 1 : 0;
     }
     return ans;
     ```
-45. Triplets with sum in range
+40. Triplets with sum in range
      
      ```
        int i=0;
