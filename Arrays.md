@@ -1780,10 +1780,10 @@ return max - min == B * 2 ? 1 : 0;
         v.push_back(sell);
         
         ans.push_back(v);
-    ```
+      ```
 51. chocolate distribution problem 
 
-        ```
+    ```
           long long ans=INT_MAX;
         if(n<m)
         return -1;
@@ -1795,10 +1795,10 @@ return max - min == B * 2 ? 1 : 0;
         }
         return ans;
 
-        ```
+    ```
 52. Minimum platforms https://www.youtube.com/watch?v=dxVcMDI7vyI
 
-        ```
+    ```
           sort(arr,arr+n);
     	sort(dep,dep+n);
     	int i=1,j=0;
@@ -1822,7 +1822,7 @@ return max - min == B * 2 ? 1 : 0;
     	     
     	 }
     	 return res;
-        ```
+    ```
 53. Number of pairs 
        
 ``` 
