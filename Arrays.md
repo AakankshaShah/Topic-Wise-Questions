@@ -1737,12 +1737,13 @@ return max - min == B * 2 ? 1 : 0;
                 swap(arr[i],arr[i+1]);
                 
             }
-        }
+            }
        
-      }
-     ```
+         }
+      ```
 
 50. Stock sell & buy Local minima & local maxima
+
     ```
       vector<vector<int>>ans;
         if (n == 1)
