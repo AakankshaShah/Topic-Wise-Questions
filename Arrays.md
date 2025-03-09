@@ -1463,7 +1463,7 @@ return max - min == B * 2 ? 1 : 0;
     }
     return 0;
      ```
-46. Balanced arrays https://www.youtube.com/watch?v=jcAsP5z41EM 
+41. Balanced arrays https://www.youtube.com/watch?v=jcAsP5z41EM 
     
      ```
       int n=A.size();
@@ -1514,7 +1514,7 @@ return max - min == B * 2 ? 1 : 0;
     return ans;
 
      ```
-47. N/3 repeat number
+42. N/3 repeat number
     
     ```
        int cnt1=0;
@@ -1567,7 +1567,7 @@ return max - min == B * 2 ? 1 : 0;
     }
     return -1;  
     ```
-48. Majority element N/ 2 (If more than n/2 then only one element)
+43. Majority element N/ 2 (If more than n/2 then only one element)
     
     ```
     int cnt=0;
@@ -1589,7 +1589,7 @@ return max - min == B * 2 ? 1 : 0;
     ```
 
 
-49. Max gap
+44. Max gap
     
    ```
     int mina = nums[0], maxa = nums[0], n = nums.size();
@@ -1625,7 +1625,7 @@ return max - min == B * 2 ? 1 : 0;
         return maxGap;
    ```
 
-50. Subarray with given sum 
+45. Subarray with given sum 
     ```
      int i=0,j=0;
         int sum=0;
@@ -1655,7 +1655,7 @@ return max - min == B * 2 ? 1 : 0;
         ans.push_back(-1);
         return ans;
     ```
-51. Count triplets
+46. Count triplets
     ```
      int c=0;
 	   sort(arr,arr+n);
@@ -1680,7 +1680,7 @@ return max - min == B * 2 ? 1 : 0;
 	    return c;
       ```
 
-52. Rearange array alternatively 
+47. Rearange array alternatively 
     ```
       	int min_ind=0;
     	int i=0;
@@ -1702,7 +1702,7 @@ return max - min == B * 2 ? 1 : 0;
     	 
     ```
 
-53. Merge sorted arrays without extra space 
+48. Merge sorted arrays without extra space 
     ```
       int x=n-1;
     int y=0;
@@ -1722,9 +1722,9 @@ return max - min == B * 2 ? 1 : 0;
         sort(arr2,arr2+m);// code here 
     ```
 
-54  Zig zag fashion
+49.  Zig zag fashion
 
-    ```
+     ```
        void zigZag(int arr[], int n) {
         for(int i=0;i<n;i++)
         {
@@ -1739,10 +1739,10 @@ return max - min == B * 2 ? 1 : 0;
             }
         }
        
-    }
-    ```
+      }
+     ```
 
-55. Stock sell & buy Local minima & local maxima
+50. Stock sell & buy Local minima & local maxima
     ```
       vector<vector<int>>ans;
         if (n == 1)
@@ -1780,7 +1780,7 @@ return max - min == B * 2 ? 1 : 0;
         
         ans.push_back(v);
     ```
-56. chocolate distribution problem 
+51. chocolate distribution problem 
 
         ```
           long long ans=INT_MAX;
@@ -1795,7 +1795,7 @@ return max - min == B * 2 ? 1 : 0;
         return ans;
 
         ```
-57. Minimum platforms https://www.youtube.com/watch?v=dxVcMDI7vyI
+52. Minimum platforms https://www.youtube.com/watch?v=dxVcMDI7vyI
 
         ```
           sort(arr,arr+n);
@@ -1822,7 +1822,7 @@ return max - min == B * 2 ? 1 : 0;
     	 }
     	 return res;
         ```
-58. Number of pairs 
+53. Number of pairs 
        
 ``` 
 long long int N_Y[1005];
@@ -1852,7 +1852,7 @@ for (int i = 0; i < M; i++) {
 }
 return c;
 ```
-59. Count inversions
+54. Count inversions
 
     ```
       void merge(long long arr[],long long  low,long long  mid, long long high)
@@ -1903,30 +1903,11 @@ return c;
         count=0;
         mergesort(arr,0,N-1);
         return count;
-    }```
-
-60. Merge without extra space
-    
-    ```
-      {
-
-    int x = n - 1;
-    int y = 0;
-    while (x >= 0 && y < m) {
-        if (arr1[x] >= arr2[y]) {
-            swap(arr1[x], arr2[y]);
-            x--;
-            y++;
-        } else
-            break;
     }
-
-    sort(arr1, arr1 + n);
-    sort(arr2, arr2 + m); // code here
-     }
     ```
 
-61. Sort 0,1,2
+55. Sort 0,1,2
+
    ```
      void sort012(int a[], int n) {
     int l = 0, mid = 0, high = n - 1;
@@ -1947,7 +1928,7 @@ return c;
     }
 }
 ```
-62. No consecutive one https://www.youtube.com/watch?v=H7tshfFTSvw
+56. No consecutive one https://www.youtube.com/watch?v=H7tshfFTSvw
 
     ```
       	ll countStrings(int n) {
@@ -1966,7 +1947,7 @@ return c;
 	    return sum;
 	}
     ```
-63. Closet sum to zero 
+57. Closet sum to zero 
     ```
       sort(arr, arr + n);
     int low = 0;
@@ -1999,7 +1980,7 @@ return c;
     return ans;
     ```
 
-64. Odd even jump 
+58. Odd even jump 
 
     ```
       int n = arr.size();
@@ -2032,7 +2013,7 @@ return c;
         }
         return totalGoodStartingPoints;
     ```
-65. Intersection of two arrays 
+59. Intersection of two arrays 
     ```
       //We can also make use of sets 
       vector<int> intersection(vector<int>& nums1, vector<int>& nums2) {
@@ -2054,7 +2035,7 @@ return c;
         return ans;
     }
     ```
-66. Missing number
+60. Missing number
       Approach 1 - Sum of series 
       Approach 2 - XOR
       Approach 3 - Sort
@@ -2081,7 +2062,7 @@ return c;
     }
      ```
 
- 67. Kth missing positive number
+ 61. Kth missing positive number
      ```
         int findKthPositive(vector<int>& arr, int k) {
         vector<int> ans;
@@ -2111,7 +2092,7 @@ return c;
         return low+k;
      ``` 
 
-68. Find nth digit   
+62. Find nth digit   
     ```
       int findNthDigit(int n) {
         int total=0;
@@ -2131,7 +2112,7 @@ return c;
         
     }
     ``` 
-69. Product of array except itself
+63. Product of array except itself
     ```
       vector<int> productExceptSelf(vector<int>& nums) {
         int n = nums.size();
@@ -2173,7 +2154,7 @@ return c;
 
     }
     ```
-70. Bulb Switcher 2
+64. Bulb Switcher 2
     ```
       int flipLights(int n, int presses) {
        if(presses==0)return 1;
@@ -2185,7 +2166,7 @@ return c;
         
     }
     ```
-71. Find smallest common element in all rows 
+64. Find smallest common element in all rows 
     ```
       int smallestCommonElement(vector<vector<int>>& mat) 
     {
@@ -2215,7 +2196,7 @@ return c;
     }
     };
     ```
-72. Integer to english words
+66. Integer to english words
      ```
        string numberToWords(int n) {
         vector<int> numbers = {1000000000, 1000000, 1000, 100, 90, 80, 70, 60,
@@ -2251,7 +2232,7 @@ return c;
         return result.empty() ? "Zero" : result.substr(0, result.size() - 1);
     }
      ```
-73. Merge strings alternatively 
+67. Merge strings alternatively 
     ```
       string mergeAlternately(string word1, string word2) {
         int n = word1.length();
@@ -2275,7 +2256,7 @@ return c;
         return ans;
     }
     ```
-74. Longest consecutive sequence
+68. Longest consecutive sequence
     ```
       nt longestConsecutive(vector<int>& nums) {
         int n = nums.size();
@@ -2298,7 +2279,7 @@ return c;
         
     }
     ```
-75.  Rotate array 
+69.  Rotate array 
 
     ```
        void rotate(vector<int>& nums, int k) {
@@ -2310,7 +2291,7 @@ return c;
         
     }
     ```
-76. Merge intervals
+70. Merge intervals
     ```
       vector<vector<int>> merge(vector<vector<int>>& intervals) {
         sort(intervals.begin(), intervals.end(), [](const vector<int>& a, const vector<int>& b) {
@@ -2335,7 +2316,7 @@ return c;
         
     }
     ```
-77. Max sum pair in an array 
+71. Max sum pair in an array 
     ```
       int findMax(int number) {
         int maxDigit = INT_MIN;
@@ -2366,7 +2347,7 @@ return c;
         return answer;
     }
     ```
-78. Reverse words in a string 
+72. Reverse words in a string 
     ```
       string reverseWords(string s) {
         reverse(s.begin(), s.end());
@@ -2391,7 +2372,7 @@ return c;
         return s;
     }
     ```
-79. Diagonal traverse 2
+73. Diagonal traverse 2
 
     ```
            vector<int> findDiagonalOrder(vector<vector<int>>& nums) {
@@ -2440,7 +2421,7 @@ return c;
         
         return result;
      ```
-80.Diagonal Traverse
+74.Diagonal Traverse
 
    ```
        class Solution {
@@ -2482,7 +2463,7 @@ return c;
 
     }
    ```
-80. Exam room 
+75. Exam room 
      ```
        class ExamRoom {
        private:
