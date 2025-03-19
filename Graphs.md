@@ -4013,5 +4013,78 @@ public:
         return result;
     }
      ```
-      
+  79. shortest path to get all keys
+       ```
+            int shortestPathAllKeys(vector<string>& grid) {
+        int dx[] = {1, 0, -1, 0};
+        int dy[] = {0, 1, 0, -1};
+        int n = grid.size();
+        int m = grid[0].size();
+
+        queue<tuple<int, int, int>> q;
+        unordered_map<int, unordered_set<int>> visited;
+        int total_keys = 0, start_x = -1, start_y = -1;
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                if (grid[i][j] == '@') {
+                    start_x = i;
+                    start_y = j;
+                } else if (grid[i][j] >= 'a' && grid[i][j] <= 'f') {
+                    total_keys++;
+                }
+            }
+        }
+        int all_keys_mask = (1 << total_keys) - 1;
+        q.push({start_x, start_y, 0});
+        visited[0].insert(start_x * m + start_y);
+        int steps = 0;
+        while (!q.empty()) {
+            int size = q.size();
+            while (size--) {
+                auto [x, y, key_mask] = q.front();
+                q.pop();
+
+              
+                if (key_mask == all_keys_mask)
+                    return steps;
+
+  
+                for (int i = 0; i < 4; i++) {
+                    int new_x = x + dx[i];
+                    int new_y = y + dy[i];
+
+                    if (new_x >= 0 && new_x < n && new_y >= 0 && new_y < m) {
+                        char cell = grid[new_x][new_y];
+                        int new_mask = key_mask;
+
+                        if (cell == '#')
+                            continue; 
+
+                    
+                        if (cell >= 'a' && cell <= 'f') {
+                            new_mask |= (1 << (cell - 'a'));
+                        }
+
+                      
+                        if (cell >= 'A' && cell <= 'F') {
+                            if (!(key_mask & (1 << (cell - 'A'))))
+                                continue; 
+                        }
+
+               
+                        if (!visited[new_mask].count(new_x * m + new_y)) {
+                            visited[new_mask].insert(new_x * m + new_y);
+                            q.push({new_x, new_y, new_mask});
+                        }
+                    }
+                }
+            }
+            steps++; // Increase step count after processing all nodes in the
+                     // current level
+        }
+
+        return -1;
+       }
+       ```
 
