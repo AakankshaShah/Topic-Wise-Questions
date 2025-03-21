@@ -1314,8 +1314,7 @@ vector<string> res;
      ```
 32. 24 Game
       ```
-          class Solution {
-public:
+   
     vector<double> fill(double a, double b) {
 
         vector<double> v = {a + b, a - b, b - a, a * b};
@@ -1357,12 +1356,12 @@ public:
             }
         }
         return false;
-    }
-    bool judgePoint24(vector<int>& cards) {
+       }
+       bool judgePoint24(vector<int>& cards) {
         vector<double> newl(cards.begin(), cards.end());
         return check(newl);
-    }
-    };
+       }
+
       ```
 
 
