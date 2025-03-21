@@ -1312,5 +1312,57 @@ vector<string> res;
         return ans;
     }
      ```
+32. 24 Game
+      ```
+          class Solution {
+public:
+    vector<double> fill(double a, double b) {
+
+        vector<double> v = {a + b, a - b, b - a, a * b};
+        if (a != 0)
+            v.push_back(b / a);
+        if (b != 0)
+            v.push_back(a / b);
+
+        return v;
+    }
+    bool check(vector<double>& newl) {
+        if (newl.size() == 1) {
+
+            return abs(newl[0] - 24) <= 0.1;
+        }
+        for (int i = 0; i < newl.size(); i++) {
+            for (int j = i + 1; j < newl.size(); j++) {
+                vector<double> newList;
+                for (int k = 0; k < newl.size(); k++) {
+                    // pushing every element except i , j as we pus operation
+                    // result of i,j
+                    if (k != j && k != i) {
+                        newList.push_back(newl[k]);
+                    }
+                }
+
+                vector<double> res;
+
+                res = fill(newl[i], newl[j]);
+                for (int l = 0; l < res.size(); l++) {
+
+                    newList.push_back(res[l]);
+
+                    if (check(newList))
+                        return true;
+
+                    newList.pop_back();
+                }
+            }
+        }
+        return false;
+    }
+    bool judgePoint24(vector<int>& cards) {
+        vector<double> newl(cards.begin(), cards.end());
+        return check(newl);
+    }
+    };
+      ```
 
 
