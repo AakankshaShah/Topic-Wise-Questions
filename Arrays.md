@@ -5197,8 +5197,7 @@ public class Main {
     }
     };
 
- ```
-
+    ```
 155. Minimum Moves to Equal Array Elements
 
     ```
@@ -5227,7 +5226,47 @@ public class Main {
         return -1;
         }
        ```
-     
+
+157. Range Module
+       ```
+       TreeMap<Integer, Integer> m = new TreeMap<>();
+
+       public RangeModule() {
+        }
+
+        public void addRange(int s, int e) { // s: start, e: end
+        // find overlap ranges, calc merged range, clear overlapped ranges, insert
+        // merged range
+        var L = m.floorEntry(s); // left possible overlap entry
+        var R = m.floorEntry(e); // right possible overlap entry
+
+        if (L != null && L.getValue() >= s)
+            s = L.getKey(); // update overlap start
+        if (R != null && R.getValue() > e)
+            e = R.getValue(); // update overlap end
+
+        m.subMap(s, e).clear();
+        m.put(s, e);
+       }
+
+       public boolean queryRange(int s, int e) {
+        var L = m.floorEntry(s);
+        return L != null && L.getValue() >= e;
+       }
+
+       public void removeRange(int s, int e) {
+        var L = m.floorEntry(s);
+        var R = m.floorEntry(e);
+
+        if (L != null && L.getValue() > s)
+            m.put(L.getKey(), s);
+        if (R != null && R.getValue() > e)
+            m.put(e, R.getValue());
+
+        m.subMap(s, e).clear();
+        }
+       ```
+    
 
 
      
