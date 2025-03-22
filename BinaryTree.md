@@ -2766,4 +2766,26 @@ public:
         return solve(grid, 0, 0, grid.size());
     }
       ```
+81. split BST
+      ```
+              vector<TreeNode*> splitBST(TreeNode* root, int V) {
+        vector<TreeNode *> res(2, NULL);
+        if(root == NULL) return res;
+        
+        if(root->val > V){
+            res[1] = root;
+            auto res1 = splitBST(root->left, V);
+            root->left = res1[1];
+            res[0]=res1[0];
+        }else{
+            res[0] = root;
+            auto res1 = splitBST(root->right, V);
+            root->right = res1[0];
+            res[1] = res1[1];
+        }
+        
+        return res;
+        
+       }
+      ```
 
