@@ -4123,4 +4123,102 @@ public:
         }
     }
       ```
+81. Tower Frequnecy assignment https://leetcode.com/discuss/post/6565903/how-can-we-solve-it-amazon-sde-2-r1-by-a-zouv/
 
+       ```
+          #include <iostream>
+          #include <vector>
+          #include <map>
+         #include <set>
+
+       using namespace std;
+
+      const int THRESHOLD = 150;
+      const int INF = 1e9;
+
+     // Towers
+      vector<string> towers = {"Jio", "Airtel", "Vi", "BSNL"};
+
+    // Distance matrix
+    vector<vector<int>> distanceMatrix = {
+    {0, 120, 200, 160},
+    {120, 0, 180, 140},
+    {200, 180, 0, 170},
+    {160, 140, 170, 0}};
+
+    // Function to construct the adjacency list based on distance constraints
+     vector<vector<int>> buildGraph(int n)
+     {
+    vector<vector<int>> graph(n);
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = i + 1; j < n; j++)
+        {
+            if (distanceMatrix[i][j] <= THRESHOLD)
+            {
+                graph[i].push_back(j);
+                graph[j].push_back(i);
+            }
+        }
+    }
+    return graph;
+    }
+
+     // Function to assign frequencies using a greedy algorithm
+    vector<int> assignFrequencies(const vector<vector<int>> &graph, int n)
+     {
+    vector<int> freq(n, -1); // -1 indicates no frequency assigned yet
+
+    for (int i = 0; i < n; i++)
+    {
+        set<int> usedFrequencies;
+
+        // Check frequencies of adjacent towers
+        for (int neighbor : graph[i])
+        {
+            if (freq[neighbor] != -1)
+            {
+                usedFrequencies.insert(freq[neighbor]);
+            }
+        }
+
+        // Assign the smallest available frequency
+        int assignedFreq = 0;
+        while (usedFrequencies.count(assignedFreq))
+        {
+            assignedFreq++;
+        }
+        freq[i] = assignedFreq;
+    }
+    return freq;
+     }
+
+    int main()
+    {
+    int n = towers.size();
+    vector<vector<int>> graph = buildGraph(n);
+    vector<int> frequencies = assignFrequencies(graph, n);
+
+    // Output frequencies
+    map<int, vector<string>> freqMap;
+    for (int i = 0; i < n; i++)
+    {
+        freqMap[frequencies[i]].push_back(towers[i]);
+    }
+
+    for (const auto &pair : freqMap)
+    {
+        cout << "Frequency " << pair.first << ": ";
+        for (const string &tower : pair.second)
+        {
+            cout << tower << " ";
+        }
+        cout << endl;
+    }
+
+    return 0;
+     }
+
+
+
+       ```
