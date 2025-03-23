@@ -5370,10 +5370,37 @@ public class Main {
         if (!userMap.containsKey(followerId) || followerId == followeeId)
             return;
         userMap.get(followerId).unfollow(followeeId);
-    }
- }
+     }
+     }
         ```
+160. Grouping of parcels https://leetcode.com/discuss/post/6565857/how-to-solve-this-problem-amazon-sde-1-r-ivbc/
+       ```
+             int minMovesToGroupParcels(vector<char> arr) {
+    vector<int> parcel_positions;
 
+    // Step 1: Get indices of 'P'
+    for (int i = 0; i < arr.size(); i++) {
+        if (arr[i] == 'P') {
+            parcel_positions.push_back(i);
+        }
+    }
+
+    // If no parcels or already grouped
+    if (parcel_positions.empty()) return 0;
+
+    // Step 2: Find the median index
+    int median_idx = parcel_positions[parcel_positions.size() / 2];
+
+    // Step 3: Calculate moves
+    int moves = 0;
+    for (int i = 0; i < parcel_positions.size(); i++) {
+        int target_position = median_idx - (parcel_positions.size() / 2) + i;
+        moves += abs(parcel_positions[i] - target_position);
+    }
+
+    return moves;
+     }
+       ```
      
 
       
