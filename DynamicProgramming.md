@@ -2379,7 +2379,94 @@ Ctrl+ACVVVV (6 key presses) gives 5 times increase
         return rec(0, 0, obstacleGrid, m - 1, n - 1, dp);
     }
      ```
+60. shopping offers
+      ```
+            int solve(vector<int>& price, vector<vector<int>>& special,
+              vector<int> needs, int index) {
+        if (index == special.size()) {
 
+            int res = 0;
+            for (int i = 0; i < needs.size(); i++) {
+                res += needs[i] * price[i];
+            }
+            return res;
+        }
+
+        // Reject Offer
+        int reject = solve(price, special, needs, index + 1);
+
+        // Apply Offer
+        for (int i = 0; i < needs.size(); i++) {
+            needs[i] = needs[i] - special[index][i];
+            if (needs[i] < 0)
+                return reject;
+        }
+
+        int accept =
+            special[index][needs.size()] + solve(price, special, needs, index);
+
+        return min(accept, reject);
+    }
+    int shoppingOffers(vector<int>& price, vector<vector<int>>& special,
+                       vector<int>& needs) {
+        return solve(price, special, needs, 0);
+    }
+    // solution 2 
+    unordered_map<string, int> dp; 
+
+    int solve(vector<int>& price, vector<vector<int>>& special,
+              vector<int> needs, int index) {
+
+    
+        string key = encode(needs) + to_string(index);
+
+
+        if (dp.find(key) != dp.end()) 
+            return dp[key];
+
+        if (index == special.size()) {
+            int res = 0;
+            for (int i = 0; i < needs.size(); i++) {
+                res += needs[i] * price[i];
+            }
+            return dp[key] = res;  
+        }
+
+      
+        int reject = solve(price, special, needs, index + 1);
+
+        vector<int> newNeeds = needs;
+        bool valid = true;
+        for (int i = 0; i < needs.size(); i++) {
+            newNeeds[i] -= special[index][i];
+            if (newNeeds[i] < 0) { // Offer not valid
+                valid = false;
+                break;
+            }
+        }
+
+        int accept = INT_MAX;
+        if (valid) {
+            accept = special[index][needs.size()] + solve(price, special, newNeeds, index);
+        }
+
+        return dp[key] = min(accept, reject);  
+    }
+
+    int shoppingOffers(vector<int>& price, vector<vector<int>>& special, vector<int>& needs) {
+        return solve(price, special, needs, 0);
+    }
+
+    private:
+    // Encode vector<int> needs into a string key
+    string encode(vector<int>& needs) {
+        string key = "";
+        for (int num : needs) {
+            key += to_string(num) + ",";
+        }
+        return key;
+    }
+      ```
 
 
      
