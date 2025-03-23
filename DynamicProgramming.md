@@ -2467,7 +2467,30 @@ Ctrl+ACVVVV (6 key presses) gives 5 times increase
         return key;
     }
       ```
-
+61. Distinct subsequences
+       ```
+             int numDistinct(string s, string t) {
+        int sl = s.length();
+        int tl = t.length();
+        vector<vector<int>> dp(sl, vector<int>(tl, -1));
+        return recursiveSolution(s, t, sl - 1, tl - 1, dp);
+    }
+    int recursiveSolution(string s, string t, int sidx, int tidx,
+                          vector<vector<int>>& dp) {
+        if (tidx < 0)
+            return 1;
+        if (sidx < 0)
+            return 0;
+        if (dp[sidx][tidx] != -1)
+            return dp[sidx][tidx];
+        if (s[sidx] == t[tidx]) {
+            return dp[sidx][tidx] =
+                       recursiveSolution(s, t, sidx - 1, tidx - 1, dp) +
+                       recursiveSolution(s, t, sidx - 1, tidx, dp);
+        }
+        return dp[sidx][tidx] = recursiveSolution(s, t, sidx - 1, tidx, dp);
+    }
+       ```
 
      
 
