@@ -1363,5 +1363,32 @@ vector<string> res;
        }
 
       ```
+33. Letter Case Permutation
+       ```
+             void solve(int index, vector<string>& ans, string k) {
+        if (index == k.size()) {
+            ans.push_back(k);
+            return;
+        }
 
+        if (isalpha(k[index])) {
+
+            k[index] = tolower(k[index]);
+            solve(index + 1, ans, k);
+
+            k[index] = toupper(k[index]);
+            solve(index + 1, ans, k);
+        } else {
+
+            solve(index + 1, ans, k);
+        }
+    }
+
+    vector<string> letterCasePermutation(string s) {
+        vector<string> ans;
+        string k = s;
+        solve(0, ans, k);
+        return ans;
+    }
+       ```
 
