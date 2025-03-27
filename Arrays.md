@@ -5432,7 +5432,134 @@ public class Main {
 
        }
        ```
- 
+ 162. JSON Parser
+       ```
+             import java.util.*;
+
+     public class SimpleJsonParser {
+    private String json;
+    private int index;
+
+    public Object parse(String json) {
+        this.json = json.trim();
+        this.index = 0;
+        Object result = parseValue();
+        if (index != this.json.length()) {
+            throw new IllegalArgumentException("Invalid JSON input");
+        }
+        return result;
+    }
+
+    private Object parseValue() {
+        char ch = peek();
+        if (ch == '"') return parseString();
+        if (Character.isDigit(ch) || ch == '-') return parseNumber();
+        if (ch == '{') return parseObject();
+        if (ch == '[') return parseArray();
+        if (json.startsWith("true", index)) return consume("true", true);
+        if (json.startsWith("false", index)) return consume("false", false);
+        if (json.startsWith("null", index)) return consume("null", null);
+        throw new IllegalArgumentException("Unexpected character: " + ch);
+    }
+
+    private String parseString() {
+        index++; // Skip opening "
+        StringBuilder sb = new StringBuilder();
+        while (index < json.length()) {
+            char ch = json.charAt(index++);
+            if (ch == '"') return sb.toString();
+            sb.append(ch);
+        }
+        throw new IllegalArgumentException("Unterminated string");
+    }
+
+    private Number parseNumber() {
+        int start = index;
+        while (index < json.length() && (Character.isDigit(json.charAt(index)) || "-+.eE".indexOf(json.charAt(index)) != -1)) {
+            index++;
+        }
+        String numStr = json.substring(start, index);
+        try {
+            return numStr.contains(".") ? Double.parseDouble(numStr) : Integer.parseInt(numStr);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("Invalid number: " + numStr);
+        }
+    }
+
+    private Map<String, Object> parseObject() {
+        Map<String, Object> map = new HashMap<>();
+        index++; // Skip '{'
+        while (true) {
+            consumeWhitespace();
+            if (peek() == '}') {
+                index++;
+                return map;
+            }
+            String key = parseString();
+            consumeWhitespace();
+            if (json.charAt(index++) != ':') {
+                throw new IllegalArgumentException("Expected ':' after key");
+            }
+            consumeWhitespace();
+            map.put(key, parseValue());
+            consumeWhitespace();
+            if (peek() == '}') {
+                index++;
+                return map;
+            }
+            if (json.charAt(index++) != ',') {
+                throw new IllegalArgumentException("Expected ',' between key-value pairs");
+            }
+        }
+    }
+
+    private List<Object> parseArray() {
+        List<Object> list = new ArrayList<>();
+        index++; // Skip '['
+        while (true) {
+            consumeWhitespace();
+            if (peek() == ']') {
+                index++;
+                return list;
+            }
+            list.add(parseValue());
+            consumeWhitespace();
+            if (peek() == ']') {
+                index++;
+                return list;
+            }
+            if (json.charAt(index++) != ',') {
+                throw new IllegalArgumentException("Expected ',' between array elements");
+            }
+        }
+    }
+
+    private Object consume(String expected, Object value) {
+        if (!json.startsWith(expected, index)) {
+            throw new IllegalArgumentException("Expected " + expected);
+        }
+        index += expected.length();
+        return value;
+    }
+
+    private char peek() {
+        return index < json.length() ? json.charAt(index) : '\0';
+    }
+
+    private void consumeWhitespace() {
+        while (index < json.length() && Character.isWhitespace(json.charAt(index))) {
+            index++;
+        }
+    }
+
+    public static void main(String[] args) {
+        SimpleJsonParser parser = new SimpleJsonParser();
+        String jsonString = "{\"name\":\"Alice\",\"age\":25,\"isStudent\":false,\"skills\":[\"Java\",\"Python\"],\"address\":{\"city\":\"NY\"}}";
+        System.out.println(parser.parse(jsonString));
+    }
+    }
+
+       ```
 
 
 
