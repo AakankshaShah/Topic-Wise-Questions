@@ -2788,4 +2788,22 @@ public:
         
        }
       ```
+82. LCA IV
+     ```
+           TreeNode* lowestCommonAncestor(TreeNode* root, vector<TreeNode*> &nodes) {
+        unordered_set<TreeNode*> targets(nodes.begin(), nodes.end());
+        auto lca =  dfs(root, targets);
+        return lca;
+    }
+
+    TreeNode* dfs(TreeNode* node, const unordered_set<TreeNode*> targets) {
+        if (node == nullptr) return nullptr;
+        if (targets.contains(node)) return node;
+
+        auto leftNode = dfs(node->left, targets);
+        auto rightNode = dfs(node->right, targets);
+        if (leftNode && rightNode) return node;
+        return leftNode ? leftNode : rightNode;
+    }
+     ```
 
