@@ -1,3 +1,4 @@
+https://github.com/presmihaylov/booknotes/tree/master/system-design/system-design-interview
 
 
 
@@ -37,6 +38,19 @@ There are multiple options to handle a server-initiated message for the client -
 
 
 7. Search Autocomplete system
+
+<img width="1086" alt="image" src="https://github.com/user-attachments/assets/a1d7a42d-36ae-453a-80ce-016ce1eec45f" />
+
+<img width="1069" alt="image" src="https://github.com/user-attachments/assets/9f968996-523e-4606-a44c-43a3df41471c" />
+
+![image](https://github.com/user-attachments/assets/7885579a-b7c6-44c5-81f4-a10754e5e76d)
+
+```
+How to support multi-language - we store unicode characters in trie nodes, instead of ASCII.
+What if top search queries differ across countries - we can build different tries per country and leverage CDNs to improve response time.
+```
+
+
 8. Youtube
 9. Google Drive
 10. Uber
