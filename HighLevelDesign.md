@@ -69,6 +69,27 @@ API servers inform user that uploading is complete
  
 
 9. Google Drive
+
+![image](https://github.com/user-attachments/assets/d3ab553c-be42-41c7-ac0a-d108b3ed85c1)
+
+![image](https://github.com/user-attachments/assets/907c28e8-04a6-4af7-b6d4-c60e1f05de76)
+```
+User uses the application through a browser or a mobile app
+Block servers upload files to cloud storage. Block storage is a technology which allows you to split a big file in blocks and store the blocks in a backing storage. Dropbox, for example, stores blocks of size 4mb.
+Cloud storage - a file split into multiple blocks is stored in cloud storage
+Cold storage - used for storing inactive files, infrequently accessed.
+Load balancer - evenly distributes requests among API servers.
+API servers - responsible for anything other than uploading files. Authentication, user profile management, updating file metadata, etc.
+Metadata database - stores metadata about files uploaded to cloud storage.
+Metadata cache - some of the metadata is cached for fast retrieval.
+Notification service - Publisher/subscriber system which notifies users when a file is updated/edited/removed so that they can pull the latest changes.
+Offline backup queue - used to queue file changes for users who are offline so that they can pull them once they come back online.
+```
+
+![image](https://github.com/user-attachments/assets/9c30eefe-28bb-4415-a34b-f38002a9a640)
+
+
+
 10. Uber
 11. Tinder
 12. Spotify
@@ -85,3 +106,38 @@ API servers inform user that uploading is complete
 23. Airbnb
 24. Real time Gaming Leaderboar
 25. Stock Exchange
+26. Proximity service
+
+![image](https://github.com/user-attachments/assets/94c3011c-9d2d-41e3-81f3-1fa940c60177)
+```
+    The load balancer automatically distributes incoming traffic across multiple services. A company typically provides a single DNS entry point and internally routes API calls to appropriate services based on URL paths.
+Location-based service (LBS) - read-heavy, stateless service, responsible for serving read requests for nearby businesses
+Business service - supports CRUD operations on businesses.
+Database cluster - stores business information and replicates it in order to scale reads. This leads to some inconsistency for LBS to read business information, which is not an issue for our use-case
+Scalability of business service and LBS - since both services are stateless, we can easily scale them horizontally
+
+```
+```
+SELECT business_id, latitude, longitude,
+FROM business
+WHERE (latitude BETWEEN {:my_lat} - radius AND {:my_lat} + radius) AND
+      (longitude BETWEEN {:my_long} - radius AND {:my_long} + radius)
+```
+```
+Geohash works similarly to the previous approach, but it recursively divides the world into smaller and smaller grids, where each two bits correspond to a single quadrant:
+```
+
+![image](https://github.com/user-attachments/assets/05d5724a-3c70-424a-bdef-b00d5dfe8e87)
+```
+Client tries to locate restaurants within 500meters of their location
+Load balancer forwards the request to the LBS
+LBS maps the radius to geohash with length 6
+LBS calculates neighboring geohashes and adds them to the list
+For each geohash, LBS calls the redis server to fetch corresponding business IDs. This can be done in parallel.
+Finally, LBS hydrates the business ids, filters the result and returns it to the user
+Business-related APIs are separated from the LBS into the business service, which checks the cache first for any read requests before consulting the database
+Business updates are handled via a nightly job, which updates the geohash store
+```
+
+
+    
