@@ -52,6 +52,22 @@ What if top search queries differ across countries - we can build different trie
 
 
 8. Youtube
+
+![image](https://github.com/user-attachments/assets/ae84e308-8bb6-4bde-80a9-8611b5316c03)
+```
+Videos are uploaded to original storage
+Transcoding servers fetch videos from storage and start transcoding
+Once transcoding is complete, two steps are executed in parallel:
+Transcoded videos are sent to transcoded storage and distributed to CDN
+Transcoding completion events are queued in completion queue, workers pick up the events and update metadata database & cache
+API servers inform user that uploading is complete
+```
+
+![image](https://github.com/user-attachments/assets/f58bcb51-ce66-4db6-a0e2-dcaece5e8037)
+
+
+ 
+
 9. Google Drive
 10. Uber
 11. Tinder
