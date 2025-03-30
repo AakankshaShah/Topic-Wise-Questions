@@ -17,10 +17,25 @@
 ![image](https://github.com/user-attachments/assets/4cc20d12-5bf4-4a5c-af9d-760f27c3948d)
 ![image](https://github.com/user-attachments/assets/d40d5b09-44f8-4f8f-be97-504d99ce6619)
 ![image](https://github.com/user-attachments/assets/c3712251-2d7c-4359-978b-fb6a712b1054)
+![image](https://github.com/user-attachments/assets/a4a3007a-0b18-4ee7-9e8f-94260870635e)
+![image](https://github.com/user-attachments/assets/5afb6c00-e702-4f34-9320-f6435ddaae35)
+
+
 
 
 
 6. Chat System (1:1 and group)
+```
+When clients connect to the server, they can do it via one or more network protocols. One option is HTTP. That is okay for the sender-side, but not okay for receiver-side.
+
+There are multiple options to handle a server-initiated message for the client - polling, long-polling, web sockets.
+```
+![image](https://github.com/user-attachments/assets/339ed31a-0cbe-4bc2-b357-0bc52b69afad)
+![image](https://github.com/user-attachments/assets/0e6c8dea-183c-4300-a806-6e4de8af99fa)
+![image](https://github.com/user-attachments/assets/be84b7d5-1b7b-4e7e-a056-c582f7d8391b)
+
+
+
 7. Search Autocomplete system
 8. Youtube
 9. Google Drive
