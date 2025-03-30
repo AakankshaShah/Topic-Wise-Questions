@@ -98,6 +98,24 @@ Offline backup queue - used to queue file changes for users who are offline so t
 15. Flipkart/E-commerce
 16. Leetcode
 17. Logging System
+
+![image](https://github.com/user-attachments/assets/ae24e1d8-0f89-4d7d-b269-d193d30a236e)
+
+![image](https://github.com/user-attachments/assets/f3fcf02c-f61b-4d6b-b83b-10a03bd7d6ff)
+
+![image](https://github.com/user-attachments/assets/acd39aae-025f-4f9d-a30f-9e30c68c206b)
+
+![image](https://github.com/user-attachments/assets/fcb78899-2be7-43e4-89e3-e4e3dc80e7a8)
+```
+For this solution, the metrics collector needs to maintain an up-to-date list of services and metrics endpoints. We can use Zookeeper or etcd for that purpose - service discovery.
+```
+
+<img width="1025" alt="image" src="https://github.com/user-attachments/assets/f0d1778c-1e0d-42fb-994b-9af00e863f03" />
+
+
+
+![image](https://github.com/user-attachments/assets/006a7cdd-e787-4556-b18a-f600aed3b1a6)
+
 18. Zoom
 19. Google Pay/UPI
 20. Nearby Friends
