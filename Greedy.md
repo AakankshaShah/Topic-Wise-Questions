@@ -275,6 +275,32 @@
         return ans;
     }
    ```
+   ```
+       int minCost(string s, vector<int>& time) {
+        int ans = 0;
+        if(s.length() == 1) return ans;
+        int n = s.length();
+        int i=0,j=1;
+        while(j<n) {
+            if(s[i] == s[j]) {
+                if(time[j] > time[i]) {
+                    ans += time[i];
+                    i = j;
+                    j++;
+                }
+                else{
+                    ans += time[j];
+                    j++;
+                }
+            }
+            else {
+                i=j;
+                j++;
+            }
+        }
+        return ans;
+    }
+   ```
 6. Minimum Difference Between Largest and Smallest Value in Three Moves
     ```
         int minDifference(vector<int>& nums) {
