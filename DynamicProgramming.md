@@ -2491,7 +2491,36 @@ Ctrl+ACVVVV (6 key presses) gives 5 times increase
         return dp[sidx][tidx] = recursiveSolution(s, t, sidx - 1, tidx, dp);
     }
        ```
-
+62. Reconstruct Coins
+     ```
+vector<int> reconstruct_coins(const vector<int>& dp) {
+    set<int> coins;
+    
+    for (int i = 1; i < dp.size(); i++) {
+        if (dp[i] > dp[i - 1]) { // A new way appears, indicating a coin
+            coins.insert(i);
+            
+            // Validate by checking if the dp array can be recreated
+            vector<int> recreated_dp(dp.size(), 0);
+            recreated_dp[0] = 1; // Base case
+            
+            for (int c : coins) {
+                for (int j = c; j < dp.size(); j++) {
+                    recreated_dp[j] += recreated_dp[j - c];
+                }
+            }
+            
+            if (recreated_dp != dp) {
+                coins.erase(i); // If incorrect, remove the coin
+            }
+        }
+    }
+    
+    return vector<int>(coins.begin(), coins.end()); // Return sorted coin values
+     }
+     ```
+     ```
+     ```
      
 
 
