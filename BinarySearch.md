@@ -1261,3 +1261,27 @@ sort(buses.begin(), buses.end());
         return ans;
     }
      ```
+37. Min swaps to sort an array
+     ```
+         int minSwapsToSort(vector<int>& level) {
+    int n = level.size();
+    vector<int> temp = level;
+    int swaps = 0;
+
+    for (int i = 0; i < n - 1; ++i) {
+        int minIndex = i;
+        for (int j = i + 1; j < n; ++j) {
+            if (temp[j] < temp[minIndex]) {
+                minIndex = j;
+            }
+        }
+        if (minIndex != i) {
+            swap(temp[i], temp[minIndex]);
+            swaps++;
+        }
+    }
+
+    return swaps;
+    }
+
+     ```
