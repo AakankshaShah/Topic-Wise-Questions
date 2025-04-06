@@ -62,3 +62,65 @@ public class Main {
 }
 
 ```
+2. Design Hash Map
+     ```
+            class MyHashMap {
+    static class Entry {
+        String key;
+        int value;
+        Entry next;
+
+        Entry(String key, int value) {
+            this.key = key;
+            this.value = value;
+        }
+    }
+
+    private static final int SIZE = 16;
+    private Entry[] buckets = new Entry[SIZE];
+
+    private int getIndex(String key) {
+        return Math.abs(key.hashCode()) % SIZE;
+    }
+
+    public void put(String key, int value) {
+        int idx = getIndex(key);
+        Entry head = buckets[idx];
+
+        for (Entry curr = head; curr != null; curr = curr.next) {
+            if (curr.key.equals(key)) {
+                curr.value = value; // update
+                return;
+            }
+        }
+
+        Entry newEntry = new Entry(key, value);
+        newEntry.next = head;
+        buckets[idx] = newEntry;
+    }
+
+    public Integer get(String key) {
+        int idx = getIndex(key);
+        for (Entry curr = buckets[idx]; curr != null; curr = curr.next) {
+            if (curr.key.equals(key)) return curr.value;
+        }
+        return null;
+    }
+
+    public void remove(String key) {
+        int idx = getIndex(key);
+        Entry curr = buckets[idx], prev = null;
+
+        while (curr != null) {
+            if (curr.key.equals(key)) {
+                if (prev == null) buckets[idx] = curr.next;
+                else prev.next = curr.next;
+                return;
+            }
+            prev = curr;
+            curr = curr.next;
+        }
+    }
+    }
+
+     ```
