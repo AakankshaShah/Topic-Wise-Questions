@@ -158,6 +158,10 @@ Finally, LBS hydrates the business ids, filters the result and returns it to the
 Business-related APIs are separated from the LBS into the business service, which checks the cache first for any read requests before consulting the database
 Business updates are handled via a nightly job, which updates the geohash store
 ```
+27. Video Streaming
+     ```
+          <img width="1554" alt="image" src="https://github.com/user-attachments/assets/be808610-c988-457b-82d8-bd9a8da95ede" />
 
+     ```
 
     
