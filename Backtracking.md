@@ -1391,4 +1391,72 @@ vector<string> res;
         return ans;
     }
        ```
+34. The k-th Lexicographical String of All Happy Strings of Length n
+   ```
+       void solve(vector<string>& ans, int end, string temp) {
+        if (temp.length() == end) {
+            ans.push_back(temp);
+            
+            return;
+        }
+
+        for (char ch = 'a'; ch <= 'c'; ch++) {
+            if (!temp.empty() && temp.back() == ch)
+                continue;
+            temp.push_back(ch);
+
+            solve(ans,end,temp);
+
+            temp.pop_back();
+        }
+    }
+
+        string getHappyString(int n, int k) {
+            vector<string> ans;
+            solve(ans, n, "");
+            if (ans.size() < k)
+                return "";
+
+            return ans[k - 1];
+        }
+    };
+   ```
+   ```
+       void solve(int n, string &curr, int &count, int k, string &result) {
+        if (curr.length() == n) {
+            count++;
+            if (count == k) {
+                result = curr;  // Store only the k-th string
+            }
+            return;
+        }
+        
+        for (char ch = 'a'; ch <= 'c'; ch++) {
+            if (!curr.empty() && curr.back() == ch)
+                continue;
+            
+            // Do
+            curr.push_back(ch);
+
+            // Explore
+            solve(n, curr, count, k, result);
+
+            // If result is found, exit early
+            if (!result.empty()) return;
+
+            // Undo
+            curr.pop_back();
+        }
+    }
+
+    string getHappyString(int n, int k) {
+        string curr = "";
+        string result = "";
+        int count = 0;
+        
+        solve(n, curr, count, k, result);
+
+        return result;
+    }
+   ```
 
