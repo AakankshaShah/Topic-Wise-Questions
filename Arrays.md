@@ -5232,7 +5232,7 @@ public class Main {
 ```
 155. Minimum Moves to Equal Array Elements
 
-    ```
+```
         int minMoves(vector<int>& nums) {
         int n = *min_element(nums.begin(), nums.end());
         int a = 0;
@@ -5241,7 +5241,7 @@ public class Main {
         }
         return a;
       }
-    ```
+```
 156. Find the pivot index
        ```
               int pivotIndex(vector<int>& nums) {
