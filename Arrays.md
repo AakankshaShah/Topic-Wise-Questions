@@ -5155,9 +5155,10 @@ public class Main {
       }
      ```
 154. All O`one Data Structure
-       ```
+
+```
                class AllOne {
-     private:
+         private:
     unordered_map<string, int> keyCount;               // Key -> Frequency
     unordered_map<int, unordered_set<string>> freqMap; // Frequency -> Keys
     int maxFreq = 0, minFreq = 0;                      // Proper initialization
@@ -5228,7 +5229,7 @@ public class Main {
     }
     };
 
-    ```
+```
 155. Minimum Moves to Equal Array Elements
 
     ```
