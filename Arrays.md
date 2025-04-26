@@ -285,7 +285,7 @@
 9. Permutation II
 
    ```
-         private: 
+
          void permuteUnique(vector<int>& nums, vector<vector<int>>& output, vector<int> temp, vector<bool>& visited){
         if(temp.size() == nums.size()){
             output.push_back(temp);
@@ -300,7 +300,7 @@
             visited[i] = false;
         }
         }
-         public:
+
         vector<vector<int>> permuteUnique(vector<int>& nums) {
         sort(nums.begin(), nums.end());
         vector<vector<int>> output;
