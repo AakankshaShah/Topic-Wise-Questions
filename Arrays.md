@@ -5406,37 +5406,33 @@ public class Main {
         ```
 160. Grouping of parcels https://leetcode.com/discuss/post/6565857/how-to-solve-this-problem-amazon-sde-1-r-ivbc/
        ```
-             int minMovesToGroupParcels(vector<char> arr) {
-    vector<int> parcel_positions;
-
-    // Step 1: Get indices of 'P'
-    for (int i = 0; i < arr.size(); i++) {
-        if (arr[i] == 'P') {
-            parcel_positions.push_back(i);
+             for (int i = 0; i < arr.size(); i++) {
+          if (arr[i] == 'P') {
+            positions.push_back(i);
         }
-    }
+        }
+    
 
-    // If no parcels or already grouped
-    if (parcel_positions.empty()) return 0;
+        if (positions.size() <= 1) return 0;
+    
 
-    // Step 2: Find the median index
-    int median_idx = parcel_positions[parcel_positions.size() / 2];
+        int n = positions.size();
+       int medianIdx = positions[n / 2];
 
-    // Step 3: Calculate moves
-    int moves = 0;
-    for (int i = 0; i < parcel_positions.size(); i++) {
-        int target_position = median_idx - (parcel_positions.size() / 2) + i;
-        moves += abs(parcel_positions[i] - target_position);
-    }
+   
+       int moves = 0;
+        for (int i = 0; i < n; i++) {
+        moves += abs(positions[i] - (medianIdx - (n / 2) + i)); 
+        }
 
-    return moves;
-     }
+        return moves;
+ 
        ```
      
 
 161. Rotate Image
        ```
-<img width="529" alt="image" src="https://github.com/user-attachments/assets/0a3bb81f-ef37-4abe-badd-e73621863066" />
+          <img width="529" alt="image" src="https://github.com/user-attachments/assets/0a3bb81f-ef37-4abe-badd-e73621863066" />
 
               public void rotate(int[][] matrix) {
 
@@ -5464,60 +5460,61 @@ public class Main {
        }
        ```
  162. JSON Parser
-       ```
+
+```
              import java.util.*;
 
-     public class SimpleJsonParser {
-    private String json;
-    private int index;
+           public class SimpleJsonParser {
+           private String json;
+           private int index;
 
-    public Object parse(String json) {
-        this.json = json.trim();
-        this.index = 0;
-        Object result = parseValue();
-        if (index != this.json.length()) {
+          public Object parse(String json) {
+           this.json = json.trim();
+           this.index = 0;
+           Object result = parseValue();
+           if (index != this.json.length()) {
             throw new IllegalArgumentException("Invalid JSON input");
-        }
-        return result;
-    }
+           }
+           return result;
+          }
 
-    private Object parseValue() {
-        char ch = peek();
-        if (ch == '"') return parseString();
-        if (Character.isDigit(ch) || ch == '-') return parseNumber();
-        if (ch == '{') return parseObject();
-        if (ch == '[') return parseArray();
-        if (json.startsWith("true", index)) return consume("true", true);
-        if (json.startsWith("false", index)) return consume("false", false);
-        if (json.startsWith("null", index)) return consume("null", null);
-        throw new IllegalArgumentException("Unexpected character: " + ch);
-    }
+          private Object parseValue() {
+          char ch = peek();
+           if (ch == '"') return parseString();
+           if (Character.isDigit(ch) || ch == '-') return parseNumber();
+           if (ch == '{') return parseObject();
+           if (ch == '[') return parseArray();
+           if (json.startsWith("true", index)) return consume("true", true);
+           if (json.startsWith("false", index)) return consume("false", false);
+           if (json.startsWith("null", index)) return consume("null", null);
+          throw new IllegalArgumentException("Unexpected character: " + ch);
+           }
 
-    private String parseString() {
-        index++; // Skip opening "
-        StringBuilder sb = new StringBuilder();
-        while (index < json.length()) {
-            char ch = json.charAt(index++);
-            if (ch == '"') return sb.toString();
-            sb.append(ch);
-        }
-        throw new IllegalArgumentException("Unterminated string");
-    }
+           private String parseString() {
+           index++; // Skip opening "
+           StringBuilder sb = new StringBuilder();
+           while (index < json.length()) {
+              char ch = json.charAt(index++);
+              if (ch == '"') return sb.toString();
+              sb.append(ch);
+            }
+           throw new IllegalArgumentException("Unterminated string");
+           }
 
-    private Number parseNumber() {
-        int start = index;
-        while (index < json.length() && (Character.isDigit(json.charAt(index)) || "-+.eE".indexOf(json.charAt(index)) != -1)) {
+           private Number parseNumber() {
+           int start = index;
+          while (index < json.length() && (Character.isDigit(json.charAt(index)) || "-+.eE".indexOf(json.charAt(index)) != -1)) {
             index++;
-        }
-        String numStr = json.substring(start, index);
-        try {
-            return numStr.contains(".") ? Double.parseDouble(numStr) : Integer.parseInt(numStr);
-        } catch (NumberFormatException e) {
+          }
+          String numStr = json.substring(start, index);
+          try {
+              return numStr.contains(".") ? Double.parseDouble(numStr) : Integer.parseInt(numStr);
+            } catch (NumberFormatException e) {
             throw new IllegalArgumentException("Invalid number: " + numStr);
-        }
-    }
+           }
+           }
 
-    private Map<String, Object> parseObject() {
+        private Map<String, Object> parseObject() {
         Map<String, Object> map = new HashMap<>();
         index++; // Skip '{'
         while (true) {
@@ -5540,14 +5537,14 @@ public class Main {
             }
             if (json.charAt(index++) != ',') {
                 throw new IllegalArgumentException("Expected ',' between key-value pairs");
-            }
-        }
-    }
+             }
+              }
+              }
 
-    private List<Object> parseArray() {
-        List<Object> list = new ArrayList<>();
-        index++; // Skip '['
-        while (true) {
+           private List<Object> parseArray() {
+           List<Object> list = new ArrayList<>();
+           index++; // Skip '['
+            while (true) {
             consumeWhitespace();
             if (peek() == ']') {
                 index++;
@@ -5562,35 +5559,34 @@ public class Main {
             if (json.charAt(index++) != ',') {
                 throw new IllegalArgumentException("Expected ',' between array elements");
             }
-        }
-    }
+           }
+           }
 
-    private Object consume(String expected, Object value) {
-        if (!json.startsWith(expected, index)) {
+          private Object consume(String expected, Object value) {
+           if (!json.startsWith(expected, index)) {
             throw new IllegalArgumentException("Expected " + expected);
-        }
-        index += expected.length();
-        return value;
-    }
+           }
+           index += expected.length();
+          return value;
+          }
 
-    private char peek() {
+          private char peek() {
         return index < json.length() ? json.charAt(index) : '\0';
-    }
+        }
 
-    private void consumeWhitespace() {
+         private void consumeWhitespace() {
         while (index < json.length() && Character.isWhitespace(json.charAt(index))) {
             index++;
         }
-    }
+        }
 
-    public static void main(String[] args) {
+        public static void main(String[] args) {
         SimpleJsonParser parser = new SimpleJsonParser();
         String jsonString = "{\"name\":\"Alice\",\"age\":25,\"isStudent\":false,\"skills\":[\"Java\",\"Python\"],\"address\":{\"city\":\"NY\"}}";
         System.out.println(parser.parse(jsonString));
-    }
-    }
-
-       ```
+        }
+         }
+```
 163. Count Binary substrings 
       ```
             int countBinarySubstrings(string s) {
