@@ -5062,8 +5062,8 @@ public class Main {
             for (; k >= 0; k--)
                 board[k][i] = 0;
         }
-    }
-    bool preprocess(vector<vector<int>>& board) {
+        }
+        bool preprocess(vector<vector<int>>& board) {
         bool crushable = false;
         int m = board.size();
         int n = board[0].size();
@@ -5087,15 +5087,15 @@ public class Main {
                     crushable = true;
                 }
             }
-        }
-        return crushable;
-      }
+           }
+           return crushable;
+          }
 
-    vector<vector<int>> candyCrush(vector<vector<int>>& board) {
+        vector<vector<int>> candyCrush(vector<vector<int>>& board) {
         while (preprocess(board))
             crush(board);
         return board;
-      }
+        }
       ```
 152. Longest Common Prefix
        ```
