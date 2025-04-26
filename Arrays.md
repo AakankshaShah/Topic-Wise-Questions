@@ -5301,11 +5301,11 @@ public class Main {
 158. Twitter Feed
         ```
               public class Twitter {
-    private static int timeStamp = 0;
+        private static int timeStamp = 0;
 
-    private Map<Integer, User> userMap;
+       private Map<Integer, User> userMap;
 
-    private class Tweet {
+       private class Tweet {
         public int id;
         public int time;
         public Tweet next;
@@ -5315,10 +5315,10 @@ public class Main {
             time = timeStamp++;
             next = null;
         }
-    }
+       }
 
-    public class User {
-        public int id;
+        public class User {
+         public int id;
         public Set<Integer> followed;
         public Tweet tweet_head;
 
@@ -5342,22 +5342,22 @@ public class Main {
             t.next = tweet_head;
             tweet_head = t;
         }
-    }
+       }
 
-    public Twitter() {
+        public Twitter() {
         userMap = new HashMap<Integer, User>();
-    }
+        }
 
-    public void postTweet(int userId, int tweetId) {
+        public void postTweet(int userId, int tweetId) {
         if (!userMap.containsKey(userId)) {
             User u = new User(userId);
             userMap.put(userId, u);
         }
         userMap.get(userId).post(tweetId);
 
-    }
+        }
 
-    public List<Integer> getNewsFeed(int userId) {
+        public List<Integer> getNewsFeed(int userId) {
         List<Integer> res = new LinkedList<>();
 
         if (!userMap.containsKey(userId))
@@ -5371,21 +5371,21 @@ public class Main {
             if (t != null) {
                 q.add(t);
             }
-        }
-        int n = 0;
-        while (!q.isEmpty() && n < 10) {
+           }
+          int n = 0;
+           while (!q.isEmpty() && n < 10) {
             Tweet t = q.poll();
             res.add(t.id);
             n++;
             if (t.next != null)
                 q.add(t.next);
-        }
+           }
 
-        return res;
+           return res;
 
-    }
+           }
 
-    public void follow(int followerId, int followeeId) {
+         public void follow(int followerId, int followeeId) {
         if (!userMap.containsKey(followerId)) {
             User u = new User(followerId);
             userMap.put(followerId, u);
@@ -5395,14 +5395,14 @@ public class Main {
             userMap.put(followeeId, u);
         }
         userMap.get(followerId).follow(followeeId);
-    }
+        }
 
-    public void unfollow(int followerId, int followeeId) {
+       public void unfollow(int followerId, int followeeId) {
         if (!userMap.containsKey(followerId) || followerId == followeeId)
             return;
         userMap.get(followerId).unfollow(followeeId);
-     }
-     }
+        }
+         }
         ```
 160. Grouping of parcels https://leetcode.com/discuss/post/6565857/how-to-solve-this-problem-amazon-sde-1-r-ivbc/
        ```
