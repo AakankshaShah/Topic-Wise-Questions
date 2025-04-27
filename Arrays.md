@@ -4251,14 +4251,15 @@ public class Main {
       }
       ```
 123. Majority element 2
-     ```
-        ector<int> majorityElement(vector<int>& nums) {
-        int e1 = 0, e2 = 0; // Elements
-    int c1 = 0, c2 = 0; // Counts
-    int n = nums.size();
 
-    // First pass: Find potential candidates
-    for (int num : nums) {
+     ```
+        vector<int> majorityElement(vector<int>& nums) {
+        int e1 = 0, e2 = 0; // Elements
+       int c1 = 0, c2 = 0; // Counts
+        int n = nums.size();
+
+         // First pass: Find potential candidates
+        for (int num : nums) {
         if (num == e1) {
             c1++;
         } else if (num == e2) {
@@ -4273,31 +4274,32 @@ public class Main {
             c1--;
             c2--;
         }
-    }
+        }
 
 
-    c1 = 0;
-    c2 = 0;
-    for (int num : nums) {
+        c1 = 0;
+        c2 = 0;
+        for (int num : nums) {
         if (num == e1) {
             c1++;
         } else if (num == e2) {
             c2++;
         }
-    }
+        }
 
-    vector<int> result;
-    if (c1 > n / 3) {
+        vector<int> result;
+        if (c1 > n / 3) {
         result.push_back(e1);
-    }
-    if (c2 > n / 3) {
+        }
+        if (c2 > n / 3) {
         result.push_back(e2);
-    }
+        }
 
-    return result;
+        return result;
         
        }
-    ```
+
+     ```
 124. Valid Anagram 
        ```
            bool isAnagram(string s, string t) {
