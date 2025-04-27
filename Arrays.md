@@ -4664,9 +4664,9 @@ public class Main {
 
       ```
          long long nC2(int n) {
-    if (n < 2) return 0; 
-    return (1LL * n * (n - 1)) / 2;
-    }
+        if (n < 2) return 0; 
+        return (1LL * n * (n - 1)) / 2;
+        }
        int tupleSameProduct(vector<int>& nums) {
         int n = nums.size();
         vector<int> hash(1e4, 0);
@@ -4756,7 +4756,7 @@ public class Main {
 138. Text justification
       ```
              int MAX_WIDTH;
-    string getFinalWord(int i, int j, int eachWordSpace, int extraSpace,
+        string getFinalWord(int i, int j, int eachWordSpace, int extraSpace,
                         vector<string>& words) {
         string s;
 
@@ -4782,7 +4782,7 @@ public class Main {
         return s;
        }
 
-      vector<string> fullJustify(vector<string>& words, int maxWidth) {
+         vector<string> fullJustify(vector<string>& words, int maxWidth) {
         vector<string> result;
         int n = words.size();
         MAX_WIDTH = maxWidth;
@@ -4819,7 +4819,7 @@ public class Main {
         return result;
         }
       
-      ```
+     ```
 139. Find the closest palindrome
 
      ```
