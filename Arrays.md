@@ -2535,7 +2535,7 @@ return c;
          class SongShuffler {
     private:
         std::vector<std::string> songs; // Array of songs
-        int playedIndex;                // Index to track the played songs
+        int playedIndex;                // Index to track the played songs//oldest song track
         int playIndex;    // Index to track the current song to be played
         int k;            // The number of recent songs to track
         std::rand random; // Random number generator
