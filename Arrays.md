@@ -2779,6 +2779,60 @@ return c;
         }
         return ans;
     ```
+    ```
+     //Largest X
+      
+     int largestX(vector<vector<int>>& matrix) {
+    int n = matrix.size();
+    if (n == 0) return 0;
+
+    // DP arrays to store distances from each direction
+    vector<vector<int>> up(n, vector<int>(n, 0));
+    vector<vector<int>> down(n, vector<int>(n, 0));
+    vector<vector<int>> left(n, vector<int>(n, 0));
+    vector<vector<int>> right(n, vector<int>(n, 0));
+
+    // Fill the DP arrays
+    for (int i = 0; i < n; ++i) {
+        for (int j = 0; j < n; ++j) {
+            if (matrix[i][j] == 1) {
+                if (i == 0) up[i][j] = 1;
+                else up[i][j] = up[i-1][j] + 1;
+
+                if (j == 0) left[i][j] = 1;
+                else left[i][j] = left[i][j-1] + 1;
+            }
+        }
+    }
+
+    for (int i = n-1; i >= 0; --i) {
+        for (int j = n-1; j >= 0; --j) {
+            if (matrix[i][j] == 1) {
+                if (i == n-1) down[i][j] = 1;
+                else down[i][j] = down[i+1][j] + 1;
+
+                if (j == n-1) right[i][j] = 1;
+                else right[i][j] = right[i][j+1] + 1;
+            }
+        }
+    }
+
+    // Now, check for the largest X
+    int maxX = 0;
+
+    for (int i = 0; i < n; ++i) {
+        for (int j = 0; j < n; ++j) {
+            if (matrix[i][j] == 1) {
+                // Check the size of the X centered at (i, j)
+                int size = min({up[i][j], down[i][j], left[i][j], right[i][j]});
+                maxX = max(maxX, size);
+            }
+        }
+    }
+
+    return maxX;
+     }
+    ```
 79. Destroy sequential targets
      ```
         int destroyTargets(vector<int>& nums, int space) {
