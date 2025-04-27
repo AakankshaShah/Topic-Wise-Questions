@@ -4887,16 +4887,16 @@ public class Main {
      ```
 142. Split message based on limit
       ```
-          int charLen(int value) {
+      int charLen(int value) {
         int len = 0;
         while (value != 0) {
             len++;
             value /= 10;
         }
         return len;
-    }
+        }
 
-    int checkValidity(String message, int limit, int segments) {
+       int checkValidity(String message, int limit, int segments) {
         int charLenSoFar = 0;
         int msgLen = message.length();
         for (int i = 1; i <= segments; i++) {
@@ -4919,7 +4919,7 @@ public class Main {
         }
 
         return 0;
-    }
+       }
 
       public String[] splitMessage(String message, int limit) {
          int left = 1;
@@ -4950,10 +4950,10 @@ public class Main {
         } else {
 
             return getFormattedStrings(message, limit, segments);
-        }
-       }
+           }
+          }
 
-       String[] getFormattedStrings(String message, int limit, int segments) {
+         String[] getFormattedStrings(String message, int limit, int segments) {
         String[] res = new String[segments];
         int msgLen = message.length();
         int charLenSoFar = 0;
@@ -4974,7 +4974,7 @@ public class Main {
 
         return res;
         }
-      ```
+     ```
 143. Design Memory Allocator
       ```
            vector<int> arr;
