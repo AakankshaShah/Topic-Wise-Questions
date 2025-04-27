@@ -3941,7 +3941,7 @@ public class Main {
 
     
 ```
-118. Product of Two Run-Length Encoded Arrays
+111. Product of Two Run-Length Encoded Arrays
 
 ```
         vector<vector<int>> findRLEArray(vector<vector<int>>& encoded1,
@@ -3973,7 +3973,7 @@ public class Main {
         return ans;
     
  ```
-119. Remove element
+112. Remove element
        ```
            int removeElement(vector<int>& nums, int val) {
         int i = 0;
@@ -4001,7 +4001,7 @@ public class Main {
         }
         return n;
        ```
-120. Strobogrammatic number
+113. Strobogrammatic number
        ```
            public boolean isStrobogrammatic(String num) {
         Map<Character, Character> rotatedDigits = new HashMap<>(
@@ -4018,7 +4018,7 @@ public class Main {
 
        }
        ```
-121. Unique Length-3 Palindromic Subsequences
+114. Unique Length-3 Palindromic Subsequences
      ```
        int countPalindromicSubsequence(string s) {
         vector<int> first = vector(26, -1);
@@ -4050,7 +4050,7 @@ public class Main {
         return ans;
         }
      ```
-122. Design Tic Tac Toe
+115. Design Tic Tac Toe
       ```
          class TicTacToe {
        private:
@@ -4075,7 +4075,7 @@ public class Main {
         }
         };
       ```
-123. Add binary
+116. Add binary
      ```
         string addBinary(string a, string b) {
         int i=a.length()-1;
@@ -4097,7 +4097,7 @@ public class Main {
         
       }
      ```
-124. Minimum Number of Operations to Move All Balls to Each Box
+117. Minimum Number of Operations to Move All Balls to Each Box
 
    ```
           vector<int> minOperations(string boxes) {
@@ -4130,7 +4130,7 @@ public class Main {
             }
 
    ```
-124. Divide two integers
+118. Divide two integers
       ```
           int divide(int dividend, int divisor) {
         if (dividend == divisor) return 1;
@@ -4165,7 +4165,7 @@ public class Main {
        }  
     
       ```
-125.   Integer to Roman
+119.   Integer to Roman
         
        ```
          string intToRoman(int num) {
@@ -4183,7 +4183,7 @@ public class Main {
         return ans;
         }
        ```
-125. Shifting letters 2
+120. Shifting letters 2
       ```
         string shiftingLetters(string s, vector<vector<int>>& shifts) {
         int n = s.length();
@@ -4219,7 +4219,7 @@ public class Main {
         return s;
        }
       ```
-126. Happy number
+121. Happy number
      ```
          bool isHappy(int n) {
         if(n==1 || n==7) return true;
@@ -4236,7 +4236,7 @@ public class Main {
         
       }
      ```
-126. Contains Duplicate
+122. Contains Duplicate
       ```
           public boolean containsDuplicate(int[] nums) {
         HashSet<Integer> set = new HashSet<>();
@@ -4250,7 +4250,7 @@ public class Main {
         
       }
       ```
-127. Majority element 2
+123. Majority element 2
      ```
         ector<int> majorityElement(vector<int>& nums) {
         int e1 = 0, e2 = 0; // Elements
@@ -4298,7 +4298,7 @@ public class Main {
         
        }
     ```
-128. Valid Anagram 
+124. Valid Anagram 
        ```
            bool isAnagram(string s, string t) {
         if (s.length() != t.length())
@@ -4322,7 +4322,7 @@ public class Main {
         return true;
         }
        ```
-129. Integer to english words
+125. Integer to english words
       ```
          string numberToWords(int num) {
         if (num == 0)
@@ -4371,7 +4371,7 @@ public class Main {
         return result;
         }
       ```
-130. Minimum time difference
+126. Minimum time difference
       ```
           public int findMinDifference(List<String> timePoints) {
         int mini = Integer.MAX_VALUE;
@@ -4392,7 +4392,7 @@ public class Main {
         
        }
       ```  
-131.  Find Score of an Array After Marking All Elements
+127.  Find Score of an Array After Marking All Elements
 
        ```
           long long findScore(vector<int>& nums) {
@@ -4469,7 +4469,7 @@ public class Main {
        }
          
        ```
-132. Valid Paranthese string 
+128. Valid Paranthese string 
         ```
             public boolean checkValidString(String s) {
         int leftBalance = 0;
@@ -4494,7 +4494,7 @@ public class Main {
         return true;
        
         ```
-133. Element Appearing More Than 25% In Sorted Array
+129. Element Appearing More Than 25% In Sorted Array
      ```
         int findSpecialInteger(vector<int>& arr) {
         //Approach 1
@@ -4527,7 +4527,7 @@ public class Main {
 
       }
      ```
-134. Rank Trasnform of an array 
+130. Rank Trasnform of an array 
       ```
           vector<int> arrayRankTransform(vector<int>& arr) {
          map<int, vector<int>> numToIndices;
@@ -4546,7 +4546,7 @@ public class Main {
         
       }
       ```
-135. Remove Sub-Folders from the Filesystem
+131. Remove Sub-Folders from the Filesystem
       ```
          vector<string> removeSubfolders(vector<string>& folder) {
         vector<string>ans;
@@ -4577,7 +4577,7 @@ public class Main {
       }
 
       ```
-136. Kids With the Greatest Number of Candies
+132. Kids With the Greatest Number of Candies
      ```
         int max_candies = *max_element(candies.begin(), candies.end());
         
@@ -4593,7 +4593,7 @@ public class Main {
         
         return result;
      ```
-137. Check If N and Its Double Exist
+133. Check If N and Its Double Exist
       ```
           bool checkIfExist(vector<int>& arr) {
         unordered_map<int, int> mp;
@@ -4610,7 +4610,7 @@ public class Main {
         
        }
       ```
-137. Find Winner on a Tic Tac Toe Game
+134. Find Winner on a Tic Tac Toe Game
      ```
            public String tictactoe(int[][] moves) {
         int n = 3;
@@ -4637,7 +4637,7 @@ public class Main {
 
       }
      ```
-138. Maximum Score After Splitting a String
+135. Maximum Score After Splitting a String
       ```
          int maxScore(string s) {
         int n=s.length();
@@ -4658,7 +4658,7 @@ public class Main {
         
       }
       ```
-139. Tuple with same product
+136. Tuple with same product
 
       ```
          long long nC2(int n) {
@@ -4687,7 +4687,7 @@ public class Main {
            }
            };
       ```
-140. Find celebrity
+137. Find celebrity
      ```
           int findCelebrity(int n) {
         // vector<int>ind(n,0);
@@ -4751,7 +4751,7 @@ public class Main {
         return candidate;
       }
      ```
-141. Text justification
+138. Text justification
       ```
              int MAX_WIDTH;
     string getFinalWord(int i, int j, int eachWordSpace, int extraSpace,
@@ -4818,7 +4818,7 @@ public class Main {
         }
       
       ```
-142. Find the closest palindrome
+139. Find the closest palindrome
 
      ```
            string nearestPalindromic(string n) {
@@ -4855,7 +4855,7 @@ public class Main {
         return to_string(closest);
        }   
      ```
-143. Add digits
+140. Add digits
       ```
            int addDigits(int num) {
         if (num == 0)
@@ -4865,7 +4865,7 @@ public class Main {
         return num % 9;
       }
       ```
-144. Find the Number of Ways to Place People II
+141. Find the Number of Ways to Place People II
      ```
             int numberOfPairs(vector<vector<int>>& p) {
 
@@ -4883,7 +4883,7 @@ public class Main {
       }
 
      ```
-145. Split message based on limit
+142. Split message based on limit
       ```
           int charLen(int value) {
         int len = 0;
@@ -4973,7 +4973,7 @@ public class Main {
         return res;
         }
       ```
-146. Design Memory Allocator
+143. Design Memory Allocator
       ```
            vector<int> arr;
           Allocator(int n) { arr.resize(n, 0); }
@@ -5014,7 +5014,7 @@ public class Main {
         return count;
       }
       ```
-147. Subarray Sums Divisible by K
+144. Subarray Sums Divisible by K
       ```
           int subarraysDivByK(vector<int>& nums, int k) {
         int n = nums.size();
@@ -5031,7 +5031,7 @@ public class Main {
         
        }
       ```
-148. Rotate the box
+145. Rotate the box
       ```
              vector<vector<char>> rotateTheBox(vector<vector<char>>& box) {
         int r=box.size(), c=box[0].size();
@@ -5053,7 +5053,7 @@ public class Main {
         
        }
       ```
-149. Meeting Scheduler
+146. Meeting Scheduler
      ```
          vector<int> minAvailableDuration(vector<vector<int>>& slots1,
                                      vector<vector<int>>& slots2,
@@ -5078,7 +5078,7 @@ public class Main {
         return {};
        }
      ```
-150. Remove comments
+147. Remove comments
        ```
                vector<string> removeComments(vector<string>& a) {
         vector<string> ret;
@@ -5100,7 +5100,7 @@ public class Main {
         
         }
        ```
- 151. Candy Crush    
+ 148. Candy Crush    
       ```
           void crush(vector<vector<int>>& board) {
         int m = board.size();
@@ -5151,7 +5151,7 @@ public class Main {
         return board;
         }
       ```
-152. Longest Common Prefix
+149. Longest Common Prefix
        ```
             int longestCommonPrefix(vector<int>& arr1, vector<int>& arr2) {
         unordered_set<int> st;
@@ -5178,7 +5178,7 @@ public class Main {
         return result;
         }
        ```
-153. Amount of new area painted each day
+150. Amount of new area painted each day
      ```
           vector<int> amountPainted(vector<vector<int>>& paint) {
         auto min_start = INT_MAX, max_end = INT_MIN;
@@ -5208,7 +5208,7 @@ public class Main {
         return res;
       }
      ```
-154. All O`one Data Structure
+151. All O`one Data Structure
 
 ```
                class AllOne {
@@ -5284,7 +5284,7 @@ public class Main {
     };
 
 ```
-155. Minimum Moves to Equal Array Elements
+152. Minimum Moves to Equal Array Elements
 
 ```
         int minMoves(vector<int>& nums) {
@@ -5296,7 +5296,7 @@ public class Main {
         return a;
       }
 ```
-156. Find the pivot index
+153. Find the pivot index
        ```
               int pivotIndex(vector<int>& nums) {
         
@@ -5313,7 +5313,7 @@ public class Main {
         }
        ```
 
-157. Range Module
+154. Range Module
        ```
        TreeMap<Integer, Integer> m = new TreeMap<>();
 
@@ -5353,7 +5353,7 @@ public class Main {
         }
        ```
     
-158. Twitter Feed
+155. Twitter Feed
         ```
               public class Twitter {
         private static int timeStamp = 0;
@@ -5459,7 +5459,7 @@ public class Main {
         }
          }
         ```
-160. Grouping of parcels https://leetcode.com/discuss/post/6565857/how-to-solve-this-problem-amazon-sde-1-r-ivbc/
+156. Grouping of parcels https://leetcode.com/discuss/post/6565857/how-to-solve-this-problem-amazon-sde-1-r-ivbc/
        ```
              for (int i = 0; i < arr.size(); i++) {
           if (arr[i] == 'P') {
@@ -5485,7 +5485,7 @@ public class Main {
        ```
      
 
-161. Rotate Image
+157. Rotate Image
        ```
           <img width="529" alt="image" src="https://github.com/user-attachments/assets/0a3bb81f-ef37-4abe-badd-e73621863066" />
 
@@ -5514,7 +5514,7 @@ public class Main {
 
        }
        ```
- 162. JSON Parser
+ 158. JSON Parser
 
 ```
              import java.util.*;
@@ -5642,7 +5642,7 @@ public class Main {
         }
          }
 ```
-163. Count Binary substrings 
+159. Count Binary substrings 
       ```
             int countBinarySubstrings(string s) {
             int cur = 1, pre = 0, res = 0;
@@ -5658,7 +5658,7 @@ public class Main {
         
          }
       ```
-164. Find Occurrences of an Element in an Array
+160. Find Occurrences of an Element in an Array
      ```
         vector<int> occurrencesOfElement(vector<int>& nums, vector<int>& queries,
                                      int x) {
