@@ -1055,6 +1055,34 @@
         return root;
     }
     ```
+    ```
+       class Codec {
+     public:
+    string serialize(TreeNode* root) {
+        if (!root)
+            return "#,";
+        return to_string(root->val) + "," + serialize(root->left) +
+               serialize(root->right);
+    }
+
+    TreeNode* deserialize(string data) {
+        stringstream ss(data);
+        return deserializeHelper(ss);
+    }
+    TreeNode* deserializeHelper(stringstream& ss) {
+        string val;
+        getline(ss, val, ',');
+
+        if (val == "#")
+            return nullptr;
+
+        TreeNode* node = new TreeNode(stoi(val));
+        node->left = deserializeHelper(ss);
+        node->right = deserializeHelper(ss);
+        return node;
+    }
+    };
+    ```
 33. Path Sum 
     ```
       bool hasPathSum(TreeNode* root, int targetSum) {
