@@ -46,9 +46,9 @@ https://www.youtube.com/watch?v=s7zE4Nmc2Fg&list=PL5DyztRVgtRVLwNWS7Rpp4qzVVHJal
 
    ```
            class Solution {
-       public:
-       vector<vector<int>> pacificAtlantic(vector<vector<int>>& heights) {
-        int m = heights.size(), n = heights[0].size();
+         public:
+         vector<vector<int>> pacificAtlantic(vector<vector<int>>& heights) {
+         int m = heights.size(), n = heights[0].size();
 
         vector<vector<int>> pacific(m, vector<int>(n, -1)),
             atlantic(m, vector<int>(n, -1));
@@ -97,9 +97,9 @@ https://www.youtube.com/watch?v=s7zE4Nmc2Fg&list=PL5DyztRVgtRVLwNWS7Rpp4qzVVHJal
                 ocean[nr][nc] = 1; // visited & can flow
                 dfs(heights, nr, nc, m, n, ocean);
             }
-        }
-       }
-       };
+           }
+          }
+           };
    ```
 
 
@@ -443,8 +443,8 @@ bool DFS(vector<string> &A, int i, int j, string B, int idx , vector<vector<bool
 13.  Word ladder 2 https://www.youtube.com/watch?v=DREutrv2XD0 
      ```
         class Solution {
-     public:
-    vector<vector<string>> findLadders(string beginWord, string endWord,
+        public:
+        vector<vector<string>> findLadders(string beginWord, string endWord,
                                        vector<string>& wordList) {
         unordered_set<string> wordSet(wordList.begin(), wordList.end());
 
@@ -457,11 +457,11 @@ bool DFS(vector<string> &A, int i, int j, string B, int idx , vector<vector<bool
         backtrack(endWord, beginWord);
 
         return shortestPaths;
-    }
-    unordered_map<string, vector<string>> adjList;
-    vector<string> currPath;
-    vector<vector<string>> shortestPaths;
-    vector<string> findNeighbors(string& word,
+        }
+       unordered_map<string, vector<string>> adjList;
+       vector<string> currPath;
+       vector<vector<string>> shortestPaths;
+        vector<string> findNeighbors(string& word,
                                  unordered_set<string>& wordList) {
         vector<string> neighbors;
         string originalWord = word;
@@ -482,8 +482,8 @@ bool DFS(vector<string> &A, int i, int j, string B, int idx , vector<vector<bool
         }
 
         return neighbors;
-    }
-    void bfs(string& beginWord, string& endWord,
+         }
+        void bfs(string& beginWord, string& endWord,
              unordered_set<string>& wordList) {
         queue<string> q;
         q.push(beginWord);
@@ -515,9 +515,9 @@ bool DFS(vector<string> &A, int i, int j, string B, int idx , vector<vector<bool
             for (string& word : visitedInThisLevel) {
                 wordList.erase(word);
             }
-        }
-    }
-    void backtrack(string& currentWord, string& beginWord) {
+          }
+         }
+        void backtrack(string& currentWord, string& beginWord) {
         if (currentWord == beginWord) {
             shortestPaths.push_back(
                 vector<string>(currPath.rbegin(), currPath.rend()));
@@ -529,8 +529,8 @@ bool DFS(vector<string> &A, int i, int j, string B, int idx , vector<vector<bool
             backtrack(predecessor, beginWord);
             currPath.pop_back();
         }
-    }
-    };
+        }
+        };
      ```
 
 14.  Clone Graph https://www.youtube.com/watch?v=z7mPg_xT5xk
