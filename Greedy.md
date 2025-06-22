@@ -48,7 +48,7 @@
     }
     
     return res;
-}
+    }
     ```
 2. Minimum no of jumps || Jump Game 2 || Jump Game https://www.youtube.com/watch?v=Yan0cv2cLy8
 
