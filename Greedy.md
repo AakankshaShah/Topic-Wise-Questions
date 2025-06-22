@@ -77,7 +77,7 @@
             return -1;
 
         int maxReach = arr[0];
-        int step = arr[0];
+        int step = arr[0];// steps left in current jump
         int jump = 1;
 
         int i = 1;
