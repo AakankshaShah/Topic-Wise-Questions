@@ -3496,157 +3496,164 @@ public:
     }
      ```
 68. Stickers to spell words
-     ```
-             int n = size(stickers);
-        unordered_set<string> visited;
-        vector<vector<int>> s_frequencies(n, vector<int>(26, 0));
-        for (int i = 0; i < n; ++i)
-            for (auto& c : stickers[i])
-                ++s_frequencies[i][c - 'a'];
+    ```
+        // 🔹 Solution 1: BFS-Based
+     int minStickers(vector<string>& stickers, string target) {
+    int n = size(stickers);
+    unordered_set<string> visited;
+    vector<vector<int>> s_frequencies(n, vector<int>(26, 0));
 
-        vector<int> t_frequency(26, 0);
-        for (auto& c : target)
-            ++t_frequency[c - 'a'];
+    for (int i = 0; i < n; ++i)
+        for (auto& c : stickers[i])
+            ++s_frequencies[i][c - 'a'];
 
-        queue<vector<int>> q;
-        q.push(t_frequency);
-        for (int res = 0; size(q); ++res) {
-            for (int k = size(q); k > 0; --k) {
-                auto t_freq = q.front();
-                q.pop();
+    vector<int> t_frequency(26, 0);
+    for (auto& c : target)
+        ++t_frequency[c - 'a'];
 
-                string t_str;
-                for (int i = 0; i < 26; ++i)
-                    if (t_freq[i] > 0)
-                        t_str += string(t_freq[i], i);
+    queue<vector<int>> q;
+    q.push(t_frequency);
 
-                if (t_str == "")
-                    return res;
+    for (int res = 0; size(q); ++res) {
+        for (int k = size(q); k > 0; --k) {
+            auto t_freq = q.front();
+            q.pop();
 
-                if (visited.count(t_str))
-                    continue;
-                visited.insert(t_str);
+            string t_str;
+            for (int i = 0; i < 26; ++i)
+                if (t_freq[i] > 0)
+                    t_str += string(t_freq[i], i);
 
-                char seeking = t_str[0];
-                for (auto& v : s_frequencies) {
+            if (t_str == "")
+                return res;
 
-                    if (v[seeking] > 0) {
-                        q.push(t_freq);
-                        for (int i = 0; i < 26; ++i)
-                            q.back()[i] -= v[i];
-                    }
+            if (visited.count(t_str))
+                continue;
+            visited.insert(t_str);
+
+            char seeking = t_str[0];
+            for (auto& v : s_frequencies) {
+                if (v[seeking] > 0) {
+                    q.push(t_freq);
+                    for (int i = 0; i < 26; ++i)
+                        q.back()[i] -= v[i];
                 }
             }
         }
-
-        return -1;
     }
-     ```
-     ```
-        unordered_map<string, int> dp;
+
+    return -1;
+     }
+
+    ```
+    ```
+         // 🔹 Solution 2: Top-Down DP with Memoization (Compact)
+     unordered_map<string, int> dp;
 
     int helper(string s, vector<unordered_map<char, int>>& mp) {
+    if (dp.find(s) != dp.end())
+        return dp[s];
+    if (s.size() == 0)
+        return 0;
 
-        if (dp.find(s) != dp.end())
-            return dp[s];
-        if (s.size() == 0)
-            return 0;
+    int res = 1e6;
+    unordered_map<char, int> mp1;
 
-        int res = 1e6;
+    for (auto c : s)
+        mp1[c]++;
 
-        unordered_map<char, int> mp1;
+    for (int j = 0; j < mp.size(); j++) {
+        if (mp[j][s[0]] == 0)
+            continue;
 
-        for (auto c : s)
-            mp1[c]++;
-
-        for (int j = 0; j < mp.size(); j++) {
-
-            if (mp[j][s[0]] == 0)
-                continue;
-
-            string str = "";
-            for (auto itr : mp1) {
-                str += string(max(0, itr.second - mp[j][itr.first]), itr.first);
-            }
-
-            int temp = helper(str, mp);
-            if (temp != -1)
-                res = min(res, 1 + temp);
+        string str = "";
+        for (auto itr : mp1) {
+            str += string(max(0, itr.second - mp[j][itr.first]), itr.first);
         }
 
-        if (res == 1e6)
-            return dp[s] = -1;
-        return dp[s] = res;
+        int temp = helper(str, mp);
+        if (temp != -1)
+            res = min(res, 1 + temp);
+    }
+
+    if (res == 1e6)
+        return dp[s] = -1;
+    return dp[s] = res;
     }
 
     int minStickers(vector<string>& stickers, string target) {
-        int m = stickers.size();
-        vector<unordered_map<char, int>> mp(m);
+    int m = stickers.size();
+    vector<unordered_map<char, int>> mp(m);
 
-        for (int i = 0; i < stickers.size(); i++) {
-            for (auto c : stickers[i]) {
-                mp[i][c]++;
-            }
+    for (int i = 0; i < stickers.size(); i++) {
+        for (auto c : stickers[i]) {
+            mp[i][c]++;
         }
-
-        int res = helper(target, mp);
-
-        return res;
     }
-     ```
-69.  unordered_map<string, int> dp;
 
-    int helper(string target,
-               vector<unordered_map<char, int>>& stickerFrequencies) {
+    int res = helper(target, mp);
+    return res;
+    }
 
-        if (dp.find(target) != dp.end())
-            return dp[target];
+    ```
 
-        if (target.empty())
-            return 0;
+    ```
+         // 🔹 Solution 3: Top-Down DP (Clean Version)
+unordered_map<string, int> dp;
 
-        int minStickers = INT_MAX;
+int helper(string target, vector<unordered_map<char, int>>& stickerFrequencies) {
+    if (dp.find(target) != dp.end())
+        return dp[target];
 
-        unordered_map<char, int> targetFreq;
-        for (char c : target) {
-            targetFreq[c]++;
+    if (target.empty())
+        return 0;
+
+    int minStickers = INT_MAX;
+
+    unordered_map<char, int> targetFreq;
+    for (char c : target) {
+        targetFreq[c]++;
+    }
+
+    for (int i = 0; i < stickerFrequencies.size(); i++) {
+        if (stickerFrequencies[i][target[0]] == 0)
+            continue;
+
+        string newTarget = "";
+        for (auto& entry : targetFreq) {
+            int remaining = entry.second - stickerFrequencies[i][entry.first];
+            if (remaining > 0) {
+                newTarget += string(remaining, entry.first);
+            }
         }
 
-        for (int i = 0; i < stickerFrequencies.size(); i++) {
-            if (stickerFrequencies[i][target[0]] == 0)
-                continue;
-            string newTarget = "";
-            for (auto& entry : targetFreq) {
-                int remaining =
-                    entry.second - stickerFrequencies[i][entry.first];
-                if (remaining > 0) {
-                    newTarget += string(remaining, entry.first);
-                }
-            }
-
-            int temp = helper(newTarget, stickerFrequencies);
-            if (temp != -1) {
-                minStickers = min(minStickers, 1 + temp);
-            }
+        int temp = helper(newTarget, stickerFrequencies);
+        if (temp != -1) {
+            minStickers = min(minStickers, 1 + temp);
         }
+    }
 
-        if (minStickers == INT_MAX)
-            return dp[target] = -1;
+    if (minStickers == INT_MAX)
+        return dp[target] = -1;
 
-        return dp[target] = minStickers;
+    return dp[target] = minStickers;
     }
 
     int minStickers(vector<string>& stickers, string target) {
-        int numStickers = stickers.size();
+    int numStickers = stickers.size();
+    vector<unordered_map<char, int>> stickerFrequencies(numStickers);
 
-        // Create frequency maps for each sticker.
-        vector<unordered_map<char, int>> stickerFrequencies(numStickers);
-        for (int i = 0; i < numStickers; i++) {
-            for (char c : stickers[i]) {
-                stickerFrequencies[i][c]++;
-            }
+    for (int i = 0; i < numStickers; i++) {
+        for (char c : stickers[i]) {
+            stickerFrequencies[i][c]++;
         }
-70. Sliding puzzle
+    }
+
+    return helper(target, stickerFrequencies);
+    }
+
+    ```
+69. Sliding puzzle
       ```
           int slidingPuzzle(vector<vector<int>>& board) {
         int dr[] = {0, 1, 0, -1};
@@ -3696,7 +3703,7 @@ public:
         return -1;
        }
       ```
-71. Shortest Bridge
+70. Shortest Bridge
      ```
          class Solution {
      public:
@@ -3762,7 +3769,7 @@ public:
     };
 
      ```
-72. Bus routes
+71. Bus routes
     ```
         int numBusesToDestination(vector<vector<int>>& routes, int S, int T) {
         unordered_map<int, vector<int>> to_routes;
@@ -3790,7 +3797,7 @@ public:
         return -1;
     }
     ```
-73. Maximize Amount After Two Days of Conversions
+72. Maximize Amount After Two Days of Conversions
    ```
         double maxAmount(string initialCurrency, vector<vector<string>>& pairs1,
                      vector<double>& rates1, vector<vector<string>>& pairs2,
@@ -3846,7 +3853,7 @@ public:
         return maxAmount;
     }
    ```
-74.  Find Minimum Time to Reach Last Room I
+73.  Find Minimum Time to Reach Last Room I
    ```
        int minTimeToReach(vector<vector<int>>& moveTime) {
         int n = moveTime.size();
@@ -3882,7 +3889,7 @@ public:
         return -1;
     }
    ```
-75. Find Minimum Time to Reach Last Room 2
+74. Find Minimum Time to Reach Last Room 2
    ```
      int di[4] = {1, -1, 0, 0};
     int dj[4] = {0, 0, 1, -1};
@@ -3915,7 +3922,7 @@ public:
         return dist[n - 1][m - 1];
     }
    ```
-76. Number of islands II
+75. Number of islands II
      ```
            class Solution {
      public:
@@ -3970,7 +3977,7 @@ public:
         }
     }
      ```
-77. Divide Nodes Into the Maximum Number of Groups
+76. Divide Nodes Into the Maximum Number of Groups
     ```
          bool isBipartite(unordered_map<int, vector<int>>& adj, int curr,
                      vector<int>& colors, int currColor) {
@@ -4073,7 +4080,7 @@ public:
         return maxGroupEachComp;
     }
     ```
-78. Open the lock
+77. Open the lock
      ```
            int openLock(vector<string>& deadends, string target) {
         unordered_set<string> deadSet(deadends.begin(), deadends.end());
@@ -4104,7 +4111,7 @@ public:
         return result;
     }
      ```
-  79. shortest path to get all keys
+  78. shortest path to get all keys
        ```
             int shortestPathAllKeys(vector<string>& grid) {
         int dx[] = {1, 0, -1, 0};
@@ -4178,7 +4185,7 @@ public:
         return -1;
        }
        ```
-80. Number of distinct islands
+79. Number of distinct islands
       ```
              int[][] dirs = new int[][] { { 1, 0 }, { 0, 1 }, { -1, 0 }, { 0, -1 } };
 
@@ -4214,7 +4221,7 @@ public:
         }
     }
       ```
-81. Tower Frequnecy assignment https://leetcode.com/discuss/post/6565903/how-can-we-solve-it-amazon-sde-2-r1-by-a-zouv/
+80. Tower Frequnecy assignment https://leetcode.com/discuss/post/6565903/how-can-we-solve-it-amazon-sde-2-r1-by-a-zouv/
 
        ```
        #include <iostream>
@@ -4313,7 +4320,7 @@ public:
 
 
        ```
-82. As Far from Land as Possible
+81. As Far from Land as Possible
      ```
           int maxDistance(vector<vector<int>>& grid) {
         int n = grid.size();
