@@ -808,6 +808,8 @@ vector<string> res;
         return ans;
     }
      ```
+<img width="685" alt="image" src="https://github.com/user-attachments/assets/56a78bf7-350b-4f74-a8f7-9cc750b33406" />
+
 18. Next closest time
     ```
         string nextClosestTime(string time) {
