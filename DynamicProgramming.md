@@ -669,7 +669,7 @@ for (int i = 0; i < n; i++) {
     }
     }
     ```
-14. Decode paths Doubt 
+14. Decode ways
      ```
         int dp[101][101];
 
@@ -994,60 +994,7 @@ for (int i = 0; i < n; i++) {
         return total;
     ```
 
-22. Decode ways 
-    ```
-      int dp[101][101];
-
-    bool check(string& s, int i, int j) {
-        string temp = s.substr(i, j - i + 1);
-        if (temp.size() > 2)
-
-            return false;
-
-        int y = stoi(temp);
-        if (y > 26 || y <= 0 || (temp.size() >= 2 && y < 10))
-
-            return false;
-
-        return true;
-    }
-    int solve(string& s, int i, int j) {
-
-        if (i > j)
-
-            return 0;
-
-        if (i == j)
-
-            return 1;
-
-        if (dp[i][j] != -1)
-
-            return dp[i][j];
-
-        int ans = 0;
-        for (int k = i; k < j; k++) {
-
-            if (check(s, i, k)) {
-                cout << "DP k+1 j " << dp[k + 1][j];
-                if (dp[k + 1][j] != -1) {
-                    ans += dp[k + 1][j];
-                } else {
-                    dp[k + 1][j] = solve(s, k + 1, j);
-                    ans += dp[k + 1][j];
-                }
-            }
-        }
-
-        return dp[i][j] = ans;
-    }
-    int numDecodings(string s) {
-        memset(dp, -1, sizeof(dp));
-        return solve(s, 0, s.size());
-    }
-    ```
-
-23. Longest arithemtic subsequence
+22. Longest arithemtic subsequence
      ```
       int n;
     int t[1001][1003];
@@ -1118,7 +1065,7 @@ for (int i = 0; i < n; i++) {
     }
     ```
 
-24. Min path sum 
+23. Min path sum 
     ```
       int minPathSum(vector<vector<int>>& grid) {
         if (grid.empty() || grid[0].empty()) {
@@ -1148,7 +1095,7 @@ for (int i = 0; i < n; i++) {
         return t[m - 1][n - 1];
     }
     ```
-25. Palindrome partition
+24. Palindrome partition
      ```
        bool ispalindrome(string s, int start, int end) {
         while (start < end) {
@@ -1177,7 +1124,7 @@ for (int i = 0; i < n; i++) {
         return solve(s, 0, s.length()-1);
     }
      ```
-26. Dungeon games
+25. Dungeon games
     ```
       int getVal(vector<vector<int>>& mat, vector<vector<int>>& dp, int i = 0,
                int j = 0) {
@@ -1210,7 +1157,7 @@ for (int i = 0; i < n; i++) {
         return getVal(dungeon, dp);
     }
     ```
-27. 2 key keyboard
+26. 2 key keyboard
    ```
      int f(int num, int lastcp, int tar, vector<vector<int>> &dp) {
     if (num == tar) return 0;
@@ -1228,7 +1175,7 @@ for (int i = 0; i < n; i++) {
         return f(2, 1, n, dp) + 2;
     }
    ```
-28. 4 key keyboard
+27. 4 key keyboard
 
 ```
 \\Ctrl+ACV (3 key presses) gives 2 times increase
@@ -1258,7 +1205,7 @@ Ctrl+ACVVVV (6 key presses) gives 5 times increase
         return dfs(n);
     }
   ```
-29. Stone Game IV
+28. Stone Game IV
     ```
       vector<bool> dp(n + 1, false);
         for (int i = 1; i <= n; ++i) {
@@ -1272,7 +1219,7 @@ Ctrl+ACVVVV (6 key presses) gives 5 times increase
         return dp[n];
     ```
 
-30. Max number of operations with same score II
+29. Max number of operations with same score II
     ```
                 vector<vector<int>>& dp) {
         if (l >= r) {
@@ -1305,7 +1252,7 @@ Ctrl+ACVVVV (6 key presses) gives 5 times increase
         return mx;
     }
     ```
-31. Optimal Partition of string 
+30. Optimal Partition of string 
     ```
       int partitionString(string s) {
         vector<int> dp(s.size() + 1, 0);
@@ -1322,7 +1269,7 @@ Ctrl+ACVVVV (6 key presses) gives 5 times increase
         return dp[s.size()] + 1;
     }
     ```
-32. Minimum Number of Increments on Subarrays to Form a Target Array
+31. Minimum Number of Increments on Subarrays to Form a Target Array
     ```
       int minNumberOperations(vector<int>& target) {
 
@@ -1346,7 +1293,7 @@ Ctrl+ACVVVV (6 key presses) gives 5 times increase
         
     }
     ```
-33. Minimum Operations to Make Array Equal to Target
+32. Minimum Operations to Make Array Equal to Target
     ```
       long long minimumOperations(vector<int>& nums, vector<int>& target) {
         int n = nums.size();
@@ -1371,7 +1318,7 @@ Ctrl+ACVVVV (6 key presses) gives 5 times increase
         return result;
     }
     ```
-34. Minimum falling path sum
+33. Minimum falling path sum
      ```
      //TLE
        int MFS(vector<vector<int>>& A, int row, int col, vector<vector<int>>& t) {
@@ -1423,7 +1370,7 @@ Ctrl+ACVVVV (6 key presses) gives 5 times increase
         return *min_element(prev.begin(), prev.end());
     }
      ```
-35.  Maximum Number of Points with Cost
+34.  Maximum Number of Points with Cost
 
       ``` 
          //TLE
@@ -1491,7 +1438,7 @@ Ctrl+ACVVVV (6 key presses) gives 5 times increase
         }
        ```
 
-36. Edit distance
+35. Edit distance
 
      ```
       int solve(string& a, string& b, int i, int j) {
@@ -1566,7 +1513,7 @@ Ctrl+ACVVVV (6 key presses) gives 5 times increase
         
     }
      ```
-37. Best time to buy & sell stocks
+36. Best time to buy & sell stocks
 
     ```
       int maxProfit(vector<int>& prices) {
@@ -1583,7 +1530,7 @@ Ctrl+ACVVVV (6 key presses) gives 5 times increase
         return profit;
     }
     ```
-38. Palindrome partition
+37. Palindrome partition
      ```
       bool isPalindrome(string& s) {
         int l = 0;
@@ -1620,7 +1567,7 @@ Ctrl+ACVVVV (6 key presses) gives 5 times increase
         return k;
     }
      ```
-  39. Maximal square
+  38. Maximal square
 
       ```
          int findMaxSquare(vector<vector<char>>& matrix, int row, int col, int &maxSideLength) {
@@ -1670,7 +1617,7 @@ Ctrl+ACVVVV (6 key presses) gives 5 times increase
         return maxSideLength * maxSideLength;
     }
    ```
-40. Fibonacci number
+30. Fibonacci number
      ```
         int fib(int n) {
         if(n<=1)
@@ -1686,7 +1633,7 @@ Ctrl+ACVVVV (6 key presses) gives 5 times increase
         
     }
      ```
-41. Filling bookshelf
+40. Filling bookshelf
      ```
         int n;
     int WIDTH;
@@ -1725,7 +1672,7 @@ Ctrl+ACVVVV (6 key presses) gives 5 times increase
         return solve(books, 0, remainW, 0);
     }
      ```
-42. Regular expression matching
+41. Regular expression matching
     ```
         bool isMatch(string text, string pattern) {
         if (pattern.length() == 0) {
@@ -1814,7 +1761,7 @@ Ctrl+ACVVVV (6 key presses) gives 5 times increase
         return solve(0, 0, s, p);
     }
     ```
-43. No of unique subarrays
+42. No of unique subarrays
 
     <img width="797" alt="image" src="https://github.com/user-attachments/assets/a0cb2fa2-a3d2-4727-8630-e4c639b7d380">
 
@@ -1837,7 +1784,7 @@ Ctrl+ACVVVV (6 key presses) gives 5 times increase
         
     }
      ```
-44. Count number of teams
+43. Count number of teams
      ```
        int numTeams(vector<int>& rating) {
          int n = rating.size();
@@ -1877,7 +1824,7 @@ Ctrl+ACVVVV (6 key presses) gives 5 times increase
         
     }
      ```
-45. All possible full binary tree
+44. All possible full binary tree
      ```
         unordered_map<int, vector<TreeNode*>> mp;
     vector<TreeNode*> solve(int n) {
@@ -1917,7 +1864,7 @@ Ctrl+ACVVVV (6 key presses) gives 5 times increase
 
     vector<TreeNode*> allPossibleFBT(int n) { return solve(n); }
      ```
-46. Unique binary search tree
+45. Unique binary search tree
     ```
        //Part II
         vector<TreeNode*> solve(int start, int end) {
@@ -1980,7 +1927,7 @@ Ctrl+ACVVVV (6 key presses) gives 5 times increase
         return sol[n];
     }
    ```
-47. Perfect squares
+46. Perfect squares
     ```
        int numSquares(int n) {
         std::vector<int> power(201), dp(n + 1);
@@ -2002,7 +1949,7 @@ Ctrl+ACVVVV (6 key presses) gives 5 times increase
         return dp[n];
     }
     ```
-48. Minimum number to eat n oranges
+47. Minimum number to eat n oranges
      ```
         int solve(int n) {
        if(n==0)return 0;
@@ -2033,7 +1980,7 @@ Ctrl+ACVVVV (6 key presses) gives 5 times increase
         return recurdp(n,dp);
     }
      ```
-49. Min cost for tickets
+48. Min cost for tickets
      ```
         int ans = 0;
     int solve(vector<int>& days, vector<int>& costs, int i) {
@@ -2166,7 +2113,7 @@ Ctrl+ACVVVV (6 key presses) gives 5 times increase
 
     }
      ```
-50. Best time to buy sell stocks with cooldown
+49. Best time to buy sell stocks with cooldown
      ```
         int t[5001][2];
     int maxP(vector<int>& prices, int day, int n, int buy) {
@@ -2196,7 +2143,7 @@ Ctrl+ACVVVV (6 key presses) gives 5 times increase
         return maxP(prices, 0, n, true);
     }
      ```
-51. Number of Ways to Rearrange Sticks With K Sticks Visible
+50. Number of Ways to Rearrange Sticks With K Sticks Visible
     ```
          int mod = 1e9 + 7;
     int dp[1001][1001];
@@ -2222,7 +2169,7 @@ Ctrl+ACVVVV (6 key presses) gives 5 times increase
         return f(n, k);
     }
     ```
-52. Number of LIS
+51. Number of LIS
      ```
         int findNumberOfLIS(vector<int>& arr) {
         int n = arr.size();
@@ -2284,7 +2231,7 @@ Ctrl+ACVVVV (6 key presses) gives 5 times increase
         }
         return totalCount;
      ```
-53.  Length of the Longest Subsequence That Sums to Target
+52.  Length of the Longest Subsequence That Sums to Target
 
    ```
      int dp[1001][1001];
@@ -2311,7 +2258,7 @@ Ctrl+ACVVVV (6 key presses) gives 5 times increase
         return ans;
     }
    ```
-54. Max score difference in a grid **
+53. Max score difference in a grid **
     ```
        vector<vector<ll>> dp;
     vector<vector<int>> grid;
@@ -2350,7 +2297,7 @@ Ctrl+ACVVVV (6 key presses) gives 5 times increase
         return ans;
     }
     ```
-55. Valid Palindrome 3
+54. Valid Palindrome 3
      ```
          int check(int start, int end, string& s, vector<vector<int>>& dp) {
         if (start > end)
@@ -2371,7 +2318,7 @@ Ctrl+ACVVVV (6 key presses) gives 5 times increase
         return check(start, end, s, dp) <= k;
     }
      ```
-56. Longest increasing path in a matrix
+55. Longest increasing path in a matrix
      ```
          int dfs(vector<vector<int>>& matrix, vector<vector<int>>& memory, int i,
             int j, vector<pair<int, int>>& directions) {
@@ -2413,7 +2360,7 @@ Ctrl+ACVVVV (6 key presses) gives 5 times increase
         return ans;
     }
      ```
-57. Maximum Sum of 3 Non-Overlapping Subarrays
+56. Maximum Sum of 3 Non-Overlapping Subarrays
     ```
        int t[20001][4];
  
@@ -2480,7 +2427,7 @@ Ctrl+ACVVVV (6 key presses) gives 5 times increase
         return indices;
     }
     ```
-58. Predict the winner
+57. Predict the winner
      ```
            int solve(int i, int j, vector<int>& nums) {
         if (i > j)
@@ -2501,7 +2448,7 @@ Ctrl+ACVVVV (6 key presses) gives 5 times increase
         return p1 >= (total - p1);
     }
      ```
-59. Unique Paths II
+58. Unique Paths II
      ```
              int rec(int r, int c, vector<vector<int>>& obstacleGrid, int m, int n,
            vector<vector<int>>& dp) {
@@ -2522,7 +2469,7 @@ Ctrl+ACVVVV (6 key presses) gives 5 times increase
         return rec(0, 0, obstacleGrid, m - 1, n - 1, dp);
     }
      ```
-60. shopping offers
+59. shopping offers
       ```
             int solve(vector<int>& price, vector<vector<int>>& special,
               vector<int> needs, int index) {
@@ -2610,7 +2557,7 @@ Ctrl+ACVVVV (6 key presses) gives 5 times increase
         return key;
     }
       ```
-61. Distinct subsequences
+60. Distinct subsequences
        ```
              int numDistinct(string s, string t) {
         int sl = s.length();
@@ -2634,7 +2581,7 @@ Ctrl+ACVVVV (6 key presses) gives 5 times increase
         return dp[sidx][tidx] = recursiveSolution(s, t, sidx - 1, tidx, dp);
     }
        ```
-62. Reconstruct Coins
+61. Reconstruct Coins
      ```
      vector<int> reconstruct_coins(const vector<int>& dp) {
       set<int> coins;
