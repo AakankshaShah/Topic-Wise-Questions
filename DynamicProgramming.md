@@ -38,6 +38,19 @@ int dp[n+1][w+1];
         }
         return dp[n][w];
 ```
+```
+   int knapsack(int wt[], int val[], int n, int W) {
+    vector<int> dp(W + 1, 0);
+
+    for (int i = 0; i < n; i++) {
+        for (int w = W; w >= wt[i]; w--) {
+            dp[w] = max(dp[w], val[i] + dp[w - wt[i]]);
+        }
+    }
+
+    return dp[W];
+}
+```
 
 ```
 # Target sum
