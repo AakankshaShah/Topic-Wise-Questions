@@ -2493,10 +2493,10 @@ Ctrl+ACVVVV (6 key presses) gives 5 times increase
        ```
 62. Reconstruct Coins
      ```
-vector<int> reconstruct_coins(const vector<int>& dp) {
-    set<int> coins;
+     vector<int> reconstruct_coins(const vector<int>& dp) {
+      set<int> coins;
     
-    for (int i = 1; i < dp.size(); i++) {
+       for (int i = 1; i < dp.size(); i++) {
         if (dp[i] > dp[i - 1]) { // A new way appears, indicating a coin
             coins.insert(i);
             
@@ -2518,8 +2518,6 @@ vector<int> reconstruct_coins(const vector<int>& dp) {
     
     return vector<int>(coins.begin(), coins.end()); // Return sorted coin values
      }
-     ```
-     ```
      ```
      
 
