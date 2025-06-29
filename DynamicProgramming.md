@@ -1702,6 +1702,9 @@ Ctrl+ACVVVV (6 key presses) gives 5 times increase
      ```
 41. Regular expression matching
     ```
+       a* means 0 to any number of a's so either we match it or leave it 
+    ```
+    ```
         bool isMatch(string text, string pattern) {
         if (pattern.length() == 0) {
             return text.length() == 0;
