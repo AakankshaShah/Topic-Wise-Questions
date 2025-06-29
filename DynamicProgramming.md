@@ -1227,6 +1227,13 @@ Ctrl+ACVVVV (6 key presses) gives 5 times increase
   ```
 28. Stone Game IV
     ```
+         For each number i from 1 to n:
+
+        Try every perfect square k*k such that k*k ≤ i.
+
+        If there is any move where the resulting state (i - k*k) is a losing position for the opponent, then i is a winning position for the current player.
+    ```
+    ```
       vector<bool> dp(n + 1, false);
         for (int i = 1; i <= n; ++i) {
             for (int k = 1; k * k <= i; ++k) {
@@ -1238,6 +1245,7 @@ Ctrl+ACVVVV (6 key presses) gives 5 times increase
         }
         return dp[n];
     ```
+
 
 29. Max number of operations with same score II
     ```
