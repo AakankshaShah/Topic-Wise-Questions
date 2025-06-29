@@ -670,6 +670,57 @@ for (int i = 0; i < n; i++) {
     }
     ```
 14. Decode paths Doubt 
+     ```
+        int dp[101][101];
+
+    bool check(string& s, int i, int j) {
+        string temp = s.substr(i, j - i + 1);
+        if (temp.size() > 2)
+
+            return false;
+
+        int y = stoi(temp);
+        if (y > 26 || y <= 0 || (temp.size() >= 2 && y < 10))
+
+            return false;
+
+        return true;
+    }
+    int solve(string& s, int i, int j) {
+
+        if (i > j)
+
+            return 0;
+
+        if (i == j)
+
+            return 1;
+
+        if (dp[i][j] != -1)
+
+            return dp[i][j];
+
+        int ans = 0;
+        for (int k = i; k < j; k++) {
+
+            if (check(s, i, k)) {
+
+                if (dp[k + 1][j] != -1) {
+                    ans += dp[k + 1][j];
+                } else {
+                    dp[k + 1][j] = solve(s, k + 1, j);
+                    ans += dp[k + 1][j];
+                }
+            }
+        }
+
+        return dp[i][j] = ans;
+    }
+    int numDecodings(string s) {
+        memset(dp, -1, sizeof(dp));
+        return solve(s, 0, s.size());
+    }
+     ```
 
 15. Word Break vector<vector<int>> https://leetcode.com/problems/word-break/description/
 
