@@ -1645,7 +1645,7 @@ Ctrl+ACVVVV (6 key presses) gives 5 times increase
         return maxSideLength * maxSideLength;
     }
    ```
-30. Fibonacci number
+39. Fibonacci number
      ```
         int fib(int n) {
         if(n<=1)
