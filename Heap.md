@@ -65,7 +65,7 @@ priority_queue<int>pq;
         
         return fleets;
      ```
- 4. kth closest elements
+ 3. kth closest elements
      ```
        vector<int> findClosestElements(vector<int>& arr, int k, int x) {
         vector<int> ans(k);
@@ -126,7 +126,7 @@ priority_queue<int>pq;
 
         return ans;
 ```
-5. Meeting Rooms II
+4. Meeting Rooms II
      ```
         int minMeetingRooms(vector<vector<int>>& intervals) {
         std::priority_queue<int, vector<int>, greater<int>> pq;
@@ -162,7 +162,7 @@ priority_queue<int>pq;
 
     }
      ```
-6. Top K frequent elements
+5. Top K frequent elements
     ```
        vector<int> topKFrequent(vector<int>& nums, int k) {
         priority_queue<pair<int, int>, vector<pair<int, int>>,
@@ -223,7 +223,7 @@ priority_queue<int>pq;
         
     }
     ```
-7. Sort characters by frequency 
+6. Sort characters by frequency 
     ```
        string frequencySort(string s) {
 
@@ -250,7 +250,7 @@ priority_queue<int>pq;
         return ans;
     }
     ```
-8. Relative Ranks
+7. Relative Ranks
     ```
       vector<string> findRelativeRanks(vector<int>& score) {
          priority_queue<tuple<int, int>> pq; 
@@ -277,7 +277,7 @@ priority_queue<int>pq;
         
     }
     ```
-7. Task Scheduler
+8. Task Scheduler
    ```
       int leastInterval(vector<char>& tasks, int n) {
         vector<int> mp(26, 0);
@@ -344,7 +344,7 @@ priority_queue<int>pq;
         return tasks.size();
 
   ```
-8. K frequent elements 
+9. K frequent elements 
    ```
        static bool cmp(pair<int, string> i, pair<int, string> j) {
         if (i.first != j.first)
@@ -373,7 +373,7 @@ priority_queue<int>pq;
         return ans;
     }
    ```
-9. Reorganize string 
+10. Reorganize string 
 
    ```
     string reorganizeString(string s) {
@@ -424,7 +424,7 @@ priority_queue<int>pq;
         return result;
     }
    ```
-10. Car Pooling 
+11. Car Pooling 
      ```
         bool carPooling(vector<vector<int>>& trips, int capacity) {
         vector<int> mp(1001, 0);
@@ -442,7 +442,7 @@ priority_queue<int>pq;
         return true;
     }
      ```
-11. Kth smallest Prime fraction 
+12. Kth smallest Prime fraction 
      ```
        vector<int> kthSmallestPrimeFraction(vector<int>& arr, int k) {
         int n = arr.size();
@@ -492,7 +492,7 @@ priority_queue<int>pq;
     }
 
    ```
-12. Minimum cost to hire k workers 
+13. Minimum cost to hire k workers 
      ```
        int n = quality.size();
         vector<double> manager_ratio(n);
@@ -609,7 +609,7 @@ priority_queue<int>pq;
         return result;
 
    ```
-13. Maximum subsequence score
+14. Maximum subsequence score
     ```
      //DP
      long long solve(vector<int>& nums1, vector<int>& nums2, int sum, int minE,
@@ -666,7 +666,7 @@ priority_queue<int>pq;
         return res;
     }
    ```
-14. Single threaded CPU
+15. Single threaded CPU
     ```
      vector<int> getOrder(vector<vector<int>>& tasks) {
         vector<int> ans;
@@ -698,7 +698,7 @@ priority_queue<int>pq;
         return ans;
     }
     ```
-15. Meeting rooms III
+16. Meeting rooms III
    ```
      int mostBooked(int n, vector<vector<int>>& meetings) {
         sort(meetings.begin(), meetings.end());
@@ -745,7 +745,7 @@ priority_queue<int>pq;
                room_meeting_count.begin();
     }
    ```
-16. Kth Largest element in an array 
+17. Kth Largest element in an array 
     ```
        int findKthLargest(vector<int>& nums, int k) {
         priority_queue<int, vector<int>, greater<int>> pq;
@@ -771,7 +771,7 @@ priority_queue<int>pq;
         return pq.peek();
     }
     ```
-17. Kth Largest element in a stream
+18. Kth Largest element in a stream
     ```
      class KthLargest {
     public:
@@ -796,7 +796,7 @@ priority_queue<int>pq;
     };
 
     ```
-18. IPO
+19. IPO
    ```
     int findMaximizedCapital(int k, int w, vector<int>& profits,
                              vector<int>& capital) {
@@ -823,7 +823,7 @@ priority_queue<int>pq;
         return w;
     }
    ```
-19. Seat Manager
+20. Seat Manager
    ```
      class SeatManager {
 public:
@@ -855,7 +855,7 @@ int last;
     }
 };
    ```
-20.  Find Subsequence of Length K With the Largest Sum
+21.  Find Subsequence of Length K With the Largest Sum
    ```
     vector<int> maxSubsequence(vector<int>& nums, int k) {
          priority_queue<pair<int,int> , vector<pair<int,int>>,greater<pair<int,int>> > pq;
@@ -879,7 +879,7 @@ int last;
         return ans;
     }
    ```
-21. Min number of refueling stops 
+22. Min number of refueling stops 
     ```
       int minRefuelStops(int target, int startFuel,
                        vector<vector<int>>& stations) {
@@ -895,7 +895,7 @@ int last;
         
                        }
     ```
-22. Minimum operations to halve array sum 
+23. Minimum operations to halve array sum 
     ```
       int halveArray(vector<int>& nums) {
         priority_queue<double> Q;
@@ -924,7 +924,7 @@ int last;
         return count;
     }
     ```
-23. Min operations to make prefix sum non negative
+24. Min operations to make prefix sum non negative
      ```
        int makePrefSumNonNegative(vector<int>& nums) {
         long long sum=0;
@@ -937,7 +937,7 @@ int last;
         return nums.size() - pq.size();
     }
      ```
-24. Find k pairs with smallest sums
+25. Find k pairs with smallest sums
      ```
        vector<vector<int>> kSmallestPairs(vector<int>& nums1, vector<int>& nums2, int k) {
         vector<vector<int>> ans;
@@ -976,7 +976,7 @@ int last;
         
     }
      ```
-25. Path with maximum probability
+26. Path with maximum probability
 
     ```
            double maxProbability(int n, vector<vector<int>>& edges,
@@ -1016,7 +1016,7 @@ int last;
         return 0.0;
         }
     ```
-26. Minimum Cost to Make at Least One Valid Path in a Grid
+27. Minimum Cost to Make at Least One Valid Path in a Grid
      ```
        int minCost(vector<vector<int>>& grid) {
         int n = grid.size();
@@ -1065,7 +1065,7 @@ int last;
         return dist[n - 1][m - 1] == 1e9 ? -1 : dist[n - 1][m - 1];
     }
      ```
-27. kth smallest element in a sorted matrix
+28. kth smallest element in a sorted matrix
      ```
        int kthSmallest(vector<vector<int>>& matrix, int k) {
         int n = matrix.size();
@@ -1131,7 +1131,7 @@ int last;
     }
   
      ```
-28. Stock price fluctuations 
+29. Stock price fluctuations 
      ```
        map<int, int> value;     // price,count
     map<int, int> timeStock; // timestamp,price
@@ -1166,7 +1166,7 @@ int last;
         return it->first;
     }
      ```
-29. Last Stone weight 
+30. Last Stone weight 
 
      ```
            int lastStoneWeight(vector<int>& stones) {
@@ -1190,7 +1190,7 @@ int last;
             return 0;
          }
      ```
-30. Max score from removing stones
+31. Max score from removing stones
      ```
        int maximumScore(int a, int b, int c) {
         int ans = 0;
@@ -1221,7 +1221,7 @@ int last;
         return ans;
     }
      ```
-31. Minimum Path Cost in a Hidden Grid
+32. Minimum Path Cost in a Hidden Grid
      ```
        class Solution {
      public:
@@ -1290,7 +1290,7 @@ int last;
     }
     };
      ```
-32. Shortest Path in a Hidden Grid
+33. Shortest Path in a Hidden Grid
 
       ```
         class Solution {
@@ -1370,7 +1370,7 @@ int last;
     }
     };
       ```
-33. Minimum obstacle removal to reach corner
+34. Minimum obstacle removal to reach corner
     ```
       bool isValid(int i, int j, vector<vector<int>>& grid) {
         return (i >= 0 && j >= 0 && i < grid.size() && j < grid[0].size());
@@ -1424,7 +1424,7 @@ int last;
         return level[mp[n - 1][m - 1]];
     }
     ```
-34. No of restricted path from first to last node
+35. No of restricted path from first to last node
     ```
        const int MOD = 1e9 + 7;
     int dfs(int node, int end, vector<int>& dis,
@@ -1498,7 +1498,7 @@ int last;
 
 
  
-35. Split Array into Consecutive Subsequences
+36. Split Array into Consecutive Subsequences
      ```
          bool isPossible(vector<int>& nums) {
          unordered_map<int,int>m,endWith;
@@ -1527,7 +1527,7 @@ int last;
         
     }
      ```
-36. The skyline problem
+37. The skyline problem
       ```
             vector<vector<int>> getSkyline(vector<vector<int>>& buildings) {
         vector<vector<int>> ans;
