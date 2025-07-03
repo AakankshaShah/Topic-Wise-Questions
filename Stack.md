@@ -745,6 +745,66 @@ public:
         return res;
     }
     ```
+    ```
+       class Solution {
+public:
+    int calculate(string s) {
+        int i = 0;
+        return helper(s, i);
+    }
+
+private:
+    int helper(string& s, int& i) {
+        stack<int> stk;
+        int num = 0;
+        char op = '+';
+
+        while (i < s.size()) {
+            char c = s[i];
+
+            if (isdigit(c)) {
+                num = num * 10 + (c - '0');
+            }
+
+            if (c == '(') {
+                i++; // skip '('
+                num = helper(s, i); // evaluate inner expression
+            }
+
+            if ((!isdigit(c) && c != ' ' && c != '(') || i == s.size() - 1) {
+                if (op == '+') stk.push(num);
+                else if (op == '-') stk.push(-num);
+                else if (op == '*') {
+                    int temp = stk.top(); stk.pop();
+                    stk.push(temp * num);
+                }
+                else if (op == '/') {
+                    int temp = stk.top(); stk.pop();
+                    stk.push(temp / num);
+                }
+                op = c;
+                num = 0;
+            }
+
+            if (c == ')') {
+                i++; // skip ')'
+                break;
+            }
+
+            i++;
+        }
+
+        int result = 0;
+        while (!stk.empty()) {
+            result += stk.top();
+            stk.pop();
+        }
+
+        return result;
+    }
+    };
+
+    ```
 
 16. Longest Absolute File path 
 
