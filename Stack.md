@@ -747,13 +747,13 @@ public:
     ```
     ```
        class Solution {
-public:
+    public:
     int calculate(string s) {
         int i = 0;
         return helper(s, i);
     }
 
-private:
+    private:
     int helper(string& s, int& i) {
         stack<int> stk;
         int num = 0;
