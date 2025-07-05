@@ -653,7 +653,7 @@ return sans;
       ```
 23. Find all anagrams in a string 
 
-         ```
+    ```
            bool is_check(vector<int>& mp1, vector<int>& mp2) {
         for (int i = 0; i < 26; i++) {
             if (mp1[i] != mp2[i])
@@ -686,7 +686,7 @@ return sans;
         }
         return ans;
         }
-        ```
+    ```
 
 24. Binary subarray with sum 
       ```
