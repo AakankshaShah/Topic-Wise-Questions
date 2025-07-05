@@ -1088,7 +1088,7 @@ return sans;
         return ans;
     }
      ```
-36. Minimum window subsequence
+37. Minimum window subsequence
     ```
       string minWindow(string s1, string s2) {
 
@@ -1123,7 +1123,7 @@ return sans;
         return result == -1 ? "" : s1.substr(start, result);
     }
     ```
-   37. New 21 game
+   38. New 21 game
 
        ```
         double new21Game(int n, int k, int maxPts) {
@@ -1150,7 +1150,7 @@ return sans;
             return accumulate(P.begin() + k, P.end(), 0.0);
            }
        ```  
-38. Max value of equation
+39. Max value of equation
     ```
       priority_queue<vector<int>> pq;
         pq.push({v[0][1]-v[0][0],v[0][0]});
@@ -1167,7 +1167,7 @@ return sans;
         
     }
     ```
-39. Minimum consecutive cards pick up 
+40. Minimum consecutive cards pick up 
      ```
        set<int> s;
         int j = 0, i = 0, ans = INT_MAX;
@@ -1183,7 +1183,7 @@ return sans;
         }
         return ans == INT_MAX ? -1 : ans;
      ```
-40. Minimum Adjacent Swaps for K Consecutive Ones
+41. Minimum Adjacent Swaps for K Consecutive Ones
 
    ```
      
@@ -1233,7 +1233,7 @@ return sans;
     }
 
    ```
-41. Continuous subarray 
+42. Continuous subarray 
     ```
        typedef long long ll;
     long long continuousSubarrays(vector<int>& nums) {
@@ -1262,7 +1262,7 @@ return sans;
     
     ```
     
-42. Count subarrays with score less than k 
+43. Count subarrays with score less than k 
      ```
         long long countSubarrays(vector<int>& nums, long long k) {
         int i = 0, j = 0, n = nums.size();
@@ -1278,7 +1278,7 @@ return sans;
         
     }
      ```
-43. Number of unique flavours after sharing k candies 
+44. Number of unique flavours after sharing k candies 
     ```
       nt shareCandies(vector<int>& candies, int k) {
         unordered_map<int, int> cnt;
@@ -1307,7 +1307,7 @@ return sans;
         return ans;
     }
     ```
-44. Longest substring that occurs thrice
+45. Longest substring that occurs thrice
      ```
         int maximumLength(string s) {
         map<string, int> mp;
@@ -1379,7 +1379,7 @@ return sans;
     }
      ```
     
-45. Substring with the concatenation of all words
+46. Substring with the concatenation of all words
     ```
        vector<int> findSubstring(string s, vector<string>& words) {
         vector<int> result;
@@ -1444,7 +1444,7 @@ return sans;
         return result;
     }
     ```
-46. Minimum operations to reduce x to zero 
+47. Minimum operations to reduce x to zero 
      ```
        int minOperations(vector<int>& nums, int x) {
         int totalSum = accumulate(begin(nums), end(nums), 0);
@@ -1473,7 +1473,7 @@ return sans;
         
     }
      ```
-47. Minimum Number of Flips to Make the Binary String Alternating
+48. Minimum Number of Flips to Make the Binary String Alternating
       ```
         int minFlips(string s) {
         int n = s.size();
@@ -1504,7 +1504,7 @@ return sans;
         return ans;
     }
       ```
-48. kth Smallest subarray sum 
+49. kth Smallest subarray sum 
 
     ```
            int kthSmallestSubarraySum(vector<int>& nums, int k) {
@@ -1643,7 +1643,7 @@ return sans;
         return result;
     }
    ```
-55. Number of Substrings Containing All Three Characters
+53. Number of Substrings Containing All Three Characters
      ```
          int numberOfSubstrings(string s) {
         unordered_map<char,int> mp;
@@ -1667,7 +1667,7 @@ return sans;
         return ans;
     }
      ```
-56. Count Subarrays With Fixed Bounds
+54. Count Subarrays With Fixed Bounds
      ```
           long long countSubarrays(vector<int>& nums, int minK, int maxK) {
         long long ans = 0;
@@ -1696,7 +1696,7 @@ return sans;
         
     }
      ```
-57. Maximum Number of Occurrences of a Substring
+55. Maximum Number of Occurrences of a Substring
     ```
         int maxFreq(string s, int maxLetters, int minSize, int maxSize) {
         int start=0,result=0;
@@ -1718,5 +1718,5 @@ return sans;
         
     }
     ```
-58. 
+56. 
       
