@@ -61,7 +61,63 @@ j++;
 3. Max sum in a subarray of size k
 4. Count occurrence of anagrams**
 5. Largest subarray of sum k - Variation If contains negative numbers
+   ```
+      int longestSubarray(vector<int>& arr, int k) {
+    unordered_map<int, int> mp;
+    int res = 0;
+    int prefSum = 0;
+
+    for (int i = 0; i < arr.size(); ++i) {
+        prefSum += arr[i];
+
+        // Check if the entire prefix sums to k
+        if (prefSum == k) 
+            res = i + 1;
+
+        // If prefixSum - k exists in the map then there exist such 
+      	// subarray from (index of previous prefix + 1) to i.
+        else if (mp.find(prefSum - k) != mp.end()) 
+            res = max(res, i - mp[prefSum - k]);
+
+        // Store only first occurrence index of prefSum
+      	if (mp.find(prefSum) == mp.end())
+            mp[prefSum] = i;
+    }
+
+    return res;
+    }
+   ```
 6. Largest substring with k unique characters
+    ```
+          while (j < n) {
+        
+        // include s[j] into the window
+        fre[s[j] - 'a']++;
+        
+        // it is the first occurrence of
+        // this character in the window
+        if (fre[s[j] - 'a'] == 1) cnt++;
+
+        // shrink the window if the number of 
+        // unique character is more than k
+        while (cnt > k) {
+            fre[s[i] - 'a']--;
+            
+            // one unique character removed
+            if (fre[s[i] - 'a'] == 0) cnt--;  
+            i++;
+        }
+
+        // we have exactly k unique characters
+        if (cnt == k) {
+            maxi = max(maxi, j - i + 1);
+        }
+
+        j++;
+    }
+
+    return maxi;
+    ```
 7. Longest substring with no repitions*
     ```
       int lengthOfLongestSubstring(string s) {
