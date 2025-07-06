@@ -1107,6 +1107,65 @@ int curr=dis[i][1];
 
 ```
 23. Implement k stacks single array 
+    ```
+         class KStacks {
+    int *arr;      // Array to store actual content
+    int *top;      // Top elements of all stacks
+    int *next;     // Helps in linking next free or next in stack
+    int n, k;
+    int free;      // Beginning index of free list
+
+    public:
+    KStacks(int k, int n) {
+        this->k = k;
+        this->n = n;
+        arr = new int[n];
+        top = new int[k];
+        next = new int[n];
+
+        // Initialize all stacks as empty
+        for (int i = 0; i < k; i++)
+            top[i] = -1;
+
+        // Initialize free list
+        free = 0;
+        for (int i = 0; i < n - 1; i++)
+            next[i] = i + 1;
+        next[n - 1] = -1;
+    }
+
+    // Push value to a specific stack
+    void push(int value, int stackNum) {
+        if (free == -1) {
+            cout << "Stack Overflow\n";
+            return;
+        }
+
+        int i = free;         // Get the free index
+        free = next[i];       // Update free to next
+
+        arr[i] = value;       // Put the value
+        next[i] = top[stackNum]; // Link to previous top
+        top[stackNum] = i;    // Update top of stack
+    }
+
+    // Pop value from specific stack
+    int pop(int stackNum) {
+        if (top[stackNum] == -1) {
+            cout << "Stack Underflow\n";
+            return -1;
+        }
+
+        int i = top[stackNum];     // Get top index
+        top[stackNum] = next[i];   // Update top
+        next[i] = free;            // Add this slot to free list
+        free = i;
+
+        return arr[i];             // Return popped value
+    }
+    };
+
+    ```
 24. Redundant braces 
     ```
       bool checkRedundancy(string& str)
