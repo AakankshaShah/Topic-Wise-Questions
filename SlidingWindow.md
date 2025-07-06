@@ -1018,6 +1018,50 @@ return sans;
 
 34. Count no of substring with dominant ones 
     ```
+        int numberOfSubstrings(string s) {
+        int n = s.size();
+        int result = 0;
+
+        for (int k = 1; k * k <= n; ++k) {
+            deque<int> zeros;
+            int lastzero = -1;
+            int ones = 0;
+
+            for (int right = 0; right < n; ++right) {
+                if (s[right] == '0') {
+                    zeros.push_back(right);
+                    while ((int)zeros.size() > k) {
+                        ones -= (zeros.front() - lastzero - 1);
+                        lastzero = zeros.front();
+                        zeros.pop_front();
+                    }
+                } else {
+                    ++ones;
+                }
+
+                if ((int)zeros.size() == k && ones >= k * k) {
+                    result += min(zeros.front() - lastzero, ones - k * k + 1);
+                }
+            }
+        }
+
+        // Handle all-ones substrings
+        int i = 0;
+        while (i < n) {
+            if (s[i] == '0') {
+                ++i;
+                continue;
+            }
+            int sz = 0;
+            while (i < n && s[i] == '1') {
+                ++sz;
+                ++i;
+            }
+            result += (sz * (sz + 1)) / 2;
+        }
+
+        return result;
+    }
     ```
 35. Sliding window median
     ```
