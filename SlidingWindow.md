@@ -1041,6 +1041,8 @@ return sans;
 
                 if ((int)zeros.size() == k && ones >= k * k) {
                     result += min(zeros.front() - lastzero, ones - k * k + 1);
+                    //zeros.front() - lastzero is the number of positions you can extend the window to the left (before the first 0), and still keep the number of zeros exactly k
+                   //ones - k*k + 1 ->You need at least k² ones.But if you have more, you can include more suffixes from the end and still be valid
                 }
             }
         }
@@ -1063,6 +1065,7 @@ return sans;
         return result;
     }
     ```
+
 35. Sliding window median
     ```
       vector<double> medianSlidingWindow(vector<int>& nums, int k) {
