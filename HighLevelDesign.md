@@ -1,6 +1,22 @@
 https://github.com/presmihaylov/booknotes/tree/master/system-design/system-design-interview
 
 
+1. Scale upto 1 million
+
+- **Database Scaling**  
+  - Vertical scaling  
+  - Horizontal scaling  
+- **Load Balancer**
+- **Database Replication**  
+  - Master & Slave
+- **Cache**
+- **CDN**
+- **Stateless Architecture**
+- **Data Centre**
+- **Message Queue**
+- **Logging, Metrics, Automation**
+<img width="641" height="781" alt="scaleupto1Million drawio" src="https://github.com/user-attachments/assets/7b95937d-10a5-4e8c-b0eb-49372ca28c65" />
+
 
 1. Rate Limitter
 2. URL Shortener
