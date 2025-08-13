@@ -125,6 +125,7 @@ Buy in diagram :
 - Back queue - > politeness
 ![WhatsApp Image 2025-08-13 at 11 08 27 PM](https://github.com/user-attachments/assets/c4bd0af4-aa2b-4271-a03d-371696590dfe)
 
+- freshness
 - robots exclusion protocol - robots.txt
 - spider traps -> infinite loop
 
@@ -133,7 +134,19 @@ Buy in diagram :
 ---
 
 7. Notification System
-![image](https://github.com/user-attachments/assets/0551f731-4e26-4d94-b733-4d96ac54f06c)
+- Types
+    - Mobile Push
+    - SMS
+    - Email
+- IOS Provider( builds and sends notification service)  -> APNS(Remote service  to propagate notifications Apple push notification service )->IOS( Client )
+- Android Provider -> FCM (Firebase cloud messaging ) - > Client
+- SMS Provider->SMS service (eg twilio)-> Client
+- Mail 
+- Steps 
+    - Contact info gathering 
+
+<img width="1156" height="783" alt="notificationsystem drawio" src="https://github.com/user-attachments/assets/0ba9b34f-8144-4724-9ab7-b36cb7c59354" />
+
 ![image](https://github.com/user-attachments/assets/adc489f5-7659-425d-b7a1-214815e07ce7)
 
 ---
