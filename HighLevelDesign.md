@@ -1,6 +1,8 @@
 https://github.com/presmihaylov/booknotes/tree/master/system-design/system-design-interview
 
 
+---
+
 1. Scale upto 1 million
 
 - **Database Scaling**  
@@ -17,6 +19,7 @@ https://github.com/presmihaylov/booknotes/tree/master/system-design/system-desig
 - **Logging, Metrics, Automation**
 <img width="641" height="781" alt="scaleupto1Million drawio" src="https://github.com/user-attachments/assets/7b95937d-10a5-4e8c-b0eb-49372ca28c65" />
 
+---
 
 2. Rate Limiter
 - server side ( not client side as client requests can be easily forged )
@@ -33,9 +36,31 @@ https://github.com/presmihaylov/booknotes/tree/master/system-design/system-desig
     - synchronisation : Sticky sessions and centralized redis 
 <img width="778" height="587" alt="RateLimiter drawio" src="https://github.com/user-attachments/assets/32feee18-935e-4d75-82aa-acdfce078fb1" />
 
+---
+3. Key Value Store
+- Scope
+  - Size of key-value pair small
+  - Ability to store big data
+  - High scalability
+  - High availibility
+  - Automatic scaling
+  - Tunable conistency
+  - Low latency
+    
+- Components 
+  - Data partition
+  - Data relication
+  - Conistency
+  - Inconistency resolution
+  - Handling failures
+  - System architecture diagram
+  - Write path
+  - Read path
 
-2. URL Shortener
-3. Web Crawler
+---
+
+4. URL Shortener
+5. Web Crawler
 ![image](https://github.com/user-attachments/assets/00dad9aa-d720-453f-a802-15474c5a9d2f)
 ![image](https://github.com/user-attachments/assets/2931868a-9ff7-4c3c-b792-c1328e8191f3)
 
