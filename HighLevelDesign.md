@@ -78,6 +78,24 @@ Single server - hast table - cache - rest on disk - not feasible for large datas
 <img width="781" height="381" alt="image" src="https://github.com/user-attachments/assets/198af5b9-3cee-499d-8d5d-05bb533b41fd" />
 
 ---
+4. UUid Gnerator
+- Features
+  - Ids must be unique
+  - Ids are numerical values
+  - 64 bit
+  - Ordered by date
+  - 10,000 ids per second
+- Ways
+   - Multi master replication : Uses auto increment by k ( no of servers)
+   - Uuid :  128 bits , non numeric, do not increase with time 
+   - Ticket Server : Centralized database auto increment , spof
+   - Twitter snowflake: Sign Bit (1), Timestamp (41) , datacentreId(5), machineId(5), sequeneceNumber ( 12) 
+     Issue - Clock sync 
+Improve - More timestamp bits , less sequence 
+
+
+
+---
 
 4. URL Shortener
 5. Web Crawler
