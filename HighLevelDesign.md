@@ -18,7 +18,17 @@ https://github.com/presmihaylov/booknotes/tree/master/system-design/system-desig
 <img width="641" height="781" alt="scaleupto1Million drawio" src="https://github.com/user-attachments/assets/7b95937d-10a5-4e8c-b0eb-49372ca28c65" />
 
 
-1. Rate Limitter
+2. Rate Limiter
+- server side ( not client side as client requests can be easily forged )
+- 429
+- **Algo**
+  - Token bucket
+  - Leaky Bucket
+  - Fixed window counter
+  - Sliding window log
+  - Sliding window counter
+- In memory cache 
+
 2. URL Shortener
 3. Web Crawler
 ![image](https://github.com/user-attachments/assets/00dad9aa-d720-453f-a802-15474c5a9d2f)
