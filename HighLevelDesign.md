@@ -28,6 +28,11 @@ https://github.com/presmihaylov/booknotes/tree/master/system-design/system-desig
   - Sliding window log
   - Sliding window counter
 - In memory cache 
+- Distributed issues
+    - race : Locks
+    - synchronisation : Sticky sessions and centralized redis 
+<img width="778" height="587" alt="RateLimiter drawio" src="https://github.com/user-attachments/assets/32feee18-935e-4d75-82aa-acdfce078fb1" />
+
 
 2. URL Shortener
 3. Web Crawler
