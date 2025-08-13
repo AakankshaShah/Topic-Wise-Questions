@@ -97,7 +97,15 @@ Improve - More timestamp bits , less sequence
 
 ---
 
-4. URL Shortener
+5. URL Shortener
+- 301 permanently moved , cached
+- 302 better for analytics
+- Hash _ SHA-1, MD5, CRC32
+- Base 62
+<img width="761" height="338" alt="urlshortner drawio" src="https://github.com/user-attachments/assets/c7fd85bc-49e6-4a19-b155-4524c4c1b932" />
+
+---
+
 5. Web Crawler
 ![image](https://github.com/user-attachments/assets/00dad9aa-d720-453f-a802-15474c5a9d2f)
 ![image](https://github.com/user-attachments/assets/2931868a-9ff7-4c3c-b792-c1328e8191f3)
