@@ -78,7 +78,7 @@ Single server - hast table - cache - rest on disk - not feasible for large datas
 <img width="781" height="381" alt="image" src="https://github.com/user-attachments/assets/198af5b9-3cee-499d-8d5d-05bb533b41fd" />
 
 ---
-4. UUid Gnerator
+4. Uuid Gnerator
 - Features
   - Ids must be unique
   - Ids are numerical values
@@ -106,14 +106,37 @@ Improve - More timestamp bits , less sequence
 
 ---
 
-5. Web Crawler
+6. Web Crawler
+- Usage
+   - Search engine indexing 
+   - Web archiving 
+   - Web mining
+   - Web monitoring 
+- Features
+   - scalability
+   - robustness
+   - politeness
+   - extensibility
+- DFS vs BFS
+- BFS does not consider priority - > Url frontier 
+Buy in diagram : 
 ![image](https://github.com/user-attachments/assets/00dad9aa-d720-453f-a802-15474c5a9d2f)
-![image](https://github.com/user-attachments/assets/2931868a-9ff7-4c3c-b792-c1328e8191f3)
+- Front queue -> priortizer
+- Back queue - > politeness
+![WhatsApp Image 2025-08-13 at 11 08 27 PM](https://github.com/user-attachments/assets/c4bd0af4-aa2b-4271-a03d-371696590dfe)
+
+- robots exclusion protocol - robots.txt
+- spider traps -> infinite loop
 
 
-4. Notification System
+
+---
+
+7. Notification System
 ![image](https://github.com/user-attachments/assets/0551f731-4e26-4d94-b733-4d96ac54f06c)
 ![image](https://github.com/user-attachments/assets/adc489f5-7659-425d-b7a1-214815e07ce7)
+
+---
 
 
 5. News Feed System (Instgaram, Facebook, Twitter)
