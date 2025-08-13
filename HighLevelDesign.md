@@ -46,16 +46,36 @@ https://github.com/presmihaylov/booknotes/tree/master/system-design/system-desig
   - Automatic scaling
   - Tunable conistency
   - Low latency
+
+Single server - hast table - cache - rest on disk - not feasible for large datasets 
     
 - Components 
-  - Data partition
-  - Data relication
-  - Conistency
-  - Inconistency resolution
+  - Data partition - Conistent hashing
+  - Data replication - N servers replicate
+  - Conistency - R+W > N Strong 
+  - Inconsistency resolution  Versioning , vector clocks
   - Handling failures
+     - Failures detection - Gossip protocol
+     - Temporary - Sloppy Quorum
+     - Permanent - Merkle tree
   - System architecture diagram
   - Write path
   - Read path
+
+| Goal / Problem                     | Technique                                                   |
+|-------------------------------------|-------------------------------------------------------------|
+| Ability to store big data           | Use consistent hashing to spread load across servers        |
+| High availability reads             | Data replication, Multi-datacenter setup                    |
+| Highly available writes             | Versioning and conflict resolution with vector clocks       |
+| Dataset partition                   | Consistent hashing                                          |
+| Incremental scalability             | Consistent hashing                                          |
+| Heterogeneity                       | Consistent hashing                                          |
+| Tunable consistency                 | Quorum consensus                                            |
+| Handling temporary failures         | Sloppy quorum and hinted handoff                            |
+| Handling permanent failures         | Merkle tree                                                 |
+| Handling data center outage         | Cross-datacenter replication                                |
+
+<img width="781" height="381" alt="image" src="https://github.com/user-attachments/assets/198af5b9-3cee-499d-8d5d-05bb533b41fd" />
 
 ---
 
