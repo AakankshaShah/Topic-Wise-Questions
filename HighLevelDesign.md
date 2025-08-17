@@ -173,7 +173,12 @@ Buy in diagram :
 ---
 
 
-5. News Feed System (Instgaram, Facebook, Twitter)
+5. News Feed System (Instagram, Facebook, Twitter)
+- Post service
+- Fanout service
+- Notification service 
+- News feed building service 
+
 ![image](https://github.com/user-attachments/assets/4cc20d12-5bf4-4a5c-af9d-760f27c3948d)
 ![image](https://github.com/user-attachments/assets/d40d5b09-44f8-4f8f-be97-504d99ce6619)
 ![image](https://github.com/user-attachments/assets/c3712251-2d7c-4359-978b-fb6a712b1054)
