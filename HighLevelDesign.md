@@ -127,7 +127,24 @@ Buy in diagram :
 
 - freshness
 - robots exclusion protocol - robots.txt
-- spider traps -> infinite loop
+- Problematic content
+ - spider traps -> infinite loop
+ - data noise
+ - reduendant content 
+- Performance optimisation
+    - Distributed crawl
+    - Cache DNS Resolver
+    - Locality
+     Short timeout
+- Robustness
+    - Conistent hashing
+    - Save state
+    - Exception handling
+    - Datas validation
+
+
+
+
 
 
 
