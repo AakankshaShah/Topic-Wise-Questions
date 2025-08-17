@@ -1,4 +1,3 @@
-<img width="1374" height="1518" alt="image" src="https://github.com/user-attachments/assets/d27fb772-49a8-4776-8d87-613fa26df766" />https://github.com/presmihaylov/booknotes/tree/master/system-design/system-design-interview
 
 
 ---
@@ -192,8 +191,7 @@ Buy in diagram :
 <img width="1374" height="1518" alt="image" src="https://github.com/user-attachments/assets/ecca0dbc-ed66-4140-83c4-1a18ea5cc0e6" />
 
 ![image](https://github.com/user-attachments/assets/c3712251-2d7c-4359-978b-fb6a712b1054)
-![image](https://github.com/user-attachments/assets/a4a3007a-0b18-4ee7-9e8f-94260870635e)
-![image](https://github.com/user-attachments/assets/5afb6c00-e702-4f34-9320-f6435ddaae35)
+
 
 
 ---
