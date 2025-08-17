@@ -335,7 +335,10 @@ API servers inform user that uploading is complete
 ![image](https://github.com/user-attachments/assets/f58bcb51-ce66-4db6-a0e2-dcaece5e8037)
 - break upa nd store videos to original storage
 - pre signed url for authorised user to upload
-- drm digital rights managemnet 
+- drm digital rights management 
+
+<img width="1350" height="789" alt="image" src="https://github.com/user-attachments/assets/55b62b48-98b5-44a9-abcc-6dffe8caeac9" />
+
 
 
  ---
