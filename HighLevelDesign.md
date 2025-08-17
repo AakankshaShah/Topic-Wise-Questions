@@ -139,14 +139,7 @@ Buy in diagram :
     - Conistent hashing
     - Save state
     - Exception handling
-    - Datas validation
-
-
-
-
-
-
-
+    - Data validation
 ---
 
 7. Notification System
@@ -197,7 +190,7 @@ Buy in diagram :
 ---
 
 
-6. Chat System (1:1 and group)
+9. Chat System (1:1 and group)
 ```
 When clients connect to the server, they can do it via one or more network protocols. One option is HTTP. That is okay for the sender-side, but not okay for receiver-side.
 
@@ -282,7 +275,24 @@ reciever <-> ws -> chat server
 
 ----
 
-7. Search Autocomplete system
+10. Search Autocomplete system
+- Fast respone time
+- Relevant
+- Sorted
+- Scalable
+- Highly available
+
+- Services
+   - Data gathering sevrice
+   - Query service
+- Trie data structure O (p) + O(C) + O(clogc) , p = length , c= children
+- Limit max length of prefix
+- Cache top at eACh node
+- AJAX REQUEST -> (Asynchronous JavaScript and XML) is a technique in web apps that lets the browser send a request to the server without reloading the page.
+- Shard for each character
+- unicode for multi lang 
+
+
 
 <img width="1086" alt="image" src="https://github.com/user-attachments/assets/a1d7a42d-36ae-453a-80ce-016ce1eec45f" />
 
@@ -295,8 +305,22 @@ How to support multi-language - we store unicode characters in trie nodes, inste
 What if top search queries differ across countries - we can build different tries per country and leverage CDNs to improve response time.
 ```
 
+<img width="1536" height="1024" alt="image" src="https://github.com/user-attachments/assets/90a7bfaf-aed5-40b3-8826-48c92ff8b0c2" />
 
-8. Youtube
+
+----
+
+11. Youtube
+https://www.youtube.com/watch?v=PuU_0esYyhg&t=48s
+- ability to upload videos fast
+- smooth video streaming 
+- change video quality
+- low infra cost 
+- high availability , scalability and reliability 
+
+
+
+
 
 ![image](https://github.com/user-attachments/assets/ae84e308-8bb6-4bde-80a9-8611b5316c03)
 ```
@@ -309,11 +333,14 @@ API servers inform user that uploading is complete
 ```
 
 ![image](https://github.com/user-attachments/assets/f58bcb51-ce66-4db6-a0e2-dcaece5e8037)
+- break upa nd store videos to original storage
+- pre signed url for authorised user to upload
+- drm digital rights managemnet 
 
 
- 
+ ---
 
-9. Google Drive
+12. Google Drive
 
 ![image](https://github.com/user-attachments/assets/d3ab553c-be42-41c7-ac0a-d108b3ed85c1)
 
