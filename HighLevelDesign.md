@@ -159,6 +159,7 @@ Buy in diagram :
 - Android Provider -> FCM (Firebase cloud messaging ) - > Client
 - SMS Provider->SMS service (eg twilio)-> Client
 - Mail 
+- One notification server - > spof ,hard to scale , performace bottleneck
 - Steps 
     - Contact info gathering 
 
