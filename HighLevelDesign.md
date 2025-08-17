@@ -273,6 +273,7 @@ reciever <-> ws -> chat server
     the **KV Store**.
 
 
+## 
 - Message sync across devices - curr_max_messagea_id
 - Group chat 
 <img width="301" height="281" alt="groupchat drawio" src="https://github.com/user-attachments/assets/5ad46c19-389b-45f0-a75e-e4316457e74d" />
