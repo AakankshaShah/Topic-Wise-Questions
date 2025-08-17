@@ -167,6 +167,9 @@ Buy in diagram :
 
 ![image](https://github.com/user-attachments/assets/adc489f5-7659-425d-b7a1-214815e07ce7)
 
+- Reliability - Commit log when pushed in queue and picked up by workers
+- authentication and rate limiting 
+
 ---
 
 
