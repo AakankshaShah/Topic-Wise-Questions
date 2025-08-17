@@ -203,11 +203,83 @@ When clients connect to the server, they can do it via one or more network proto
 
 There are multiple options to handle a server-initiated message for the client - polling, long-polling, web sockets.
 ```
+- HTTP - Client initiated
+- Polling  -> not resourceful and inefficient
+- Long polling -> client disconnected, sender and receiver not on same server , inefficient 
+- Web sockets
+    - HTTP Handshake
+    - Acknowledgement 
+    - Bidirectional messages
+sender <-> ws -> chat server
+reciever <-> ws -> chat server
+- Stateless -> service directory , authentication service , group management , user profile 
+- Stateful -> ws 
+- Third party - Notification service
+- 1: read/ write mostly
+- KV for storage
+   - easy horizontal scaling
+   - low latency
+   - rdbms - > random acess is expensive
+  - Group - local sequnece number is enough as uuid 
+
+
+
+
 ![image](https://github.com/user-attachments/assets/339ed31a-0cbe-4bc2-b357-0bc52b69afad)
 ![image](https://github.com/user-attachments/assets/0e6c8dea-183c-4300-a806-6e4de8af99fa)
 ![image](https://github.com/user-attachments/assets/be84b7d5-1b7b-4e7e-a056-c582f7d8391b)
 
+- 1:1 Chat 
 
+<img width="886" height="496" alt="chatsystem drawio" src="https://github.com/user-attachments/assets/fe105b7c-f47b-4bce-926a-128b2e0a76e8" />
+# Chat System Message Flow
+
+## User A → Chat Server 1
+
+-   User A sends a message.
+-   The **ID Generator** assigns a unique message ID.
+-   **Chat Server 1** forwards the message into the **Message Queue**
+    and also writes metadata (delivery state, recipient mapping) into
+    the **KV Store**.
+
+## Message Queue
+
+-   Acts as the transport backbone.
+-   **Chat Server 1** publishes messages into the queue.
+-   **Chat Server 2** subscribes to the queue to fetch messages for its
+    connected users.
+
+## KV Store
+
+-   Stores message metadata (e.g., "delivered", "read", "pending").
+-   Allows **Chat Server 2** to retrieve historical state or resume
+    delivery if it missed something.
+
+## Chat Server 2 (for User B)
+
+-   Subscribes to the message queue.
+-   Queries the **KV Store** if needed (for offline messages, sync, or
+    state reconciliation).
+-   If **User B** is **online**, Chat Server 2 delivers messages
+    directly.
+-   If **User B** is **offline**, the **Push Notification Service** is
+    triggered.
+- Chat Server 2 (the server handling User B’s session) subscribes only to messages relevant for its connected users.For example: If User B is connected to Chat Server 2, that server consumes messages where recipient = User B.Chat Server 2 ignores all other traffic in the queue.
+
+## Push Notification Service
+
+-   Wakes User B's client when offline.
+-   Once User B comes online, **Chat Server 2** resyncs messages from
+    the **KV Store**.
+
+
+- Message sync across devices - curr_max_messagea_id
+- Group chat 
+<img width="301" height="281" alt="groupchat drawio" src="https://github.com/user-attachments/assets/5ad46c19-389b-45f0-a75e-e4316457e74d" />
+
+
+
+----
 
 7. Search Autocomplete system
 
