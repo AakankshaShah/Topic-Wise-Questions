@@ -78,7 +78,7 @@ Single server - hast table - cache - rest on disk - not feasible for large datas
 <img width="781" height="381" alt="image" src="https://github.com/user-attachments/assets/198af5b9-3cee-499d-8d5d-05bb533b41fd" />
 
 ---
-4. Uuid Gnerator
+4. Uuid Generator
 - Features
   - Ids must be unique
   - Ids are numerical values
