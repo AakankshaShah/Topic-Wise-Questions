@@ -344,10 +344,20 @@ API servers inform user that uploading is complete
  ---
 
 12. Google Drive
+- Reliability
+- Fast sync speed
+- Bandwidth usage
+- Scalability
+- High availability 
 
-![image](https://github.com/user-attachments/assets/d3ab553c-be42-41c7-ac0a-d108b3ed85c1)
+- Web server to download and upload
+- Metadata db
+- Storage sytem to store files
+- Apis : Upload , download , get file revision
+- All apis use user authentication and httpd , SSL (Secure Sockets layer) protect data transfer
+  
+<img width="775" height="714" alt="googledrive drawio" src="https://github.com/user-attachments/assets/c8307d01-019d-4908-adb0-3f01bcf587b8" />
 
-![image](https://github.com/user-attachments/assets/907c28e8-04a6-4af7-b6d4-c60e1f05de76)
 ```
 User uses the application through a browser or a mobile app
 Block servers upload files to cloud storage. Block storage is a technology which allows you to split a big file in blocks and store the blocks in a backing storage. Dropbox, for example, stores blocks of size 4mb.
@@ -360,6 +370,30 @@ Metadata cache - some of the metadata is cached for fast retrieval.
 Notification service - Publisher/subscriber system which notifies users when a file is updated/edited/removed so that they can pull the latest changes.
 Offline backup queue - used to queue file changes for users who are offline so that they can pull them once they come back online.
 ```
+- Block storage example - EBS ( elastic block storage , Provides persistent storage volumes for EC2 instances)
+- Delta sync - only blocks updated
+-  Sync Conflict - versioning 
+- High conistency
+    - Data in cache and master same 
+    - Invalidate cache on database write hence RDBMS due to acid 
+
+-  DB : User , Device , Namespace, File , Block 
+- Why long polling : not bidirectional
+- Limit on version saved , move to cold storage
+- 
+   
+```
+File split
+Compressed
+Encyrpted
+Uploaded to cloud storage
+```
+
+![image](https://github.com/user-attachments/assets/907c28e8-04a6-4af7-b6d4-c60e1f05de76)
+<img width="1582" height="878" alt="image" src="https://github.com/user-attachments/assets/90117a0e-0edb-4720-9d38-c722694b2ea1" />
+
+
+
 
 ![image](https://github.com/user-attachments/assets/9c30eefe-28bb-4415-a34b-f38002a9a640)
 
