@@ -392,10 +392,56 @@ Uploaded to cloud storage
 ![image](https://github.com/user-attachments/assets/907c28e8-04a6-4af7-b6d4-c60e1f05de76)
 <img width="1582" height="878" alt="image" src="https://github.com/user-attachments/assets/90117a0e-0edb-4720-9d38-c722694b2ea1" />
 
-
-
-
 ![image](https://github.com/user-attachments/assets/9c30eefe-28bb-4415-a34b-f38002a9a640)
+
+---
+12. Proximity service
+
+- FR
+   - Return all business based on user's location
+   - Business owners can add , delete and update
+   - Customer can view detialed info about the business
+
+- NFR
+   - Low latency
+   - Data privacy
+   - Highly available and scalable
+
+- API 
+    - Get , request params - latitude,longitude,radius
+    - Ouput is paginated : Pagination is the process of breaking a large dataset (e.g., millions of files, database rows, or API results) into smaller chunks (pages) so that              clients don’t need to load everything at once
+     - Business : get , post , put , delete 
+
+- Read & Write 
+   - Ready heavy - rdbms better approach
+- DB schema
+<img width="740" height="870" alt="image" src="https://github.com/user-attachments/assets/5eb7cf3e-c695-455c-a0c8-8a5281f87f9d" />
+- Geo index table - used for efficient processing of spatial operations , specifically geo locations
+
+<img width="1480" height="1312" alt="image" src="https://github.com/user-attachments/assets/cb768abd-b5b9-4ee0-90f3-22336fb75781" />
+- algo 
+    - Existing Geospatial db like Geohash in redis and postGress with PostGIS
+    - 2d search - Draw a circle - not efficeint as searching entire table and indexing wont help much 
+      ```
+          SELECT business_id, lat,long
+        FROM locations
+       WHERE latitude BETWEEN (my_lat - radius) AND (my_lat + radius)
+       AND longitude BETWEEN (my_long - radius AND (lmy_long - radius);
+      ```
+     - Hash and tree : Divide map into smaller ares and build indexes for fast search
+     - Evenly divided grids as unequal division of business
+     - Geo hash better approach : base 32
+     - Geo hash length 4-6 for 20km radius 
+     - boundary issues : 1. same longer prefix closer , but may be closer but no same perfix  2. same longer prefix but different geohash
+     - Fetch all business not only within current grid but also neighbours
+     - Not enough business - 1. return as found , 2,increase search radius
+     - Quadtree
+     - Google S2 - like quad tree maps sphere to 1d based on hilbert curve
+     - Scaling - shard by business id
+     - Geospatial index , compund key as geohash so easy to remove business rathen than geohash has json of business
+       <img width="641" height="571" alt="proximityservice drawio" src="https://github.com/user-attachments/assets/dd2c1e95-ab45-4643-92d5-dc0d42703c66" />
+
+---
 
 
 
@@ -435,26 +481,7 @@ For this solution, the metrics collector needs to maintain an up-to-date list of
 23. Airbnb
 24. Real time Gaming Leaderboar
 25. Stock Exchange
-26. Proximity service
 
-![image](https://github.com/user-attachments/assets/94c3011c-9d2d-41e3-81f3-1fa940c60177)
-```
-    The load balancer automatically distributes incoming traffic across multiple services. A company typically provides a single DNS entry point and internally routes API calls to appropriate services based on URL paths.
-Location-based service (LBS) - read-heavy, stateless service, responsible for serving read requests for nearby businesses
-Business service - supports CRUD operations on businesses.
-Database cluster - stores business information and replicates it in order to scale reads. This leads to some inconsistency for LBS to read business information, which is not an issue for our use-case
-Scalability of business service and LBS - since both services are stateless, we can easily scale them horizontally
-
-```
-```
-SELECT business_id, latitude, longitude,
-FROM business
-WHERE (latitude BETWEEN {:my_lat} - radius AND {:my_lat} + radius) AND
-      (longitude BETWEEN {:my_long} - radius AND {:my_long} + radius)
-```
-```
-Geohash works similarly to the previous approach, but it recursively divides the world into smaller and smaller grids, where each two bits correspond to a single quadrant:
-```
 
 ![image](https://github.com/user-attachments/assets/05d5724a-3c70-424a-bdef-b00d5dfe8e87)
 ```
