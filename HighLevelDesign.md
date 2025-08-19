@@ -443,7 +443,35 @@ Uploaded to cloud storage
        <img width="641" height="571" alt="proximityservice drawio" src="https://github.com/user-attachments/assets/dd2c1e95-ab45-4643-92d5-dc0d42703c66" />
 
 ---
+13. Nearby friends
 
+- FR
+    - See nearby with distance & timestamp
+    - Updated few seconds
+      
+- NFR
+    - low latency
+    - reliable
+    - eventual consistency
+      
+- Design 
+<img width="1624" height="1272" alt="image" src="https://github.com/user-attachments/assets/5af233d6-25b3-4759-9817-5379659a50c0" />
+```
+The load balancer spreads traffic across rest API servers as well as bidirectional web socket servers
+The rest API servers handles auxiliary tasks such as managing friends, updating profiles, etc
+The websocket servers are stateful servers, which forward location update requests to respective clients. It also manages seeding the mobile client with nearby friends locations at initialization (discussed in detail later).
+Redis location cache is used to store most recent location data for each active user. There is a TTL set on each entry in the cache. When the TTL expires, user is no longer active and their data is removed from the cache.
+User database stores user and friendship data. Either a relational or NoSQL database can be used for this purpose.
+Location history database stores a history of user location data, not necessarily used directly within nearby friends feature, but instead used to track historical data for analytical purposes
+Redis pubsub is used as a lightweight message bus which enables different topics for each user channel for location updates.
+<img width="1598" height="726" alt="image" src="https://github.com/user-attachments/assets/d6f79e22-ce4f-4522-a280-939cfe807c2f" />
+```
+
+<img width="1598" height="726" alt="image" src="https://github.com/user-attachments/assets/28a61be7-f924-41af-8d4d-850c5f00c4e3" />
+
+     
+
+---
 
 
 10. Uber
@@ -482,8 +510,6 @@ For this solution, the metrics collector needs to maintain an up-to-date list of
 23. Airbnb
 24. Real time Gaming Leaderboar
 25. Stock Exchange
-
-
 ![image](https://github.com/user-attachments/assets/05d5724a-3c70-424a-bdef-b00d5dfe8e87)
 ```
 Client tries to locate restaurants within 500meters of their location
@@ -495,10 +521,5 @@ Finally, LBS hydrates the business ids, filters the result and returns it to the
 Business-related APIs are separated from the LBS into the business service, which checks the cache first for any read requests before consulting the database
 Business updates are handled via a nightly job, which updates the geohash store
 ```
-27. Video Streaming
-     ```
-          <img width="1554" alt="image" src="https://github.com/user-attachments/assets/be808610-c988-457b-82d8-bd9a8da95ede" />
-
-     ```
 
     
