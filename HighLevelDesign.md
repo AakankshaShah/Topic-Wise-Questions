@@ -419,26 +419,27 @@ Uploaded to cloud storage
 - Geo index table - used for efficient processing of spatial operations , specifically geo locations
 
 <img width="1480" height="1312" alt="image" src="https://github.com/user-attachments/assets/cb768abd-b5b9-4ee0-90f3-22336fb75781" />
-- algo 
-    - Existing Geospatial db like Geohash in redis and postGress with PostGIS
-    - 2d search - Draw a circle - not efficeint as searching entire table and indexing wont help much 
+
+- Algo 
+       - Existing Geospatial db like Geohash in redis and postGress with PostGIS
+       - 2d search - Draw a circle - not efficeint as searching entire table and indexing wont help much 
       ```
           SELECT business_id, lat,long
         FROM locations
        WHERE latitude BETWEEN (my_lat - radius) AND (my_lat + radius)
        AND longitude BETWEEN (my_long - radius AND (lmy_long - radius);
       ```
-     - Hash and tree : Divide map into smaller ares and build indexes for fast search
-     - Evenly divided grids as unequal division of business
-     - Geo hash better approach : base 32
-     - Geo hash length 4-6 for 20km radius 
-     - boundary issues : 1. same longer prefix closer , but may be closer but no same perfix  2. same longer prefix but different geohash
-     - Fetch all business not only within current grid but also neighbours
-     - Not enough business - 1. return as found , 2,increase search radius
-     - Quadtree
-     - Google S2 - like quad tree maps sphere to 1d based on hilbert curve
-     - Scaling - shard by business id
-     - Geospatial index , compund key as geohash so easy to remove business rathen than geohash has json of business
+      - Hash and tree : Divide map into smaller ares and build indexes for fast search
+      - Evenly divided grids as unequal division of business
+      - Geo hash better approach : base 32
+      - Geo hash length 4-6 for 20km radius 
+      - boundary issues : 1. same longer prefix closer , but may be closer but no same perfix  2. same longer prefix but different geohash
+      - Fetch all business not only within current grid but also neighbours
+      - Not enough business - 1. return as found , 2,increase search radius
+      - Quadtree
+      - Google S2 - like quad tree maps sphere to 1d based on hilbert curve
+      - Scaling - shard by business id
+      - Geospatial index , compund key as geohash so easy to remove business rathen than geohash has json of business
        <img width="641" height="571" alt="proximityservice drawio" src="https://github.com/user-attachments/assets/dd2c1e95-ab45-4643-92d5-dc0d42703c66" />
 
 ---
