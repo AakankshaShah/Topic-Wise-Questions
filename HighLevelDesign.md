@@ -472,6 +472,156 @@ Redis pubsub is used as a lightweight message bus which enables different topics
      
 
 ---
+14. Google Maps
+___
+- FR
+    - User location update
+    - Navigation service
+    - Map rendering
+- NFR
+    - accuracy
+    - smooth navigation
+    - data & battery usage
+    - general availability and scalability
+- Map Positioning 
+     - Geocoding
+     - Geohashing 
+     - Map rendering : tiling
+         - Hiearchical routing tiles
+          
+   
+- Path finding algo 
+    - Dijkstra
+    - A's pathfinding algo 
+- Storage
+    - Map of the world
+    - Metadata
+    - Road data
+    - Zoom level 21 , 4.3 trillion tiles , 256*256 pixels , 100 kb , 440PB--> reduce as most area is hills,oceans etc -> 50PB
+    - all levels around 100PB
+
+    <img width="1362" height="872" alt="image" src="https://github.com/user-attachments/assets/07ce5c99-4386-4e7d-8e7d-0ff3994fd45a" />
+
+    ```
+       User opens app → Base map tiles fetched from CDN.
+
+       User searches for an address → Request goes through Load Balancer → Navigation Service → Geocoding DB.
+
+       User requests directions → Navigation Service fetches data from Routing Tiles, computes path.
+
+       User shares live location → Location Service stores updates in User Location DB.
+       Navigation service loads only the necessary tiles from object storage (instead of the entire map).Builds a subgraph connecting start tile → neighboring tiles → destination         tile.On the subgraph, run routing algorithms:
+
+       Dijkstra’s Algorithm: Finds the shortest path (but slow for large networks).
+
+       A*: Optimized Dijkstra with a heuristic (usually straight-line "Haversine distance" between nodes).
+
+      Contraction Hierarchies (CH): Preprocess the graph by building shortcuts for fast long-distance queries (used by Google Maps).
+
+      ALT (A* with Landmarks + Triangle Inequality) for further speed.
+    ```
+
+   - Send location update in a buffered batch way
+   - High write volume , cassandra , kafka , http
+   - Map rendering - not feasible to store entire map tiles of all zoom levels , use cdn
+   - How to get tiles - based on goe hash 
+<img width="1496" height="1416" alt="image" src="https://github.com/user-attachments/assets/4459fea4-ad8b-4817-8bc2-3fc7dbd71e4b" />
+```
+1. Mobile User
+
+User requests directions (start → destination).
+
+Sends the request to the Navigation Service.
+
+2. Navigation Service
+
+Acts as the orchestrator.
+
+Breaks the request into subtasks:
+
+Get coordinates of addresses (via Geocoding Service).
+
+Ask Route Planner Service to compute route.
+
+Collect results (route path, ETA, alternatives) and send back to the user.
+3. Geocoding Service
+
+Converts user’s start and destination addresses into latitude/longitude.
+
+Uses Geocoding DB (mapping of addresses, POIs, landmarks → coordinates).
+
+Sends results back to Navigation Service.
+This is the core of directions computation.
+It coordinates three sub-services:
+
+a) Shortest Path Service
+
+Responsible for computing the actual path on the road graph.
+
+Loads Routing Tiles (object storage) containing the road network split into tiles (nodes = intersections, edges = roads).
+
+Runs algorithms like:
+
+A* (fast search with heuristics),
+
+Contraction Hierarchies (CH) (for precomputed shortcuts),
+
+Dijkstra (baseline).
+
+Returns one or multiple candidate routes.
+
+b) ETA Service
+
+Computes Estimated Time of Arrival for each candidate route.
+
+Uses Traffic DB (historical + real-time speeds).
+
+Update Traffic Service pushes live data from Location DB (crowdsourced user GPS, sensors, reports).
+
+Adjusts road speeds, delays, closures.
+
+c) Ranker
+
+Receives candidate routes from Shortest Path Service.
+
+Adjusts them based on:
+
+ETA (from ETA Service),
+
+Filters (from Filter Service: e.g., avoid tolls, ferries, highways),
+
+User preferences (fastest, shortest, scenic).
+
+Produces a final ranked list of routes.
+
+5. Filter Service
+
+Applies constraints like:
+
+Avoid tolls,
+
+Avoid highways,
+
+Prefer bike lanes,
+
+Truck restrictions (height/weight limits).
+
+Works closely with Ranker.
+
+6. Final Response
+
+Navigation Service collects:
+
+Best route polyline (from Shortest Path Service),
+
+ETA (from ETA Service),
+
+Alternative ranked routes (from Ranker).
+
+Returns them to the Mobile User as JSON → rendered on map tiles.
+```
+
+
 
 
 10. Uber
