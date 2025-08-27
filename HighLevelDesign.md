@@ -1,4 +1,3 @@
-<img width="1346" height="894" alt="image" src="https://github.com/user-attachments/assets/d0547d77-0c71-42f9-a9af-43271f3f356d" />
 
 ---
 
@@ -723,6 +722,7 @@ The replica.lag.max.messages defines how many messages can a replica be lagging 
      - Extremely costly to implement for the system, albeit it's the friendliest guarantee to users
 
 - Temp storage for message schedule
+<img width="1346" height="894" alt="image" src="https://github.com/user-attachments/assets/d0547d77-0c71-42f9-a9af-43271f3f356d" />
 ---
 
 16. Metrics monitoring and alert system 
@@ -781,6 +781,121 @@ Kafka can be configured with one partition per metric name, so that consumers ca
 <img width="1956" height="708" alt="image" src="https://github.com/user-attachments/assets/ad507073-c1bb-4d99-a285-dce0c469e881" />
 
 - Cold storage of inactive data
+---
+17. Ad cLick event aggregation
+
+
+
+Digital advertising has a process called real-time bidding (RTB), where digital advertising inventory is bought and sold:<img width="1930" height="244" alt="image" src="https://github.com/user-attachments/assets/b03e21cf-7bd6-434f-a9e7-184553f09bd7" />
+
+- FR
+   - Aggregate no ad_id clicks in last M minutes
+   - Return 100 most clicked ads
+   - Support aggregation filtering by diff attributes
+
+- NFR
+   - Correctness
+   -  Handle delay/ duplicate
+   -  Robusntness
+   -  Few minutes latency
+- API
+   - get ads/ad_id/aggregated_count
+   - get ads/popular_ads
+     
+- Data model 
+<img width="686" height="216" alt="image" src="https://github.com/user-attachments/assets/fcd4a860-3ccd-455b-993e-eec890e2aad6" />
+<img width="559" height="414" alt="image" src="https://github.com/user-attachments/assets/3b131559-ce65-4772-a15e-e312fc2f3540" />
+<img width="840" height="226" alt="image" src="https://github.com/user-attachments/assets/0c7f9c6a-f440-49ae-a1bd-488477bd44c8" />
+
+- Cassandra- have better native support for heavy write loads
+<img width="1812" height="400" alt="image" src="https://github.com/user-attachments/assets/9ddb8626-ee5e-42dd-8534-3fd60c938569" />
+  - Async 
+<img width="1778" height="1024" alt="image" src="https://github.com/user-attachments/assets/d92f7ebe-ce31-483d-8a31-6bf7704194c8" />
+
+```
+The first message queue stores ad click event data:
+
+ad_id	click_timestamp	user_id	ip	country
+
+The second message queue contains ad click counts, aggregated per-minute:
+
+ad_id	click_minute	count
+As well as top N clicked ads aggregated per minute:
+
+update_time_minute	most_clicked_ads
+The second message queue is there in order to achieve end to end exactly-once atomic commit semantics
+```
+- Aggregation service 
+    - map reduce , dag 
+<img width="1160" height="804" alt="image" src="https://github.com/user-attachments/assets/49b55d56-0673-4250-9312-2f4ba0db9a54" />
+<img width="1570" height="822" alt="image" src="https://github.com/user-attachments/assets/8e9e1f75-b461-459c-8a00-0473cee13b92" />
+- Map , aggregate node , reduce
+- The aggregate node counts ad click events by ad_id in-memory every minute.
+- Use-case 1 - aggregate the number of clicks:
+<img width="1856" height="758" alt="image" src="https://github.com/user-attachments/assets/8484e138-ad80-448d-8e6b-f2563a7eb41c" />
+- Use-case 2 - return top N most clicked ads:
+<img width="1844" height="1030" alt="image" src="https://github.com/user-attachments/assets/33a4ee6e-0fee-4fe3-8ed8-fb576a83292d" />
+
+- Use-case 3 - data filtering:
+     - To support fast data filtering, we can predefine filtering criterias and pre-aggregate based on it
+     - This technique is called the star schema and is widely used in data warehouses. The filtering fields are called dimensions.
+     - This approach has the following benefits:
+          - Simple to undertand and build
+          - Current aggregation service can be reused to create more dimensions in the star schema.
+          - Accessing data based on filtering criteria is fast as results are pre-calculated
+
+    - A limitation of this approach is that it creates many more buckets and records, especially when we have lots of filtering criterias.
+      
+- <img width="1106" height="405" alt="image" src="https://github.com/user-attachments/assets/e5a1ee36-c94a-4018-8e4b-5d938118fcc3" />
+
+- In our design, we used a mixture of batching and streaming.
+
+We used streaming for processing data as it arrives and generates aggregated results in near real-time. We used batching, on the other hand, for historical data backup.
+
+A system which contains two processing paths - batch and streaming, simultaneously, this architecture is called lambda. A disadvantage is that you have two processing paths with two different codebases to maintain.
+
+Kappa is an alternative architecture, which combines batch and stream processing in one processing path. The key idea is to use a single stream processing engine.
+<img width="1868" height="716" alt="image" src="https://github.com/user-attachments/assets/b3bc014f-615e-452e-abc7-f4d213830f76" />
+<img width="1860" height="540" alt="image" src="https://github.com/user-attachments/assets/3af0edd8-730e-4e8c-b56e-f36cf963471e" />
+<img width="1940" height="692" alt="image" src="https://github.com/user-attachments/assets/7d4c492f-b4b6-43d3-adf1-9e544daa9f64" />
+
+- We need timestamp for aggregation
+<img width="1065" height="177" alt="image" src="https://github.com/user-attachments/assets/f0de9191-4b0f-4f6c-9973-c9e05f12e30d" />
+- However, if we purposefully extend the aggregation window, we can reduce the likelihood of missed events. The extended part of a window is called a "watermark":
+    - Short watermark increases likelihood of missed events, but reduces latency
+    - Longer watermark reduces likelihood of missed events, but increases latency
+<img width="1950" height="606" alt="image" src="https://github.com/user-attachments/assets/d5902e9d-00cd-45dc-96ab-b741edf66f4d" />
+
+- There are four types of window functions:
+
+Tumbling (fixed) window
+Hopping window
+Sliding window
+Session window
+
+- We'll need to use exactly-once delivery semantics.
+- Use S3 to record offset
+- 
+  
+
+
+
+
+
+
+      
+
+
+
+
+
+
+
+
+
+
+
+
 ---
 
 10. Uber
