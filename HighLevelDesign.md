@@ -1,4 +1,4 @@
-
+<img width="1346" height="894" alt="image" src="https://github.com/user-attachments/assets/d0547d77-0c71-42f9-a9af-43271f3f356d" />
 
 ---
 
@@ -623,8 +623,165 @@ Alternative ranked routes (from Ranker).
 Returns them to the Mobile User as JSON → rendered on map tiles.
 ```
 
+---
+15. DISTRIBUTED MESSAGE QUEUE
+
+FR
+- Producer sends messages to a queue
+- Consumers consume
+- Consumed repeatedly / only once
+- Historical data can be truncated
+- Size in kb
+- ability to deliver messages to consumer in order they added
+- Data delivery semantics configurable
+  
+
+NFR
+- high throughput / low latency
+- scalable
+- persistent & durable 
 
 
+<img width="1726" height="216" alt="image" src="https://github.com/user-attachments/assets/879758f7-6ec8-4595-b621-17c6b4ffbf56" />
+
+Messaging models
+- Point to point 
+- Pub/sub 
+     - Messages are persisted by topics
+     - Message consumption order -single partition by one consumer from consumer group 
+
+| Term          | Simple Meaning                                   | Analogy (Post Office)                            | Key Point                                             |
+| ------------- | ------------------------------------------------ | ------------------------------------------------ | ----------------------------------------------------- |
+| **Topic**     | Logical channel/category for messages            | Newspaper title (e.g., “Sports News”)            | Groups related messages                               |
+| **Partition** | Sub-division of a topic, ordered log of messages | Section of newspaper (football, cricket, tennis) | Keeps order **within partition**                      |
+| **Broker**    | Server that stores partitions                    | Printing press building                          | Cluster has many brokers, each stores some partitions |
+| **Offset**    | Position of a message inside a partition         | Page number in a newspaper section               | Lets consumers track where they left off              |
+
+
+<img width="1716" height="794" alt="image" src="https://github.com/user-attachments/assets/4a37aea8-cb19-4b75-8e0c-d0c61e84d09a" />
+
+- In order to achieve high throughput and preserve the high data retention requirement, we made some important design choices:
+
+We chose an on-disk data structure which takes advantage of the properties of modern HDD and disk caching strategies of modern OS-es.
+The message data structure is immutable to avoid extra copying, which we want to avoid in a high volume/high traffic system.
+We designed our writes around batching as small I/O is an enemy of high throughput.
+
+- Data storage
+In order to find the best data store for messages, we must examine a message's properties:
+
+Write-heavy, read-heavy
+No update/delete operations. In traditional message queues, there is a "delete" operation as messages are not retained.
+Predominantly sequential read/write access pattern.
+What are our options:
+
+Database - not ideal as typical databases don't support well both write and read heavy systems.
+Write-ahead log (WAL) - a plain text file which only supports appending to it and is very HDD-friendly.
+We split partitions into segments to avoid maintaining a very large file.
+Old segments are read-only. Writes are accepted by latest segment only.
+
+- Batching
+Batching is critical for the performance of our system. We apply it in the producer, consumer and message queue.
+
+It is critical because:
+
+It allows the operating system to group messages together, amortizing the cost of expensive network round trips
+Messages are written to the WAL in groups sequentially, which leads to a lot of sequential writes and disk caching.
+
+- Producer flow 
+<img width="1204" height="838" alt="image" src="https://github.com/user-attachments/assets/ddf2d7bc-78d8-4461-949d-d053ee45f682" />
+<img width="1346" height="894" alt="image" src="https://github.com/user-attachments/assets/17aae196-40fd-411f-968d-04aa76922194" />
+
+- Consumer flow 
+The consumer specifies its offset in a partition and receives a chunk of messages, beginning from that offset:
+<img width="1718" height="488" alt="image" src="https://github.com/user-attachments/assets/5b3f738a-4cce-4c41-802e-ab0cb448bf82" />
+
+- Push model leads to lower latency as broker pushes messages to consumer as it receives them.
+However, if rate of consumption falls behind the rate of production, the consumer can be overwhelmed.
+It is challenging to deal with consumers with varying processing power as the broker controls the rate of consumption.
+
+Pull model leads to the consumer controlling the consumption rate.
+If rate of consumption is slow, consumer will not be overwhelmed and we can scale it to catch up.
+The pull model is more suitable for batch processing, because with the push model, the broker can't know how many messages a consumer can handle.
+With the pull model, on the other hand, consumers can aggressively fetch large message batches.
+The down side is the higher latency and extra network calls when there are no new messages. Latter issue can be mitigated using long polling.
+Hence, most message queues (and us) choose the pull model.
+
+- Consumer rebalancing
+Consumer rebalancing is responsible for deciding which consumers are responsible for which partition.
+
+<img width="1740" height="730" alt="image" src="https://github.com/user-attachments/assets/ad82a4e9-276a-4569-9a86-c4ba0d5c381b" />
+
+- One problem we need to tackle is keeping messages in-sync between the leader and the followers for a given partition.
+
+In-sync replicas (ISR) are replicas for a partition that stay in-sync with the leader.
+
+The replica.lag.max.messages defines how many messages can a replica be lagging behind the leader to be considered in-sync.
+
+- Data delivery semantics
+     - At most once : ACK =0 
+     - At least once : ACK 1/ACK=ALL
+     - Extremely costly to implement for the system, albeit it's the friendliest guarantee to users
+
+- Temp storage for message schedule
+---
+
+16. Metrics monitoring and alert system 
+- BOE
+   - 100 metrics per machine , 100 machine per pool, 1000 server pools
+   - 10^7 logs 
+
+- NFR 
+   - Scalability
+   - Low latency
+   - Reliabiility
+   - Flexibility
+![image](https://github.com/user-attachments/assets/ae24e1d8-0f89-4d7d-b269-d193d30a236e)
+
+- Data model
+   - Metrics data usually recorded  as time series contains sets of data with their associated timestamps
+   - metric name , tag (key value pair) , timestamps array 
+- Data access pattern - write heavy and read spiky
+- Data storage system
+   - use tiemseries db 
+  
+![image](https://github.com/user-attachments/assets/f3fcf02c-f61b-4d6b-b83b-10a03bd7d6ff)
+
+- Pull vs Push
+<img width="1398" height="772" alt="image" src="https://github.com/user-attachments/assets/4b2d1d3a-a460-4ead-bcc1-790b9df394a3" />
+
+```
+For this solution, the metrics collector needs to maintain an up-to-date list of services and metrics endpoints. We can use Zookeeper or etcd for that purpose - service discovery.
+```
+
+<img width="1025" alt="image" src="https://github.com/user-attachments/assets/f0d1778c-1e0d-42fb-994b-9af00e863f03" />
+<img width="1714" height="590" alt="image" src="https://github.com/user-attachments/assets/531b88d1-5a4a-4c87-9689-d220ba185cdd" />
+
+```
+With this model, we can potentially aggregate metrics before sending them to the collector, which reduces the volume of data processed by the collector.
+On the flip side, metrics collector can reject push requests as it can't handle the load. It is important, hence, to add the collector to an auto-scaling group behind a load balancer.
+```
+<img width="1126" height="725" alt="image" src="https://github.com/user-attachments/assets/f5dd3596-f9b2-4820-8e46-ce7d3e38cdbb" />
+![image](https://github.com/user-attachments/assets/006a7cdd-e787-4556-b18a-f600aed3b1a6)
+
+- There is a chance of data loss if the time-series DB is down, however. To mitigate this, we'll provision a queuing mechanism:
+<img width="1866" height="714" alt="image" src="https://github.com/user-attachments/assets/7d4e67ee-e77c-4b7c-a047-31675afecb33" />
+
+- This approach has several advantages:
+
+Kafka is used as a highly-reliable and scalable distributed message platform
+It decouples data collection and data processing from one another
+It can prevent data loss by retaining the data in Kafka
+
+Kafka can be configured with one partition per metric name, so that consumers can aggregate data by metric names. To scale this, we can further partition by tags/labels and categorize/prioritize metrics to be collected first.
+
+- We can add a Cache layer here to reduce the load to the time-series database:
+<img width="1942" height="904" alt="image" src="https://github.com/user-attachments/assets/c51baf5e-0623-4ade-9118-abd5c1697ad8" />
+
+- Alerting system
+<img width="1956" height="708" alt="image" src="https://github.com/user-attachments/assets/ad507073-c1bb-4d99-a285-dce0c469e881" />
+
+- Cold storage of inactive data
+---
 
 10. Uber
 11. Tinder
@@ -635,25 +792,6 @@ Returns them to the Mobile User as JSON → rendered on map tiles.
 <img width="1455" alt="image" src="https://github.com/user-attachments/assets/308213c6-8917-4276-9db1-a831dc69915b" />
 
 16. Leetcode
-17. Logging System
-
-![image](https://github.com/user-attachments/assets/ae24e1d8-0f89-4d7d-b269-d193d30a236e)
-
-![image](https://github.com/user-attachments/assets/f3fcf02c-f61b-4d6b-b83b-10a03bd7d6ff)
-
-![image](https://github.com/user-attachments/assets/acd39aae-025f-4f9d-a30f-9e30c68c206b)
-
-![image](https://github.com/user-attachments/assets/fcb78899-2be7-43e4-89e3-e4e3dc80e7a8)
-```
-For this solution, the metrics collector needs to maintain an up-to-date list of services and metrics endpoints. We can use Zookeeper or etcd for that purpose - service discovery.
-```
-
-<img width="1025" alt="image" src="https://github.com/user-attachments/assets/f0d1778c-1e0d-42fb-994b-9af00e863f03" />
-
-
-
-![image](https://github.com/user-attachments/assets/006a7cdd-e787-4556-b18a-f600aed3b1a6)
-
 18. Zoom
 19. Google Pay/UPI
 20. Nearby Friends
