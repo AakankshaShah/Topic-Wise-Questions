@@ -876,28 +876,187 @@ Session window
 - We'll need to use exactly-once delivery semantics.
 - Use S3 to record offset
 - 
-  
-
-
-
-
-
-
-      
-
-
-
-
-
-
-
-
-
-
-
 
 ---
+18. Hotel Reservation
+---
+19. Distributed mail system 
 
+- FR
+    - Authetication
+    - Send and receive mails
+    - Fetch all mails
+    - Filter mails
+    - Search mails
+    - Anti spam and anti virus
+
+- HTTP used for client and server communication, traditionally smtp,pop,imap etc.
+- SMTP (Simple Mail Transfer Protocol) -Purpose: Sending emails
+- POP (Post Office Protocol, usually POP3) -Purpose: Receiving emails (download-and-delete model) , deletes once read from server
+- IMAP (Internet Message Access Protocol) - Purpose: Receiving emails (sync model) , not deleted
+- HTTPS - Outlook
+- 
+
+- NFR
+    - reliable
+    - scalable
+    - available
+    - flexible and extensible 
+
+<img width="1166" height="928" alt="image" src="https://github.com/user-attachments/assets/6b49267e-bbd4-475b-8c18-1e60565753b7" />
+
+- Maildir was a popular way to store mails on mail server.
+- APIS
+    - post :  send mail
+    - get : all folders of an mail account
+    - get : all messages in a folder
+    - get : specifics about a mail
+
+<img width="1328" height="1040" alt="image" src="https://github.com/user-attachments/assets/541684c0-9c60-4bab-aced-3a4c572b80c4" />
+
+- Webmail - users use web browsers to send/receive emails
+- Web servers - public-facing request/response services used to manage login, signup, user profile, etc.
+- Real-time servers - Used for pushing new email updates to clients in real-time. We use websockets for real-time communication but fallback to long-polling for older browsers that don't support them.
+- Metadata db - stores email metadata such as subject, body, from, to, etc.
+- Attachment store - Object store (eg Amazon S3), suitable for storing large files (S3)
+- Distributed cache - We can cache recent emails in Redis to improve UX.
+- Search store - distributed document store, used for supporting full-text searches , uses data structure called inverted index
+- Inverted index (for search engines):
+
+```
+Each term (word) maps to a list of documents (emails) containing that term.
+Example:
+"project" → [EmailID: 101, 305, 420]  
+"meeting" → [EmailID: 101, 222, 333, 420]  
+Eg : Elasticstore 
+```
+
+<img width="1698" height="1126" alt="image" src="https://github.com/user-attachments/assets/0f285cd2-76ba-4419-9b83-87528f5b7440" />
+
+- Mail sending flow 
+- User writes an email and presses "send". Email is sent to load balancer.
+- Load balancer rate limits excessive mail sends and routes to one of the web servers.
+- Web servers do basic email validation (eg email size) and short-circuits outbound flow if domain is same as sender. But does spam check first.
+- If basic validation passes, email is sent to message queue (attachment is referenced from object store)
+- If basic validation fails, email is sent to error queue
+- SMTP outgoing workers pull messages from outgoing queue, do spam/virus checks and route to destination mail server.
+- Email is stored in the "Sent Emails" folder
+
+<img width="1824" height="946" alt="image" src="https://github.com/user-attachments/assets/fdc1fbfb-4676-4c5e-b6d0-eada4d959b9d" />
+
+- Mail receiving flow
+- Incoming emails arrive at the SMTP load balancer. Mails are distributed to SMTP servers, where mail acceptance policy is done (eg invalid emails are directly discarded).
+ - If attachment of email is too large, we can put it in object store (s3).
+ - Put in incoming mail queue
+ - Mail processing workers - filtering , spam , virus
+ - mail stored in mail storage , cache , object data store
+ - online - pushed to real time server
+ - offline - storage layer - served via rest api
+   
+
+- DB :
+- Relational database - we can build indexes for headers and body, but these DBs are typically optimized for small chunks of data.
+- Distributed object store - this can be a good option for backup storage, but can't efficiently support searching/marking as read/etc.
+- NoSQL - Google BigTable is used by gmail, but it's not open-sourced.
+- Based on above analysis, very few existing solutions seems to fit our needs perfectly. In an interview setting, it's infeasible to design a new distributed database solution, but important to mention characteristics:
+
+- Single column can be a single-digit MB
+- Strong data consistency
+- Designed to reduce disk I/O
+- Highly available and fault tolerant
+- Should be easy to create incremental backups
+
+
+- Search
+- Elasticsearch
+<img width="1210" height="1224" alt="image" src="https://github.com/user-attachments/assets/d669d2b5-294d-400e-b02c-dde5cf43922b" />
+- Custom search
+- To achieve that, we can use Log-Structured Merge-Trees (LSM) to structure the index data on disk. Write path is optimized for sequential writes only. This technique is used in Cassandra, BigTable and RocksDB.Its core idea is to store data in-memory until a predefined threshold is reached, after which it is merged in the next layer (disk).
+  <img width="1926" height="1002" alt="image" src="https://github.com/user-attachments/assets/fe781206-d6e3-4364-a2f5-2680ef1378cb" />
+---
+20. S3 Storage
+- Storage systems fall into three broad categories:
+
+    - Block storage
+    - File storage
+    - Object storage - Stores all data as object in a flat structure 
+- Terminology 
+      - Bucket - logical container for objects. Name is globally unique.
+      - Object - An individual piece of data, stored in a bucket. Contains object data and metadata.
+      - Versioning - A feature keeping multiple variants of an object in the same bucket.
+      - Uniform Resource Identifier (URI) - each resource is uniquely identified by a URI.
+      - Service-level Agreement (SLA) - contract between service provider and client.
+
+- NFR
+   - 100 PB of data per year
+   - Durability 6 nine
+   - SLA 4 nine
+   - Storage efficiency
+
+- Bottlenecks at disk capacity / disk i/o.
+- we have 20% small (less than 1mb), 60% mid-size (1-64mb) and 20% large objects (greater than 64mb),
+- One hard disk (SATA, 7200rpm) is capable of doing 100-150 random seeks per second (100-150 IOPS) - Input/Output Operations Per Second
+- 100PB*0.4/(0.2*0.5+0.4*32+0.2*200) = 0.68 billion objects
+- metadata 1 kb then 0.68 TB space 
+
+- Immutable objects
+ - Key value store , uri as key , object as value
+ - write once , read many times
+   
+<img width="1368" height="1058" alt="image" src="https://github.com/user-attachments/assets/d859871b-fbad-427a-9eb1-8cac1ef7ecd6" />
+
+
+- Design philosophy of object storage is similar to UNIX - when we save a file, it creates the filename in a data structure, called inode and file data is stored in different disk locations. The inode contains a list of file block pointers, which point to different locations on disk.
+
+- When accessing a file, we first fetch its metadata from the inode, prior to fetching the file contents.
+
+- Object storage works similarly - metadata store is used for file information, but contents are stored on disk
+- Inode becomes metastore
+- Hard disk becomes data store
+
+<img width="1596" height="1102" alt="image" src="https://github.com/user-attachments/assets/57aae0bd-83db-4b26-9e78-a3554248fd63" />
+
+- Uploading an object
+<img width="1638" height="1110" alt="image" src="https://github.com/user-attachments/assets/f6a1d853-bdf8-46d4-b04a-a8aa0d4dba1c" />
+
+- Downloading an object 
+
+<img width="1678" height="1130" alt="image" src="https://github.com/user-attachments/assets/3e9ab06c-90a2-4aa2-908f-09c98d247ddb" />
+
+- Data store
+
+<img width="1562" height="812" alt="image" src="https://github.com/user-attachments/assets/afc073e4-2b57-4771-924f-4932df5efa3a" />
+
+<img width="1562" height="926" alt="image" src="https://github.com/user-attachments/assets/b7023ab9-125d-4ac4-aa28-f9c547162853" />
+- The data routing service provides a RESTful or gRPC API to access the data node cluster. It is a stateless service, which scales by adding more servers.
+
+- It's main responsibilities are:
+
+  - querying the placement service to get the best data node to store data
+  - reading data from data nodes and returning it to the API service
+  - Writing data to data nodes
+
+- The Data Store is made up of many Data Nodes (each is usually a physical server with local disks/SSDs).
+
+- These issues can be addressed by merging many small files into bigger ones via a write-ahead log (WAL). Once the file reaches its capacity (typically a few GB), a new file is created
+
+- To support storing multiple objects in the same file, we need to maintain a table, which tells the data node:
+
+    - object_id
+    - filename where object is stored
+    - file_offset where object starts
+    - object_size
+      
+- We can deploy this table in a file-based db like RocksDB or a traditional relational database. Since the access pattern is low write+high read, a relational database works better.
+
+- <img width="1824" height="1032" alt="image" src="https://github.com/user-attachments/assets/3bf946d1-f642-4668-811d-8a0416bf0c0c" />
+- Versioning works by having another object_version column which is of type TIMEUUID, enabling us to sort records based on it.
+
+- <img width="1844" height="858" alt="image" src="https://github.com/user-attachments/assets/83225673-afca-4f44-9b1a-14dc3f622fc1" />
+
+-<img width="1850" height="896" alt="image" src="https://github.com/user-attachments/assets/b0740f2c-8009-412e-9e42-ed349a17a464" />
+
+---
 10. Uber
 11. Tinder
 12. Spotify
@@ -909,22 +1068,10 @@ Session window
 16. Leetcode
 18. Zoom
 19. Google Pay/UPI
-20. Nearby Friends
-21. Google Maps
-22. Ad Click Event aggregation
 23. Airbnb
 24. Real time Gaming Leaderboar
 25. Stock Exchange
 ![image](https://github.com/user-attachments/assets/05d5724a-3c70-424a-bdef-b00d5dfe8e87)
-```
-Client tries to locate restaurants within 500meters of their location
-Load balancer forwards the request to the LBS
-LBS maps the radius to geohash with length 6
-LBS calculates neighboring geohashes and adds them to the list
-For each geohash, LBS calls the redis server to fetch corresponding business IDs. This can be done in parallel.
-Finally, LBS hydrates the business ids, filters the result and returns it to the user
-Business-related APIs are separated from the LBS into the business service, which checks the cache first for any read requests before consulting the database
-Business updates are handled via a nightly job, which updates the geohash store
-```
+
 
     
