@@ -1112,6 +1112,73 @@ However, read scalability suffers as we need to query more partitions to collect
 
 ---
 22.  Payment system
+
+ - FR 
+    - Pay in flow
+    - Pay out flow
+      
+- NFR
+   - reliable and fault tolerance
+   - conistent
+- Back of envelope 
+    - 10 TPS
+
+<img width="1304" height="474" alt="image" src="https://github.com/user-attachments/assets/f56ba94a-1ab8-4d76-a846-31be4c43e7c9" />
+
+Pay in flow : 
+
+<img width="1792" height="952" alt="image" src="https://github.com/user-attachments/assets/396160c2-8da7-412b-9470-d8126f82b828" />
+- Payment service - accepts payment events and coordinates the payment process. It typically also does a risk check using a third-party provider for AML violations or criminal activity.
+- Payment executor - executes a single payment order via the Payment Service Provider (PSP). Payment events may contain several payment orders.
+- Payment service provider (PSP) - moves money from one account to another, eg from buyer's credit card account to e-commerce site's bank account.
+- Card schemes - organizations that process credit card operations, eg Visa MasterCard, etc.
+- Ledger - keeps financial record of all payment transactions.-audit trail
+- Wallet - keeps the account balance for all merchants.- merchant
+  
+
+- APIS
+- POST /v1/payments
+{
+  "buyer_info": {...},
+  "checkout_id": "some_id",
+  "credit_card_info": {...},
+  "payment_orders": [{...}, {...}, {...}]
+}
+- The payment_order_id is forwarded to the PSP to deduplicate payments, ie it is the idempotency key.
+The amount field is string as double is not appropriate for representing monetary values.
+- GET /v1/payments/{:id}
+- Data model
+    - We need to maintain two tables - payment_events and payment_orders.
+    - Here's what the payment_events table contains:
+
+        checkout_id - string, primary key
+        buyer_info - string (personal note - prob a foreign key to another table is more appropriate)
+         seller_info - string (personal note - same remark as above)
+         credit_card_info - depends on card provider
+         is_payment_done - boolean
+
+    - Here's what the payment_orders table contains:
+
+      payment_order_id - string, primary key
+      buyer_account - string
+      amount - string
+       currency - string
+       checkout_id - string, foreign key
+       payment_order_status - enum (NOT_STARTED, EXECUTING, SUCCESS, FAILED)
+      ledger_updated - boolean
+      wallet_updated - boolean
+
+- PSP Integration
+
+<img width="1936" height="1088" alt="image" src="https://github.com/user-attachments/assets/07a112f7-a62d-47cd-b96a-cd84063df812" />
+
+-  Reconcilation
+
+<img width="1758" height="938" alt="image" src="https://github.com/user-attachments/assets/2a9135a3-7143-4ced-88b6-d16e028b892c" />
+
+
+
+
 ---
 10. Uber
 11. Tinder
@@ -1123,7 +1190,6 @@ However, read scalability suffers as we need to query more partitions to collect
 
 16. Leetcode
 18. Zoom
-19. Google Pay/UPI
 23. Airbnb
 25. Stock Exchange
 ![image](https://github.com/user-attachments/assets/05d5724a-3c70-424a-bdef-b00d5dfe8e87)
