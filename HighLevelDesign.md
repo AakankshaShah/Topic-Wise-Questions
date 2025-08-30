@@ -1057,6 +1057,62 @@ Eg : Elasticstore
 -<img width="1850" height="896" alt="image" src="https://github.com/user-attachments/assets/b0740f2c-8009-412e-9e42-ed349a17a464" />
 
 ---
+21. Real time gaming leaderboard
+- FR
+   - Display top 10
+   - show a user specific rank
+   - Display 4 users above and below desired user
+
+- NFR
+   - real time update
+   - score update reflected in real time
+   - scalable, available and reliable
+
+- BOE
+     - With 5 mil DAU, if the game has an even distribution of players during a 24h period, we'd have an average of 50 users per second. However, since distribution is typically         uneven, we can estimate that the peak online users would be 250 users per second.
+
+     - QPS for users scoring a point - given 10 games per day on average, 50 users/s * 10 = 500 QPS. Peak QPS = 2500.
+
+     - QPS for fetching the top 10 leaderboard - assuming users open that once a day on average, QPS is 50.
+
+- API
+    - POST /v1/scores
+    - GET /v1/scores
+    - GET /v1/scores/{:user_id}
+
+<img width="1102" height="1066" alt="image" src="https://github.com/user-attachments/assets/473253fa-d14d-42dd-94d5-5e3e63f227d4" />
+
+- Data model
+   - RDBMS - Good fr small set , we can index and limit
+   - Redis - sorted sets / skip list - memory more than enough and for presistence read replica
+   - 
+
+
+<img width="1836" height="770" alt="image" src="https://github.com/user-attachments/assets/cf65f584-7f35-4ebc-9468-dca92d91e6a3" />
+
+<img width="1978" height="496" alt="image" src="https://github.com/user-attachments/assets/cf61d2de-acf2-471f-8574-83fef885796c" />
+
+<img width="1964" height="506" alt="image" src="https://github.com/user-attachments/assets/65953035-3c52-49c5-b474-fa5eb488b06f" />
+
+- Redis sharding -  we'll shard based on user's score. We'll maintain the mapping between user_id and shard in application code. We can do that either via MySQL or another cache for the mapping itself.
+
+- NO SQL 
+
+<img width="1344" height="286" alt="image" src="https://github.com/user-attachments/assets/a689a9ef-9f33-468e-af41-c9c1ca067a4d" />
+- This works well, but doesn't scale well if we need to query anything by score. Hence, we can put the score as a sort key:
+
+<img width="1464" height="614" alt="image" src="https://github.com/user-attachments/assets/8df61645-9203-40dd-bf40-d1d38a1d06bb" />
+- Another problem with this design is that we're partitioning by month. This leads to a hotspot partition as the latest month will be unevenly accessed compared to the others.
+- We could use a technique called write sharding, where we append a partition number for each key, calculated via user_id % num_partitions
+- An important trade-off to consider is how many partitions we should use:
+
+The more partitions there are, the higher the write scalability
+However, read scalability suffers as we need to query more partitions to collect aggregate results
+- This NoSQL approach still has one major downside - it is hard to calculate the specific rank of a user.A cron job can periodically run to analyze score distributions, based on which a user's percentile is determined.
+
+---
+22.  Payment system
+---
 10. Uber
 11. Tinder
 12. Spotify
@@ -1069,7 +1125,6 @@ Eg : Elasticstore
 18. Zoom
 19. Google Pay/UPI
 23. Airbnb
-24. Real time Gaming Leaderboar
 25. Stock Exchange
 ![image](https://github.com/user-attachments/assets/05d5724a-3c70-424a-bdef-b00d5dfe8e87)
 
