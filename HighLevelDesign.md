@@ -1,4 +1,4 @@
-
+<img width="1359" height="892" alt="image" src="https://github.com/user-attachments/assets/35011af8-d6a1-404f-9a01-67c206c83481" />
 ---
 
 1. Scale upto 1 million
@@ -1180,6 +1180,90 @@ The amount field is string as double is not appropriate for representing monetar
 
 
 ---
+23. Digital wallet
+- API
+    - post /balance_transfer
+- Redis for user balance map
+- Zookeeper can be used to store the number of partitions and addresses of redis nodes as it's a highly-available configuration storage.
+-  wallet service is a stateless service responsible for carrying out transfer operations. It can easily scale horizontally:
+-  <img width="1654" height="906" alt="image" src="https://github.com/user-attachments/assets/306ad599-37a0-4ded-b2be-c7a3590a193d" />
+- Although this solution addresses scalability concerns, it doesn't allow us to execute balance transfers atomically.
+- <img width="1718" height="1014" alt="image" src="https://github.com/user-attachments/assets/46fcfa0c-c8ab-4cd0-aa83-d6e1f717b733" />
+- 2 phase commit 
+<img width="1852" height="646" alt="image" src="https://github.com/user-attachments/assets/1203ab69-750a-4a7b-9cf9-d7ee0bd78a5f" />
+- Downsides to the 2PC approach:
+
+Not performant due to lock contention
+The coordinator is a single point of failure
+- TC/C is a variation of the 2PC protocol, which works with compensating transactions. Try-Confirm/Cancel (TC/C)
+- Coordinator asks all databases to reserve resources for the transaction
+Coordinator collects replies from DBs - if yes, DBs are asked to try-confirm. If no, DBs are asked to try-cancel.
+- Here's how TC/C works in phases:
+
+Phase	Operation	A	C
+1	Try	Balance change: -$1	Do nothing
+2	Confirm	Do nothing	Balance change: +$1
+Cancel	Balance change: +$1	Do Nothing
+
+- If the coordinator dies mid-flight, it needs to recover its intermediary state. That can be done by maintaining phase status tables, atomically updated within the database shards
+- <img width="1474" height="800" alt="image" src="https://github.com/user-attachments/assets/0b667342-d580-4fac-8ccc-ff3db1dba108" />
+- ID and content of distributed transaction
+status of try phase - not sent, has been sent, response received
+second phase name - confirm or cancel
+status of second phase
+out-of-order flag (explained later)
+- one issue : cancel before try
+- <img width="1690" height="720" alt="image" src="https://github.com/user-attachments/assets/e949795e-be59-4e12-bb51-37002b33f642" />
+-This edge case can be handled by adding an out of order flag in our phase status table. When we receive a try operation, we first check if the out of order flag is set and if so, a failure is returned.
+- Another way saga
+- Choreography - all services involved in a saga subscribe to the related events and do their part in the saga
+- Orchestration - a single coordinator instructs all services to do their jobs in the correct order
+- Event sourcing for auditing
+- Event sourcing
+- command - intended action from the real world, eg transfer 1$ from account A to B. Need to have a global order, due to which they're put into a FIFO queue.
+commands, unlike events, can fail and have some randomness due to eg IO or invalid state.
+commands can produce zero or more events
+event generation can contain randomness such as external IO. This will be revisited later
+- event - historical facts about events which occured in the system, eg "transferred 1$ from A to B".
+unlike commands, events are facts that have happened within our system
+similar to commands, they need to be ordered, hence, they're enqueued in a FIFO queue
+- state - what has changed as a result of an event. Eg a key-value store between account and their balances.
+- state machine - drives the event sourcing process. It mainly validates commands and applies events to update the system state.
+the state machine should be deterministic, hence, it shouldn't read external IO or rely on randomness.
+<img width="1350" height="586" alt="image" src="https://github.com/user-attachments/assets/aae583e8-0bc5-4216-9452-b83b3bedb5c2" />
+<img width="1404" height="1044" alt="image" src="https://github.com/user-attachments/assets/464d713f-0f42-4efc-9528-c417557574c6" />
+- Do we know the account balance at any given time? - events can be replayed from the start until the point which we are interested in
+- How do we know the historical and current balances are correct? - correctness can be verified by recalculating all events from the start
+- How do we prove the system logic is correct after a code change? - we can run different versions of the code against the events and verify their results are identical
+
+- CQRS
+<img width="1750" height="1454" alt="image" src="https://github.com/user-attachments/assets/7ad5acd9-b808-4758-8274-79ec279f034f" />
+
+- Optimizations
+     - The first optimization we'll explore is to save commands and events into local disk store instead of an external store such as Kafka
+     - The next optimization is to cache recent commands and events in-memory in order to save the time of loading them back from disk
+     - The next optimization we can do is also store state in the local file system using SQLite - a file-based local relational database. RocksDB is also another good option
+
+---
+24. Stock exchange
+    - NFR
+         - Available
+         - Fault tolernat
+         - Latency
+         - Secrity
+    - BOE
+       - 100 symbols
+       - 1 billion orders per day
+       - qps 1 billion/ 6.6 hours
+
+
+<img width="2000" height="1088" alt="image" src="https://github.com/user-attachments/assets/8197ba43-ee68-4b01-b085-551957b0a6c0" />
+<img width="1359" height="892" alt="image" src="https://github.com/user-attachments/assets/3b481958-9c9e-4020-b208-b8de00331345" />
+- Next is the sequencer - it is the key component making the matching engine deterministic by stamping each inbound order and outbound fill with a sequence ID. 
+
+    <img width="1388" height="436" alt="image" src="https://github.com/user-attachments/assets/287d2f99-0a83-4566-8dc3-c01e4191aa88" />
+  
+___
 10. Uber
 11. Tinder
 12. Spotify
@@ -1187,12 +1271,10 @@ The amount field is string as double is not appropriate for representing monetar
 14. Goibibo/Skyscanner
 15. Flipkart/E-commerce
 <img width="1455" alt="image" src="https://github.com/user-attachments/assets/308213c6-8917-4276-9db1-a831dc69915b" />
-
 16. Leetcode
 18. Zoom
 23. Airbnb
-25. Stock Exchange
-![image](https://github.com/user-attachments/assets/05d5724a-3c70-424a-bdef-b00d5dfe8e87)
+
 
 
     
