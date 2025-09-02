@@ -1264,7 +1264,7 @@ the state machine should be deterministic, hence, it shouldn't read external IO 
     <img width="1388" height="436" alt="image" src="https://github.com/user-attachments/assets/287d2f99-0a83-4566-8dc3-c01e4191aa88" />
   
 ---
-25. Paste bin
+25. Paste bin https://www.youtube.com/@jordanhasnolife5163
    Similar like tinyurl 
 We send a long url of text and we get short url in return 
 <img width="1192" height="629" alt="image" src="https://github.com/user-attachments/assets/311850af-c59b-4daf-8644-8eb389b8cc3e" />
