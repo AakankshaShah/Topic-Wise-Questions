@@ -1,4 +1,4 @@
-<img width="1359" height="892" alt="image" src="https://github.com/user-attachments/assets/35011af8-d6a1-404f-9a01-67c206c83481" />
+
 ---
 
 1. Scale upto 1 million
@@ -1262,6 +1262,44 @@ the state machine should be deterministic, hence, it shouldn't read external IO 
 - Next is the sequencer - it is the key component making the matching engine deterministic by stamping each inbound order and outbound fill with a sequence ID. 
 
     <img width="1388" height="436" alt="image" src="https://github.com/user-attachments/assets/287d2f99-0a83-4566-8dc3-c01e4191aa88" />
+  
+---
+25. Paste bin
+   Similar like tinyurl 
+We send a long url of text and we get short url in return 
+<img width="1192" height="629" alt="image" src="https://github.com/user-attachments/assets/311850af-c59b-4daf-8644-8eb389b8cc3e" />
+<img width="682" height="487" alt="image" src="https://github.com/user-attachments/assets/9f7bcd93-19c5-4a7e-b38f-18b0329b4c56" />
+<img width="1169" height="679" alt="image" src="https://github.com/user-attachments/assets/f6327164-bbd7-488a-8451-01fac564387a" />
+<img width="1256" height="713" alt="image" src="https://github.com/user-attachments/assets/8741889e-df6b-402a-b388-791a68af606b" />
+-Creating a Paste
+
+- Client submits a paste.
+      - Client sends paste content to Application Servers via Load Balancer.Application Server writes paste content to Object Store (S3 in this case).Example: s3.abc.aws.us-east-          1.com
+      - Application Server claims a short URL:
+      - Routes request to a random shard in the database.
+      - Finds an unclaimed short URL.
+      - Application Server stores mapping in the PostgreSQL database.
+      - Application Server updates cache (Redis) with the short URL → long URL mapping.
+      - Client receives the short URL (e.g., tinyurl.com/abc123).
+      - CDN may cache the content for faster subsequent delivery.
+
+- Retrieving a Paste
+    - Client requests a paste via short URL.
+    - Load balancer forwards request to an application server.
+    - Application server checks cache (Redis):
+    - If content exists → return immediately.
+    - If not → fetch from database shard, then populate cache.
+    - Optionally, paste content is retrieved from the object store.
+    - Client receives the paste content.
+
+<img width="537" height="414" alt="image" src="https://github.com/user-attachments/assets/0b581f39-bc08-4506-8738-28e9d4f48f0e" />
+- Uplaod to S3 directly via sugned url
+
+<img width="1027" height="532" alt="image" src="https://github.com/user-attachments/assets/5f1d6233-d829-4d60-b5fb-8faad0cc95ea" />
+
+-DB has expiration time --> run cron jobs
+
+
   
 ___
 10. Uber
