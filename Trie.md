@@ -298,3 +298,119 @@ class Solution {
         return curr->sum;
     } 
      ```
+6. Add bold tag
+   ```
+
+
+    string addBoldTag(string s, const vector<string>& dict) {
+    int n = s.size();
+    vector<pair<int,int>> intervals;
+
+    // Step 1: find all matches and store intervals
+    for (const string& w : dict) {
+        size_t pos = s.find(w);
+        while (pos != string::npos) {
+            intervals.push_back({(int)pos, (int)(pos + w.size() - 1)});
+            pos = s.find(w, pos + 1);
+        }
+    }
+
+    if (intervals.empty()) return s;
+
+    // Step 2: sort intervals
+    sort(intervals.begin(), intervals.end());
+
+    // Step 3: merge overlapping/adjacent intervals
+    vector<pair<int,int>> merged;
+    int start = intervals[0].first, end = intervals[0].second;
+
+    for (int i = 1; i < intervals.size(); i++) {
+        if (intervals[i].first <= end + 1) {
+            end = max(end, intervals[i].second);
+        } else {
+            merged.push_back({start, end});
+            start = intervals[i].first;
+            end = intervals[i].second;
+        }
+    }
+    merged.push_back({start, end});
+
+    // Step 4: build output string
+    string result;
+    int idx = 0;
+    for (auto &p : merged) {
+        int l = p.first, r = p.second;
+        // add part before bold
+        result.append(s.substr(idx, l - idx));
+        // add bold part
+        result += "<b>" + s.substr(l, r - l + 1) + "</b>";
+        idx = r + 1;
+    }
+    // add remaining part
+    if (idx < n) result.append(s.substr(idx));
+
+    return result;
+    }
+
+
+   ```
+   ```
+     struct TrieNode {
+    bool isWord = false;
+    unordered_map<char, TrieNode*> children;
+     };
+
+     class Trie {
+    public:
+    TrieNode* root;
+    Trie() { root = new TrieNode(); }
+
+    void insert(const string &word) {
+        TrieNode* node = root;
+        for (char c : word) {
+            if (!node->children.count(c))
+                node->children[c] = new TrieNode();
+            node = node->children[c];
+        }
+        node->isWord = true;
+    }
+
+    // Return farthest match end index starting at position i, or -1 if no match
+    int search(const string &s, int i) {
+        TrieNode* node = root;
+        int far = -1;
+        for (int j = i; j < s.size(); j++) {
+            if (!node->children.count(s[j])) break;
+            node = node->children[s[j]];
+            if (node->isWord) far = j;
+        }
+        return far;
+    }
+    };
+
+    string addBoldTag(string s, const vector<string>& dict) {
+    int n = s.size();
+    vector<bool> bold(n, false);
+
+    // Build Trie
+    Trie trie;
+    for (auto &w : dict) trie.insert(w);
+
+    // Mark bold positions
+    for (int i = 0; i < n; i++) {
+        int far = trie.search(s, i);
+        if (far >= 0) {
+            for (int k = i; k <= far; k++) bold[k] = true;
+        }
+    }
+
+    // Build result with <b> tags
+    string result;
+    for (int i = 0; i < n; i++) {
+        if (bold[i] && (i == 0 || !bold[i-1])) result += "<b>";
+        result.push_back(s[i]);
+        if (bold[i] && (i == n-1 || !bold[i+1])) result += "</b>";
+    }
+    return result;
+     }
+   ```
