@@ -1461,4 +1461,83 @@ vector<string> res;
         return result;
     }
    ```
+35, Min distance from all office
+```
+#include <bits/stdc++.h>
+using namespace std;
 
+struct Point {
+    int x, y;
+};
+
+int w, h, n;
+int minMaxDist = INT_MAX;
+vector<Point> bestPlacement;
+vector<Point> currentPlacement;
+
+// Directions for 4-way movement
+int dx[4] = {0, 0, 1, -1};
+int dy[4] = {1, -1, 0, 0};
+
+// Compute maximum distance from any lot to nearest office using BFS
+int computeMaxDistance(const vector<Point>& offices) {
+    vector<vector<int>> dist(h, vector<int>(w, -1));
+    queue<Point> q;
+
+    for (auto &p : offices) {
+        dist[p.y][p.x] = 0;
+        q.push(p);
+    }
+
+    int maxDist = 0;
+    while (!q.empty()) {
+        Point cur = q.front(); q.pop();
+        for (int dir = 0; dir < 4; dir++) {
+            int nx = cur.x + dx[dir];
+            int ny = cur.y + dy[dir];
+            if (nx >= 0 && nx < w && ny >= 0 && ny < h && dist[ny][nx] == -1) {
+                dist[ny][nx] = dist[cur.y][cur.x] + 1;
+                maxDist = max(maxDist, dist[ny][nx]);
+                q.push({nx, ny});
+            }
+        }
+    }
+    return maxDist;
+}
+
+// Backtracking function to place offices
+void backtrack(int placed, int startY, int startX) {
+    if (placed == n) {
+        int curMaxDist = computeMaxDistance(currentPlacement);
+        if (curMaxDist < minMaxDist) {
+            minMaxDist = curMaxDist;
+            bestPlacement = currentPlacement;
+        }
+        return;
+    }
+
+    for (int y = startY; y < h; y++) {
+        for (int x = (y == startY ? startX : 0); x < w; x++) {
+            currentPlacement.push_back({x, y});
+            backtrack(placed + 1, y, x + 1);
+            currentPlacement.pop_back(); // backtrack
+        }
+    }
+}
+
+int main() {
+    cout << "Enter width (w), height (h), number of offices (n): ";
+    cin >> w >> h >> n;
+
+    backtrack(0, 0, 0);
+
+    cout << "\nMinimum maximum distance: " << minMaxDist << "\n";
+    cout << "Optimal office positions (x, y):\n";
+    for (auto &p : bestPlacement) {
+        cout << "(" << p.x << ", " << p.y << ")\n";
+    }
+
+    return 0;
+}
+
+```
