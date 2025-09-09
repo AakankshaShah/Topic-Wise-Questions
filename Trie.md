@@ -414,3 +414,80 @@ class Solution {
     return result;
      }
    ```
+7. Autocomplete
+```
+     
+struct TrieNode {
+    unordered_map<char, TrieNode*> children;
+    unordered_map<string, int> counts; // sentence -> frequency
+    bool isEnd = false;
+};
+
+class AutocompleteSystem {
+private:
+    TrieNode* root;
+    string currentInput;
+
+    // Insert a sentence into the trie
+    void insert(const string& sentence, int count) {
+        TrieNode* node = root;
+        for (char c : sentence) {
+            if (!node->children.count(c))
+                node->children[c] = new TrieNode();
+            node = node->children[c];
+            node->counts[sentence] += count; // update frequency
+        }
+        node->isEnd = true;
+    }
+
+    // Get top 3 sentences from a node using min-heap
+    vector<string> getTop3(TrieNode* node) {
+        auto cmp = [](auto &a, auto &b) {
+            return a.first > b.first || (a.first == b.first && a.second < b.second);
+        };
+
+        priority_queue<pair<int, string>, vector<pair<int, string>>, decltype(cmp)> pq(cmp);
+
+        for (const auto& entry : node->counts) {
+            pq.push({entry.second, entry.first});
+            if (pq.size() > 3) pq.pop();
+        }
+
+        vector<string> result;
+        while (!pq.empty()) {
+            result.push_back(pq.top().second);
+            pq.pop();
+        }
+
+        reverse(result.begin(), result.end());
+        return result;
+    }
+
+public:
+    AutocompleteSystem(vector<string>& sentences, vector<int>& times) {
+        root = new TrieNode();
+        currentInput = "";
+        for (int i = 0; i < sentences.size(); i++) {
+            insert(sentences[i], times[i]);
+        }
+    }
+
+    vector<string> input(char c) {
+        if (c == '#') {
+            insert(currentInput, 1);
+            currentInput = "";
+            return {};
+        }
+
+        currentInput += c;
+        TrieNode* node = root;
+        for (char ch : currentInput) {
+            if (!node->children.count(ch))
+                return {}; // no match
+            node = node->children[ch];
+        }
+
+        return getTop3(node);
+    }
+};
+```
