@@ -163,4 +163,42 @@ public:
     }
 
    ```
-  
+  5. Design bounded blocking queue
+
+      ```
+            #include <mutex>
+            #include <condition_variable>
+            #include <queue>
+
+          class BoundedBlockingQueue {
+         private: 
+        std::mutex mtx;
+        std::condition_variable cv;
+        int cap;
+         std::queue<int> q;
+
+         public:
+        BoundedBlockingQueue(int capacity) : cap(capacity) {}
+
+        void enqueue(int element) {
+        std::unique_lock<std::mutex> lock(mtx);
+        cv.wait(lock, [this] { return q.size() < cap; }); 
+        q.push(element);
+        cv.notify_one(); 
+        }
+
+        int dequeue() {
+        std::unique_lock<std::mutex> lock(mtx);
+        cv.wait(lock, [this] { return !q.empty(); }); 
+        int val = q.front();
+        q.pop();
+        cv.notify_one();
+        return val;
+        }
+
+        int size() {
+        std::lock_guard<std::mutex> lock(mtx);
+        return q.size();
+        }
+        };
+      ```
