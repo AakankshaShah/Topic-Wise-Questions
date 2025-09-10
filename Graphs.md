@@ -4354,3 +4354,35 @@ int helper(string target, vector<unordered_map<char, int>>& stickerFrequencies) 
         return distance;
     }
      ```
+82. Reconstruct itinerary
+     ```
+           
+
+class Solution {
+public:
+    vector<string> findItinerary(vector<vector<string>>& tickets) {
+        // Build graph
+        for (auto &t : tickets) {
+            graph[t[0]].insert(t[1]);
+        }
+
+        dfs("JFK");
+
+        reverse(itinerary.begin(), itinerary.end());
+        return itinerary;
+    }
+
+     private:
+    map<string, multiset<string>> graph; // sorted adjacency list
+    vector<string> itinerary;
+
+    void dfs(const string &airport) {
+        while (!graph[airport].empty()) {
+            string next = *graph[airport].begin();
+            graph[airport].erase(graph[airport].begin());
+            dfs(next);
+        }
+        itinerary.push_back(airport);
+    }
+     };
+     ```
