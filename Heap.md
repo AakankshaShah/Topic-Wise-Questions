@@ -1567,4 +1567,7 @@ int last;
     }
     };
       ```
-  
+  38. Min heap
+       ```
+            https://www.youtube.com/watch?v=-tp3cr0lodo
+       ```
