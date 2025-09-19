@@ -1765,5 +1765,23 @@ return sans;
         
     }
     ```
-56. 
+56. Number of good ways to split 
+```
+ int numSplits(string s) {
+        const int n = s.length();
+        int freqr[26] = {0}, right = 0;
+        for(int i = 0; i < n; ++i){
+            if(++freqr[s[i] - 'a'] == 1) ++right;
+        }
+        int freql[26] = {0}, res = 0, left = 0;
+        for(int i = 0; i < n; ++i){
+            int idx = s[i] - 'a';
+            if(++freql[idx] == 1) ++left;
+            if(--freqr[idx] == 0) --right;
+            if(left == right) ++res;
+        }
+        return res;
+        
+    }
+```
       
