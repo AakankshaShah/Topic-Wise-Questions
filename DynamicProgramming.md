@@ -2651,7 +2651,46 @@ Ctrl+ACVVVV (6 key presses) gives 5 times increase
      }
      ```
      
+62. Delete and earn
+      ```
+            int solve(int idx, vector<int>& temp, vector<int>& freq, vector<int>& dp) {
+        if (idx == 0)
+            return freq[0] * temp[0];
+        if (idx < 0)
+            return 0;
+        if (dp[idx] != -1)
+            return dp[idx];
+        int take = freq[idx] * temp[idx];
+        if (temp[idx] - 1 == temp[idx - 1]) {
+            take += solve(idx - 2, temp, freq, dp);
+        } else {
+            take += solve(idx - 1, temp, freq, dp);
+        }
+        int notTake = solve(idx - 1, temp, freq, dp);
+        return dp[idx] = max(take, notTake);
+    }
+    int deleteAndEarn(vector<int>& nums) {
+        unordered_map<int, int> mp;
+        vector<int> temp;
+        for (int num : nums) {
+            if (mp[num] == 0)
+                temp.push_back(num);
 
+            mp[num]++;
+        }
+
+        sort(temp.begin(), temp.end());
+        int n = temp.size();
+        if (n == 0)
+            return 0;
+        vector<int> freq(n);
+        for (int i = 0; i < n; i++) {
+            freq[i] = mp[temp[i]];
+        }
+        vector<int> dp(n + 1, -1);
+        return solve(n - 1, temp, freq, dp);
+    }
+      ```
 
 
 
