@@ -1301,7 +1301,13 @@ We send a long url of text and we get short url in return
 
 
   
-___
+---
+26. Alexa https://youtu.be/TQg_RFqIlkA
+<img width="1608" height="626" alt="image" src="https://github.com/user-attachments/assets/807f2ef6-9af9-450f-90eb-4fa9a749b502" />
+<img width="1107" height="285" alt="image" src="https://github.com/user-attachments/assets/7ca14116-a4aa-41c5-86b2-fbcfd9aff60e" />
+
+
+---
 10. Uber
 11. Tinder
 12. Spotify
