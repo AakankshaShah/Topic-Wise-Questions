@@ -1308,7 +1308,42 @@ We send a long url of text and we get short url in return
 
 
 ---
-10. Uber
+27. Uber
+
+- Requirements 
+    - FR
+        - User able to input location , destination and estimated fair
+        - Request ride
+        - Driver accept/reject request
+    - NFR
+       - Low latency for matching
+       - conistency of matching ride 1 : 1
+       - highly available outside matching
+       - scalability during peak hours
+
+    - Core entities
+        - User
+        - Ride
+        - Driver
+        - Location
+
+  - API
+    - Post fare estimate
+    - Patch Ride Request on rideId from estimate result
+    - Post location
+    - Patch accept/ride/driver  - rideId, trye/false
+    - Patch driver/ride lat/long --> status - picked up , drop off 
+      
+ <img width="1436" height="697" alt="image" src="https://github.com/user-attachments/assets/a7a7130b-4c34-4abc-b25c-105c2f678a91" />
+ 
+ - Use quadtres geospatial index --- complex update all on update---> divides on freq on driver
+ - Another way use redis in memory ---> geohashing-> no consideration of frequency 
+ - Consitency --> one driver gets one requets at a time , given ride one request at a time
+ <img width="1286" height="687" alt="image" src="https://github.com/user-attachments/assets/1f7bbc57-652b-491a-bba6-ede3153fa1a8" />
+
+
+
+---
 11. Tinder
 12. Spotify
 13. Bookmyshow
