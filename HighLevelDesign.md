@@ -1305,6 +1305,66 @@ We send a long url of text and we get short url in return
 26. Alexa https://youtu.be/TQg_RFqIlkA
 <img width="1608" height="626" alt="image" src="https://github.com/user-attachments/assets/807f2ef6-9af9-450f-90eb-4fa9a749b502" />
 <img width="1107" height="285" alt="image" src="https://github.com/user-attachments/assets/7ca14116-a4aa-41c5-86b2-fbcfd9aff60e" />
+```
+User: "Alexa, play Shape of You"
+           │
+           ▼
+┌───────────────────────────┐
+│ 1. Wake Word Detection    │
+│ - Continuously listening  │
+│ - Detects "Alexa"         │
+└─────────────┬─────────────┘
+              │
+              ▼
+┌───────────────────────────┐
+│ 2. Audio Capture          │
+│ - Records user command    │
+│ - Converts analog → digital│
+└─────────────┬─────────────┘
+              │ Encoded audio
+              ▼
+┌───────────────────────────┐
+│ 3. Audio Preprocessing    │
+│ - Noise reduction         │
+│ - Echo cancellation       │
+│ - Compression (Opus/PCM) │
+└─────────────┬─────────────┘
+              │
+              ▼
+┌───────────────────────────┐
+│ 4. Cloud Processing       │
+│                           │
+│ a) ASR (Automatic Speech  │
+│    Recognition)           │
+│    → Converts audio → text│
+│                           │
+│ b) NLU (Natural Language  │
+│    Understanding)         │
+│    → Extracts intent &    │
+│      entities             │
+└─────────────┬─────────────┘
+              │ Intent + Entities
+              ▼
+┌───────────────────────────┐
+│ 5. Skill / Music Service  │
+│ - Determines which service│
+│   (Amazon Music, Spotify) │
+│ - Authenticates user      │
+│ - Generates streaming URL │
+└─────────────┬─────────────┘
+              │ Signed HLS/DASH URL
+              ▼
+┌───────────────────────────┐
+│ 6. Alexa Device Playback  │
+│ - Downloads audio chunks  │
+│   from CloudFront/S3      │
+│ - Buffers 10–20 seconds   │
+│ - Decodes audio (MP3/AAC)│
+│ - Sends PCM → Speaker     │
+│ - Supports adaptive bitrate│
+└───────────────────────────┘
+
+```
 
 
 ---
