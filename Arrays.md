@@ -5927,3 +5927,21 @@ vector<pair<int, int>>a;
     return 0;
      }
 		```
+
+166. Maximum subarray sum with one deletion
+     ```
+	        int maximumSum(vector<int>& nums) {
+         int n=nums.size();
+         int maxi=nums[0];
+         int nd=nums[0]; 
+         int od=INT_MIN;
+         for(int i=1;i<n;i++){
+            od=max(nd, od==INT_MIN?INT_MIN:od+nums[i]);
+             nd=max(nums[i],nums[i]+nd);
+            maxi=max({maxi,od,nd});
+         }
+
+
+       return maxi;
+        }
+	 ```
