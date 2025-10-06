@@ -335,5 +335,6 @@
         }
         return s.substr(0, i);
      ```
-   
+ 11. KMP
+ 
   
