@@ -806,11 +806,12 @@ Digital advertising has a process called real-time bidding (RTB), where digital 
 <img width="559" height="414" alt="image" src="https://github.com/user-attachments/assets/3b131559-ce65-4772-a15e-e312fc2f3540" />
 <img width="840" height="226" alt="image" src="https://github.com/user-attachments/assets/0c7f9c6a-f440-49ae-a1bd-488477bd44c8" />
 
-- Cassandra- have better native support for heavy write loads
+
 <img width="1812" height="400" alt="image" src="https://github.com/user-attachments/assets/9ddb8626-ee5e-42dd-8534-3fd60c938569" />
   - Async 
 <img width="1778" height="1024" alt="image" src="https://github.com/user-attachments/assets/d92f7ebe-ce31-483d-8a31-6bf7704194c8" />
 
+- Cassandra have better native support for heavy write loads
 ```
 The first message queue stores ad click event data:
 
