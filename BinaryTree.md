@@ -3015,3 +3015,41 @@ public:
         }
          
   ```
+  88.  Closest Binary Search Tree Value II 
+  ```
+       class Solution {
+public:
+    priority_queue<pair<double,int>> pq;
+    double t;
+    int k;
+
+    vector<int> closestKValues(TreeNode* root, double target, int k) {
+        this->t = target;
+        this->k = k;
+
+        dfs(root);
+
+        vector<int> ans;
+        while (!pq.empty()) {
+            ans.push_back(pq.top().second);
+            pq.pop();
+        }
+
+        return ans;
+    }
+
+    void dfs(TreeNode* root) {
+        if (!root) return;
+
+        double diff = abs(root->val - t);
+        pq.push({diff, root->val});
+
+        if (pq.size() > k)
+            pq.pop();   // removes element with largest difference
+
+        dfs(root->left);
+        dfs(root->right);
+    }
+};
+
+  ```
