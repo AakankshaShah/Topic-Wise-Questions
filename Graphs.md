@@ -4358,8 +4358,8 @@ int helper(string target, vector<unordered_map<char, int>>& stickerFrequencies) 
      ```
            
 
-class Solution {
-public:
+    class Solution {
+     public:
     vector<string> findItinerary(vector<vector<string>>& tickets) {
         // Build graph
         for (auto &t : tickets) {
@@ -4386,3 +4386,47 @@ public:
     }
      };
      ```
+83.  Count Stepping Numbers in Range
+
+    ```
+    class Solution {
+     public:
+    static const int MOD = 1e9 + 7;
+
+    int countSteppingNumbers(string low, string high) {
+        long long lo = stoll(low);
+        long long hi = stoll(high);
+
+        queue<long long> q;
+        long long count = 0;
+
+        // Single digit stepping numbers
+        for (int i = 0; i <= 9; i++) {
+            q.push(i);
+        }
+
+        while (!q.empty()) {
+            long long num = q.front();
+            q.pop();
+
+            if (num >= lo && num <= hi) {
+                count = (count + 1) % MOD;   // 🔹 MOD applied here
+            }
+
+            if (num == 0 || num > hi)
+                continue;
+
+            int last = num % 10;
+
+            if (last > 0)
+                q.push(num * 10 + (last - 1));
+
+            if (last < 9)
+                q.push(num * 10 + (last + 1));
+        }
+
+        return count;
+    }
+    };
+
+	```
