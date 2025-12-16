@@ -2754,6 +2754,56 @@ Ctrl+ACVVVV (6 key presses) gives 5 times increase
 
  
 
+64.  Best Time to Buy and Sell Stock IV
+     ```
+     int maxProfit(int k, vector<int>& prices) {
+        int n = prices.size();
+        if (n == 0)
+            return 0;
 
+        // If k is large enough, it's equivalent to unlimited transactions
+        if (k >= n / 2) {
+            int profit = 0;
+            for (int i = 1; i < n; ++i) {
+                if (prices[i] > prices[i - 1]) {
+                    profit += prices[i] - prices[i - 1];
+                }
+            }
+            return profit;
+        }
+
+        // dp_buy[t]: max profit after at most t transactions, currently holding
+        // a stock dp_sell[t]: max profit after at most t transactions,
+        // currently not holding
+        vector<int> dp_buy(k + 1, INT_MIN);
+        vector<int> dp_sell(k + 1, 0);
+
+        dp_buy[0] = INT_MIN; // impossible to hold with 0 transactions
+        dp_sell[0] = 0;      // no transaction, profit 0
+
+        for (int price : prices) {
+            for (int t = k; t >= 1; --t) {
+                // Update sell[t]: max of previous sell, or sell today (from
+                // buy[t])
+                dp_sell[t] =
+                    max(dp_sell[t],
+                        (dp_buy[t] == INT_MIN ? INT_MIN : dp_buy[t] + price));
+
+                // Update buy[t]: max of previous buy, or buy today (from
+                // sell[t-1])
+                dp_buy[t] = max(dp_buy[t], dp_sell[t - 1] - price);
+            }
+            // For t=0, buy[0] remains impossible, sell[0] remains 0 (no action
+            // needed)
+        }
+
+        // The answer is the maximum among all dp_sell[0..k]
+        int ans = 0;
+        for (int t = 0; t <= k; ++t) {
+            ans = max(ans, dp_sell[t]);
+        }
+        return ans;
+    }
+     ```
 
 
