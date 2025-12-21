@@ -2846,3 +2846,39 @@ Ctrl+ACVVVV (6 key presses) gives 5 times increase
         
          }
       ```
+67. Concatenate words
+      ```
+             class Solution {
+         public:
+        vector<string> findAllConcatenatedWordsInADict(vector<string>& words) {
+        unordered_set<string> dict(words.begin(), words.end());
+        vector<string> result;
+
+        for (auto& w : words) {
+            dict.erase(w);
+            if (canForm(w, dict)) {
+                result.push_back(w);
+            }
+            dict.insert(w);
+        }
+        return result;
+    }
+    bool canForm(const string& word, unordered_set<string>& dict) {
+        int n = word.size();
+        if (n == 0)
+            return false;
+        vector<bool> dp(n + 1, false);
+        dp[0] = true;
+
+        for (int i = 1; i <= n; ++i) {
+            for (int j = (i == n ? 1 : 0); j < i; ++j) {
+                if (dp[j] && dict.count(word.substr(j, i - j))) {
+                    dp[i] = true;
+                    break;
+                }
+            }
+        }
+        return dp[n];
+    }
+    };
+      ```
