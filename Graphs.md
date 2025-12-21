@@ -4388,24 +4388,25 @@ int helper(string target, vector<unordered_map<char, int>>& stickerFrequencies) 
      ```
 83.  Count Stepping Numbers in Range
 
-    ```
-    class Solution {
-     public:
-    static const int MOD = 1e9 + 7;
 
-    int countSteppingNumbers(string low, string high) {
+    ```
+        class Solution {
+         public:
+        static const int MOD = 1e9 + 7;
+
+        int countSteppingNumbers(string low, string high) {
         long long lo = stoll(low);
         long long hi = stoll(high);
 
         queue<long long> q;
         long long count = 0;
 
-        // Single digit stepping numbers
-        for (int i = 0; i <= 9; i++) {
+           // Single digit stepping numbers
+          for (int i = 0; i <= 9; i++) {
             q.push(i);
-        }
+           }
 
-        while (!q.empty()) {
+           while (!q.empty()) {
             long long num = q.front();
             q.pop();
 
@@ -4426,7 +4427,51 @@ int helper(string target, vector<unordered_map<char, int>>& stickerFrequencies) 
         }
 
         return count;
-    }
-    };
+       }
+       };
 
 	```
+
+84. Network delay
+
+      ```
+	       int networkDelayTime(vector<vector<int>>& times, int n, int k) {
+        vector<vector<pair<int, int>>> adj(n + 1);
+
+        for (auto& edge : times) {
+            adj[edge[0]].push_back({edge[1], edge[2]});
+        }
+
+        priority_queue<pair<int, int>, vector<pair<int, int>>,
+                       greater<pair<int, int>>>
+            pq;
+        pq.push({0, k});
+
+        vector<int> dist(n + 1, 1e9);
+        dist[k] = 0;
+
+        while (!pq.empty()) {
+            auto [currDist, node] = pq.top();
+            pq.pop();
+
+            if (currDist > dist[node])
+                continue;
+
+            for (auto& [adjNode, weight] : adj[node]) {
+                if (currDist + weight < dist[adjNode]) {
+                    dist[adjNode] = currDist + weight;
+                    pq.push({dist[adjNode], adjNode});
+                }
+            }
+        }
+
+        int maxDist = 0;
+        for (int i = 1; i <= n; i++) {
+            if (dist[i] == 1e9)
+                return -1;
+            maxDist = max(maxDist, dist[i]);
+        }
+
+        return maxDist;
+    }
+	  ```
