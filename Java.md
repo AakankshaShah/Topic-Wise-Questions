@@ -83,3 +83,7 @@ Set<Integer> set = new HashSet<>();
      ```
         Map<Integer, List<int[]>> map = new TreeMap<>();
      ```
+14. String
+         ```
+         s.charAt(i);
+         ```
