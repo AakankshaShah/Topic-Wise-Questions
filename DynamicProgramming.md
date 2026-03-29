@@ -606,6 +606,40 @@ for (int i = 0; i < n; i++) {
 
         }
       ```
+      ```
+         class Solution {
+         public String longestPalindrome(String s) {
+        int n = s.length();
+        int start = 0, maxLen = 1;
+
+        for (int i = 0; i < n; i++) {
+
+            // Odd length palindrome
+            int l = i, r = i;
+            while (l >= 0 && r < n && s.charAt(l) == s.charAt(r)) {
+                if (r - l + 1 > maxLen) {
+                    start = l;
+                    maxLen = r - l + 1;
+                }
+                l--; r++;
+            }
+
+            // Even length palindrome
+            l = i; r = i + 1;
+            while (l >= 0 && r < n && s.charAt(l) == s.charAt(r)) {
+                if (r - l + 1 > maxLen) {
+                    start = l;
+                    maxLen = r - l + 1;
+                }
+                l--; r++;
+            }
+          }
+
+          return s.substring(start, start+maxLen);
+        
+          }
+           }
+      ```
 
 12.  Wildcard matching***  https://www.youtube.com/watch?v=ZmlQ3vgAOMo
 
@@ -2311,7 +2345,7 @@ Ctrl+ACVVVV (6 key presses) gives 5 times increase
     }
     };
     ```
-54. Valid Palindrome 3
+54. Valid  3
      ```
          int check(int start, int end, string& s, vector<vector<int>>& dp) {
         if (start > end)
@@ -2324,7 +2358,7 @@ Ctrl+ACVVVV (6 key presses) gives 5 times increase
             return dp[start][end] = 1 + min(check(start + 1, end, s, dp),
                                             check(start, end - 1, s, dp));
     }
-    bool isValidPalindrome(string s, int k) {
+    bool isValid(string s, int k) {
 
         int start = 0;
         int end = s.length() - 1;
